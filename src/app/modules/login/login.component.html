@@ -1,0 +1,32 @@
+<main class="h-full">
+    <section class="h-full flex flex-col justify-center">
+        <div class="mx-auto max-w-xl w-full flex items-center justify-center">
+            <div class="w-full flex flex-col mx-auto items-center">
+                <h2 nz-typography class="text-slate-800 text-lg font-black mb-6">Login</h2>
+                <form nz-form [formGroup]="validateForm" class="max-w-xs w-full"
+                    (ngSubmit)="submitForm()">
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Usernamingizni kiriting!">
+                            <nz-input-group nzPrefixIcon="user" class="px-4">
+                                <input type="text" nz-input class="h-full my-2" formControlName="userName" nzSize="large" placeholder="Username" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Parolingizni kiriting!">
+                            <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate" class="px-4">
+                                <input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="password" nz-input class="h-full my-2"
+                                    formControlName="password" placeholder="Password" nzSize="large" />
+                            </nz-input-group>
+                            <ng-template #suffixTemplate>
+                                <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" class="cursor-pointer"
+                                    (click)="passwordVisible = !passwordVisible"></i>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <button nz-button class="w-full" nzSize='large' [nzType]="'primary'">Log in</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
