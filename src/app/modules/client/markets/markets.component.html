@@ -1,7 +1,7 @@
 <div class="flex flex-col w-full">
   <button nz-button nzType="primary" (click)="showAddModal()" class="mb-4 self-end max-w-[15%] w-full">+ Add</button>
   <div>
-    <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
+    <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed" [nzLoading]="true">
       <thead>
         <tr>
           <th nzWidth="25%">Nomi</th>

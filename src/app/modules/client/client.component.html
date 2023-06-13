@@ -1,43 +1,71 @@
 <nz-layout>
-    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-        <div class="m-4 bg-white px-1 py-1">
-            <img src="../../../assets/icons/Logo.svg" alt="Logo" width="">
-        </div>
-        <ul nz-menu nzTheme="dark" nzMode="inline">
-            <li nz-menu-item [routerLink]="['dashboard']">
-                <span nz-icon nzType="dashboard" nzTheme="outline" class="text-white"></span>
-                <span>Dashboard</span>
-            </li>
-            <li nz-menu-item [routerLink]="['products']">
-                <span nz-icon nzTheme="outline">
-                    <img src="../../../assets/icons/products.svg" alt="products" width="15px" height="15px">
-                </span>
-                <span>Products</span>
-            </li>
-            <li nz-menu-item [routerLink]="['sales']">
-                <span nz-icon nzTheme="outline">
-                    <img src="../../../assets/icons/sales.svg" alt="sales" width="15px" height="15px">
-                </span>
-                <span>Sales</span>
-            </li>
-            <li nz-menu-item [routerLink]="['markets']">
-                <span nz-icon nzTheme="outline">
-                    <img src="../../../assets/icons/markets.svg" alt="markets" width="15px" height="15px">
-                </span>
-                <span>Markets</span>
-            </li>
-        </ul>
-    </nz-sider>
-    <nz-layout class="flex flex-col gap-y-5">
-        <nz-header class="!px-4">
-            <span class="hover:text-blue-600 cursor-pointer" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-                (click)="isCollapsed = !isCollapsed"></span>
-        </nz-header>
-        <nz-content class="h-full">
-            <div class="inner-content">
-                <router-outlet></router-outlet>
-            </div>
-        </nz-content>
-        <nz-footer>SKLAD CRM ©2023 Implement By Ibrohim</nz-footer>
-    </nz-layout>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="m-4 bg-white px-1 py-1">
+      <img
+        [src]="isCollapsed ? '../../../assets/icons/Logo-con.svg' : '../../../assets/icons/Logo.svg'"
+        class="h-[38px]"
+        alt="Logo"
+      />
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item [routerLink]="['dashboard']">
+        <span
+          nz-icon
+          nzType="dashboard"
+          nzTheme="outline"
+          class="text-white"
+        ></span>
+        <span>Dashboard</span>
+      </li>
+      <li nz-menu-item [routerLink]="['products']">
+        <span nz-icon nzTheme="outline">
+          <img
+            src="../../../assets/icons/products.svg"
+            alt="products"
+            width="15px"
+            height="15px"
+          />
+        </span>
+        <span>Products</span>
+      </li>
+      <li nz-menu-item [routerLink]="['sales']">
+        <span nz-icon nzTheme="outline">
+          <img
+            src="../../../assets/icons/sales.svg"
+            alt="sales"
+            width="15px"
+            height="15px"
+          />
+        </span>
+        <span>Sales</span>
+      </li>
+      <li nz-menu-item [routerLink]="['markets']">
+        <span nz-icon nzTheme="outline">
+          <img
+            src="../../../assets/icons/markets.svg"
+            alt="markets"
+            width="15px"
+            height="15px"
+          />
+        </span>
+        <span>Markets</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout class="flex flex-col gap-y-5">
+    <nz-header class="!px-4">
+      <span
+        class="hover:text-blue-600 cursor-pointer"
+        nz-icon
+        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"
+      ></span>
+    </nz-header>
+    <nz-content class="h-full">
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer>SKLAD CRM ©2023 Implement By Ibrohim</nz-footer>
+  </nz-layout>
 </nz-layout>
