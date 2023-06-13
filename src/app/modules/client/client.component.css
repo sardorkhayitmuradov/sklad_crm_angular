@@ -10,16 +10,6 @@ nz-layout {
     transition: color 0.3s;
   }
   
-  .trigger:hover {
-    color: #1890ff;
-  }
-  
-  .logo {
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 16px;
-  }
-  
   nz-header {
     background: #fff;
     padding: 0;
@@ -36,7 +26,7 @@ nz-layout {
   .inner-content {
     padding: 24px;
     background: #fff;
-    height: calc(100vh - 185px);
+    height: calc(100vh - 155px);
     overflow: auto;
   }
   

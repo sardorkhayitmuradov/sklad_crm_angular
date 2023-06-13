@@ -7,6 +7,11 @@ const routes: Routes = [{
   component: ClientComponent,
   children: [
     {
+      path: 'dashboard',
+      loadChildren: () => 
+        import('./dashboard/dashboard.module').then((m)=> m.DashboardModule)
+    },
+    {
       path: 'markets',
       loadChildren: () => 
         import('./markets/markets.module').then((m)=> m.MarketsModule)
@@ -20,11 +25,6 @@ const routes: Routes = [{
       path: 'sales',
       loadChildren: () => 
         import('./sales/sales.module').then((m)=> m.SalesModule)
-    },
-    {
-      path: 'markets-more',
-      loadChildren: () => 
-        import('./markets-more/markets-more.module').then((m)=> m.MarketsMoreModule)
     }
   ]
 }];
