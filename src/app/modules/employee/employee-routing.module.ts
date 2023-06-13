@@ -25,6 +25,31 @@ const routes: Routes = [{
       path: 'sales',
       loadChildren: () => 
         import('./sales/sales.module').then((m)=> m.SalesModule)
+    },
+    {
+      path: 'admins',
+      loadChildren: () => 
+        import('./admins/admins.module').then((m)=> m.AdminsModule)
+    },
+    {
+      path: 'finance',
+      loadChildren: () => 
+        import('./finance/finance.module').then((m)=> m.FinanceModule)
+    },
+    {
+      path: 'clients',
+      loadChildren: () => 
+        import('./clients/clients.module').then((m)=> m.ClientsModule)
+    },
+    {
+      path: 'orders',
+      loadChildren: () => 
+        import('./orders/orders.module').then((m)=> m.OrdersModule)
+    },
+    {
+      path: 'settings',
+      loadChildren: () => 
+        import('./settings/settings.module').then((m)=> m.SettingsModule)
     }
   ]
 }];
