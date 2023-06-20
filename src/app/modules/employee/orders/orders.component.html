@@ -1,1 +1,24 @@
-<h1>Orders</h1>
+<nz-table #columnTable [nzData]="datas" [nzScroll]="{ x: '1100px' }" [nzLoading]="false">
+    <thead>
+      <tr>
+        <th nzLeft>Id</th>
+        <th nzLeft>Date</th>
+        <th>Total Price</th>
+        <th>To'langan</th>
+        <th>Qarzdorlik</th>
+        <th nzRight>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of columnTable.data">
+        <td nzLeft>{{ data.id }}</td>
+        <td nzLeft>{{ data.date }}</td>
+        <td>{{ data.totalPrice }}</td>
+        <td>{{ data.paid }}</td>
+        <td>{{ data.debt }}</td>
+        <td nzRight>
+          <a>action</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
