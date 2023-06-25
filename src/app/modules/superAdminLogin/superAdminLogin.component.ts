@@ -6,17 +6,12 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'superAdminLogin',
+  templateUrl: './superAdminLogin.component.html',
+  styleUrls: ['./superAdminLogin.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class SuperAdminLoginComponent implements OnInit {
   validateForm!: FormGroup;
-  optionList = [
-    { label: 'Admin', value: 'employer' },
-    { label: 'Xodim', value: 'employee' }
-  ];
-  selectedValue = this.optionList[1];
 
   passwordVisible = false;
   password?: string;
@@ -43,10 +38,5 @@ export class LoginComponent implements OnInit {
       remember: [true],
     });
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  compareFn = (o1: any, o2: any): boolean => (o1 && o2 ? o1.value === o2.value : o1 === o2);
 
-  log(event: any) {
-    console.log(event);
-  }
 }

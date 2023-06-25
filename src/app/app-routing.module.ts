@@ -3,6 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
+  // Super Admin Login
+  {
+    path: 'admin/login',
+    loadChildren: () =>
+    import('./modules/superAdminLogin/superAdminLogin.module').then((m) => m.SuperAdminLoginModule),
+  },
+  // Employee and Employer Login
   {
     path: 'login',
     loadChildren: () =>

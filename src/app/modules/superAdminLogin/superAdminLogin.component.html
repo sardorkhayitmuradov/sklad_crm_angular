@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-xl w-full flex items-center justify-center">
       <div class="w-full flex flex-col mx-auto items-center">
         <h2 nz-typography class="text-slate-800 text-lg font-black mb-6">
-          Login
+          Super Admin Login
         </h2>
         <form
           nz-form
@@ -11,22 +11,7 @@
           class="max-w-xs w-full"
           (ngSubmit)="submitForm()"
         >
-          <nz-select
-            nzSize="large"
-            [(ngModel)]="selectedValue"
-            [compareWith]="compareFn"
-            (ngModelChange)="log($event)"
-            class="mt-2 mb-6 w-full"
-            nzAllowClear
-            [nzPlaceHolder]="selectedValue.label"
-          >
-            <nz-option
-              *ngFor="let option of optionList"
-              class="h-full"
-              [nzValue]="option"
-              [nzLabel]="option.label"
-            ></nz-option>
-          </nz-select>
+
           <nz-form-item>
             <nz-form-control nzErrorTip="Usernamingizni kiriting!">
               <nz-input-group nzPrefixIcon="user" class="px-4">
