@@ -11,6 +11,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import {  NzNotificationServiceModule } from 'ng-zorro-antd/notification';
 
+//Mask
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+
 
 @NgModule({
   declarations: [LoginComponent],
@@ -24,7 +27,12 @@ import {  NzNotificationServiceModule } from 'ng-zorro-antd/notification';
     NzButtonModule,
     NzIconModule,
     NzSelectModule,
-    NzNotificationServiceModule
-  ]
+    NzNotificationServiceModule,
+    NgxMaskDirective,
+    NgxMaskPipe
+  ],
+  providers: [
+    provideNgxMask()
+  ],
 })
 export class LoginModule { }

@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+
+    console.log(this.validateForm);
   }
 
   constructor(
@@ -32,9 +34,9 @@ export class LoginComponent implements OnInit {
     private $notification: NzNotificationService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.validateForm = this.fb.group({
-      phone_number: ['+998 (', [Validators.required]],
+      phone_number: ['', [Validators.required]],
       password: ['', [Validators.required]],
       remember: [true],
     });
@@ -49,6 +51,7 @@ export class LoginComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   compareFn = (o1: any, o2: any): boolean =>
     o1 && o2 ? o1.value === o2.value : o1 === o2;
+    
 
   log(event: any) {
     console.log(event);
