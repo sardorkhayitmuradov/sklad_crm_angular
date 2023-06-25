@@ -25,6 +25,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/employee/employee.module').then((m) => m.EmployeeModule),
   },
+  {
+    path: '**',
+    loadChildren: () => 
+      import('./modules/not-found/not-found.module').then((m) => m.NotFoundModule)
+  },
+
 ];
 
 @NgModule({

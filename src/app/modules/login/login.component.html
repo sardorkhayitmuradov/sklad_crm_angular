@@ -28,15 +28,21 @@
             ></nz-option>
           </nz-select>
           <nz-form-item>
-            <nz-form-control nzErrorTip="Usernamingizni kiriting!">
-              <nz-input-group nzPrefixIcon="user" class="px-4">
+            <nz-form-control nzErrorTip="Nomeringizni kiriting!">
+              <nz-input-group nzPrefixIcon="phone" class="px-4">
+                <ng-template #addOnBeforeTemplate>
+                  <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+                    <nz-option nzLabel="+998" nzValue="+998"></nz-option>
+                  </nz-select>
+                </ng-template>
                 <input
                   type="text"
                   nz-input
                   class="h-full my-2"
-                  formControlName="userName"
+                  formControlName="phone_number"
+                  phoneNumberFormatter
                   nzSize="large"
-                  placeholder="Username"
+                  placeholder="Telefon Raqamingiz"
                 />
               </nz-input-group>
             </nz-form-control>
@@ -72,8 +78,8 @@
             nz-button
             class="w-full"
             nzSize="large"
-            routerLink="/employee"
             [nzType]="'primary'"
+            (click)="createNotification('error')"
           >
             Log in
           </button>
