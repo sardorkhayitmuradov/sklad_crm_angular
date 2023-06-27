@@ -24,7 +24,7 @@ import {  NzNotificationServiceModule } from 'ng-zorro-antd/notification';
     NzButtonModule,
     NzIconModule,
     NzSelectModule,
-    NzNotificationServiceModule
+    NzNotificationServiceModule,
   ]
 })
 export class LoginModule { }
