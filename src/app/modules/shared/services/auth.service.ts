@@ -4,19 +4,33 @@ import { BaseService } from './base.service';
 @Injectable({
   providedIn: 'root',
 })
-
 export abstract class AuthService<TResponse, TRequest> {
+  /**
+   *
+   */
+  url?: string;
 
-    protected abstract url: string;
+  /**
+   *
+   * @param http
+   */
+  constructor(private _base: BaseService) {}
 
-    constructor(private _base: BaseService){}
+  /**
+   *
+   * @param model
+   * @returns
+   */
+  login(model: TRequest) {
+    return this._base.post<TResponse>(`${this.url}/login`, model);
+  }
 
-
-    login(body: TRequest){
-        return this._base.post<TResponse>(this.url, body)
-    }
-
-    register(body: TRequest){
-        return this._base.post<TResponse>(this.url, body)
-    }
- }
+  /**
+   *
+   * @param model
+   * @returns
+   */
+  register(model: TRequest) {
+    return this._base.post<TResponse>(`${this.url}/register`, model);
+  }
+}

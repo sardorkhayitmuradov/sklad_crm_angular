@@ -7,9 +7,9 @@
         </h2>
         <form
           nz-form
-          [formGroup]="validateForm"
+          [formGroup]="form"
           class="max-w-xs w-full"
-          (ngSubmit)="submitForm()"
+          (ngSubmit)="login(selectedValue.value)"
         >
           <nz-select
             nzSize="large"
@@ -36,9 +36,9 @@
                   nz-input
                   class="h-full my-2"
                   formControlName="phone_number"
-                  prefix="+998 "
-                  placeholder="+998 (__) ___-__-__"
-                  mask="(00) 000 00 00"
+                  prefix="+998"
+                  placeholder="+998-(__) ___-__-__"
+                  mask="-(00)-000-00-00"
                   nzSize="large"
                 />
               </nz-input-group>
@@ -59,6 +59,7 @@
                   formControlName="password"
                   placeholder="Password"
                   nzSize="large"
+                  autocomplete="on"
                 />
               </nz-input-group>
               <ng-template #suffixTemplate>
@@ -76,7 +77,6 @@
             class="w-full"
             nzSize="large"
             [nzType]="'primary'"
-            (click)="createNotification('error')"
           >
             Log in
           </button>

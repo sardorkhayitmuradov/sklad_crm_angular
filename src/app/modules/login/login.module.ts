@@ -16,7 +16,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent],  
   imports: [
     CommonModule,
     LoginRoutingModule,
