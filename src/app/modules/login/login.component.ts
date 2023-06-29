@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { LoginRequest, LoginResponse } from './model/login.model';
+import {  LoginRequest, LoginResponse } from './model/login.model';
 import { Auth } from '../shared/crud/auth.class';
 import { LoginService } from './service/login.service';
 import { ActivatedRoute, Router } from '@angular/router';

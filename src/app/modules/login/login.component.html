@@ -9,7 +9,7 @@
           nz-form
           [formGroup]="form"
           class="max-w-xs w-full"
-          (ngSubmit)="login()"
+          (ngSubmit)="login(selectedValue.value)"
         >
           <nz-select
             nzSize="large"

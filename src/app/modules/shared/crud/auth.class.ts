@@ -2,13 +2,13 @@ import { FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { Phone_Number_Formatter } from '../../directives/phone_number_formatter.directive';
+import { LoginResponse } from '../../login/model/login.model';
 
-export abstract class Auth<TResponse, TRequest> {
+export abstract class Auth<TResponse extends LoginResponse, TRequest> {
   /**
    *
    */
-  protected phone_number?: string
+  protected phone_number?: string;
   abstract form: FormGroup;
 
   /**
@@ -20,39 +20,41 @@ export abstract class Auth<TResponse, TRequest> {
     private $notification: NzNotificationService,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-    
-  }
+  ) {}
 
-  /* 
-  * 
-  */
-  formatter(phoneNumber: string){
-    this.phone_number = phoneNumber.replace(/^(\+\d{3})(\d{2})(\d{3})(\d{2})(\d{2})$/, '$1-$2-$3-$4-$5');
+  /*
+   *
+   */
+  formatter(phoneNumber: string) {
+    this.phone_number = phoneNumber.replace(
+      /^(\+\d{3})(\d{2})(\d{3})(\d{2})(\d{2})$/,
+      '$1-$2-$3-$4-$5'
+    );
   }
-
 
   /**
    *
    * @param request
    */
-  login() {
-    const request: TRequest = this.form.getRawValue();
+  login(route: string) {
+    const request = this.form.getRawValue();
     const countryCode = '+998';
-    this.formatter(countryCode+this.form.value.phone_number)
-    this.form.value.phone_number = this.phone_number
-    console.log(this.phone_number, this.form.value)
+    this.formatter(countryCode + request.phone_number);
+    request.phone_number = this.phone_number;
+    console.log(this.phone_number, request);
 
     if (this.form.valid) {
-      this.$data.login(request).subscribe((item) => {
-        // if (item) {
-        //   this.router.navigate([route], { relativeTo: this.route });
-        //   return;
-        // }
-        console.log(item);
+      this.$data.login(request).subscribe({
+        next: (response) => {
+          if (response.token) {
+            this.router.navigate([route]);
+          }
+        },
+        error: (response) => {
+          this.createNotification('error', response.error.error);
+        },
       });
     } else {
-      // this.createNotification('error', 'error')
       return this.updateValueAndValidity();
     }
   }
@@ -81,8 +83,8 @@ export abstract class Auth<TResponse, TRequest> {
     });
   }
 
-  createNotification(type: string, error: any): void {
-    this.$notification.create(type, error, error, {
+  createNotification(type: string, error: any) {
+    this.$notification.create(type, error, '', {
       nzPlacement: 'top',
       nzDuration: 3000,
     });
