@@ -9,6 +9,8 @@ import { NzInputModule } from 'ng-zorro-antd/input'
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzNotificationServiceModule } from 'ng-zorro-antd/notification';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
@@ -22,7 +24,13 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzInputModule,
     NzButtonModule,
     NzIconModule,
-    NzSelectModule
-  ]
+    NzSelectModule,
+    NzNotificationServiceModule,
+    NgxMaskDirective,
+    NgxMaskPipe
+  ],
+  providers: [
+    provideNgxMask()
+  ],
 })
 export class SuperAdminLoginModule { }

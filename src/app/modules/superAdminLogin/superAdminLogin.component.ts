@@ -1,42 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   Validators,
-  FormBuilder,
-  FormGroup,
+  FormBuilder
 } from '@angular/forms';
+import { SuperAdminLoginService } from './service/superAdminLogin.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Auth } from '../shared/crud/auth.class';
+import { SuperAdminLoginRequest, SuperAdminLoginResponse } from './model/superAdminLogin.model';
 
 @Component({
   selector: 'superAdminLogin',
   templateUrl: './superAdminLogin.component.html',
   styleUrls: ['./superAdminLogin.component.css'],
 })
-export class SuperAdminLoginComponent implements OnInit {
-  validateForm!: FormGroup;
+export class SuperAdminLoginComponent extends Auth<SuperAdminLoginResponse, SuperAdminLoginRequest> {
+  form = this.fb.group({
+    email: ['', [Validators.required]],
+    password: ['', [Validators.required]]
+  });
 
   passwordVisible = false;
   password?: string;
 
-  submitForm(): void {
-    if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
-    } else {
-      Object.values(this.validateForm.controls).forEach((control) => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
-    }
+  constructor(
+    private fb: FormBuilder,
+    $data: SuperAdminLoginService,
+    $notification: NzNotificationService,
+    router: Router,
+    route: ActivatedRoute
+  ) {
+    super($data, $notification, router, route);
   }
-
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [true],
-    });
-  }
-
 }

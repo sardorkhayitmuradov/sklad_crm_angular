@@ -1,0 +1,28 @@
+<nz-table #columnTable [nzData]="datas" [nzScroll]="{ x: '1100px' }" [nzLoading]="false">
+    <thead>
+      <tr>
+        <th nzLeft>Kodi</th>
+        <th nzLeft>Soni</th>
+        <th>O'lchami</th>
+        <th>Narxi</th>
+        <th>Jami Narxi</th>
+        <th>Do'kon Nomi</th>
+        <th>To'lov Holati</th>
+        <th nzRight>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of columnTable.data">
+        <td nzLeft>{{ data.code }}</td>
+        <td nzLeft>{{ data.quantity }}</td>
+        <td>{{ data.size }}</td>
+        <td>{{ data.price }}</td>
+        <td>{{ data.totalPrice }}</td>
+        <td>{{ data.marketName }}</td>
+        <td>{{ data.paidStatus }}</td>
+        <td nzRight>
+          <a>action</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>

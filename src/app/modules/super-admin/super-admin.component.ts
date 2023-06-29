@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'superAdmin',
-  templateUrl: './super-admin.component.html'
+  templateUrl: './super-admin.component.html',
+  styleUrls: ['./super-admin.component.css']
 })
 
-export class SuperAdmin {
-
+export class SuperAdminComponent {
+  isCollapsed = false;
 }

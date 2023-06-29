@@ -9,6 +9,11 @@ const routes: Routes = [
     loadChildren: () =>
     import('./modules/superAdminLogin/superAdminLogin.module').then((m) => m.SuperAdminLoginModule),
   },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./modules/super-admin/super-admin.module').then((m) => m.SuperAdminModule),
+  },
   // Employee and Employer Login
   {
     path: 'login',
