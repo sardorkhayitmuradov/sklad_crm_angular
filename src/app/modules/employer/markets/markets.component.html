@@ -1,0 +1,49 @@
+<div class="flex flex-col w-full">
+  <button nz-button nzType="primary" (click)="showAddModal()" class="mb-4 self-end max-w-[15%] w-full">+ Add</button>
+  <div>
+    <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed" [nzLoading]="true">
+      <thead>
+        <tr>
+          <th nzWidth="25%">Nomi</th>
+          <th nzWidth="20%">Raqami</th>
+          <th nzWidth="35%">Manzili</th>
+          <th>Operatsiyalar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of editRowTable.data">
+          <ng-container>
+            <td>{{ data.name }}</td>
+            <td>{{ data.number }}</td>
+            <td>{{ data.address }}</td>
+            <td>
+              <div class="flex items-center gap-x-3">
+                <button nz-button nzType="default" class="flex items-center justify-center">
+                  <span nz-icon nzType="edit" nzTheme="outline"></span>
+                </button>
+                <button nz-button nzType="primary" nzDanger class="flex items-center justify-center">
+                  <span nz-icon nzType="delete" nzTheme="outline"></span>
+                </button>
+                <button nz-button nzType="primary" class="flex items-center justify-center">
+                  <span nz-icon nzType="more" nzTheme="outline"></span>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+
+<nz-modal
+      [(nzVisible)]="isVisible"
+      nzTitle="Add Product"
+      (nzOnCancel)="handleCancel()"
+      (nzOnOk)="handleOk()"
+      [nzOkLoading]="isOkLoading"
+    >
+      <div *nzModalContent>
+        add modal content
+      </div>
+    </nz-modal>

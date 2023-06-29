@@ -7,21 +7,22 @@
         </h2>
         <form
           nz-form
-          [formGroup]="validateForm"
+          [formGroup]="form"
           class="max-w-xs w-full"
-          (ngSubmit)="submitForm()"
+          (ngSubmit)="login('admin')"
         >
 
           <nz-form-item>
-            <nz-form-control nzErrorTip="Usernamingizni kiriting!">
-              <nz-input-group nzPrefixIcon="user" class="px-4">
+            <nz-form-control nzErrorTip="Emailingizni kiriting!">
+              <nz-input-group nzPrefixIcon="mail" class="px-4">
                 <input
-                  type="text"
+                  type="email"
                   nz-input
                   class="h-full my-2"
-                  formControlName="userName"
+                  formControlName="email"
                   nzSize="large"
-                  placeholder="Username"
+                  placeholder="Email"
+                  autocomplete="on"
                 />
               </nz-input-group>
             </nz-form-control>
@@ -41,6 +42,7 @@
                   formControlName="password"
                   placeholder="Password"
                   nzSize="large"
+                  autocomplete="on"
                 />
               </nz-input-group>
               <ng-template #suffixTemplate>
@@ -57,7 +59,6 @@
             nz-button
             class="w-full"
             nzSize="large"
-            routerLink="/employee"
             [nzType]="'primary'"
           >
             Log in

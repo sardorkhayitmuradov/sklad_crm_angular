@@ -38,15 +38,18 @@ export abstract class Auth<TResponse extends LoginResponse, TRequest> {
    */
   login(route: string) {
     const request = this.form.getRawValue();
-    const countryCode = '+998';
-    this.formatter(countryCode + request.phone_number);
-    request.phone_number = this.phone_number;
-    console.log(this.phone_number, request);
+    if(request?.phone_number){
+      const countryCode = '+998';
+      this.formatter(countryCode + request.phone_number);
+      request.phone_number = this.phone_number;
+    }
 
     if (this.form.valid) {
       this.$data.login(request).subscribe({
         next: (response) => {
           if (response.token) {
+            // Set the cookie to expire in 1 day
+            this.setCookie('token', response.token, 1);
             this.router.navigate([route]);
           }
         },
@@ -70,6 +73,17 @@ export abstract class Auth<TResponse extends LoginResponse, TRequest> {
       }
     });
   }
+
+
+  private setCookie(name: string, value: string, days: number) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
 
   /**
    *
