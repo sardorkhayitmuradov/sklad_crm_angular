@@ -11,9 +11,13 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import {  NzNotificationServiceModule } from 'ng-zorro-antd/notification';
 
+//Mask
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { PhoneFormatDirective } from '../directives/phone-format.directive';
+
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, PhoneFormatDirective],  
   imports: [
     CommonModule,
     LoginRoutingModule,
@@ -25,6 +29,11 @@ import {  NzNotificationServiceModule } from 'ng-zorro-antd/notification';
     NzIconModule,
     NzSelectModule,
     NzNotificationServiceModule,
-  ]
+    NgxMaskDirective,
+    NgxMaskPipe
+  ],
+  providers: [
+    provideNgxMask()
+  ],
 })
 export class LoginModule { }

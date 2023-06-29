@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { LoginResponse, LoginRequest } from '../model/login.model';
 import { BaseService } from '../../shared/services/base.service';
-import { CRUDService } from '../../shared/services/crud.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService extends CRUDService<LoginResponse, LoginRequest> {
+export class LoginService extends AuthService<LoginResponse, LoginRequest> {
   /**
    *
    */
-  protected override url = 'employee/login';
+  override url = 'employee';
 
   /**
    *
@@ -19,4 +19,5 @@ export class LoginService extends CRUDService<LoginResponse, LoginRequest> {
   constructor(private $base: BaseService) {
     super($base);
   }
+
 }

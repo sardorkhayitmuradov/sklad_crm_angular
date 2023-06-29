@@ -1,43 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-
+import { LoginRequest, LoginResponse } from './model/login.model';
+import { Auth } from '../shared/crud/auth.class';
+import { LoginService } from './service/login.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends Auth<LoginResponse, LoginRequest> {
   // Forms
-  validateForm!: FormGroup;
+  form = this.fb.group({
+    phone_number: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+  });
 
   passwordVisible = false;
   password?: string;
 
-  submitForm(): void {
-    if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
-    } else {
-      Object.values(this.validateForm.controls).forEach((control) => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
-    }
-  }
-
   constructor(
     private fb: FormBuilder,
-    private $notification: NzNotificationService
-  ) {}
-
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      phone_number: ['+998 (', [Validators.required]],
-      password: ['', [Validators.required]],
-      remember: [true],
-    });
+    $data: LoginService,
+    $notification: NzNotificationService,
+    router: Router,
+    route: ActivatedRoute
+  ) {
+    super($data, $notification, router, route);
   }
 
   // Options Role
@@ -51,16 +41,7 @@ export class LoginComponent implements OnInit {
     o1 && o2 ? o1.value === o2.value : o1 === o2;
 
   log(event: any) {
-    console.log(event);
-  }
-
-  // Notification
-  createNotification(type: string): void {
-    this.$notification.create(
-      type,
-      'Notification Title',
-      'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-      { nzPlacement: 'top', nzDuration: 3000 }
-    );
+    this.selectedValue = event;
+    this.$data.url = this.selectedValue.value;
   }
 }

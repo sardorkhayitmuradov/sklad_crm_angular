@@ -7,13 +7,14 @@
         </h2>
         <form
           nz-form
-          [formGroup]="validateForm"
+          [formGroup]="form"
           class="max-w-xs w-full"
-          (ngSubmit)="submitForm()"
+          (ngSubmit)="login()"
         >
           <nz-select
             nzSize="large"
             [(ngModel)]="selectedValue"
+            [ngModelOptions]="{standalone: true}"
             [compareWith]="compareFn"
             (ngModelChange)="log($event)"
             class="mt-2 mb-6 w-full"
@@ -30,19 +31,15 @@
           <nz-form-item>
             <nz-form-control nzErrorTip="Nomeringizni kiriting!">
               <nz-input-group nzPrefixIcon="phone" class="px-4">
-                <ng-template #addOnBeforeTemplate>
-                  <nz-select formControlName="phoneNumberPrefix" class="phone-select">
-                    <nz-option nzLabel="+998" nzValue="+998"></nz-option>
-                  </nz-select>
-                </ng-template>
                 <input
                   type="text"
                   nz-input
                   class="h-full my-2"
                   formControlName="phone_number"
-                  phoneNumberFormatter
+                  prefix="+998"
+                  placeholder="+998-(__) ___-__-__"
+                  mask="-(00)-000-00-00"
                   nzSize="large"
-                  placeholder="Telefon Raqamingiz"
                 />
               </nz-input-group>
             </nz-form-control>
@@ -62,6 +59,7 @@
                   formControlName="password"
                   placeholder="Password"
                   nzSize="large"
+                  autocomplete="on"
                 />
               </nz-input-group>
               <ng-template #suffixTemplate>
@@ -79,7 +77,6 @@
             class="w-full"
             nzSize="large"
             [nzType]="'primary'"
-            (click)="createNotification('error')"
           >
             Log in
           </button>
