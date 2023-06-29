@@ -19,4 +19,6 @@ export class LoginService extends CRUDService<LoginResponse, LoginRequest> {
   constructor(private $base: BaseService) {
     super($base);
   }
+
+
 }

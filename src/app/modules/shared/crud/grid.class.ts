@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { CRUDService } from '../services/crud.service';
 
 export abstract class Grid<TResponse, TRequest> {
+  [x: string]: any;
   /**
    *
    */
