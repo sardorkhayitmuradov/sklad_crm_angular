@@ -100,7 +100,7 @@ export abstract class Auth<TResponse extends LoginResponse, TRequest> {
   createNotification(type: string, error: any) {
     this.$notification.create(type, error, '', {
       nzPlacement: 'top',
-      nzDuration: 3000,
+      nzDuration: 0
     });
   }
 

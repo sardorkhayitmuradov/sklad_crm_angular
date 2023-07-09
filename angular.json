@@ -16,9 +16,7 @@
             "outputPath": "dist/sklad_crm",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -29,10 +27,7 @@
                 "output": "/assets/"
               }
             ],
-            "styles": [
-              "src/theme.less",
-              "src/styles.css"
-            ],
+            "styles": ["src/theme.less", "src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -49,6 +44,12 @@
                   "maximumError": "4kb"
                 }
               ],
+              "fileReplacements": [
+                {
+                  "replace": "src/app/modules/environments/environment.ts",
+                  "with": "src/app/modules/environments/environment.prod.ts"
+                }
+              ],
               "outputHashing": "all"
             },
             "development": {
@@ -63,13 +64,6 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "options": {
-<<<<<<< HEAD
-            "proxyConfig": "./src/proxy.conf.json"
-=======
-            "proxyConfig": "src/proxy.conf.json"
->>>>>>> 755d67d9a2c3e5e5fcd87566dc36142b60751aab
-          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
@@ -90,18 +84,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         }

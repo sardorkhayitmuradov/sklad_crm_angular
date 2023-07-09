@@ -21,7 +21,6 @@ export class SuperAdminLoginComponent extends Auth<SuperAdminLoginResponse, Supe
   });
 
   passwordVisible = false;
-  password?: string;
 
   constructor(
     private fb: FormBuilder,

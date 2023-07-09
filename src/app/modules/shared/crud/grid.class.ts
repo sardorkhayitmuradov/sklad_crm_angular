@@ -6,7 +6,7 @@ export abstract class Grid<TResponse, TRequest> {
   /**
    *
    */
-  data$!: Observable<TResponse[]>;
+  data$!: Observable<TResponse>;
 
   /**
    *
@@ -18,7 +18,7 @@ export abstract class Grid<TResponse, TRequest> {
   /**
    *
    */
-  private getAll() {
+  getAll() {
     this.data$ = this.$data.getAll();
   }
 

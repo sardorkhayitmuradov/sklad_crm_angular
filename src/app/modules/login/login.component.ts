@@ -18,7 +18,6 @@ export class LoginComponent extends Auth<LoginResponse, LoginRequest> {
   });
 
   passwordVisible = false;
-  password?: string;
 
   constructor(
     private fb: FormBuilder,

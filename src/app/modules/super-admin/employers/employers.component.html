@@ -1,1 +1,56 @@
-<h1>Employers</h1>
+<div class="flex flex-col w-full">
+
+  <app-title-advanced [title]="'Boshliqlar'"></app-title-advanced>
+
+
+  <nz-table #basicTable [nzData]="(data$ | async)?.employers ?? []" [nzLoading]="!(data$ | async)">
+    <thead>
+      <tr>
+        <th nzWidth="20%">FullName</th>
+        <th nzWidth="20%">Phone</th>
+        <th nzWidth="25%">Balance</th>
+        <th>Xodimlar</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employer of basicTable.data">
+        <td>{{ employer.fullname }}</td>
+        <td>{{ employer.phone_number }}</td>
+        <td>{{ employer.balance }}</td>
+        <td><a href="#">Ishchilari</a></td>
+        <td>
+          <div class="flex items-center gap-x-3">
+            <button
+              nz-button
+              nzType="default"
+              class="flex items-center justify-center"
+              [routerLink]="['edit', employer._id]"
+            >
+              <span nz-icon nzType="edit" nzTheme="outline"></span>
+            </button>
+            <button
+              nz-button
+              nzType="primary"
+              nzDanger
+              class="flex items-center justify-center"
+              (click)="showDeleteConfirm(employer._id)"
+            >
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+
+<!-- <nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Add Product"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzOkLoading]="isOkLoading"
+>
+  <div *nzModalContent>add modal content</div>
+</nz-modal> -->

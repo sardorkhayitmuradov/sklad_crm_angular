@@ -13,19 +13,30 @@
         >
 
           <nz-form-item>
-            <nz-form-control nzErrorTip="Emailingizni kiriting!">
+            <nz-form-control [nzErrorTip]="emailError">
               <nz-input-group nzPrefixIcon="mail" class="px-4">
                 <input
-                  type="email"
+                  type="text"
                   nz-input
                   class="h-full my-2"
                   formControlName="email"
+                  mask="A*@A*.SSS"
+                  [validation]="true" 
+                  [dropSpecialCharacters]="false"
                   nzSize="large"
                   placeholder="Email"
                   autocomplete="on"
                 />
               </nz-input-group>
             </nz-form-control>
+            <ng-template #emailError let-control>
+              <ng-container *ngIf="control.getError('required')">
+                Ushbu maydonni to'ldiring
+              </ng-container>
+              <ng-container *ngIf="control.getError('mask')">
+                Emailingizni to'liq kiriting
+              </ng-container>
+            </ng-template> 
           </nz-form-item>
           <nz-form-item>
             <nz-form-control nzErrorTip="Parolingizni kiriting!">
@@ -36,7 +47,6 @@
               >
                 <input
                   [type]="passwordVisible ? 'text' : 'password'"
-                  [(ngModel)]="password"
                   nz-input
                   class="h-full my-2"
                   formControlName="password"

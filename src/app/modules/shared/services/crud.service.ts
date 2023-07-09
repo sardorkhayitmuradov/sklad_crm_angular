@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,8 @@ export abstract class CRUDService<TResponse, TRequest> {
    * @returns
    */
   getAll() {
-    return this._base.get<TResponse[]>(this.url);
+    console.log(this.url)
+    return this._base.get<TResponse>(this.url);
   }
 
   /**

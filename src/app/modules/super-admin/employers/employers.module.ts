@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { EmployersRoutingModule } from './employers-routing.module';
 import { EmployersComponent } from './employers.component';
+import { SharedModule } from '../../shared/shared.module';
+import { AddEditEmployersComponent } from './add-edit-employers/add-edit-employers.component';
 
 
 @NgModule({
-  declarations: [
-    EmployersComponent
-  ],
+  declarations: [EmployersComponent, AddEditEmployersComponent],
   imports: [
-    CommonModule,
-    EmployersRoutingModule
+    EmployersRoutingModule,
+    SharedModule
   ]
 })
 export class EmployersModule { }

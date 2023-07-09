@@ -1,5 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class BaseService {
    * @returns
    */
   private makeUrl(url: string) {
-    return `${this.url}${url}`;
+    return `${environment.baseUrl}${this.url}${url}`;
   }
 
   /**
@@ -25,6 +26,32 @@ export class BaseService {
    */
   constructor(private http: HttpClient) {}
 
+  private getCookie(cname: string) {
+    let name = cname + '=';
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return '';
+  }
+
+  private getHeaders() {
+    const token = this.getCookie('token');
+
+    let headers = new HttpHeaders().set(
+      'Authorization', token
+   );
+
+    return headers;
+  }
+
   /**
    *
    * @param url
@@ -32,7 +59,10 @@ export class BaseService {
    * @returns
    */
   get<T>(url: string, params?: HttpParams) {
-    return this.http.get<T>(this.makeUrl(url), { params });
+    return this.http.get<T>(this.makeUrl(url), {
+      headers: this.getHeaders(),
+      params,
+    });
   }
 
   /**
@@ -42,7 +72,9 @@ export class BaseService {
    * @returns
    */
   post<T>(url: string, model?: any) {
-    return this.http.post<T>(this.makeUrl(url), model);
+    return this.http.post<T>(this.makeUrl(url), model, {
+      headers: this.getHeaders(),
+    });
   }
 
   /**
@@ -52,7 +84,9 @@ export class BaseService {
    * @returns
    */
   put<T>(url: string, model?: any) {
-    return this.http.put<T>(this.makeUrl(url), model);
+    return this.http.put<T>(this.makeUrl(url), model, {
+      headers: this.getHeaders(),
+    });
   }
 
   /**
@@ -62,6 +96,8 @@ export class BaseService {
    * @returns
    */
   delete<T>(url: string, body?: any) {
-    return this.http.delete<T>(this.makeUrl(url), { body });
+    return this.http.delete<T>(this.makeUrl(url), {
+      headers: this.getHeaders(),
+    });
   }
 }
