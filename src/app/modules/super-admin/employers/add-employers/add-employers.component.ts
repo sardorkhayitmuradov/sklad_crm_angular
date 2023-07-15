@@ -4,12 +4,13 @@ import { EmployersService } from '../services/employers.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddEdit } from 'src/app/modules/shared/crud/add-edit.class';
 import { EmployersRequest, EmployersResponse } from '../models/employers.model';
+import {  formatter } from 'src/app/modules/shared/crud/auth.class';
 
 @Component({
-  selector: 'add-edit-employers',
-  templateUrl: './add-edit-employers.component..html',
+  selector: 'add-employers',
+  templateUrl: './add-employers.component.html',
 })
-export class AddEditEmployersComponent extends AddEdit<
+export class AddEmployersComponent extends AddEdit<
   EmployersResponse,
   EmployersRequest
 > {
@@ -37,4 +38,19 @@ export class AddEditEmployersComponent extends AddEdit<
   ) {
     super($data, router, route);
   }
+
+   /**
+   * 
+   * @returns 
+   */
+   protected override getRequest(): EmployersRequest {
+    const request = super.getRequest();
+    const countryCode = '+998'
+    request.phone_number = formatter(countryCode + request.phone_number)
+    console.log(request)
+    // request.dateOfBirth = this.datePipe.transform(request.dateOfBirth, 'yyyy-MM-dd')!;
+    // request.dateOfRegister = this.datePipe.transform(request.dateOfRegister, 'yyyy-MM-dd')!;
+    return request;
+  }
+
 }

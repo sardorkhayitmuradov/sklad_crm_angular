@@ -1,8 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Component } from '@angular/core';
 import { Grid } from '../../shared/crud/grid.class';
-import { Employers, EmployersRequest, EmployersResponse } from './models/employers.model';
+import {  EmployersRequest, EmployersResponse } from './models/employers.model';
 import { EmployersService } from './services/employers.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
@@ -23,7 +21,7 @@ export class EmployersComponent extends Grid<
     this.isLoading = true;
   }
 
-  showDeleteConfirm(id: number): void {
+  showDeleteConfirm(id: string): void {
     this.modal.confirm({
       nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
       nzOkText: 'Yes',

@@ -1,9 +1,19 @@
 <div class="flex flex-col w-full">
+  <div class="relative mb-4">
+    <nz-divider nzText="Boshliqlar" nzOrientation="left"></nz-divider>
+    <div
+      class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2"
+    >
+      <input type="text" nz-input placeholder="search..." />
+      <button [routerLink]="['add']" nz-button nzType="primary">Registration</button>
+    </div>
+  </div>
 
-  <app-title-advanced [title]="'Boshliqlar'"></app-title-advanced>
-
-
-  <nz-table #basicTable [nzData]="(data$ | async)?.employers ?? []" [nzLoading]="!(data$ | async)">
+  <nz-table
+    #basicTable
+    [nzData]="(data$ | async)?.employers ?? []"
+    [nzLoading]="!(data$ | async)"
+  >
     <thead>
       <tr>
         <th nzWidth="20%">FullName</th>

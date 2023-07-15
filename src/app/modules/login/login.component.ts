@@ -5,6 +5,8 @@ import { LoginRequest, LoginResponse } from './model/login.model';
 import { Auth } from '../shared/crud/auth.class';
 import { LoginService } from './service/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -23,10 +25,11 @@ export class LoginComponent extends Auth<LoginResponse, LoginRequest> {
     private fb: FormBuilder,
     $data: LoginService,
     $notification: NzNotificationService,
+    cookieService: CookieService,
     router: Router,
     route: ActivatedRoute
   ) {
-    super($data, $notification, router, route);
+    super($data, $notification, cookieService, router, route);
   }
 
   // Options Role

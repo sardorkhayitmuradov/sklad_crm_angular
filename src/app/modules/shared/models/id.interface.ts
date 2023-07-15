@@ -1,3 +1,3 @@
 export interface Id {
-  _id: number;
+  _id: string;
 }

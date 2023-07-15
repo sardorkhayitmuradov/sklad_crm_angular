@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 
 export class SuperAdminComponent {
-  isCollapsed = false;
+  isCollapsed = true;
 }

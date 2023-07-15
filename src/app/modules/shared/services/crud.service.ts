@@ -22,7 +22,6 @@ export abstract class CRUDService<TResponse, TRequest> {
    * @returns
    */
   getAll() {
-    console.log(this.url)
     return this._base.get<TResponse>(this.url);
   }
 
@@ -40,7 +39,7 @@ export abstract class CRUDService<TResponse, TRequest> {
    * @param model
    * @returns
    */
-  edit(id: number, model: TRequest) {
+  edit(id: string, model: TRequest) {
     return this._base.put<TResponse>(`${this.url}/${id}`, model);
   }
 
@@ -48,7 +47,7 @@ export abstract class CRUDService<TResponse, TRequest> {
    *
    * @param id
    */
-  getById(id: number) {
+  getById(id: string) {
     return this._base.get<TResponse>(`${this.url}/${id}`);
   }
 
@@ -56,7 +55,7 @@ export abstract class CRUDService<TResponse, TRequest> {
    *
    * @param id
    */
-  delete(id: number) {
+  delete(id: string) {
     return this._base.delete<any>(`${this.url}/${id}`);
   }
 }

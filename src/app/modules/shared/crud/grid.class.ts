@@ -2,7 +2,6 @@ import { Observable } from 'rxjs';
 import { CRUDService } from '../services/crud.service';
 
 export abstract class Grid<TResponse, TRequest> {
-  [x: string]: any;
   /**
    *
    */
@@ -26,7 +25,7 @@ export abstract class Grid<TResponse, TRequest> {
    *
    * @param id
    */
-  delete(id: number) {
+  delete(id: string) {
     this.$data.delete(id).subscribe(() => {
       this.getAll();
     });

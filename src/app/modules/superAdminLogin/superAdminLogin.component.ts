@@ -8,6 +8,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Auth } from '../shared/crud/auth.class';
 import { SuperAdminLoginRequest, SuperAdminLoginResponse } from './model/superAdminLogin.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'superAdminLogin',
@@ -27,8 +28,9 @@ export class SuperAdminLoginComponent extends Auth<SuperAdminLoginResponse, Supe
     $data: SuperAdminLoginService,
     $notification: NzNotificationService,
     router: Router,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    cookieService: CookieService
   ) {
-    super($data, $notification, router, route);
+    super($data, $notification, cookieService, router, route);
   }
 }

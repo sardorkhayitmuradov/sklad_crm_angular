@@ -10,15 +10,9 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzNotificationServiceModule } from 'ng-zorro-antd/notification';
-import { TitleBasicComponent } from './title-basic/title-basic.component';
-import { TitleAdvancedComponent } from './title-basic/title-advanced/title-advanced.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    TitleBasicComponent,
-    TitleAdvancedComponent
-  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -36,10 +30,6 @@ import { RouterModule } from '@angular/router';
 
   ],
   exports: [
-
-    TitleBasicComponent,
-    TitleAdvancedComponent,
-
     CommonModule,
     ReactiveFormsModule,
 

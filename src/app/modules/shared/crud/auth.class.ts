@@ -3,12 +3,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { LoginResponse } from '../../login/model/login.model';
+import { CookieService } from 'ngx-cookie-service';
+
 
 export abstract class Auth<TResponse extends LoginResponse, TRequest> {
-  /**
-   *
-   */
-  protected phone_number?: string;
+
   abstract form: FormGroup;
 
   /**
@@ -18,19 +17,10 @@ export abstract class Auth<TResponse extends LoginResponse, TRequest> {
   constructor(
     protected $data: AuthService<TResponse, TRequest>,
     private $notification: NzNotificationService,
+    private cookieService: CookieService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
-  /*
-   *
-   */
-  formatter(phoneNumber: string) {
-    this.phone_number = phoneNumber.replace(
-      /^(\+\d{3})(\d{2})(\d{3})(\d{2})(\d{2})$/,
-      '$1-$2-$3-$4-$5'
-    );
-  }
 
   /**
    *
@@ -40,16 +30,18 @@ export abstract class Auth<TResponse extends LoginResponse, TRequest> {
     const request = this.form.getRawValue();
     if(request?.phone_number){
       const countryCode = '+998';
-      this.formatter(countryCode + request.phone_number);
-      request.phone_number = this.phone_number;
-    }
+      request.phone_number = formatter(countryCode + request.phone_number);
+    } 
 
     if (this.form.valid) {
       this.$data.login(request).subscribe({
         next: (response) => {
           if (response.token) {
-            // Set the cookie to expire in 1 day
-            this.setCookie('token', response.token, 1);
+            if(route === 'admin'){
+              // Set the cookie to expire in 1 day
+              this.cookieService.set('superadmintoken', response.token);
+            }
+            this.cookieService.set('token', response.token);
             this.router.navigate([route]);
           }
         },
@@ -74,16 +66,6 @@ export abstract class Auth<TResponse extends LoginResponse, TRequest> {
     });
   }
 
-
-  private setCookie(name: string, value: string, days: number) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-}
 
   /**
    *
@@ -110,4 +92,12 @@ export abstract class Auth<TResponse extends LoginResponse, TRequest> {
   reset() {
     this.form.reset();
   }
+}
+
+export function formatter(phoneNumber: string) {
+  let phone_number: string  = phoneNumber.replace(
+   /^(\+\d{3})(\d{2})(\d{3})(\d{2})(\d{2})$/,
+   '$1-$2-$3-$4-$5'
+ );
+  return phone_number
 }

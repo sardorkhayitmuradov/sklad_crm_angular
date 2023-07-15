@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminAuthGuard } from './modules/guards/admin-auth.guard';
+import { SuperAdminAuthGuard } from './modules/guards/superadmin-auth.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -13,6 +15,7 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./modules/super-admin/super-admin.module').then((m) => m.SuperAdminModule),
+    canActivate: [SuperAdminAuthGuard]
   },
   // Employee and Employer Login
   {
@@ -24,11 +27,13 @@ const routes: Routes = [
     path: 'employer',
     loadChildren: () =>
       import('./modules/employer/employer.module').then((m) => m.EmployerModule),
+    canActivate: [AdminAuthGuard],
   },
   {
     path: 'employee',
     loadChildren: () =>
       import('./modules/employee/employee.module').then((m) => m.EmployeeModule),
+    canActivate: [AdminAuthGuard],
   },
   {
     path: '**',

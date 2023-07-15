@@ -1,4 +1,4 @@
-import {  FormGroup } from '@angular/forms';
+import {  FormControl, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CRUDService } from '../services/crud.service';
 
@@ -12,14 +12,14 @@ export abstract class AddEdit<TResponse, TRequest> {
    *
    */
   get isEdit() {
-    return this.id > 0;
+    return this.id ;
   }
 
   /**
    *
    */
   get id() {
-    return Number(this.route.snapshot.params['id']);
+    return this.route.snapshot.params['id'];
   }
 
   /**
@@ -37,39 +37,49 @@ export abstract class AddEdit<TResponse, TRequest> {
       });
     }
   }
-
+  
   /**
    *
    * @param model
-   */
-  private setFormValues(model: TResponse) {
+  */
+ private setFormValues(model: TResponse) {
     type FormControlsKeys = keyof typeof this.form.controls;
     type TResponseKeys = keyof TResponse;
     Object.keys(this.form.controls).forEach((key) => {
       this.form.controls[key as FormControlsKeys].setValue(
         model[key as TResponseKeys]
       );
+      console.log(key, model)
     });
-  }
+  } 
 
   /**
    *
    * @returns
    */
-  submit() {
+  submit(key: string) {
     if (this.form.invalid) {
       this.updateValueAndValidity();
       return;
     }
 
-    const request: TRequest = this.form.getRawValue();
-    if (this.isEdit) {
+    const request: TRequest = this.getRequest();
+    if (key === 'Edit') {
       this.edit(request);
       return;
     }
 
     this.add(request);
   }
+
+   /**
+   * 
+   * @returns 
+   */
+   protected getRequest(): TRequest {
+    return this.form.getRawValue();
+  }
+
 
   /**
    *
@@ -78,7 +88,8 @@ export abstract class AddEdit<TResponse, TRequest> {
   private add(request: TRequest) {
     this.$data.add(request).subscribe((item) => {
       if (item) {
-        // this.router.navigate(['../'], { relativeTo: this.route });
+        console.log(item)
+        this.router.navigate(['../'], { relativeTo: this.route });
         return;
       }
     });
@@ -88,10 +99,10 @@ export abstract class AddEdit<TResponse, TRequest> {
    *
    * @param request
    */
-  private edit(request: TRequest) {
+  private edit(request: TRequest) { 
     this.$data.edit(this.id, request).subscribe((item) => {
       if (item) {
-        // this.router.navigate(['../../'], { relativeTo: this.route });
+        this.router.navigate(['../../'], { relativeTo: this.route });
         return;
       }
     });
