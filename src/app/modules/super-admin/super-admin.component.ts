@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'superAdmin',
@@ -8,4 +10,13 @@ import { Component } from '@angular/core';
 
 export class SuperAdminComponent {
   isCollapsed = true;
+
+  constructor(private router: Router, private cookieService: CookieService){
+
+  }
+
+  logOut(){
+    this.cookieService.delete("superadmintoken");
+    this.router.navigate(['/admin/login']);
+  }
 }

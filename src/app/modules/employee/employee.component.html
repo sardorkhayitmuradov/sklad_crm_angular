@@ -99,12 +99,16 @@
   </nz-sider>
   <nz-layout class="flex flex-col gap-y-5">
     <nz-header class="!px-4">
-      <span
-        class="hover:text-blue-600 cursor-pointer"
-        nz-icon
-        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-        (click)="isCollapsed = !isCollapsed"
-      ></span>
+      <div class="flex items-center justify-between h-full">
+        <span
+          class="hover:text-blue-600 cursor-pointer"
+          nz-icon
+          [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          (click)="isCollapsed = !isCollapsed"
+        ></span>
+
+        <button nz-button nzSize="default" nzType="primary" (click)="logOut()">Log out</button>
+      </div>
     </nz-header>
     <nz-content class="h-full">
       <div class="inner-content">

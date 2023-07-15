@@ -6,6 +6,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { SuperAdminComponent } from './super-admin.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { SuperAdminComponent } from './super-admin.component';
     NzLayoutModule,
     NzIconModule,
     NzMenuModule,
+    NzButtonModule
   ]
 })
 export class SuperAdminModule { }
