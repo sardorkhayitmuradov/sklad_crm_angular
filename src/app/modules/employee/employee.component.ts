@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 
 export class EmployeeComponent {
-  isCollapsed = false;
+  isCollapsed = true;
 
   constructor(private router: Router, private cookieService: CookieService){
 

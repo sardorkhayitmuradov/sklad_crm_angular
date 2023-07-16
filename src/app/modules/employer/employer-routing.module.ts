@@ -2,60 +2,65 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployerComponent } from './employer.component';
 
-const routes: Routes = [{
-  path: '',
-  component: EmployerComponent,
-  children: [
-    {
-      path: 'dashboard',
-      loadChildren: () => 
-        import('./dashboard/dashboard.module').then((m)=> m.DashboardModule)
-    },
-    {
-      path: 'markets',
-      loadChildren: () => 
-        import('./markets/markets.module').then((m)=> m.MarketsModule)
-    },
-    {
-      path: 'products',
-      loadChildren: () => 
-        import('./products/products.module').then((m)=> m.ProductsModule)
-    },
-    {
-      path: 'sales',
-      loadChildren: () => 
-        import('./sales/sales.module').then((m)=> m.SalesModule)
-    },
-    {
-      path: 'admins',
-      loadChildren: () => 
-        import('../employee/admins/admins.module').then((m)=> m.AdminsModule)
-    },
-    {
-      path: 'finance',
-      loadChildren: () => 
-        import('./finance/finance.module').then((m)=> m.FinanceModule)
-    },
-    {
-      path: 'clients',
-      loadChildren: () => 
-        import('./clients/clients.module').then((m)=> m.ClientsModule)
-    },
-    {
-      path: 'orders',
-      loadChildren: () => 
-        import('./orders/orders.module').then((m)=> m.OrdersModule)
-    },
-    {
-      path: 'settings',
-      loadChildren: () => 
-        import('./settings/settings.module').then((m)=> m.SettingsModule)
-    }
-  ]
-}];
+const routes: Routes = [
+  {
+    path: '',
+    component: EmployerComponent,
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+        data: {
+          breadcrumb: 'Dashboard',
+        },
+      },
+      {
+        path: 'markets',
+        loadChildren: () =>
+          import('./markets/markets.module').then((m) => m.MarketsModule),
+        data: {
+          breadcrumb: 'Markets',
+        },
+      },
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('./products/products.module').then((m) => m.ProductsModule),
+        data: {
+          breadcrumb: 'Products',
+        },
+      },
+      {
+        path: 'employees',
+        loadChildren: () =>
+          import('./employees/employees.module').then((m) => m.EmployeesModule),
+        data: {
+          breadcrumb: 'Employees',
+        },
+      },
+      {
+        path: 'orders',
+        loadChildren: () =>
+          import('./orders/orders.module').then((m) => m.OrdersModule),
+        data: {
+          breadcrumb: 'Orders',
+        },
+      },
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import('./settings/settings.module').then((m) => m.SettingsModule),
+        data: {
+          breadcrumb: 'Settings',
+        },
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class EmployerRoutingModule { }
+export class EmployerRoutingModule {}

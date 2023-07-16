@@ -26,7 +26,7 @@ nz-breadcrumb {
 .inner-content {
   padding: 24px;
   background: #fff;
-  height: calc(100vh - 155px);
+  height: calc(100vh - 180px);
   overflow: auto;
 }
 

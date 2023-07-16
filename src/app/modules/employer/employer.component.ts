@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-
 @Component({
   selector: 'employer',
   templateUrl: './employer.component.html',
@@ -9,7 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 
 export class EmployerComponent {
-  isCollapsed = false;
+  isCollapsed = true;
+
 
   constructor(private router: Router, private cookieService: CookieService){}
 

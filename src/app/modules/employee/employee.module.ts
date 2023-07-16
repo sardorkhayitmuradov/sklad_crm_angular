@@ -7,6 +7,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
 @NgModule({
   declarations: [EmployeeComponent],
@@ -16,7 +17,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzLayoutModule,
     NzIconModule,
     NzMenuModule,
-    NzButtonModule
+    NzButtonModule,
+    NzBreadCrumbModule
   ],
 })
 export class EmployeeModule {}

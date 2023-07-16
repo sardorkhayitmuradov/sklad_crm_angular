@@ -2,7 +2,11 @@
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="m-4 bg-white px-1 py-1 rounded-5">
       <img
-        [src]="isCollapsed ? '../../../assets/icons/Logo-con.svg' : '../../../assets/icons/Logo.svg'"
+        [src]="
+          isCollapsed
+            ? '../../../assets/icons/Logo-con.svg'
+            : '../../../assets/icons/Logo.svg'
+        "
         class="h-[38px]"
         alt="Logo"
       />
@@ -17,28 +21,6 @@
         ></span>
         <span>Dashboard</span>
       </li>
-      <li nz-menu-item [routerLink]="['admins']">
-        <span nz-icon nzTheme="outline">
-          <img
-            src="../../../assets/icons/users.svg"
-            alt="admins"
-            width="15px"
-            height="15px"
-          />
-        </span>
-        <span>Xodimlar</span>
-      </li>
-      <li nz-menu-item [routerLink]="['finance']">
-        <span nz-icon nzTheme="outline">
-          <img
-            src="../../../assets/icons/finance.svg"
-            alt="finance"
-            width="15px"
-            height="15px"
-          />
-        </span>
-        <span>Moliya</span>
-      </li>
       <li nz-menu-item [routerLink]="['products']">
         <span nz-icon nzTheme="outline">
           <img
@@ -48,41 +30,7 @@
             height="15px"
           />
         </span>
-        <span>Mahsulotlar</span>
-      </li>
-      <li nz-menu-item [routerLink]="['clients']">
-        <span nz-icon nzTheme="outline">
-          <img
-            src="../../../assets/icons/clients.svg"
-            alt="clients"
-            width="15px"
-            height="15px"
-          />
-        </span>
-        <span>Mijozlar</span>
-      </li>
-      <li nz-menu-item [routerLink]="['orders']">
-        <span nz-icon nzTheme="outline">
-          <span nz-icon nzType="unordered-list" class="text-white" nzTheme="outline"></span>
-        </span>
-        <span>Buyurtmalar</span>
-      </li>
-      <li nz-menu-item [routerLink]="['settings']">
-        <span nz-icon nzTheme="outline">
-          <span nz-icon nzType="setting" class="text-white" nzTheme="outline"></span>
-        </span>
-        <span>Sozlamalar</span>
-      </li>
-      <!-- <li nz-menu-item [routerLink]="['sales']">
-        <span nz-icon nzTheme="outline">
-          <img
-            src="../../../assets/icons/sales.svg"
-            alt="sales"
-            width="15px"
-            height="15px"
-          />
-        </span>
-        <span>Sales</span>
+        <span>Products</span>
       </li>
       <li nz-menu-item [routerLink]="['markets']">
         <span nz-icon nzTheme="outline">
@@ -94,10 +42,32 @@
           />
         </span>
         <span>Markets</span>
-      </li> -->
+      </li>
+      <li nz-menu-item [routerLink]="['orders']">
+        <span nz-icon nzTheme="outline">
+          <span
+            nz-icon
+            nzType="unordered-list"
+            class="text-white"
+            nzTheme="outline"
+          ></span>
+        </span>
+        <span>Orders</span>
+      </li>
+      <li nz-menu-item [routerLink]="['settings']">
+        <span nz-icon nzTheme="outline">
+          <span
+            nz-icon
+            nzType="setting"
+            class="text-white"
+            nzTheme="outline"
+          ></span>
+        </span>
+        <span>Settings</span>
+      </li>
     </ul>
   </nz-sider>
-  <nz-layout class="flex flex-col gap-y-5">
+  <nz-layout class="flex flex-col">
     <nz-header class="!px-4">
       <div class="flex items-center justify-between h-full">
         <span
@@ -107,14 +77,22 @@
           (click)="isCollapsed = !isCollapsed"
         ></span>
 
-        <button nz-button nzSize="default" nzType="primary" (click)="logOut()">Log out</button>
+        <button nz-button nzSize="default" nzType="primary" (click)="logOut()">
+          Log out
+        </button>
       </div>
     </nz-header>
     <nz-content class="h-full">
+      <nz-breadcrumb
+        class="!my-3"
+        [nzAutoGenerate]="true"
+        [nzRouteLabel]="'breadcrumb'"
+      >
+      </nz-breadcrumb>
       <div class="inner-content">
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-    <nz-footer>SKLAD CRM ©2023 Implement By Ibrohim</nz-footer>
+    <nz-footer>SKLAD CRM ©2023 Created by Imcon Group</nz-footer>
   </nz-layout>
 </nz-layout>
