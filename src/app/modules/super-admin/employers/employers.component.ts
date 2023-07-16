@@ -6,6 +6,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'employers',
@@ -18,7 +20,7 @@ export class EmployersComponent extends Grid<Employers, EmployersRequest> {
 
   data: Employers[] = [];
 
-  constructor($data: EmployersService, private modal: NzModalService) {
+  constructor($data: EmployersService, private modal: NzModalService, private cookieService: CookieService,private router: Router) {
     super($data);
     this.data$.subscribe((response: any) => {
       this.data = response.employers;
@@ -43,4 +45,9 @@ export class EmployersComponent extends Grid<Employers, EmployersRequest> {
     });
   }
 
+
+  linkToEmployees(id: string) {
+    this.cookieService.set('employer_id', id);
+    this.router.navigate([`admin/employers/employees/${id}`]);
+  }
 }

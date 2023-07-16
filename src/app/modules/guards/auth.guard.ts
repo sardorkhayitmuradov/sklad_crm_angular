@@ -12,17 +12,17 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' }) 
 
-export class SuperAdminAuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(private router: Router,private cookieService: CookieService ) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    const token = this.cookieService.get('superadmintoken');
+    const token = this.cookieService.get('token');
     if (token) {
       return true;
     }
 
-    this.router.navigate(['/admin/login']);
+    this.router.navigate(['/login']);
     return false;
   }
 

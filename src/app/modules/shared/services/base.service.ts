@@ -27,13 +27,13 @@ export class BaseService {
    */
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
-
   private getHeaders() {
     const token = this.cookieService.get('token');
+    const employer_id = this.cookieService.get('employer_id') || '';
 
-    let headers = new HttpHeaders().set(
-      'Authorization', token
-   );
+    let headers = new HttpHeaders()
+      .set('Authorization', token)
+      .set('employer_id', employer_id);
 
     return headers;
   }

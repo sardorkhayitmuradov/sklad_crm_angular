@@ -87,17 +87,16 @@ export abstract class AddEdit<TResponse, TRequest> {
    * @param request
    */
   private add(request: TRequest) {
+    console.log(request)
     this.$data.add(request).subscribe({
       next: (response) => { 
           if (response) {
-            console.log(response)
             this.router.navigate(['../'], { relativeTo: this.route });
             return;
           }
       },
       error: (response) => { 
         let err = response.error.error
-        console.log(err)
         if(err){
           this.createNotification('error', err);
         }

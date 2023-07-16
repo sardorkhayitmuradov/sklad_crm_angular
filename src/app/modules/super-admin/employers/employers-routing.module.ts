@@ -12,14 +12,28 @@ const routes: Routes = [
   },
   { 
     path: 'add', 
-  component: AddEmployersComponent 
+  component: AddEmployersComponent ,
+  data: {
+    breadcrumb: 'Add'
+  },
 },
   {
     path: 'edit/:id',
     component: EditEmployersComponent,
-    resolve: {
-      data: EmployersResolver
-    }
+    // resolve: {
+    //   data: EmployersResolver
+    // },
+    data: {
+      breadcrumb: 'Edit'
+    },
+  },
+  {
+    path: 'employees/:id',
+    loadChildren: () => 
+      import('./employees/employees.module').then((m)=> m.EmployeesModule),
+      data: {
+        breadcrumb: 'Employees'
+      },
   },
 ];
 

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminAuthGuard } from './modules/guards/admin-auth.guard';
-import { SuperAdminAuthGuard } from './modules/guards/superadmin-auth.guard';
+import {  AuthGuard } from './modules/guards/auth.guard';
 import { NetworkAwarePreloadStrategy } from './modules/shared/services/network-aware-preload-strategy.service';
 
 const routes: Routes = [
@@ -15,7 +14,10 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./modules/super-admin/super-admin.module').then((m) => m.SuperAdminModule),
-    canActivate: [SuperAdminAuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      breadcrumb: 'Super Admin'
+    },
   },
   {
     path: 'login',
@@ -26,13 +28,19 @@ const routes: Routes = [
     path: 'employer',
     loadChildren: () =>
       import('./modules/employer/employer.module').then((m) => m.EmployerModule),
-    canActivate: [AdminAuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      breadcrumb: 'Employer'
+    },
   },
   {
     path: 'employee',
     loadChildren: () =>
       import('./modules/employee/employee.module').then((m) => m.EmployeeModule),
-    canActivate: [AdminAuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      breadcrumb: 'Employee'
+    },
   },
   {
     path: '**',

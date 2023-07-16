@@ -9,47 +9,66 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       loadChildren: () => 
-        import('./dashboard/dashboard.module').then((m)=> m.DashboardModule)
+        import('./dashboard/dashboard.module').then((m)=> m.DashboardModule),
+        data: {
+          breadcrumb: 'Dashboard'
+        },
     },
     {
       path: 'markets',
       loadChildren: () => 
-        import('./markets/markets.module').then((m)=> m.MarketsModule)
+        import('./markets/markets.module').then((m)=> m.MarketsModule),
+        data: {
+          breadcrumb: 'Markets'
+        },
     },
     {
       path: 'products',
       loadChildren: () => 
-        import('./products/products.module').then((m)=> m.ProductsModule)
+        import('./products/products.module').then((m)=> m.ProductsModule),
+        data: {
+          breadcrumb: 'Products'
+        },
     },
     {
       path: 'sales',
       loadChildren: () => 
-        import('./sales/sales.module').then((m)=> m.SalesModule)
+        import('./sales/sales.module').then((m)=> m.SalesModule),
+        data: {
+          breadcrumb: 'Sales'
+        },
     },
     {
       path: 'employers',
       loadChildren: () => 
-        import('./employers/employers.module').then((m)=> m.EmployersModule)
-    },
-    {
-      path: 'finance',
-      loadChildren: () => 
-        import('./finance/finance.module').then((m)=> m.FinanceModule)
+        import('./employers/employers.module').then((m)=> m.EmployersModule),
+        data: {
+          breadcrumb: 'Employers'
+        },
     },
     {
       path: 'clients',
       loadChildren: () => 
-        import('./clients/clients.module').then((m)=> m.ClientsModule)
+        import('./clients/clients.module').then((m)=> m.ClientsModule),
+        data: {
+          breadcrumb: 'Clients'
+        },
     },
     {
       path: 'orders',
       loadChildren: () => 
-        import('./orders/orders.module').then((m)=> m.OrdersModule)
+        import('./orders/orders.module').then((m)=> m.OrdersModule),
+        data: {
+          breadcrumb: 'Orders'
+        },
     },
     {
       path: 'settings',
       loadChildren: () => 
-        import('./settings/settings.module').then((m)=> m.SettingsModule)
+        import('./settings/settings.module').then((m)=> m.SettingsModule),
+        data: {
+          breadcrumb: 'Settings'
+        },
     }
   ]
 }];

@@ -37,10 +37,6 @@ export abstract class Auth<TResponse extends LoginResponse, TRequest> {
       this.$data.login(request).subscribe({
         next: (response) => {
           if (response.token) {
-            if(route === 'admin'){
-              // Set the cookie to expire in 1 day
-              this.cookieService.set('superadmintoken', response.token);
-            }
             this.cookieService.set('token', response.token);
             this.router.navigate([route]);
           }

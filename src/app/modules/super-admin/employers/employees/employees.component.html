@@ -1,0 +1,67 @@
+<div class="flex flex-col w-full">
+    <div class="relative mb-4">
+      <nz-divider nzText="Employees" nzOrientation="left"></nz-divider>
+      <div
+        class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2"
+      >
+        <input type="text" nz-input placeholder="search..." />
+        <button [routerLink]="['add']" nz-button nzType="primary">Add</button>
+      </div>
+    </div>
+  
+    <nz-table
+      #basicTable
+      [nzData]="(data) || []"
+      [nzLoading]="isLoading"
+    >
+      <thead>
+        <tr>
+          <th nzWidth="20%">FullName</th>
+          <th nzWidth="20%">Phone</th>
+          <th nzWidth="25%">Balance</th>
+          <th nzWidth="20%">Debt</th>
+          <th>Operations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{ data.fullname }}</td>
+          <td>{{ data.phone_number }}</td>
+          <td>{{ data.balance }}</td>
+          <td>{{ data.debt }}</td>
+          <td>
+            <div class="flex items-center gap-x-3">
+              <button
+                nz-button
+                nzType="default"
+                class="flex items-center justify-center"
+                [routerLink]="['edit', data._id]"
+              >
+                <span nz-icon nzType="edit" nzTheme="outline"></span>
+              </button>
+              <button
+                nz-button
+                nzType="primary"
+                nzDanger
+                class="flex items-center justify-center"
+                (click)="showDeleteConfirm(data._id)"
+              >
+                <span nz-icon nzType="delete" nzTheme="outline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  
+  <!-- <nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="Add Product"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleOk()"
+    [nzOkLoading]="isOkLoading"
+  >
+    <div *nzModalContent>add modal content</div>
+  </nz-modal> -->
+  

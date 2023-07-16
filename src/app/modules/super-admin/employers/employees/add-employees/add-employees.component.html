@@ -1,0 +1,82 @@
+<div>
+    <!-- NAVIGATE TO BACK -->
+    <div class="flex items-center gap-2">
+      <span
+        [routerLink]="['../']"
+        nz-icon
+        nzType="arrow-left"
+        class="hover:text-[#1890ff] text-xs flex flex-row-reverse items-center gap-3"
+        nzTheme="outline"
+      >
+        back
+    </span>
+    </div>
+  </div>
+  <form [formGroup]="form" nz-form class="py-10">
+    <h1 class="text-slate-800 text-lg font-black mb-6 text-center">Register Employee</h1>
+    <!--FULL NAME -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="fullname">Full Name</nz-form-label>
+      <nz-form-control nzErrorTip="Required field!" [nzSpan]="14">
+        <input
+          nz-input
+          name="fullname"
+          formControlName="fullname"
+          type="text"
+          id="fullname"
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+  
+    <!-- PHONE NUMBER -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="phone_number"
+        >Phone Number</nz-form-label
+      >
+      <nz-form-control [nzErrorTip]="phoneNumberError" [nzSpan]="14">
+        <input
+          nz-input
+          name="phone_number"
+          formControlName="phone_number"
+          [showMaskTyped]="true"
+          prefix="+998 "
+          placeHolderCharacter="*"
+          mask="(00) 000-00-00"
+          type="tel"
+          id="phone_number"
+        />
+      </nz-form-control>
+      <ng-template #phoneNumberError let-control>
+        <ng-container *ngIf="control.getError('required')">
+          Ushbu maydonni to'ldiring
+        </ng-container>
+        <ng-container *ngIf="control.getError('mask')">
+          Telefon nomerni to'liq kiriting
+        </ng-container>
+      </ng-template>
+    </nz-form-item>
+  
+    <!-- PASSWORD -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="password">Password</nz-form-label>
+      <nz-form-control nzErrorTip="Required field!" [nzSpan]="14">
+        <input
+          autocomplete="on"
+          nz-input
+          name="password"
+          formControlName="password"
+          type="password"
+          id="password"
+        />
+      </nz-form-control>
+    </nz-form-item> 
+  
+    <div class="flex gap-3 justify-end">
+      <button nz-button nzType="primary" (click)="submit('Add')">
+        Add
+      </button>
+      <button nz-button (click)="reset()">Reset</button>
+    </div>
+  </form>
+  
