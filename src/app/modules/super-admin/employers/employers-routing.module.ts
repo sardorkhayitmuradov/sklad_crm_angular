@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EmployersComponent } from './employers.component';
 import { AddEmployersComponent } from './add-employers/add-employers.component';
 import { EditEmployersComponent } from './edit-employers/edit-employers.component';
+import { EmployersResolver } from './services/employers.resolver';
 
 const routes: Routes = [
   {
@@ -16,6 +17,9 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     component: EditEmployersComponent,
+    resolve: {
+      data: EmployersResolver
+    }
   },
 ];
 

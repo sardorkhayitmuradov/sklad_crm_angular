@@ -41,31 +41,11 @@
           name="phone_number"
           formControlName="phone_number"
           value="phone_number"
-          [showMaskTyped]="true"
-          prefix="+998 "
-          placeHolderCharacter="*"
-          mask="(00) 000-00-00"
           type="tel"
           id="phone_number"
         />
       </nz-form-control>
     </nz-form-item>
-  
-    <!-- PASSWORD -->
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6" nzFor="password">Password</nz-form-label>
-      <nz-form-control nzErrorTip="Required field!" [nzSpan]="14">
-        <input
-          autocomplete="on"
-          nz-input
-          name="password"
-          value="password"
-          formControlName="password"
-          type="password"
-          id="password"
-        />
-      </nz-form-control>
-    </nz-form-item> 
   
     <div class="flex gap-3 justify-end">
       <button nz-button nzType="primary" (click)="submit('Edit')">

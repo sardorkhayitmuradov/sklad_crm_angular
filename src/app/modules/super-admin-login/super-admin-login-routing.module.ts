@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SuperAdminLoginComponent } from './superAdminLogin.component';
+import { SuperAdminLoginComponent } from './super-admin-login.component';
 
 const routes: Routes = [{
   path: '',

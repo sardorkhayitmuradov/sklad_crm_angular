@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {  SuperAdminLoginResponse, SuperAdminLoginRequest } from '../model/superAdminLogin.model';
+import {  SuperAdminLoginResponse, SuperAdminLoginRequest } from '../model/super-admin-login.model';
 import { BaseService } from '../../shared/services/base.service';
 import { AuthService } from '../../shared/services/auth.service';
 

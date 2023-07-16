@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminAuthGuard } from './modules/guards/admin-auth.guard';
 import { SuperAdminAuthGuard } from './modules/guards/superadmin-auth.guard';
+import { NetworkAwarePreloadStrategy } from './modules/shared/services/network-aware-preload-strategy.service';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
-  // Super Admin Login
   {
     path: 'admin/login',
     loadChildren: () =>
-    import('./modules/superAdminLogin/superAdminLogin.module').then((m) => m.SuperAdminLoginModule),
+    import('./modules/super-admin-login/super-admin-login.module').then((m) => m.SuperAdminLoginModule),
   },
   {
     path: 'admin',
@@ -17,7 +17,6 @@ const routes: Routes = [
       import('./modules/super-admin/super-admin.module').then((m) => m.SuperAdminModule),
     canActivate: [SuperAdminAuthGuard]
   },
-  // Employee and Employer Login
   {
     path: 'login',
     loadChildren: () =>
@@ -44,7 +43,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {preloadingStrategy: NetworkAwarePreloadStrategy})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

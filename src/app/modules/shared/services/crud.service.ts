@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
+import { BaseResponse } from '../models/base.interface';
 // import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -22,7 +23,15 @@ export abstract class CRUDService<TResponse, TRequest> {
    * @returns
    */
   getAll() {
-    return this._base.get<TResponse>(this.url);
+    return this._base.get<BaseResponse<TResponse[]>>(this.url);
+  }
+
+  /**
+   *
+   * @param id
+   */
+  getById(id: string) {
+    return this._base.get<BaseResponse<TResponse[]>>(`${this.url}/${id}`);
   }
 
   /**
@@ -43,13 +52,6 @@ export abstract class CRUDService<TResponse, TRequest> {
     return this._base.put<TResponse>(`${this.url}/${id}`, model);
   }
 
-  /**
-   *
-   * @param id
-   */
-  getById(id: string) {
-    return this._base.get<TResponse>(`${this.url}/${id}`);
-  }
 
   /**
    *

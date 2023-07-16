@@ -1,6 +1,7 @@
-import {  FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CRUDService } from '../services/crud.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 export abstract class AddEdit<TResponse, TRequest> {
   /**
@@ -19,7 +20,7 @@ export abstract class AddEdit<TResponse, TRequest> {
    *
    */
   get id() {
-    return this.route.snapshot.params['id'];
+    return this.route.snapshot.params['id']; // id is string
   }
 
   /**
@@ -28,12 +29,13 @@ export abstract class AddEdit<TResponse, TRequest> {
    */
   constructor(
     private $data: CRUDService<TResponse, TRequest>,
+    private $notification: NzNotificationService,
     private router: Router,
     private route: ActivatedRoute
   ) {
     if (this.isEdit) {
       $data.getById(this.id).subscribe((item) => {
-        this.setFormValues(item);
+        this.setFormValues(item.data);
       });
     }
   }
@@ -42,9 +44,9 @@ export abstract class AddEdit<TResponse, TRequest> {
    *
    * @param model
   */
- private setFormValues(model: TResponse) {
+ private setFormValues(model: TResponse[]) {
     type FormControlsKeys = keyof typeof this.form.controls;
-    type TResponseKeys = keyof TResponse;
+    type TResponseKeys = keyof TResponse[];
     Object.keys(this.form.controls).forEach((key) => {
       this.form.controls[key as FormControlsKeys].setValue(
         model[key as TResponseKeys]
@@ -80,17 +82,25 @@ export abstract class AddEdit<TResponse, TRequest> {
     return this.form.getRawValue();
   }
 
-
   /**
    *
    * @param request
    */
   private add(request: TRequest) {
-    this.$data.add(request).subscribe((item) => {
-      if (item) {
-        console.log(item)
-        this.router.navigate(['../'], { relativeTo: this.route });
-        return;
+    this.$data.add(request).subscribe({
+      next: (response) => { 
+          if (response) {
+            console.log(response)
+            this.router.navigate(['../'], { relativeTo: this.route });
+            return;
+          }
+      },
+      error: (response) => { 
+        let err = response.error.error
+        console.log(err)
+        if(err){
+          this.createNotification('error', err);
+        }
       }
     });
   }
@@ -117,6 +127,13 @@ export abstract class AddEdit<TResponse, TRequest> {
         control.markAsDirty();
         control.updateValueAndValidity({ onlySelf: true });
       }
+    });
+  }
+
+  createNotification(type: string, error: any) {
+    this.$notification.create(type, error, '', {
+      nzPlacement: 'top',
+      nzDuration: 1000
     });
   }
 

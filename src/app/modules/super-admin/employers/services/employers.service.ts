@@ -1,6 +1,6 @@
 // import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EmployersRequest, EmployersResponse } from '../models/employers.model';
+import { EmployersRequest, Employers } from '../models/employers.model';
 import { BaseService } from 'src/app/modules/shared/services/base.service';
 import { CRUDService } from 'src/app/modules/shared/services/crud.service';
 
@@ -8,7 +8,7 @@ import { CRUDService } from 'src/app/modules/shared/services/crud.service';
   providedIn: 'root',
 })
 export class EmployersService extends CRUDService<
-  EmployersResponse,
+Employers,
   EmployersRequest
 > {
   /**

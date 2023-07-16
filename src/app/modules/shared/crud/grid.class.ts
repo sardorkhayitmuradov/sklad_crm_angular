@@ -1,11 +1,12 @@
 import { Observable } from 'rxjs';
 import { CRUDService } from '../services/crud.service';
+import { BaseResponse } from '../models/base.interface';
 
 export abstract class Grid<TResponse, TRequest> {
   /**
    *
    */
-  data$!: Observable<TResponse>;
+  data$!: Observable<BaseResponse<TResponse[]>>;
 
   /**
    *
@@ -27,7 +28,8 @@ export abstract class Grid<TResponse, TRequest> {
    */
   delete(id: string) {
     this.$data.delete(id).subscribe(() => {
-      this.getAll();
+      this.getAll()
+      this.data$.subscribe()
     });
   }
 }
