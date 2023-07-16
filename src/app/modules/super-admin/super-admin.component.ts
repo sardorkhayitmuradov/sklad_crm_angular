@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { token } from './models/token.model';
+import { token } from './model/token.model';
 import  jwt_decode from 'jwt-decode';
 
 @Component({

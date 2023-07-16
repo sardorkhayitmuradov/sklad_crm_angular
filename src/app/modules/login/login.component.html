@@ -51,7 +51,7 @@
                 <ng-container *ngIf="control.getError('mask')">
                   Telefon nomerni to'liq kiriting
                 </ng-container>
-              </ng-template>          
+              </ng-template>
             </nz-form-item>
             <nz-form-item>
               <nz-form-control nzErrorTip="Parolingizni kiriting!">
@@ -81,12 +81,25 @@
               </nz-form-control>
             </nz-form-item>
             <button
+              *ngIf="!isLogin"
               nz-button
               class="w-full"
               nzSize="large"
               [nzType]="'primary'"
             >
               Log in
+            </button>
+            <button
+              nz-button
+              *ngIf="isLogin"
+              disabled="true"
+              nzType="primary"
+              nzLoading
+              class="w-full !bg-[#1890ff] !text-white"
+              nzSize="large"
+            >
+              <span nz-icon nzType="poweroff"></span>
+              Loading
             </button>
           </form>
         </div>
