@@ -44,14 +44,13 @@ export abstract class AddEdit<TResponse, TRequest> {
    *
    * @param model
   */
- private setFormValues(model: TResponse[]) {
+ protected setFormValues(model: TResponse[]) {
     type FormControlsKeys = keyof typeof this.form.controls;
     type TResponseKeys = keyof TResponse[];
     Object.keys(this.form.controls).forEach((key) => {
       this.form.controls[key as FormControlsKeys].setValue(
         model[key as TResponseKeys]
       );
-      console.log(key, model)
     });
   } 
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'settings',
+  selector: 'employer-settings',
   templateUrl: './settings.component.html'
 })
 export class SettingsComponent {

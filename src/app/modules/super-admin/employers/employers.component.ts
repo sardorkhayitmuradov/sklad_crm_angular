@@ -4,13 +4,11 @@ import { EmployersRequest, Employers } from './models/employers.model';
 import { EmployersService } from './services/employers.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'employers',
+  selector: 'super-admin-employers',
   templateUrl: './employers.component.html',
 })
 export class EmployersComponent extends Grid<Employers, EmployersRequest> {

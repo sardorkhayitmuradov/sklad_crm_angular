@@ -11,7 +11,6 @@
           class="max-w-xs w-full"
           (ngSubmit)="login('admin')"
         >
-
           <nz-form-item>
             <nz-form-control [nzErrorTip]="emailError">
               <nz-input-group nzPrefixIcon="mail" class="px-4">
@@ -21,7 +20,7 @@
                   class="h-full my-2"
                   formControlName="email"
                   mask="A*@A*.SSS"
-                  [validation]="true" 
+                  [validation]="true"
                   [dropSpecialCharacters]="false"
                   nzSize="large"
                   placeholder="Email"
@@ -36,7 +35,7 @@
               <ng-container *ngIf="control.getError('mask')">
                 Emailingizni to'liq kiriting
               </ng-container>
-            </ng-template> 
+            </ng-template>
           </nz-form-item>
           <nz-form-item>
             <nz-form-control nzErrorTip="Parolingizni kiriting!">
@@ -65,13 +64,25 @@
               </ng-template>
             </nz-form-control>
           </nz-form-item>
+          <button 
+            *ngIf="!isLogin"
+            nz-button 
+            class="w-full" 
+            nzSize="large" 
+            [nzType]="'primary'">
+            Log in
+          </button>
           <button
             nz-button
-            class="w-full"
+            *ngIf="isLogin"
+            disabled="true"
+            nzType="primary"
+            nzLoading
+            class="w-full !bg-[#1890ff] !text-white"
             nzSize="large"
-            [nzType]="'primary'"
           >
-            Log in
+            <span nz-icon nzType="poweroff"></span>
+            Loading
           </button>
         </form>
       </div>

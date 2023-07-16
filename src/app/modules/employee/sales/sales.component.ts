@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { salesData } from './services/sales.service';
 
 @Component({
-  selector: 'sales',
+  selector: 'employee-sales',
   templateUrl: './sales.component.html',
 })
 

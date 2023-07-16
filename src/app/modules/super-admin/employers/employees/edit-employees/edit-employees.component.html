@@ -22,7 +22,6 @@
           nz-input
           name="fullname"
           formControlName="fullname"
-          value="fullname"
           type="text"
           id="fullname"
         />
@@ -40,7 +39,9 @@
           nz-input
           name="phone_number"
           formControlName="phone_number"
-          value="phone_number"
+          prefix="+998 "
+          [showMaskTyped]="true"
+          [mask]="'(00) 000-00-00'"
           type="tel"
           id="phone_number"
         />

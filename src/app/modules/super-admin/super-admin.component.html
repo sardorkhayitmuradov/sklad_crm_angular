@@ -12,7 +12,7 @@
       />
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <!-- <li nz-menu-item [routerLink]="['dashboard']">
+      <li nz-menu-item [routerLink]="['dashboard']">
         <span
           nz-icon
           nzType="dashboard"
@@ -20,7 +20,7 @@
           class="text-white"
         ></span>
         <span>Dashboard</span>
-      </li> -->
+      </li>
       <li nz-menu-item [routerLink]="['employers']">
         <span nz-icon nzTheme="outline">
           <img
@@ -30,52 +30,8 @@
             height="15px"
           />
         </span>
-        <span>Boshliqlar</span>
+        <span>Employers</span>
       </li>
-      <!-- <li nz-menu-item [routerLink]="['finance']">
-        <span nz-icon nzTheme="outline">
-          <img
-            src="../../../assets/icons/finance.svg"
-            alt="finance"
-            width="15px"
-            height="15px"
-          />
-        </span>
-        <span>Moliya</span>
-      </li> -->
-      <!-- <li nz-menu-item [routerLink]="['products']">
-        <span nz-icon nzTheme="outline">
-          <img
-            src="../../../assets/icons/products.svg"
-            alt="products"
-            width="15px"
-            height="15px"
-          />
-        </span>
-        <span>Mahsulotlar</span>
-      </li> -->
-      <!-- <li nz-menu-item [routerLink]="['clients']">
-        <span nz-icon nzTheme="outline">
-          <img
-            src="../../../assets/icons/clients.svg"
-            alt="clients"
-            width="15px"
-            height="15px"
-          />
-        </span>
-        <span>Mijozlar</span>
-      </li> -->
-      <!-- <li nz-menu-item [routerLink]="['orders']">
-        <span nz-icon nzTheme="outline">
-          <span
-            nz-icon
-            nzType="unordered-list"
-            class="text-white"
-            nzTheme="outline"
-          ></span>
-        </span>
-        <span>Buyurtmalar</span>
-      </li> -->
       <li nz-menu-item [routerLink]="['settings']">
         <span nz-icon nzTheme="outline">
           <span
@@ -85,30 +41,8 @@
             nzTheme="outline"
           ></span>
         </span>
-        <span>Sozlamalar</span>
+        <span>Settings</span>
       </li>
-      <!-- <li nz-menu-item [routerLink]="['sales']">
-          <span nz-icon nzTheme="outline">
-            <img
-              src="../../../assets/icons/sales.svg"
-              alt="sales"
-              width="15px"
-              height="15px"
-            />
-          </span>
-          <span>Sales</span>
-        </li>
-        <li nz-menu-item [routerLink]="['markets']">
-          <span nz-icon nzTheme="outline">
-            <img
-              src="../../../assets/icons/markets.svg"
-              alt="markets"
-              width="15px"
-              height="15px"
-            />
-          </span>
-          <span>Markets</span>
-        </li> -->
     </ul>
   </nz-sider>
   <nz-layout class="flex flex-col">
@@ -121,7 +55,10 @@
           (click)="isCollapsed = !isCollapsed"
         ></span>
 
-        <button nz-button nzSize="default" nzType="primary" (click)="logOut()">Log out</button>
+        <div class="flex items-center gap-x-6">
+            <p class="h-fit font-medium">{{tokenInfo.email || ""}}</p>
+          <button nz-button nzSize="default" nzType="primary" (click)="logOut()">Log out</button>
+        </div>
       </div>
     </nz-header>
     <nz-content class="h-full">
@@ -131,6 +68,6 @@
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-    <nz-footer>©2023 Created by Coredu Team</nz-footer>
+    <nz-footer>©2023 Created by Imcon Group</nz-footer>
   </nz-layout>
 </nz-layout>

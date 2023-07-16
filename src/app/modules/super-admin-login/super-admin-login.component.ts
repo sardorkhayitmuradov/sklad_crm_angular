@@ -16,12 +16,13 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./super-admin-login.component.css'],
 })
 export class SuperAdminLoginComponent extends Auth<SuperAdminLoginResponse, SuperAdminLoginRequest> {
+  passwordVisible = false;
+
   form = this.fb.group({
     email: ['', [Validators.required]],
     password: ['', [Validators.required]]
   });
 
-  passwordVisible = false;
 
   constructor(
     private fb: FormBuilder,
@@ -33,4 +34,5 @@ export class SuperAdminLoginComponent extends Auth<SuperAdminLoginResponse, Supe
   ) {
     super($data, $notification, cookieService, router, route);
   }
+
 }

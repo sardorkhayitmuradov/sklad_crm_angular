@@ -5,7 +5,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { EmployeesService } from './services/employees.service';
 
 @Component({
-  selector: 'employees',
+  selector: 'super-admin-employees',
   templateUrl: './employees.component.html'
 })
 export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {

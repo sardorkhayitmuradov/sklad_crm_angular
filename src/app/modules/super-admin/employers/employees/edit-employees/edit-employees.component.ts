@@ -40,6 +40,12 @@ export class EditEmployeesComponent extends AddEdit<
     route: ActivatedRoute
   ) {
     super($data,$notification, router, route);
+    if (this.isEdit) {
+      route.data.subscribe((w) => {
+        console.log(w['data'])
+        this.setFormValues(w['data']);
+      })
+    }
   }
 
    /**

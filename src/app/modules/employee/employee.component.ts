@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
-  selector: 'client',
+  selector: 'employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })

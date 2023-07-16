@@ -9,6 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 export abstract class Auth<TResponse extends LoginResponse, TRequest> {
 
   abstract form: FormGroup;
+  protected isLogin: boolean = false;
 
   /**
    *
@@ -27,6 +28,7 @@ export abstract class Auth<TResponse extends LoginResponse, TRequest> {
    * @param request
    */
   login(route: string) {
+    this.isLogin = true;
     const request = this.form.getRawValue();
     if(request?.phone_number){
       const countryCode = '+998';
@@ -37,29 +39,20 @@ export abstract class Auth<TResponse extends LoginResponse, TRequest> {
       this.$data.login(request).subscribe({
         next: (response) => {
           if (response.token) {
+            this.isLogin = false;
             this.cookieService.set('token', response.token);
             this.router.navigate([route]);
           }
         },
         error: (response) => {
+          this.isLogin = false;
           this.createNotification('error', response.error.error);
         },
       });
     } else {
+      this.isLogin = false;
       return this.updateValueAndValidity();
     }
-  }
-
-  /**
-   *
-   */
-  register(request: TRequest) {
-    this.$data.register(request).subscribe((item) => {
-      if (item) {
-        // this.router.navigate([route], { relativeTo: this.route });
-        return;
-      }
-    });
   }
 
 

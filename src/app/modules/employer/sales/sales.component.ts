@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { salesData } from './services/sales.service';
 
 @Component({
-  selector: 'sales',
+  selector: 'employer-sales',
   templateUrl: './sales.component.html',
 })
 

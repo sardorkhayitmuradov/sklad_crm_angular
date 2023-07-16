@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Markets } from './models/markets.models';
 
 @Component({
-  selector: 'markets',
+  selector: 'employee-markets',
   templateUrl: './markets.component.html',
 })
 export class MarketsComponent implements OnInit {
