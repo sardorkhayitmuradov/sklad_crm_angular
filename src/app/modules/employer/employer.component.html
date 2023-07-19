@@ -74,7 +74,10 @@
             (click)="isCollapsed = !isCollapsed"
           ></span>
   
+          <div class="flex items-center gap-x-6">
+            <p class="h-fit font-medium">{{tokenInfo.role == 'employer' && 'Admin'}}</p>
           <button nz-button nzSize="default" nzType="primary" (click)="logOut()">Log out</button>
+        </div>
         </div>
       </nz-header>
       <nz-content class="h-full">

@@ -1,49 +1,69 @@
-import { Component, OnInit } from '@angular/core';
-import { Products } from './models/products.model';
+import { Component } from '@angular/core';
+import { Products , ProductsRequest } from './models/products.model';
+import { Grid } from '../../shared/crud/grid.class';
+import { pages } from './models/pages.model';
+import { ProductsService } from './services/products.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { BaseResponse } from '../../shared/models/base.interface';
 
 @Component({
   selector: 'employer-products',
   templateUrl: './products.component.html',
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent extends Grid<Products, ProductsRequest> {
   isVisible = false;
   isOkLoading = false;
+  isLoading = true;
+  pages: pages = {
+    page: 1,
+    pageSize: 10,
+    all: 0,
+    pageSizeOptions: [10,15,20,25,30]
+  };
 
-  editCache: { [key: string]: { edit: boolean; data: Products } } = {};
-  listOfData: Products[] = [];
+  data: Products[] = [];
 
-  ngOnInit(): void {
-    const data = [];
-    for (let i = 0; i < 100; i++) {
-      data.push({
-        id: `${i}`,
-        code: `Code ${i}`,
-        size: `O'lchami ${i}`,
-        quantity: i * Math.floor(Math.random() * 10),
-        price:  Math.floor(Math.random() * 100000),
+  constructor($data: ProductsService, private modal: NzModalService) {
+    super($data);
+    this.getData()
+  }
+
+  getData() {
+    this.$data
+      .getByPagination(this.pages.page, this.pages.pageSize)
+      .subscribe((response: BaseResponse<Products[]>) => {
+        this.data = response.data;
+        this.pages.page = response.page;
+        this.pages.pageSize = response.page_size;
+        this.pages.all = response.all
+        this.isLoading = false;
       });
-    }
-    this.listOfData = data;
-  }
-
-  // Modal
-
-  showAddModal(): void {
-    this.isVisible = true;
-  }
-
-  handleOk(): void {
-    this.isOkLoading = true;
-    setTimeout(() => {
-      this.isVisible = false;
-      this.isOkLoading = false;
-    }, 2000);
-  }
-
-  handleCancel(): void {
-    this.isVisible = false;
   }
 
 
-  // Add Form Modal 
+  handlePageIndexChange(newPageIndex: number){
+    this.pages.page = newPageIndex;
+    this.isLoading = true;
+    this.getData()
+  }
+
+  handlePageSizeChange(newPageSize: number){
+    this.pages.pageSize = newPageSize
+    this.isLoading = true;
+    this.getData()
+  }
+
+  showDeleteConfirm(id: string): void {
+    this.modal.confirm({
+      nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => {
+        this.delete(id);
+      },
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel'),
+    });
+  }
 }

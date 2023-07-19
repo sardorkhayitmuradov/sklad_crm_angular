@@ -9,6 +9,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzModalModule } from 'ng-zorro-antd/modal'
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -16,12 +17,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
   imports: [
     CommonModule,
     ProductsRoutingModule,
-    FormsModule,
-    NzTableModule,
-    NzIconModule,
-    NzButtonModule,
-    NzModalModule,
-    NzFormModule
+    SharedModule
   ]
 })
 export class ProductsModule { }

@@ -11,7 +11,7 @@ export abstract class Grid<TResponse, TRequest> {
   /**
    *
    */
-  constructor(private $data: CRUDService<TResponse, TRequest>) {
+  constructor(protected $data: CRUDService<TResponse, TRequest>) {
     this.getAll();
   }
 
@@ -24,12 +24,18 @@ export abstract class Grid<TResponse, TRequest> {
 
   /**
    *
+   */
+  getByPagination(page: number, pageSize: number) {
+    this.data$ = this.$data.getByPagination(page, pageSize);
+  }
+
+  /**
+   *
    * @param id
    */
   delete(id: string) {
     this.$data.delete(id).subscribe(() => {
       this.getAll()
-      this.data$.subscribe()
     });
   }
 }

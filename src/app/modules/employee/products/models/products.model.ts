@@ -1,7 +1,11 @@
-export interface Products {
-  id: string;
+import { Id } from 'src/app/modules/shared/models/id.interface';
+
+export interface Products extends Id, ProductsRequest {}
+
+export interface ProductsRequest {
   code: string;
-  size: string;
-  quantity: number;
-  price: number
+  name: string;
+  qty: number;
+  price: number;
+  unit: string; // "dona", "kg", "m2", "qadoq"
 }

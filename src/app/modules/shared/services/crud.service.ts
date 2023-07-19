@@ -36,6 +36,14 @@ export abstract class CRUDService<TResponse, TRequest> {
 
   /**
    *
+   * @param id
+   */
+  getByPagination(page: number, pageSize: number) {
+    return this._base.get<BaseResponse<TResponse[]>>(`${this.url}/pagination?page=${page}&pageSize=${pageSize}`);
+  }
+
+  /**
+   *
    * @param model
    * @returns
    */
