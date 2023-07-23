@@ -21,6 +21,12 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
     pageSizeOptions: [10,15,20,25,30]
   };
 
+    /// Input
+  /**
+   *
+   */
+  searchText = '';
+
   data: Markets[] = [];
 
   constructor($data: MarketsService, private modal: NzModalService) {
@@ -66,4 +72,12 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
       nzOnCancel: () => console.log('Cancel'),
     });
   }
+
+
+    /**
+   *
+   */
+    clear() {
+      this.searchText = '';
+    }
 }

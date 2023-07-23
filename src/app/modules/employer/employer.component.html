@@ -1,93 +1,143 @@
 <nz-layout>
-    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-      <div class="m-4 bg-white px-1 py-1 rounded-5">
-        <img
-          [src]="isCollapsed ? '../../../assets/icons/Logo-con.svg' : '../../../assets/icons/Logo.svg'"
-          class="h-[38px]"
-          alt="Logo"
-        />
-      </div>
-      <ul nz-menu nzTheme="dark" nzMode="inline">
-        <li nz-menu-item [routerLink]="['dashboard']">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="m-4 bg-white px-1 py-1 rounded-5">
+      <img
+        [src]="
+          isCollapsed
+            ? '../../../assets/icons/Logo-con.svg'
+            : '../../../assets/icons/Logo.svg'
+        "
+        class="h-[38px]"
+        alt="Logo"
+      />
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li
+        nz-menu-item
+        [routerLink]="['dashboard']"
+        routerLinkActive="ant-menu-item-selected"
+      >
+        <span
+          nz-icon
+          nzType="dashboard"
+          nzTheme="outline"
+          class="text-white"
+        ></span>
+        <span>Dashboard</span>
+      </li>
+      <li
+        nz-menu-item
+        [routerLink]="['employees']"
+        routerLinkActive="ant-menu-item-selected"
+      >
+        <span nz-icon nzTheme="outline">
+          <img
+            src="../../../assets/icons/users.svg"
+            alt="admins"
+            width="15px"
+            height="15px"
+          />
+        </span>
+        <span>Employees</span>
+      </li>
+      <li
+        nz-menu-item
+        [routerLink]="['markets']"
+        routerLinkActive="ant-menu-item-selected"
+      >
+        <span nz-icon nzTheme="outline">
+          <img
+            src="../../../assets/icons/markets.svg"
+            alt="markets"
+            width="15px"
+            height="15px"
+          />
+        </span>
+        <span>Markets</span>
+      </li>
+      <li
+        nz-menu-item
+        [routerLink]="['products']"
+        routerLinkActive="ant-menu-item-selected"
+      >
+        <span nz-icon nzTheme="outline">
+          <img
+            src="../../../assets/icons/products.svg"
+            alt="products"
+            width="15px"
+            height="15px"
+          />
+        </span>
+        <span>Products</span>
+      </li>
+      <li
+        nz-menu-item
+        [routerLink]="['orders']"
+        routerLinkActive="ant-menu-item-selected"
+      >
+        <span nz-icon nzTheme="outline">
           <span
             nz-icon
-            nzType="dashboard"
-            nzTheme="outline"
+            nzType="unordered-list"
             class="text-white"
+            nzTheme="outline"
           ></span>
-          <span>Dashboard</span>
-        </li>
-        <li nz-menu-item [routerLink]="['employees']">
-          <span nz-icon nzTheme="outline">
-            <img
-              src="../../../assets/icons/users.svg"
-              alt="admins"
-              width="15px"
-              height="15px"
-            />
-          </span>
-          <span>Employees</span>
-        </li>
-        <li nz-menu-item [routerLink]="['markets']">
-          <span nz-icon nzTheme="outline">
-            <img
-              src="../../../assets/icons/markets.svg"
-              alt="markets"
-              width="15px"
-              height="15px"
-            />
-          </span>
-          <span>Markets</span>
-        </li>
-        <li nz-menu-item [routerLink]="['products']">
-          <span nz-icon nzTheme="outline">
-            <img
-              src="../../../assets/icons/products.svg"
-              alt="products"
-              width="15px"
-              height="15px"
-            />
-          </span>
-          <span>Products</span>
-        </li>
-        <li nz-menu-item [routerLink]="['orders']">
-          <span nz-icon nzTheme="outline">
-            <span nz-icon nzType="unordered-list" class="text-white" nzTheme="outline"></span>
-          </span>
-          <span>Orders</span>
-        </li>
-        <li nz-menu-item [routerLink]="['settings']">
-          <span nz-icon nzTheme="outline">
-            <span nz-icon nzType="setting" class="text-white" nzTheme="outline"></span>
-          </span>
-          <span>Settings</span>
-        </li>
-      </ul>
-    </nz-sider>
-    <nz-layout class="flex flex-col">
-      <nz-header class="!px-4">
-        <div class="flex items-center justify-between h-full">
+        </span>
+        <span>Orders</span>
+      </li>
+      <li
+        nz-menu-item
+        [routerLink]="['settings']"
+        routerLinkActive="ant-menu-item-selected"
+      >
+        <span nz-icon nzTheme="outline">
           <span
-            class="hover:text-blue-600 cursor-pointer"
             nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            (click)="isCollapsed = !isCollapsed"
+            nzType="setting"
+            class="text-white"
+            nzTheme="outline"
           ></span>
-  
-          <div class="flex items-center gap-x-6">
-            <p class="h-fit font-medium">{{tokenInfo.role == 'employer' && 'Admin'}}</p>
-          <button nz-button nzSize="default" nzType="primary" (click)="logOut()">Log out</button>
+        </span>
+        <span>Settings</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout class="flex flex-col">
+    <nz-header class="!px-4">
+      <div class="flex items-center justify-between h-full">
+        <span
+          class="hover:text-blue-600 cursor-pointer"
+          nz-icon
+          [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          (click)="isCollapsed = !isCollapsed"
+        ></span>
+
+        <div class="flex items-center gap-x-6">
+          <p class="h-fit font-medium">
+            {{ tokenInfo.role == "employer" && "Admin" }}
+          </p>
+          <button
+            nz-button
+            nzSize="default"
+            nzType="primary"
+            (click)="logOut()"
+          >
+            Log out
+          </button>
         </div>
-        </div>
-      </nz-header>
-      <nz-content class="h-full">
-        <nz-breadcrumb class="!my-3" [nzAutoGenerate]="true" [nzRouteLabel]="'breadcrumb'">
-        </nz-breadcrumb>
-        <div class="inner-content">
-          <router-outlet></router-outlet>
-        </div>
-      </nz-content>
-      <nz-footer>SKLAD CRM ©2023 Created By Imcon Group</nz-footer>
-    </nz-layout>
+      </div>
+    </nz-header>
+    <nz-content class="h-full">
+      <nz-breadcrumb
+        class="!my-3"
+        [nzAutoGenerate]="true"
+        [nzRouteLabel]="'breadcrumb'"
+      >
+      </nz-breadcrumb>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer>SKLAD CRM ©2023 Created By Imcon Group</nz-footer>
   </nz-layout>
-  
+</nz-layout>

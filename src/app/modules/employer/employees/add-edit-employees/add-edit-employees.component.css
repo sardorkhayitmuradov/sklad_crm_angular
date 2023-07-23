@@ -1,0 +1,18 @@
+.title {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.gap-1 {
+    gap: 10px;
+}
+
+.justify-content-end {
+    justify-content: end;
+}

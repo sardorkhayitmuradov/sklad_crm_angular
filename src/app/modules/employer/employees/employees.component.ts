@@ -16,8 +16,20 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
 
   data: Employees[] = [];
 
+
+  /// Input
+  /**
+   *
+   */
+  searchText = '';
+
+
   constructor($data: EmployeesService, private modal: NzModalService) {
     super($data);
+    this.getDatas()
+  }
+
+  private getDatas(){
     this.data$.subscribe((response: any) => {
       this.data = response.employees;
         this.isLoading = false
@@ -32,9 +44,23 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
       nzOkDanger: true,
       nzOnOk: () => {
         this.delete(id);
+        this.getDatas()
       },
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel'),
     });
   }
+
+
+
+
+
+
+  /**
+   *
+   */
+  clear() {
+    this.searchText = '';
+  }
+
 }

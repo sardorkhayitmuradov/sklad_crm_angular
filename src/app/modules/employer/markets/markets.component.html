@@ -1,17 +1,37 @@
 <div class="flex flex-col w-full">
   <div class="relative mb-4">
     <nz-divider nzText="Markets" nzOrientation="left"></nz-divider>
-    <div
-      class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2"
-    >
-      <input type="text" nz-input placeholder="search..." />
+    <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
+      <nz-input-group
+        nzSearch
+        [nzSuffix]="inputClearTpl"
+        [nzAddOnAfter]="suffixIconButton"
+      >
+        <input type="text" nz-input placeholder="search..." />
+      </nz-input-group>
+
+      <ng-template #inputClearTpl>
+        <span
+          nz-icon
+          class="ant-input-clear-icon"
+          nzTheme="fill"
+          nzType="close-circle"
+          [hidden]="!searchText"
+          (click)="clear()"
+        ></span>
+      </ng-template>
+      <ng-template #suffixIconButton>
+        <button nz-button nzType="primary" nzSearch>
+          <span nz-icon nzType="search"></span>
+        </button>
+      </ng-template>
       <button [routerLink]="['add']" nz-button nzType="primary">Add</button>
     </div>
   </div>
 
   <nz-table
     #basicTable
-    [nzData]="(data) || []"
+    [nzData]="data || []"
     [nzLoading]="isLoading"
     nzBordered
     [nzSize]="'middle'"
@@ -23,7 +43,6 @@
     [nzPageSize]="pages.pageSize"
     [nzTotal]="pages.all"
     nzShowSizeChanger
-    
   >
     <thead>
       <tr>

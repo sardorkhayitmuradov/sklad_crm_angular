@@ -4,16 +4,24 @@ import { CommonModule } from '@angular/common';
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { EmployeesComponent } from './employees.component';
 import { SharedModule } from '../../shared/shared.module';
+import { AddEditEmployeesComponent } from './add-edit-employees/add-edit-employees.component';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
   declarations: [
-    EmployeesComponent
+    EmployeesComponent,
+    AddEditEmployeesComponent
   ],
   imports: [
     CommonModule,
     EmployeesRoutingModule,
-    SharedModule
-  ]
+    NgxMaskDirective,
+    NgxMaskPipe,
+    SharedModule,
+  ],
+  providers: [
+    provideNgxMask()
+  ],
 })
 export class EmployeesModule { }

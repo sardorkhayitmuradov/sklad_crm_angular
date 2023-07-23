@@ -13,7 +13,7 @@ export abstract class AddEdit<TResponse, TRequest> {
    *
    */
   get isEdit() {
-    return this.id ;
+    return this.id;
   }
 
   /**
@@ -30,8 +30,8 @@ export abstract class AddEdit<TResponse, TRequest> {
   constructor(
     private $data: CRUDService<TResponse, TRequest>,
     private $notification: NzNotificationService,
-    private router: Router,
-    private route: ActivatedRoute
+    protected router: Router,
+    protected route: ActivatedRoute
   ) {
     if (this.isEdit) {
       $data.getById(this.id).subscribe((item) => {
@@ -39,12 +39,12 @@ export abstract class AddEdit<TResponse, TRequest> {
       });
     }
   }
-  
+
   /**
    *
    * @param model
-  */
- protected setFormValues(model: TResponse[]) {
+   */
+  protected setFormValues(model: TResponse[]) {
     type FormControlsKeys = keyof typeof this.form.controls;
     type TResponseKeys = keyof TResponse[];
     Object.keys(this.form.controls).forEach((key) => {
@@ -52,7 +52,7 @@ export abstract class AddEdit<TResponse, TRequest> {
         model[key as TResponseKeys]
       );
     });
-  } 
+  }
 
   /**
    *
@@ -73,11 +73,11 @@ export abstract class AddEdit<TResponse, TRequest> {
     this.add(request);
   }
 
-   /**
-   * 
-   * @returns 
+  /**
+   *
+   * @returns
    */
-   protected getRequest(): TRequest {
+  protected getRequest(): TRequest {
     return this.form.getRawValue();
   }
 
@@ -86,20 +86,20 @@ export abstract class AddEdit<TResponse, TRequest> {
    * @param request
    */
   private add(request: TRequest) {
-    console.log(request)
+    console.log(request);
     this.$data.add(request).subscribe({
-      next: (response) => { 
-          if (response) {
-            this.router.navigate(['../'], { relativeTo: this.route });
-            return;
-          }
+      next: (response) => {
+        if (response) {
+          this.router.navigate(['../'], { relativeTo: this.route });
+          return;
+        }
       },
-      error: (response) => { 
-        let err = response.error.error
-        if(err){
+      error: (response) => {
+        let err = response.error.error;
+        if (err) {
           this.createNotification('error', err);
         }
-      }
+      },
     });
   }
 
@@ -107,7 +107,7 @@ export abstract class AddEdit<TResponse, TRequest> {
    *
    * @param request
    */
-  private edit(request: TRequest) { 
+  private edit(request: TRequest) {
     this.$data.edit(this.id, request).subscribe((item) => {
       if (item) {
         this.router.navigate(['../../'], { relativeTo: this.route });
@@ -131,7 +131,7 @@ export abstract class AddEdit<TResponse, TRequest> {
   createNotification(type: string, error: any) {
     this.$notification.create(type, error, '', {
       nzPlacement: 'top',
-      nzDuration: 1000
+      nzDuration: 1000,
     });
   }
 

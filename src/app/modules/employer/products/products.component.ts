@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Products , ProductsRequest } from './models/products.model';
+import { Products, ProductsRequest } from './models/products.model';
 import { Grid } from '../../shared/crud/grid.class';
 import { pages } from './models/pages.model';
 import { ProductsService } from './services/products.service';
@@ -18,14 +18,20 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
     page: 1,
     pageSize: 10,
     all: 0,
-    pageSizeOptions: [10,15,20,25,30]
+    pageSizeOptions: [10, 15, 20, 25, 30],
   };
+
+  /// Input
+  /**
+   *
+   */
+  searchText = '';
 
   data: Products[] = [];
 
   constructor($data: ProductsService, private modal: NzModalService) {
     super($data);
-    this.getData()
+    this.getData();
   }
 
   getData() {
@@ -35,22 +41,21 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
         this.data = response.data;
         this.pages.page = response.page;
         this.pages.pageSize = response.page_size;
-        this.pages.all = response.all
+        this.pages.all = response.all;
         this.isLoading = false;
       });
   }
 
-
-  handlePageIndexChange(newPageIndex: number){
+  handlePageIndexChange(newPageIndex: number) {
     this.pages.page = newPageIndex;
     this.isLoading = true;
-    this.getData()
+    this.getData();
   }
 
-  handlePageSizeChange(newPageSize: number){
-    this.pages.pageSize = newPageSize
+  handlePageSizeChange(newPageSize: number) {
+    this.pages.pageSize = newPageSize;
     this.isLoading = true;
-    this.getData()
+    this.getData();
   }
 
   showDeleteConfirm(id: string): void {
@@ -65,5 +70,12 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel'),
     });
+  }
+
+  /**
+   *
+   */
+  clear() {
+    this.searchText = '';
   }
 }
