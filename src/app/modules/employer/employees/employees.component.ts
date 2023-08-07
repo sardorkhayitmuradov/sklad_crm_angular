@@ -26,7 +26,7 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
 
   constructor($data: EmployeesService, private modal: NzModalService) {
     super($data);
-    this.getDatas()
+    this.getDatas();
   }
 
   private getDatas(){
@@ -44,7 +44,7 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
       nzOkDanger: true,
       nzOnOk: () => {
         this.delete(id);
-        this.getDatas()
+        this.getDatas();
       },
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel'),

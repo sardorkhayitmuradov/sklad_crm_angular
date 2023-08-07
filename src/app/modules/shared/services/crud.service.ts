@@ -10,13 +10,15 @@ export abstract class CRUDService<TResponse, TRequest> {
   /**
    *
    */
-  protected abstract url: string;
+  protected url: string;
 
   /**
    *
    * @param http
    */
-  constructor(private _base: BaseService) {}
+  constructor(private _base: BaseService, url: string) {
+    this.url = url;
+  }
 
   /**
    *
@@ -36,7 +38,7 @@ export abstract class CRUDService<TResponse, TRequest> {
 
   /**
    *
-   * @param id
+   * @param page pageSize
    */
   getByPagination(page: number, pageSize: number) {
     return this._base.get<BaseResponse<TResponse[]>>(`${this.url}/pagination?page=${page}&pageSize=${pageSize}`);

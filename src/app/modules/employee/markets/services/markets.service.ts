@@ -10,14 +10,9 @@ import { CRUDService } from 'src/app/modules/shared/services/crud.service';
 export class MarketsService extends CRUDService<Markets, MarketsRequest> {
   /**
    *
-   */
-  protected override url = 'market';
-
-  /**
-   *
    * @param $base
    */
   constructor(private $base: BaseService) {
-    super($base);
+    super($base, 'market');
   }
 }

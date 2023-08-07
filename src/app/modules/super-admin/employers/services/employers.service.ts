@@ -11,16 +11,12 @@ export class EmployersService extends CRUDService<
 Employers,
   EmployersRequest
 > {
-  /**
-   *
-   */
-  protected override url = 'employer';
 
   /**
    *
    * @param $base
    */
   constructor(private $base: BaseService) {
-    super($base);
+    super($base, 'employer');
   }
 }

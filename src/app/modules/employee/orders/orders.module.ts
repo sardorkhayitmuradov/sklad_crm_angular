@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { OrdersComponent } from './orders.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
   imports: [
     CommonModule,
     OrdersRoutingModule,
-    NzTableModule
+    SharedModule
   ]
 })
 export class OrdersModule { }

@@ -35,7 +35,7 @@ export abstract class Grid<TResponse, TRequest> {
    */
   delete(id: string) {
     this.$data.delete(id).subscribe(() => {
-      this.getAll()
+      this.getAll();
     });
   }
 }

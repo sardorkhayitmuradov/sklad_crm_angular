@@ -10,14 +10,9 @@ import { CRUDService } from 'src/app/modules/shared/services/crud.service';
 export class EmployeesService extends CRUDService<Employees, EmployeesRequest> {
   /**
    *
-   */
-  protected override url = 'employee';
-
-  /**
-   *
    * @param $base
    */
   constructor(private $base: BaseService) {
-    super($base);
+    super($base, 'employee');
   }
 }

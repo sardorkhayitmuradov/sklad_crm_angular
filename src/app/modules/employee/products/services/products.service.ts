@@ -8,16 +8,12 @@ import { CRUDService } from 'src/app/modules/shared/services/crud.service';
   providedIn: 'root',
 })
 export class ProductsService extends CRUDService<Products, ProductsRequest> {
-  /**
-   *
-   */
-  protected override url = 'product';
 
   /**
    *
    * @param $base
    */
   constructor(private $base: BaseService) {
-    super($base);
+    super($base, 'product');
   }
 }

@@ -67,7 +67,7 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
     this.pages.pageIndex = newPageIndex;
     this.isLoading = true;
     this.router.navigate([], { queryParams: { pageIndex: newPageIndex , pageSize: this.pages.pageSize } });
-    this.getData(this.pages.pageIndex , this.pages.pageSize)
+    this.getData(this.pages.pageIndex , this.pages.pageSize);
   }
 
   handlePageSizeChange(newPageSize: number) {

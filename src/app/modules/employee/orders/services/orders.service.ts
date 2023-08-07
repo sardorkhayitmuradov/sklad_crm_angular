@@ -1,60 +1,21 @@
-import { orders } from "../model/orders.model";
+// import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+// import { Markets , MarketsRequest } from '../models/markets.models';
+import { BaseService } from 'src/app/modules/shared/services/base.service';
+import { CRUDService } from 'src/app/modules/shared/services/crud.service';
+import { OrdersRequest, OrdersResponse } from '../model/orders.model';
 
-export const ordersData: orders[] = [
-  {
-    id: Math.floor(Math.random() * 100),
-    date: `${new Date().toLocaleDateString('en-US')}`,
-    debt: Math.floor(Math.random() * 1000000 ),
-    paid: Math.floor(Math.random() * 100000),
-    totalPrice: Math.floor(Math.random() * 1000000),
-  },
-  {
-    id: Math.floor(Math.random() * 100),
-    date: `${new Date().toLocaleDateString('en-US')}`,
-    debt: Math.floor(Math.random() * 1000 ),
-    paid: Math.floor(Math.random() * 100000),
-    totalPrice: Math.floor(Math.random() * 1000000),
-  },
-  {
-    id: Math.floor(Math.random() * 100),
-    date: `${new Date().toLocaleDateString('en-US')}`,
-    debt: Math.floor(Math.random() * 1000 ),
-    paid: Math.floor(Math.random() * 100000),
-    totalPrice: Math.floor(Math.random() * 1000000),
-  },
-  {
-    id: Math.floor(Math.random() * 100),
-    date: `${new Date().toLocaleDateString('en-US')}`,
-    debt: Math.floor(Math.random() * 1000 ),
-    paid: Math.floor(Math.random() * 100000),
-    totalPrice: Math.floor(Math.random() * 1000000),
-  },
-  {
-    id: Math.floor(Math.random() * 100),
-    date: `${new Date().toLocaleDateString('en-US')}`,
-    debt: Math.floor(Math.random() * 1000 ),
-    paid: Math.floor(Math.random() * 100000),
-    totalPrice: Math.floor(Math.random() * 1000000),
-  },
-  {
-    id: Math.floor(Math.random() * 100),
-    date: `${new Date().toLocaleDateString('en-US')}`,
-    debt: Math.floor(Math.random() * 1000 ),
-    paid: Math.floor(Math.random() * 100000),
-    totalPrice: Math.floor(Math.random() * 1000000),
-  },
-  {
-    id: Math.floor(Math.random() * 100),
-    date: `${new Date().toLocaleDateString('en-US')}`,
-    debt: Math.floor(Math.random() * 1000 ),
-    paid: Math.floor(Math.random() * 100000),
-    totalPrice: Math.floor(Math.random() * 1000000),
-  },
-  {
-    id: Math.floor(Math.random() * 100),
-    date: `${new Date().toLocaleDateString('en-US')}`,
-    debt: Math.floor(Math.random() * 1000 ),
-    paid: Math.floor(Math.random() * 100000),
-    totalPrice: Math.floor(Math.random() * 1000000),
+@Injectable({
+  providedIn: 'root',
+})
+export class OrdersService extends CRUDService<OrdersResponse, OrdersRequest> {
+
+   /**
+   *
+   * @param $base
+   */
+   constructor(private $base: BaseService) {
+    super($base, 'order/employee');
   }
-];
+}
+

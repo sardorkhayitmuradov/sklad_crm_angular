@@ -10,6 +10,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzNotificationServiceModule } from 'ng-zorro-antd/notification';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -27,7 +28,7 @@ import { RouterModule } from '@angular/router';
     NzModalModule,
     NzSelectModule,
     NzNotificationServiceModule,
-
+    NzTabsModule
   ],
   exports: [
     CommonModule,
@@ -41,7 +42,8 @@ import { RouterModule } from '@angular/router';
     NzInputModule,
     NzModalModule,
     NzSelectModule,
-    NzNotificationServiceModule
+    NzNotificationServiceModule,
+    NzTabsModule
   ],
 })
 export class SharedModule {}
