@@ -26,7 +26,7 @@
         </button>
       </ng-template>
 
-      <button [routerLink]="['add']" nz-button nzType="primary">Add</button>
+      <button (click)="isVisible = true" nz-button nzType="primary">Add</button>
     </div>
   </div>
 
@@ -77,12 +77,5 @@
   </nz-table>
 </div>
 
-<!-- <nz-modal
-    [(nzVisible)]="isVisible"
-    nzTitle="Add Product"
-    (nzOnCancel)="handleCancel()"
-    (nzOnOk)="handleOk()"
-    [nzOkLoading]="isOkLoading"
-  >
-    <div *nzModalContent>add modal content</div>
-  </nz-modal> -->
+<add-edit-employees [(isVisible)]="isVisible" (submitted)="getAll()">
+</add-edit-employees>

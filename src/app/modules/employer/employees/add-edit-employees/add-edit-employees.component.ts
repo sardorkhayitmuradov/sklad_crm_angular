@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AddEdit } from 'src/app/modules/shared/crud/add-edit.class';
 import { Employees, EmployeesRequest } from '../model/employees.model';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -13,13 +13,32 @@ import { formatter } from 'src/app/modules/shared/crud/auth.class';
   styleUrls: ['./add-edit-employees.component.css']
 })
 export class AddEditEmployeesComponent extends AddEdit<Employees, EmployeesRequest> {
+
+  /**
+   *
+   */
+  @Input()
+  isVisible = false;
+
+  /**
+   *
+   */
+  @Output()
+  isVisibleChange = new EventEmitter<boolean>();
+
+  /**
+   *
+   */
+  @Output()
+  submitted = new EventEmitter<boolean>();
+
+
     /**
    *
    */
   form = this.fb.nonNullable.group({
     fullname: ['', Validators.required],
     phone_number: ['', Validators.required],
-    password: ['', Validators.required],
   });
 
 
@@ -45,6 +64,15 @@ export class AddEditEmployeesComponent extends AddEdit<Employees, EmployeesReque
     }
   }
 
+   /**
+   *
+   */
+   protected override afterSuccess(): void {
+    this.submitted.emit(true);
+    this.close();
+  }
+
+
   /**
    *
    * @returns
@@ -68,9 +96,15 @@ export class AddEditEmployeesComponent extends AddEdit<Employees, EmployeesReque
   /**
    *
    */
-  goBack() {
-    this.router.navigate([this.isEdit ? '../../' : '../'], {
-      relativeTo: this.route,
-    });
+  cancel() {
+    this.close();
   }
+
+  /**
+   *
+   */
+  close() {
+    this.isVisibleChange.emit(false);
+  }
+
 }

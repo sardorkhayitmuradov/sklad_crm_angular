@@ -86,11 +86,10 @@ export abstract class AddEdit<TResponse, TRequest> {
    * @param request
    */
   private add(request: TRequest) {
-    console.log(request);
     this.$data.add(request).subscribe({
       next: (response) => {
         if (response) {
-          this.router.navigate(['../'], { relativeTo: this.route });
+          this.afterSuccess();
           return;
         }
       },
@@ -105,12 +104,24 @@ export abstract class AddEdit<TResponse, TRequest> {
 
   /**
    *
+   */
+  protected afterSuccess() {
+    if (this.isEdit) {
+      this.router.navigate(['../../'], { relativeTo: this.route });
+      return;
+    }
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+
+  /**
+   *
    * @param request
    */
   private edit(request: TRequest) {
     this.$data.edit(this.id, request).subscribe((item) => {
       if (item) {
-        this.router.navigate(['../../'], { relativeTo: this.route });
+        this.afterSuccess();
         return;
       }
     });

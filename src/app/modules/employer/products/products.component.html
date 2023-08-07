@@ -39,7 +39,7 @@
     (nzPageIndexChange)="handlePageIndexChange($event)"
     (nzPageSizeChange)="handlePageSizeChange($event)"
     [nzFrontPagination]="false"
-    [nzPageIndex]="pages.page"
+    [nzPageIndex]="pages.pageIndex"
     [nzPageSize]="pages.pageSize"
     [nzTotal]="pages.all"
     nzShowSizeChanger
@@ -49,8 +49,8 @@
         <th nzWidth="10%" [nzAlign]="'center'">Code</th>
         <th nzWidth="35%" [nzAlign]="'center'">Name</th>
         <th nzWidth="10%" [nzAlign]="'center'">Quantity</th>
-        <th nzWidth="20%" [nzAlign]="'center'">Price</th>
         <th nzWidth="10%" [nzAlign]="'center'">Unit</th>
+        <th nzWidth="20%" [nzAlign]="'center'">Price</th>
         <th [nzAlign]="'center'">Operations</th>
       </tr>
     </thead>
@@ -59,8 +59,8 @@
         <td [nzAlign]="'center'">{{ data.code }}</td>
         <td [nzAlign]="'center'">{{ data.name }}</td>
         <td [nzAlign]="'center'">{{ data.qty }}</td>
-        <td [nzAlign]="'center'">{{ data.price }}</td>
         <td [nzAlign]="'center'">{{ data.unit }}</td>
+        <td [nzAlign]="'center'">{{ data.price }}</td>
 
         <td [nzAlign]="'center'">
           <div class="flex items-center gap-x-3 justify-center">
