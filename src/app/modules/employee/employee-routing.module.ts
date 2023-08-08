@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '',
     component: EmployeeComponent,
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+      { path: '', pathMatch: 'full', redirectTo: 'products' },
       {
         path: 'dashboard',
         loadChildren: () =>
