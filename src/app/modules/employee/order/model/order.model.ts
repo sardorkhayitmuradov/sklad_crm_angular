@@ -6,11 +6,13 @@ export interface Products {
   price: number;
 }
 
-export interface OrdersResponse extends Id, OrdersRequest {
+export interface OrderResponse extends OrderRequest, Id {
   totalAmount: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
-export interface OrdersRequest {
+export interface OrderRequest {
   client_type?: string;
   market_id?: string;
   client_name?: string;

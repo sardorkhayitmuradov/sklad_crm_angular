@@ -25,6 +25,10 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
     pageSizeOptions: [10,15,20,25,30]
   };
 
+   /**
+   * @Input
+   */
+   searchText = '';
   data: Products[] = [];
 
   constructor($data: ProductsService, private modal: NzModalService, private router: Router , private route: ActivatedRoute) {
@@ -83,5 +87,13 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel'),
     });
+  }
+
+
+   /**
+   *
+   */
+   clear() {
+    this.searchText = '';
   }
 }

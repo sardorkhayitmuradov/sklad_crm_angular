@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { OrdersService } from './services/orders.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Grid } from '../../shared/crud/grid.class';
+import { Grid } from 'src/app/modules/shared/crud/grid.class';
 import { OrdersRequest, OrdersResponse } from './model/orders.model';
-import { pages } from '../../shared/models/pages.model';
-import { BaseResponse } from '../../shared/models/base.interface';
+import { pages } from 'src/app/modules/shared/models/pages.model';
+import { BaseResponse } from 'src/app/modules/shared/models/base.interface';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
@@ -38,6 +38,7 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     private route: ActivatedRoute
   ) {
     super($data);
+    const id = this.route.snapshot.params['id'];
     const pageIndex = +this.route.snapshot.queryParams['pageIndex'];
     const pageSize = +this.route.snapshot.queryParams['pageSize'];
 
@@ -49,16 +50,16 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
       this.pages.pageSize = pageSize;
     }
 
-    this.getData(this.pages.pageIndex, this.pages.pageSize);
+    this.getData(this.pages.pageIndex, this.pages.pageSize, id);
   }
 
   getQtyOrders(): number {
     return this.pages.qtyOrders ?? 0;
   }
 
-  getData(pageIndex: number, pageSize: number) {
+  getData(pageIndex: number, pageSize: number, id?: string) {
     this.$data
-      .getByPagination(pageIndex, pageSize)
+      .getByPaginationMarketId(pageIndex, pageSize, id && `${id}`)
       .subscribe((response: BaseResponse<OrdersResponse[]>) => {
         this.data = response.data;
         this.pages.pageIndex = response.page;

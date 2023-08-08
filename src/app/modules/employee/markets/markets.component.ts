@@ -25,6 +25,11 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
     pageSizeOptions: [10,15,20,25,30]
   };
 
+  /**
+   * 
+   */
+  searchText: string = '';
+
   data: Markets[] = [];
 
   constructor($data: MarketsService, private modal: NzModalService, private router: Router , private route: ActivatedRoute) {
@@ -48,6 +53,7 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
       .getByPagination(pageIndex, pageSize)
       .subscribe((response: BaseResponse<Markets[]>) => {
         this.data = response.data;
+        console.log(this.data)
         this.pages.pageIndex = response.page;
         this.pages.pageSize = response.page_size;
         this.pages.all = response.all
@@ -82,5 +88,13 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel'),
     });
+  }
+
+
+  /**
+   *
+   */
+  clear() {
+    this.searchText = '';
   }
 }

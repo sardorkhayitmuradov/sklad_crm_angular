@@ -1,10 +1,30 @@
 <div class="flex flex-col w-full">
   <div class="relative mb-4">
     <nz-divider nzText="Products" nzOrientation="left"></nz-divider>
-    <div
-      class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2"
-    >
-      <input type="text" nz-input placeholder="search..." />
+    <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
+      <nz-input-group
+        nzSearch
+        [nzSuffix]="inputClearTpl"
+        [nzAddOnAfter]="suffixIconButton"
+      >
+        <input type="text" nz-input placeholder="search..." />
+      </nz-input-group>
+
+      <ng-template #inputClearTpl>
+        <span
+          nz-icon
+          class="ant-input-clear-icon"
+          nzTheme="fill"
+          nzType="close-circle"
+          [hidden]="!searchText"
+          (click)="clear()"
+        ></span>
+      </ng-template>
+      <ng-template #suffixIconButton>
+        <button nz-button nzType="primary" nzSearch>
+          <span nz-icon nzType="search"></span>
+        </button>
+      </ng-template>
       <button [routerLink]="['add']" nz-button nzType="primary">Add</button>
     </div>
   </div>
@@ -27,11 +47,20 @@
   >
     <thead>
       <tr>
-        <th nzWidth="10%" [nzAlign]="'center'">Code</th>
+        <th nzWidth="10%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <span nz-icon nzType="number" nzTheme="outline"></span>
+            <p>Code</p>
+          </div>
+        </th>
         <th nzWidth="35%" [nzAlign]="'center'">Name</th>
-        <th nzWidth="20%" [nzAlign]="'center'">Price</th>
-        <th nzWidth="10%" [nzAlign]="'center'">Quantity</th>
-        <th nzWidth="10%" [nzAlign]="'center'">Unit</th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <p>Price</p>
+            <span nz-icon nzType="dollar" nzTheme="twotone"></span>
+          </div>
+        </th>
+        <th nzWidth="20%" [nzAlign]="'center'">Quantity</th>
         <th [nzAlign]="'center'">Operations</th>
       </tr>
     </thead>
@@ -39,9 +68,8 @@
       <tr *ngFor="let data of basicTable.data">
         <td [nzAlign]="'center'">{{ data.code }}</td>
         <td [nzAlign]="'center'">{{ data.name }}</td>
-        <td [nzAlign]="'center'">{{ data.price }}</td>
-        <td [nzAlign]="'center'">{{ data.qty }}</td>
-        <td [nzAlign]="'center'">{{ data.unit }}</td>
+        <td [nzAlign]="'center'">{{ data.price | number }} so'm</td>
+        <td [nzAlign]="'center'">{{ data.qty | number }} {{ data.unit }}</td>
 
         <td [nzAlign]="'center'">
           <div class="flex items-center gap-x-3 justify-center">
