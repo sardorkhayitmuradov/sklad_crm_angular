@@ -29,8 +29,8 @@
       <tr>
         <th nzWidth="10%" [nzAlign]="'center'">Code</th>
         <th nzWidth="35%" [nzAlign]="'center'">Name</th>
-        <th nzWidth="10%" [nzAlign]="'center'">Quantity</th>
         <th nzWidth="20%" [nzAlign]="'center'">Price</th>
+        <th nzWidth="10%" [nzAlign]="'center'">Quantity</th>
         <th nzWidth="10%" [nzAlign]="'center'">Unit</th>
         <th [nzAlign]="'center'">Operations</th>
       </tr>
@@ -39,8 +39,8 @@
       <tr *ngFor="let data of basicTable.data">
         <td [nzAlign]="'center'">{{ data.code }}</td>
         <td [nzAlign]="'center'">{{ data.name }}</td>
-        <td [nzAlign]="'center'">{{ data.qty }}</td>
         <td [nzAlign]="'center'">{{ data.price }}</td>
+        <td [nzAlign]="'center'">{{ data.qty }}</td>
         <td [nzAlign]="'center'">{{ data.unit }}</td>
 
         <td [nzAlign]="'center'">

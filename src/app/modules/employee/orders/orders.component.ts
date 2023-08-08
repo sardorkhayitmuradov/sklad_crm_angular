@@ -3,14 +3,16 @@ import { OrdersService } from './services/orders.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Grid } from '../../shared/crud/grid.class';
-import { OrdersRequest, OrdersResponse, Products } from './model/orders.model';
+import { OrdersRequest, OrdersResponse } from './model/orders.model';
 import { pages } from '../../shared/models/pages.model';
 import { BaseResponse } from '../../shared/models/base.interface';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'employee-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css'],
+  providers: [DecimalPipe]
 })
 export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
   isVisible = false;
@@ -27,7 +29,6 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
   };
 
   data: OrdersResponse[] = [];
-  tabRoute: string = localStorage.getItem('tabRoute') as string | 'markets';
 
   constructor(
     $data: OrdersService,
@@ -36,7 +37,6 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     private route: ActivatedRoute
   ) {
     super($data);
-    this.handleTabRoute(this.tabRoute);
     const pageIndex = +this.route.snapshot.queryParams['pageIndex'];
     const pageSize = +this.route.snapshot.queryParams['pageSize'];
 
@@ -52,19 +52,7 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
   }
 
   getQtyOrders(): number {
-    return this.pages.qtyOrders ?? 0; // Provide a default value of 0 if pages.qtyOrders is undefined
-  }
-
-  getProductsId(productsId: Products[]) {
-    return productsId?.map((product) => product.productId).join(', ');
-  }
-
-  getProductsQty(productsQty: Products[]) {
-    return productsQty?.map((product) => product.qty).join(', ');
-  }
-
-  getProductsPrice(productsPrice: Products[]) {
-    return productsPrice?.map((product) => product.price).join(', ');
+    return this.pages.qtyOrders ?? 0;
   }
 
   getData(pageIndex: number, pageSize: number) {
@@ -72,10 +60,9 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
       .getByPagination(pageIndex, pageSize)
       .subscribe((response: BaseResponse<OrdersResponse[]>) => {
         this.data = response.data;
-        console.log(this.data);
         this.pages.pageIndex = response.page;
         this.pages.pageSize = response.page_size;
-        this.pages.all = response.all;
+        this.pages.qtyOrders = response.qtyOrders;
         this.isLoading = false;
       });
   }
@@ -96,14 +83,6 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
       queryParams: { pageIndex: this.pages.pageIndex, pageSize: newPageSize },
     });
     this.getData(this.pages.pageIndex, this.pages.pageSize);
-  }
-
-  handleTabRoute(route: string) {
-    this.router.navigate([], {
-      queryParams: { tab: route },
-      queryParamsHandling: 'merge',
-    });
-    localStorage.setItem('tabRoute', route);
   }
 
   showDeleteConfirm(id: string): void {

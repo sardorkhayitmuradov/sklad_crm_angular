@@ -1,155 +1,60 @@
-<div class="card-container">
-  <nz-tabset nzLinkRouter nzType="card">
-    <nz-tab>
-      <a
-        *nzTabLink
-        nz-tab-link
-        [routerLink]="['.']"
-        [queryParams]="{ tab: 'markets' }"
-        (click)="handleTabRoute('markets')"
-      >
-        Markets
-      </a>
-      <nz-table
-        nzSize="middle"
-        #groupingTable
-        [nzData]="data || []"
-        [nzLoading]="isLoading"
-        [nzPageSizeOptions]="pages.pageSizeOptions"
-        (nzPageIndexChange)="handlePageIndexChange($event)"
-        (nzPageSizeChange)="handlePageSizeChange($event)"
-        [nzFrontPagination]="false"
-        [nzPageIndex]="pages.pageIndex"
-        [nzPageSize]="pages.pageSize"
-        [nzTotal]="getQtyOrders()"
-        nzBordered
-      >
-        <thead>
-          <tr>
-            <th nzWidth="10%" nzAlign="center" rowSpan="2">ID (Name)</th>
-            <th nzWidth="15%" nzAlign="center" colspan="3">Products</th>
-            <th nzWidth="15%" nzAlign="center" rowSpan="2">Paid</th>
-            <th nzWidth="15%" nzAlign="center" rowSpan="2">Total</th>
-            <th nzWidth="40" nzAlign="center" rowSpan="2">Operations</th>
-          </tr>
-          <tr>
-            <th nzAlign="center">Code</th>
-            <th nzAlign="center">Qty</th>
-            <th nzAlign="center">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of groupingTable.data">
-            <td nzAlign="center">{{ data.client_type }}</td>
-            <td nzAlign="center">{{ getProductsId(data.products) }}</td>
-            <td nzAlign="center">
-              {{ getProductsQty(data.products) | number : "" : "en" }}
-            </td>
-            <td nzAlign="center">
-              {{ getProductsPrice(data.products) | number : "" : "en" }} so'm
-            </td>
-            <td nzAlign="center">{{ data.paid | number : "" : "en" }} so'm</td>
-            <td nzAlign="center">
-              {{ data.totalAmount | number : "" : "en" }} so'm
-            </td>
-            <td nzAlign="center">
-              <div class="flex items-center gap-x-3 justify-center">
-                <button
-                  nz-button
-                  nzType="default"
-                  class="flex items-center justify-center"
-                >
-                  <span nz-icon nzType="edit" nzTheme="outline"></span>
-                </button>
-                <button
-                  nz-button
-                  nzType="primary"
-                  nzDanger
-                  class="flex items-center justify-center"
-                >
-                  <span nz-icon nzType="delete" nzTheme="outline"></span>
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </nz-tab>
-
-    <nz-tab>
-      <a
-        *nzTabLink
-        nz-tab-link
-        [routerLink]="['.']"
-        [queryParams]="{ tab: 'clients' }"
-        (click)="handleTabRoute('clients')"
-      >
-        Clients
-      </a>
-      <nz-table
-        nzSize="middle"
-        #groupingTable
-        [nzData]="data || []"
-        [nzLoading]="isLoading"
-        [nzPageSizeOptions]="pages.pageSizeOptions"
-        (nzPageIndexChange)="handlePageIndexChange($event)"
-        (nzPageSizeChange)="handlePageSizeChange($event)"
-        [nzFrontPagination]="false"
-        [nzPageIndex]="pages.pageIndex"
-        [nzPageSize]="pages.pageSize"
-        [nzTotal]="getQtyOrders()"
-        nzBordered
-      >
-        <thead>
-          <tr>
-            <th nzWidth="10%" nzAlign="center" rowSpan="2">ID (Name)</th>
-            <th nzWidth="15%" nzAlign="center" colspan="3">Products</th>
-            <th nzWidth="15%" nzAlign="center" rowSpan="2">Paid</th>
-            <th nzWidth="15%" nzAlign="center" rowSpan="2">Total</th>
-            <th nzWidth="40" nzAlign="center" rowSpan="2">Operations</th>
-          </tr>
-          <tr>
-            <th nzAlign="center">Code</th>
-            <th nzAlign="center">Qty</th>
-            <th nzAlign="center">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of groupingTable.data">
-            <td nzAlign="center">{{ data.client_type }}</td>
-            <td nzAlign="center">{{ getProductsId(data.products) }}</td>
-            <td nzAlign="center">
-              {{ getProductsQty(data.products) | number : "" : "en" }}
-            </td>
-            <td nzAlign="center">
-              {{ getProductsPrice(data.products) | number : "" : "en" }} so'm
-            </td>
-            <td nzAlign="center">{{ data.paid | number : "" : "en" }} so'm</td>
-            <td nzAlign="center">
-              {{ data.totalAmount | number : "" : "en" }} so'm
-            </td>
-            <td nzAlign="center">
-              <div class="flex items-center gap-x-3 justify-center">
-                <button
-                  nz-button
-                  nzType="default"
-                  class="flex items-center justify-center"
-                >
-                  <span nz-icon nzType="edit" nzTheme="outline"></span>
-                </button>
-                <button
-                  nz-button
-                  nzType="primary"
-                  nzDanger
-                  class="flex items-center justify-center"
-                >
-                  <span nz-icon nzType="delete" nzTheme="outline"></span>
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </nz-tab>
-  </nz-tabset>
-</div>
+<nz-table
+  #groupingTable
+  nzSize="middle"
+  [nzData]="data || []"
+  [nzLoading]="isLoading"
+  [nzPageSizeOptions]="pages.pageSizeOptions"
+  (nzPageIndexChange)="handlePageIndexChange($event)"
+  (nzPageSizeChange)="handlePageSizeChange($event)"
+  [nzFrontPagination]="false"
+  [nzPageIndex]="pages.pageIndex"
+  [nzPageSize]="pages.pageSize"
+  [nzTotal]="getQtyOrders()"
+  nzBordered
+>
+  <thead>
+    <tr>
+      <th nzWidth="10%" nzAlign="center" rowSpan="2">ID (Name)</th>
+      <th nzWidth="15%" nzAlign="center" colspan="3">Products</th>
+      <th nzWidth="15%" nzAlign="center" rowSpan="2">Paid</th>
+      <th nzWidth="15%" nzAlign="center" rowSpan="2">Total</th>
+      <th class="w-[150px]" nzAlign="center" rowSpan="2">Operations</th>
+    </tr>
+    <tr>
+      <th nzAlign="center">Code</th>
+      <th nzAlign="center">Qty</th>
+      <th nzAlign="center">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let order of groupingTable.data; let i = index">
+      <tr *ngFor="let product of order.products; let j = index">
+        <td *ngIf="j === 0" [attr.rowspan]="order.products.length" nzAlign="center">{{ order.client_name }}</td>
+        <td nzAlign="center">{{ product.productId }}</td>
+        <td nzAlign="center">{{ product.qty }}</td>
+        <td nzAlign="center">{{ product.price }}</td>
+        <td *ngIf="j === 0" [attr.rowspan]="order.products.length" nzAlign="center">{{ order.paid }}</td>
+        <td *ngIf="j === 0" [attr.rowspan]="order.products.length" nzAlign="center">{{ order.totalAmount }}</td>
+        <td *ngIf="j === 0" [attr.rowspan]="order.products.length" nzAlign="center" rowspan="2">
+          <div class="flex items-center gap-x-3 justify-center">
+            <button
+              nz-button
+              nzType="default"
+              class="flex items-center justify-center"
+            >
+              <span nz-icon nzType="edit" nzTheme="outline"></span>
+            </button>
+            <button
+              nz-button
+              nzType="primary"
+              nzDanger
+              class="flex items-center justify-center"
+            >
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</nz-table>
