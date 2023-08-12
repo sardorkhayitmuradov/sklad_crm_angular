@@ -20,11 +20,6 @@ export abstract class CRUDService<TResponse, TRequest> {
     this.url = url;
   }
 
-  submitAnOrderUrl(){
-    this.url = 'order'
-    console.log(this.url);
-  }
-
   /**
    *
    * @returns

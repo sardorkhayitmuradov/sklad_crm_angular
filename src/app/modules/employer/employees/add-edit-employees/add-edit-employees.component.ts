@@ -14,6 +14,15 @@ import { formatter } from 'src/app/modules/shared/crud/auth.class';
 })
 export class AddEditEmployeesComponent extends AddEdit<Employees, EmployeesRequest> {
 
+  private $id!: string;
+  public override get id(): string {
+    return this.$id
+  }
+
+  public override set id(v: string){
+    this.$id = v;
+  }
+
   /**
    *
    */
@@ -39,6 +48,7 @@ export class AddEditEmployeesComponent extends AddEdit<Employees, EmployeesReque
   form = this.fb.nonNullable.group({
     fullname: ['', Validators.required],
     phone_number: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
 
@@ -59,9 +69,25 @@ export class AddEditEmployeesComponent extends AddEdit<Employees, EmployeesReque
     super($data,$notification, router, route);
     if (this.isEdit) {
       route.data.subscribe((w) => {
-        this.setFormValues(w['data']);
+        console.log(w['data']);
+        // this.setFormValues(w['data']['data']);
+        // this.form.controls.phone_number.setValue(
+        //   this.form.controls.phone_number.value.replace('+998', '')
+        // )
       });
+      this.form.controls.phone_number.disable()
     }
+  }
+
+  /**
+   *
+   * @returns
+   */
+  protected override getRequest(): EmployeesRequest {
+    const request = super.getRequest();
+    const countryCode = '+998';
+    request.phone_number = formatter(countryCode + request.phone_number);
+    return request;
   }
 
    /**
@@ -81,17 +107,6 @@ export class AddEditEmployeesComponent extends AddEdit<Employees, EmployeesReque
     return confirm('Sizda saqlanmagan malumotlar bor. Rostan chiqmoqchimisiz?');
   };
 
-  /**
-   *
-   * @returns
-   */
-  protected override getRequest(): EmployeesRequest {
-    const request = super.getRequest();
-    const countryCode = '+998';
-    request.phone_number = formatter(countryCode + request.phone_number);
-    console.log(request);
-    return request;
-  }
 
   /**
    *
@@ -105,6 +120,8 @@ export class AddEditEmployeesComponent extends AddEdit<Employees, EmployeesReque
    */
   close() {
     this.isVisibleChange.emit(false);
+    this.form.reset();
+    this.id = '';
   }
 
 }

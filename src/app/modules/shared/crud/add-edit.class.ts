@@ -44,18 +44,6 @@ export abstract class AddEdit<TResponse, TRequest> {
     this.id = this.route.snapshot.params['id'] as string;
   }
 
-  submitAnOrder(){
-    this.$data.submitAnOrderUrl();
-    console.log(this.$data.submitAnOrderUrl());
-    const request: TRequest = this.getRequest();
-    if (this.form.invalid) {
-      this.updateValueAndValidity();
-      return;
-    }
-    this.add(request);
-
-  }
-
   /**
    *
    */
@@ -91,6 +79,7 @@ export abstract class AddEdit<TResponse, TRequest> {
     }
     
     const request: TRequest = this.getRequest();
+    console.log(request);
     if (this.isEdit) {
       this.edit(request);
       return;

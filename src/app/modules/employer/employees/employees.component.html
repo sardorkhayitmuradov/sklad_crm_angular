@@ -26,7 +26,7 @@
         </button>
       </ng-template>
 
-      <button (click)="isVisible = true" nz-button nzType="primary">Add</button>
+      <button (click)="add()" nz-button nzType="primary">Add</button>
     </div>
   </div>
 
@@ -40,8 +40,8 @@
       <tr>
         <th nzWidth="20%">FullName</th>
         <th nzWidth="20%">Phone</th>
-        <th nzWidth="25%">Balance</th>
-        <th nzWidth="20%">Debt</th>
+        <th nzWidth="25%">Orders</th>
+        <th nzWidth="20%">Transactions</th>
         <th>Operations</th>
       </tr>
     </thead>
@@ -57,7 +57,7 @@
               nz-button
               nzType="default"
               class="flex items-center justify-center"
-              [routerLink]="['edit', data._id]"
+              (click)="isVisible = true; addEdit.id = data._id"
             >
               <span nz-icon nzType="edit" nzTheme="outline"></span>
             </button>
@@ -77,5 +77,9 @@
   </nz-table>
 </div>
 
-<add-edit-employees [(isVisible)]="isVisible" (submitted)="getAll()">
+<add-edit-employees 
+#addEdit
+[(isVisible)]="isVisible" 
+(submitted)="getDatas()">
 </add-edit-employees>
+

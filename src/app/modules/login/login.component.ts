@@ -31,7 +31,6 @@ export class LoginComponent extends Auth<LoginResponse, LoginRequest> {
     route: ActivatedRoute
   ) {
     super($data, $notification, cookieService, router, route);
-    console.log(this.$data.url)
   }
 
   // Options Role

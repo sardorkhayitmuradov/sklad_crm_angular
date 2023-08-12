@@ -29,7 +29,7 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     products: this.fb.array([
       this.fb.group({
         productId: ['', Validators.required],
-        qty: [0, Validators.required],
+        qty: [0, [Validators.required, Validators.min(1)]],
         productPrice: [0, Validators.required],
         price: [{ value: 0, disabled: true }, Validators.required],
       }),
@@ -120,7 +120,7 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     }
   }
 
-  setProductQty(index: number, productId: string) {
+  setProductQty(index: number, productId: string, fromProductSelect = false) {
     const selectedProduct = this.productsData.find((p) => p._id === productId)!;
     const productGroup = this.products.at(index);
 
@@ -130,17 +130,17 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
       const productPriceControl = productGroup.get('productPrice')!;
 
       if (qtyControl && priceControl && productPriceControl) {
-        let qty = qtyControl.value;
-        const price = priceControl.value;
-        const productPrice = productPriceControl.value;
+        // let qty = qtyControl.value;
+        // const price = priceControl.value;
+        // const productPrice = productPriceControl.value;
 
         // Handle initial qty value and price calculation
-        if (qty < 1) {
+        if (fromProductSelect) {
           qtyControl.setValue(1); // Update the form control value
 
           // Multiply the price by the initial qty
           productPriceControl.setValue(selectedProduct.price);
-          priceControl.setValue(qty * selectedProduct.price);
+          priceControl.setValue(qtyControl.value * selectedProduct.price);
           if (this.products.getRawValue().length === 1) {
             this.orderTotalPrice = selectedProduct.price;
           }
@@ -150,8 +150,8 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
           this.form.controls.paid.setValue(this.orderTotalPrice);
         }
 
-        if (!isNaN(qty) && !isNaN(price)) {
-          const overallPrice = qty * productPrice;
+        if (!isNaN(qtyControl.value) && !isNaN(priceControl.value)) {
+          const overallPrice = qtyControl.value * productPriceControl.value;
           priceControl.setValue(overallPrice);
           this.showOrderTotalPrice();
           this.form.controls.paid.setValue(this.orderTotalPrice);

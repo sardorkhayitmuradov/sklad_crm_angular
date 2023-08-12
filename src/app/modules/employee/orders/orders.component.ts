@@ -100,6 +100,12 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     });
   }
 
+  override delete(id: string): void {
+    this.$data.delete(id).subscribe(() => {
+      this.getData(this.pages.pageIndex, this.pages.pageSize);
+    });
+  }
+
 
   clear(){
     this.searchText = ''

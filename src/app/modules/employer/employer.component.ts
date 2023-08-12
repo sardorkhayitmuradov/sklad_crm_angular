@@ -17,6 +17,7 @@ export class EmployerComponent {
   constructor(private router: Router, private cookieService: CookieService){
     const token = this.cookieService.get('token');
     this.tokenInfo = this.getDecodedAccessToken(token) as role
+    console.log(this.tokenInfo);
   }
 
   private getDecodedAccessToken(token: string) {

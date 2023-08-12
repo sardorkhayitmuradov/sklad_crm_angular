@@ -9,7 +9,7 @@
   <form [formGroup]="form" nz-form class="py-4" >
     <!--FULL NAME -->
     <nz-form-item class="gap-2">
-      <nz-form-label [nzSpan]="6" nzFor="fullname">Full Name</nz-form-label>
+      <nz-form-label nzFor="fullname">Full Name</nz-form-label>
       <nz-form-control nzErrorTip="Required field!">
         <input
           nz-input
@@ -23,7 +23,7 @@
   
     <!-- PHONE NUMBER -->
     <nz-form-item class="gap-2">
-      <nz-form-label [nzSpan]="6" nzFor="phone_number"
+      <nz-form-label nzFor="phone_number"
         >Phone number</nz-form-label
       >
       <nz-form-control [nzErrorTip]="phoneNumberError">
@@ -49,15 +49,32 @@
       </ng-template>
     </nz-form-item>
 
+
+    <!--PASSWORD -->
+    <nz-form-item class="gap-2">
+      <nz-form-label nzFor="fullname">Password</nz-form-label>
+      <nz-form-control nzErrorTip="Required field!">
+        <input
+          nz-input
+          name="password"
+          formControlName="password"
+          type="text"
+          id="password"
+        />
+      </nz-form-control>
+    </nz-form-item>
+
   </form>
 </ng-container>
 <ng-template #footer>
-  <div class="flex gap-3 justify-end">
+
     <button nz-button nzType="primary" (click)="submit()">
       {{ isEdit ? "Edit" : "Add" }}
     </button>
     <button nz-button (click)="reset()">Reset</button>
-  </div>
+    <button nz-button (click)="cancel()">
+      Cancel
+    </button>
 </ng-template>
 </nz-modal>
 

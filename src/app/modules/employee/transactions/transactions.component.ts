@@ -47,17 +47,17 @@ export class TransactionsComponent extends Grid<
     private route: ActivatedRoute
   ) {
     super($data);
-    this.getDatas();
     const pageIndex = +this.route.snapshot.queryParams['pageIndex'];
     const pageSize = +this.route.snapshot.queryParams['pageSize'];
 
     if (isFinite(pageSize)) {
       this.pages.pageSize = pageSize;
     }
-
+    
     if (isFinite(pageIndex)) {
       this.pages.pageIndex = pageIndex;
     }
+    this.getDatas();
   }
 
   protected getDatas() {
@@ -106,6 +106,12 @@ export class TransactionsComponent extends Grid<
     }
 
     this.isVisible= true;
+  }
+
+  override delete(id: string): void {
+    this.$data.delete(id).subscribe(() => {
+      this.getDatas();
+    });
   }
 
   /**

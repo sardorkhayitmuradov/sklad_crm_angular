@@ -3,12 +3,12 @@ import { EmployeesService } from './services/employees.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Employees, EmployeesRequest } from './model/employees.model';
 import { Grid } from '../../shared/crud/grid.class';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'employer-employees',
   templateUrl: './employees.component.html',
 })
-
 export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
   isVisible = false;
   isOkLoading = false;
@@ -16,23 +16,26 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
 
   data: Employees[] = [];
 
-
   /// Input
   /**
    *
    */
   searchText = '';
 
-
-  constructor($data: EmployeesService, private modal: NzModalService) {
+  constructor(
+    $data: EmployeesService,
+    private modal: NzModalService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     super($data);
     this.getDatas();
   }
 
-  private getDatas(){
+  protected getDatas() {
     this.data$.subscribe((response: any) => {
       this.data = response.employees;
-        this.isLoading = false
+      this.isLoading = false;
     });
   }
 
@@ -51,10 +54,23 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
     });
   }
 
+  override delete(id: string): void {
+    this.$data.delete(id).subscribe(() => {
+      this.getDatas();
+    });
+  }
 
+  /**
+   *
+   */
+  add() {
+    if (this.isVisible === undefined) {
+      this.router.navigate(['add'], { relativeTo: this.route });
+      return;
+    }
 
-
-
+    this.isVisible = true;
+  }
 
   /**
    *
@@ -62,5 +78,4 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
   clear() {
     this.searchText = '';
   }
-
 }
