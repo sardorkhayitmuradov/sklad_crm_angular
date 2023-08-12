@@ -26,6 +26,14 @@ const routes: Routes = [
       breadcrumb: 'Edit',
     },
   },
+  {
+    path: 'orders/:id',
+    loadChildren: () =>
+      import('./orders/orders.module').then((m) => m.OrdersModule),
+    data: {
+      breadcrumb: 'Market Orders',
+    },
+  },
 ];
 
 @NgModule({

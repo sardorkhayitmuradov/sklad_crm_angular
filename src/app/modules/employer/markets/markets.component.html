@@ -25,13 +25,15 @@
           <span nz-icon nzType="search"></span>
         </button>
       </ng-template>
-      <button [routerLink]="['add']" nz-button nzType="primary">Add</button>
+      <button [routerLink]="['add']" nz-button nzType="primary" class="flex items-center justify-center">
+        <span nz-icon nzType="plus" nzTheme="outline"></span>
+      </button>
     </div>
   </div>
 
   <nz-table
     #basicTable
-    [nzData]="data || []"
+    [nzData]="(data) || []"
     [nzLoading]="isLoading"
     nzBordered
     [nzSize]="'middle'"
@@ -43,12 +45,19 @@
     [nzPageSize]="pages.pageSize"
     [nzTotal]="pages.all"
     nzShowSizeChanger
+    
   >
     <thead>
       <tr>
-        <th nzWidth="30%" [nzAlign]="'center'">Market</th>
-        <th nzWidth="20%" [nzAlign]="'center'">Phone</th>
-        <th nzWidth="35%" [nzAlign]="'center'">Location</th>
+        <th nzWidth="30%" [nzAlign]="'center'">Name</th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <p>Phone</p>
+            <span nz-icon nzType="phone" nzTheme="twotone"></span>
+          </div>
+        </th>
+        <th nzWidth="35%" [nzAlign]="'center'">Address</th>
+        <th [nzAlign]="'center'">Orders</th>
         <th [nzAlign]="'center'">Operations</th>
       </tr>
     </thead>
@@ -57,6 +66,15 @@
         <td [nzAlign]="'center'">{{ data.market_name }}</td>
         <td [nzAlign]="'center'">{{ data.phone_number }}</td>
         <td [nzAlign]="'center'">{{ data.location }}</td>
+        <td [nzAlign]="'center'">
+          <button
+              nz-button
+              nzType="link"
+              [routerLink]="['orders', data._id]"
+            >
+            <span nz-icon nzType="link" nzTheme="outline"></span>
+            </button>
+        </td>
         <td [nzAlign]="'center'">
           <div class="flex items-center gap-x-3 justify-center">
             <button

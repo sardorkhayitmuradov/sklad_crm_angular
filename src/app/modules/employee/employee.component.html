@@ -72,6 +72,16 @@
       </li>
       <li
         nz-menu-item
+        [routerLink]="['transactions']"
+        routerLinkActive="ant-menu-item-selected"
+      >
+        <span nz-icon nzTheme="outline" >
+          <span nz-icon nzType="transaction" class="text-white" nzTheme="outline"></span>
+        </span>
+        <span>My transactions</span>
+      </li>
+      <li
+        nz-menu-item
         [routerLink]="['settings']"
         routerLinkActive="ant-menu-item-selected"
       >

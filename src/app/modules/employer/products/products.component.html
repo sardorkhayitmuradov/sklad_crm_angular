@@ -25,13 +25,15 @@
           <span nz-icon nzType="search"></span>
         </button>
       </ng-template>
-      <button [routerLink]="['add']" nz-button nzType="primary">Add</button>
+      <button [routerLink]="['add']" nz-button nzType="primary" class="flex items-center justify-center">
+        <span nz-icon nzType="plus" nzTheme="outline"></span>
+      </button>
     </div>
   </div>
 
   <nz-table
     #basicTable
-    [nzData]="data || []"
+    [nzData]="(data) || []"
     [nzLoading]="isLoading"
     nzBordered
     [nzSize]="'middle'"
@@ -43,14 +45,24 @@
     [nzPageSize]="pages.pageSize"
     [nzTotal]="pages.all"
     nzShowSizeChanger
+    
   >
     <thead>
       <tr>
-        <th nzWidth="10%" [nzAlign]="'center'">Code</th>
+        <th nzWidth="10%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <span nz-icon nzType="number" nzTheme="outline"></span>
+            <p>Code</p>
+          </div>
+        </th>
         <th nzWidth="35%" [nzAlign]="'center'">Name</th>
-        <th nzWidth="10%" [nzAlign]="'center'">Quantity</th>
-        <th nzWidth="10%" [nzAlign]="'center'">Unit</th>
-        <th nzWidth="20%" [nzAlign]="'center'">Price</th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <p>Price</p>
+            <span nz-icon nzType="dollar" nzTheme="twotone"></span>
+          </div>
+        </th>
+        <th nzWidth="20%" [nzAlign]="'center'">Quantity</th>
         <th [nzAlign]="'center'">Operations</th>
       </tr>
     </thead>
@@ -58,9 +70,8 @@
       <tr *ngFor="let data of basicTable.data">
         <td [nzAlign]="'center'">{{ data.code }}</td>
         <td [nzAlign]="'center'">{{ data.name }}</td>
-        <td [nzAlign]="'center'">{{ data.qty }}</td>
-        <td [nzAlign]="'center'">{{ data.unit }}</td>
-        <td [nzAlign]="'center'">{{ data.price }}</td>
+        <td [nzAlign]="'center'">{{ data.price | number }} so'm</td>
+        <td [nzAlign]="'center'">{{ data.qty | number }} {{ data.unit }}</td>
 
         <td [nzAlign]="'center'">
           <div class="flex items-center gap-x-3 justify-center">

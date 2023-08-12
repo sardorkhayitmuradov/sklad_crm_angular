@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OrdersComponent } from './orders.component';
+import { AddOrdersComponent } from './add-orders/add-orders.component';
 
 const routes: Routes = [
   {
     path: '',
     component: OrdersComponent,
   },
-  // {
-  //   path: 'add',
-  //   component: AddEditProductsComponent,
-  //   data: {
-  //     breadcrumb: 'Add',
-  //   },
-  // },
+  {
+    path: 'add',
+    loadChildren: () =>
+      import('./add-orders/add-orders.module').then((m) => m.AddOrdersModule),
+    data: {
+      breadcrumb: 'Order',
+    },
+  },
   {
     path: 'order/:id',
     loadChildren: () =>

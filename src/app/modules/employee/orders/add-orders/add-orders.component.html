@@ -1,0 +1,230 @@
+<a (click)="goBack()" class="flex items-center gap-2 font-bold text-xs mb-5">
+  <!-- NAVIGATE TO BACK -->
+  <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+  {{ isEdit ? "Edit" : "Add" }}</a
+>
+
+<form [formGroup]="form" nz-form>
+  <div class="flex flex-col w-full">
+    <nz-tabset nzType="card" (nzSelectedIndexChange)="handleTabChange($event)">
+      <nz-tab [nzTitle]="'Market'" [tabindex]="selectedTab.id">
+        <div class="w-full flex items-center my-6 justify-between">
+          <!-- MARKETS -->
+          <nz-form-item class="mb-0" nzSpan="16">
+            <nz-form-label nzRequired nzFor="markets"
+              >Choose the market</nz-form-label
+            >
+            <nz-form-control nzErrorTip="Required field!">
+              <nz-select
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Select a market"
+                formControlName="market_id"
+                id="markets"
+              >
+                <nz-option
+                  *ngFor="let market of markets"
+                  [nzLabel]="market.market_name"
+                  [nzValue]="market._id"
+                ></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+
+          <button
+            nz-button
+            nzType="primary"
+            class="flex items-center justify-center"
+            (click)="addProduct()"
+            nzSpan="8"
+          >
+            <span nz-icon nzType="plus" nzTheme="outline"></span>
+            Add product
+          </button>
+        </div>
+      </nz-tab>
+      <nz-tab [nzTitle]="'Client'" [tabindex]="selectedTab.id">
+        <div class="w-full flex items-center justify-between my-6">
+          <!-- CLIENT NAME -->
+          <nz-form-item class="mb-0" nzSpan="16">
+            <nz-form-label nzRequired nzFor="client_name"
+              >Client name</nz-form-label
+            >
+            <nz-form-control nzErrorTip="Required field!">
+              <input
+                nz-input
+                name="client_name"
+                formControlName="client_name"
+                type="text"
+                id="client_name"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <button
+            nz-button
+            nzType="primary"
+            class="flex items-center justify-center"
+            (click)="addProduct()"
+            nzSpan="8"
+          >
+            <span nz-icon nzType="plus" nzTheme="outline"></span>
+            Add product
+          </button>
+        </div>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+
+  <div>
+    <nz-table nzTemplateMode #editRowTable nzBordered nzFrontPagination="false">
+      <thead>
+        <tr>
+          <th
+            nzWidth="20%"
+            nzAlign="center"
+          >
+            Choose a product
+          </th>
+          <th nzWidth="15%" nzAlign="center">Enter the product quantity</th>
+          <th nzWidth="20%" nzAlign="center">Enter the product price</th>
+          <th nzWidth="35%" nzAlign="center">Overall price</th>
+          <th nzWidth="10%" nzAlign="center">Operation</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="products">
+        <tr
+          *ngFor="let product of products.controls; let i = index"
+          [formGroupName]="i"
+          class="editable-row"
+          nzAlign="center"
+        >
+          <td>
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              class="w-full"
+              nzPlaceHolder="Select products"
+              formControlName="productId"
+              id="products"
+              class="w-full"
+              (ngModelChange)="setProductQty(i, product.value.productId)"
+            >
+              <nz-option
+                class="w-full"
+                *ngFor="let p of productsData; let j = index"
+                [nzLabel]="p.name"
+                [nzValue]="p._id"
+              ></nz-option>
+            </nz-select>
+          </td>
+          <td nzAlign="center">
+            <div class="flex items-center gap-2">
+              <nz-form-item class="mb-0 w-full">
+                <nz-form-control nzErrorTip="Required field!" class="w-full">
+                  <input
+                    nz-input
+                    name="qty"
+                    type="text"
+                    id="qty"
+                    (ngModelChange)="setProductQty(i, product.value.productId)"
+                    formControlName="qty"
+                    mask="separator.2"
+                    thousandSeparator=" "
+                  />
+                </nz-form-control>
+              </nz-form-item>
+              <p class="mt-auto w-fit">
+                {{ getProductUnit(product.value.productId) }}
+              </p>
+            </div>
+          </td>
+          <td nzAlign="center">
+            <div class="flex items-center gap-2">
+              <nz-form-item class="mb-0 w-full">
+                <nz-form-control nzErrorTip="Required field!">
+                  <input
+                    nz-input
+                    name="productPrice"
+                    type="text"
+                    id="productPrice"
+                    formControlName="productPrice"
+                    (ngModelChange)="updateOverallPrice(i, $event)"
+                    mask="separator.2"
+                    thousandSeparator=" "
+                  />
+                </nz-form-control>
+              </nz-form-item>
+              <p class="mt-auto w-fit">sum</p>
+            </div>
+          </td>
+          <td nzAlign="center">
+            <div class="flex items-center gap-2">
+              <nz-form-item class="mb-0 w-full">
+                <nz-form-control nzErrorTip="Required field!">
+                  <input
+                    nz-input
+                    name="price"
+                    formControlName="price"
+                    type="text"
+                    id="price"
+                    mask="separator.2"
+                    thousandSeparator=" "
+                  />
+                </nz-form-control>
+              </nz-form-item>
+              <p class="mt-auto w-fit">sum</p>
+            </div>
+          </td>
+          <td nzAlign="center">
+            <button
+              nz-popconfirm
+              nzPopconfirmTitle="Sure to delete?"
+              (nzOnConfirm)="removeProduct(i)"
+              nz-button
+              nzType="primary"
+              nzDanger
+              class="flex items-center justify-center mx-auto"
+            >
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <div class="mt-6 flex">
+    <p class="font-bold text-xs w-1/2">
+      Total Price: {{ orderTotalPrice | number }} sum
+    </p>
+    <nz-form-item class="w-1/2">
+      <nz-form-label
+        nzFor="paid"
+        nzRequired
+        nzTooltipTitle="Enter the paid price for an order !"
+      >
+        <span>Enter paid price</span>
+      </nz-form-label>
+      <nz-form-control nzErrorTip="Please input your paid price !">
+        <input
+          nz-input
+          class="w-full"
+          name="paid"
+          formControlName="paid"
+          type="text"
+          id="paid"
+          mask="separator.2"
+          thousandSeparator=" "
+        />
+      </nz-form-control>
+      <p class="mb-0 self-end ml-2">sum</p>
+    </nz-form-item>
+  </div>
+
+  <div class="flex gap-1 justify-end my-6">
+    <button nz-button nzType="primary" (click)="submit()">Add Order</button>
+    <button nz-button (click)="reset()">Clear</button>
+    <button nz-button (click)="goBack()">Cancel</button>
+  </div>
+</form>

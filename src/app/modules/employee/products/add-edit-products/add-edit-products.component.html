@@ -98,7 +98,7 @@
   </div>
 
   <div class="flex gap-1 justify-end">
-    <button nz-button nzType="primary" (click)="submit(isEdit ? 'Edit' : 'Add')">
+    <button nz-button nzType="primary" (click)="submit()">
       {{ isEdit ? "Edit" : "Add" }}
     </button>
     <button nz-button (click)="reset()">Clear</button>

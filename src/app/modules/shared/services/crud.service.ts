@@ -20,6 +20,11 @@ export abstract class CRUDService<TResponse, TRequest> {
     this.url = url;
   }
 
+  submitAnOrderUrl(){
+    this.url = 'order'
+    console.log(this.url);
+  }
+
   /**
    *
    * @returns
@@ -50,7 +55,7 @@ export abstract class CRUDService<TResponse, TRequest> {
    */
   getByPaginationMarketId(page: number, pageSize: number, id?: string) {
     console.log(page, pageSize, id)
-    return this._base.get<BaseResponse<TResponse[]>>(`${this.url}/pagination?page=${page}&pageSize=${pageSize}/marketId=${id}`);
+    return this._base.get<BaseResponse<TResponse[]>>(`${this.url}/pagination?page=${page}&pageSize=${pageSize}&marketId=${id}`);
   }
 
   /**

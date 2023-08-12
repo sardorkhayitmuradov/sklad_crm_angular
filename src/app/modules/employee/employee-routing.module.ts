@@ -8,14 +8,14 @@ const routes: Routes = [
     component: EmployeeComponent,
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'products' },
-      {
-        path: 'dashboard',
-        loadChildren: () =>
-          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-        data: {
-          breadcrumb: 'Dashboard',
-        },
-      },
+      // {
+      //   path: 'dashboard',
+      //   loadChildren: () =>
+      //     import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      //   data: {
+      //     breadcrumb: 'Dashboard',
+      //   },
+      // },
       {
         path: 'markets',
         loadChildren: () =>
@@ -38,6 +38,14 @@ const routes: Routes = [
           import('./orders/orders.module').then((m) => m.OrdersModule),
         data: {
           breadcrumb: 'Orders',
+        },
+      },
+      {
+        path: 'transactions',
+        loadChildren: () =>
+          import('./transactions/transactions.module').then((m) => m.TransactionsModule),
+        data: {
+          breadcrumb: 'My transactions',
         },
       },
       {

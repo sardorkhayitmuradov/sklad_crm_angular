@@ -4,15 +4,11 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Grid } from '../../shared/crud/grid.class';
 import { OrderRequest, OrderResponse } from './model/order.model';
-import { pages } from '../../shared/models/pages.model';
-import { DecimalPipe } from '@angular/common';
-import { BaseResponse } from '../../shared/models/base.interface';
 
 @Component({
   selector: 'employee-order',
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css'],
-  providers: [DecimalPipe]
+  styleUrls: ['./order.component.css']
 })
 export class OrderComponent extends Grid<OrderResponse, OrderRequest> {
   isVisible = false;
@@ -30,7 +26,6 @@ export class OrderComponent extends Grid<OrderResponse, OrderRequest> {
     super($data);
     const Id = route.snapshot.params['id'];
     this.getDataById(Id)
-    console.log(this.data)
   }
 
   getDataById(id: string) {

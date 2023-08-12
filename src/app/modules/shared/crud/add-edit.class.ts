@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CRUDService } from '../services/crud.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -19,26 +19,52 @@ export abstract class AddEdit<TResponse, TRequest> {
   /**
    *
    */
-  get id() {
-    return this.route.snapshot.params['id']; // id is string
+  private _id!: string;
+  public get id(): string {
+    return this._id;
   }
+  public set id(v: string) {
+    this._id = v;
+    if (this.isEdit) {
+      this.getById();
+    }
+  }
+
 
   /**
    *
    * @param $teachers
    */
   constructor(
-    private $data: CRUDService<TResponse, TRequest>,
+    protected $data: CRUDService<TResponse, TRequest>,
     private $notification: NzNotificationService,
     protected router: Router,
     protected route: ActivatedRoute
   ) {
-    if (this.isEdit) {
-      $data.getById(this.id).subscribe((item) => {
-        this.setFormValues(item.data);
-      });
-    }
+    this.id = this.route.snapshot.params['id'] as string;
   }
+
+  submitAnOrder(){
+    this.$data.submitAnOrderUrl();
+    console.log(this.$data.submitAnOrderUrl());
+    const request: TRequest = this.getRequest();
+    if (this.form.invalid) {
+      this.updateValueAndValidity();
+      return;
+    }
+    this.add(request);
+
+  }
+
+  /**
+   *
+   */
+  protected getById() {
+    this.$data.getById(this.id).subscribe((item) => {
+      this.setFormValues(item.data);
+    });
+  }
+
 
   /**
    *
@@ -58,19 +84,20 @@ export abstract class AddEdit<TResponse, TRequest> {
    *
    * @returns
    */
-  submit(key: string) {
+  submit() {
     if (this.form.invalid) {
       this.updateValueAndValidity();
       return;
     }
-
+    
     const request: TRequest = this.getRequest();
-    if (key === 'Edit') {
+    if (this.isEdit) {
       this.edit(request);
       return;
     }
-
+    
     this.add(request);
+
   }
 
   /**
@@ -85,7 +112,7 @@ export abstract class AddEdit<TResponse, TRequest> {
    *
    * @param request
    */
-  private add(request: TRequest) {
+  protected add(request: TRequest) {
     this.$data.add(request).subscribe({
       next: (response) => {
         if (response) {
@@ -132,10 +159,21 @@ export abstract class AddEdit<TResponse, TRequest> {
    */
   private updateValueAndValidity() {
     Object.values(this.form.controls).forEach((control) => {
-      if (control.invalid) {
-        control.markAsDirty();
-        control.updateValueAndValidity({ onlySelf: true });
+      if (control instanceof FormArray) {
+        control.controls.forEach((formGroup) => {
+          Object.values((formGroup as FormGroup).controls).forEach(
+            (innerControl) => {
+              this.markAsDirty(innerControl);
+            }
+          );
+        });
+        return;
       }
+
+      if (control.invalid) {
+        this.markAsDirty(control);
+      }
+
     });
   }
 
@@ -144,6 +182,15 @@ export abstract class AddEdit<TResponse, TRequest> {
       nzPlacement: 'top',
       nzDuration: 1000,
     });
+  }
+
+   /**
+   *
+   * @param control
+   */
+   private markAsDirty(control: AbstractControl) {
+    control.markAsDirty();
+    control.updateValueAndValidity({ onlySelf: true });
   }
 
   /**

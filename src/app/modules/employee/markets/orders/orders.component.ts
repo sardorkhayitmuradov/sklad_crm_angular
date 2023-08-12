@@ -9,7 +9,7 @@ import { BaseResponse } from 'src/app/modules/shared/models/base.interface';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
-  selector: 'employee-orders',
+  selector: 'app-employee-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css'],
   providers: [DecimalPipe]

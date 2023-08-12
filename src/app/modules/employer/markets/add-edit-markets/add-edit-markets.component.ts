@@ -13,6 +13,14 @@ import { formatter } from 'src/app/modules/shared/crud/auth.class';
   styleUrls: ['./add-edit-markets.component.css']
 })
 export class AddEditMarketsComponent extends AddEdit<Markets, MarketsRequest>  {
+  private $id!: string;
+  public override get id(): string {
+    return this.$id
+  }
+
+  public override set id(v: string){
+    this.$id = v;
+  }
    /**
    *
    */
@@ -40,8 +48,10 @@ export class AddEditMarketsComponent extends AddEdit<Markets, MarketsRequest>  {
     super($data,$notification, router, route);
     if (this.isEdit) {
       route.data.subscribe((w) => {
-        console.log(w)
-        this.setFormValues(w['data']);
+        this.setFormValues(w['data']['data']);
+        this.form.controls.phone_number.setValue(
+          this.form.controls.phone_number.value.replace('+998', '')
+        )
       });
     }
   }
@@ -55,7 +65,6 @@ export class AddEditMarketsComponent extends AddEdit<Markets, MarketsRequest>  {
     const request = super.getRequest();
     const countryCode = '+998';
     request.phone_number = formatter(countryCode + request.phone_number);
-    console.log(request);
     return request;
   }
 

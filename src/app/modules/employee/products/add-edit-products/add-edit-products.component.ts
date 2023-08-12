@@ -41,10 +41,14 @@ export class AddEditProductsComponent  extends AddEdit<Products, ProductsRequest
     super($data,$notification, router, route);
     if (this.isEdit) {
       route.data.subscribe((w) => {
-        console.log(w)
-        this.setFormValues(w['data']);
+        this.setFormValues(w['data']['data']);
+        console.log(this.form.controls)
       });
     }
+  }
+
+  protected override getById(): void {
+      // Nothing
   }
 
   /**

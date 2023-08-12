@@ -1,0 +1,111 @@
+<div class="flex flex-col w-full">
+  <div class="relative mb-4">
+    <nz-divider nzText=" My transactions" nzOrientation="left"></nz-divider>
+    <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
+      <nz-input-group
+        nzSearch
+        [nzSuffix]="inputClearTpl"
+        [nzAddOnAfter]="suffixIconButton"
+      >
+        <input type="text" nz-input placeholder="search..." />
+      </nz-input-group>
+
+      <ng-template #inputClearTpl>
+        <span
+          nz-icon
+          class="ant-input-clear-icon"
+          nzTheme="fill"
+          nzType="close-circle"
+          [hidden]="!searchText"
+          (click)="clear()"
+        ></span>
+      </ng-template>
+      <ng-template #suffixIconButton>
+        <button nz-button nzType="primary" nzSearch>
+          <span nz-icon nzType="search"></span>
+        </button>
+      </ng-template>
+      <button
+        (click)="add()"
+        nz-button
+        nzType="primary"
+        class="flex items-center justify-center"
+      >
+        <span nz-icon nzType="plus" nzTheme="outline"></span>
+      </button>
+    </div>
+  </div>
+
+  <nz-table
+    #basicTable
+    [nzData]="data || []"
+    [nzLoading]="isLoading"
+    nzBordered
+    [nzSize]="'middle'"
+    [nzPageSizeOptions]="pages.pageSizeOptions"
+    (nzPageSizeChange)="handlePageSize($event)"
+    [nzPageIndex]="pages.pageIndex"
+    (nzPageIndexChange)="handelPageIndex($event)"
+    [nzPageSize]="pages.pageSize"
+    [nzTotal]="pages.all"
+    nzShowSizeChanger
+  >
+    <thead>
+      <tr>
+        <th nzWidth="35%" [nzAlign]="'center'">Transfer amount paid</th>
+        <th nzWidth="20%" [nzAlign]="'center'">Transfer time</th>
+        <th nzWidth="20%" [nzAlign]="'center'">Transfer acception</th>
+        <th [nzAlign]="'center'">Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td [nzAlign]="'center'">{{ data.amountPaid | number }} sum</td>
+        <td [nzAlign]="'center'">{{ data.createdAt | date : "medium" }}</td>
+        <td [nzAlign]="'center'">
+            <ng-container *ngIf="data.employerAccepted; else notAccepted">
+              <div class="flex items-center gap-1 justify-center">
+                <p>Accepted</p>
+                <span nz-icon nzType="check-circle" nzTheme="twotone"></span>
+              </div>
+            </ng-container>
+            <ng-template #notAccepted>
+              <div class="flex items-center gap-1 justify-center">
+                <p>Not Accepted</p>
+                <span nz-icon nzType="close-circle" nzTheme="twotone"></span>
+              </div>
+            </ng-template>
+          </td>
+        <td [nzAlign]="'center'">
+          <div class="flex items-center gap-x-3 justify-center">
+            <!-- <button
+              nz-button
+              nzType="default"
+              class="flex items-center justify-center"
+              (click)="isVisible = true; addEdit.id = data._id"
+            >
+              <span nz-icon nzType="edit" nzTheme="outline"></span>
+            </button> -->
+            <button
+              nz-button
+              nzType="primary"
+              [disabled]="data.employerAccepted"
+              nzDanger
+              class="flex items-center justify-center"
+              (click)="showDeleteConfirm(data._id)"
+            >
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+
+<app-add-edit-transactions
+  #addEdit
+  [(isVisible)]="isVisible"
+  (submitted)="getDatas()"
+></app-add-edit-transactions>
+

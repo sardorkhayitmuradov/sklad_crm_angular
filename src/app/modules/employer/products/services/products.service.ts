@@ -14,6 +14,6 @@ export class ProductsService extends CRUDService<Products, ProductsRequest> {
    * @param $base
    */
   constructor(private $base: BaseService) {
-    super($base, 'order');
+    super($base, 'product');
   }
 }

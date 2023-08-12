@@ -1,0 +1,104 @@
+<a (click)="goBack()" class="flex items-center gap-2 font-bold text-xs mb-5">
+  <!-- NAVIGATE TO BACK -->
+  <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+  {{ isEdit ? "Edit" : "Add" }}</a
+>
+<form [formGroup]="form" nzLayout="vertical" nz-form>
+  <div nz-row [nzGutter]="40" class="w-4/5 !mx-auto">
+    <div nz-col nzSpan="12">
+      <!-- CODE -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzFor="code">Code</nz-form-label>
+        <nz-form-control nzErrorTip="Required field!">
+          <input
+            nz-input
+            name="code"
+            formControlName="code"
+            type="text"
+            id="code"
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- NAME -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzFor="name">Name</nz-form-label>
+        <nz-form-control nzErrorTip="Required field!">
+          <input
+            nz-input
+            name="name"
+            formControlName="name"
+            type="text"
+            id="name"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12">
+      <div class="flex items-center gap-2">
+        <!-- PRICE -->
+        <nz-form-item class="w-full">
+          <nz-form-label [nzSpan]="6" nzFor="price">Price</nz-form-label>
+          <nz-form-control nzErrorTip="Required field!" class="w-full">
+            <input
+              nz-input
+              name="price"
+              formControlName="price"
+              type="text"
+              id="price"
+              mask="separator.2"
+              thousandSeparator=" "
+            />
+          </nz-form-control>
+        </nz-form-item>
+        <p class="mt-4">so'm</p>
+      </div>
+
+      <div class="flex items-center gap-5">
+        <!-- QTY -->
+        <nz-form-item class="w-full">
+          <nz-form-label nzFor="qty">Quantity</nz-form-label>
+          <nz-form-control nzErrorTip="Required field!" class="w-full">
+            <input
+              nz-input
+              name="qty"
+              formControlName="qty"
+              type="text"
+              id="qty"
+              mask="separator.2"
+              thousandSeparator=" "
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- UNIT -->
+        <nz-form-item class="w-full">
+          <nz-form-label nzFor="unit">Unit</nz-form-label>
+          <nz-form-control nzErrorTip="Required field!" class="w-full">
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Select a unit"
+              formControlName="unit"
+              id="unit"
+            >
+              <nz-option
+                *ngFor="let unit of UNITS"
+                [nzLabel]="unit.label"
+                [nzValue]="unit.value"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex gap-1 justify-end">
+    <button nz-button nzType="primary" (click)="submit()">
+      {{ isEdit ? "Edit" : "Add" }}
+    </button>
+    <button nz-button (click)="reset()">Clear</button>
+    <button nz-button (click)="goBack()">Cancel</button>
+  </div>
+</form>
