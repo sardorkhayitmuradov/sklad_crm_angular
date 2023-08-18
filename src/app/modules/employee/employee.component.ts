@@ -16,7 +16,7 @@ export class EmployeeComponent {
 
   constructor(private router: Router, private cookieService: CookieService){
     const token = this.cookieService.get('token');
-    this.tokenInfo = this.getDecodedAccessToken(token) as role
+    this.tokenInfo = this.getDecodedAccessToken(token) as role;
   }
 
   private getDecodedAccessToken(token: string) {
@@ -28,7 +28,7 @@ export class EmployeeComponent {
   }
 
   logOut(){
-    this.cookieService.delete("token");
+    this.cookieService.deleteAll();
     this.router.navigate(['/login']);
-  }
+}
 }

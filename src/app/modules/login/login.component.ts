@@ -31,7 +31,7 @@ export class LoginComponent extends Auth<LoginResponse, LoginRequest> {
     route: ActivatedRoute
   ) {
     super($data, $notification, cookieService, router, route);
-  }
+  } 
 
   // Options Role
   optionList = [
@@ -45,5 +45,6 @@ export class LoginComponent extends Auth<LoginResponse, LoginRequest> {
   log(event: role) {
     this.selectedValue = event;
     this.$data.url = this.selectedValue.value;
+    console.log(this.selectedValue.value);
   }
 }
