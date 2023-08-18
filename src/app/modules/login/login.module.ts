@@ -1,20 +1,25 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { SuperAdminRoutingModule } from './super-admin-routing.module';
+import { LoginRoutingModule } from './login-routing.module';
+import { LoginComponent } from './login.component';
+
+//Mask
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { SharedModule } from '../shared/shared.module';
-import { SuperAdminComponent } from './super-admin.component';
+
 
 @NgModule({
-  declarations: [SuperAdminComponent],
+  declarations: [LoginComponent],  
   imports: [
-    SuperAdminRoutingModule,
+    LoginRoutingModule,
     FormsModule,
     NgxMaskDirective,
     NgxMaskPipe,
-    SharedModule,
+    SharedModule
   ],
-  providers: [provideNgxMask()],
+  providers: [
+    provideNgxMask()
+  ],
 })
-export class SuperAdminModule {}
+export class LoginModule { }

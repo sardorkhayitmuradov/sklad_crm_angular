@@ -7,9 +7,9 @@ import { SuperAdminLoginService } from './services/super-admin-login.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import {  Router } from '@angular/router';
 import { SuperAdminLoginRequest, SuperAdminLoginResponse } from './model/super-admin-login.model';
-import { TokenModel } from '../shared/models/token.model';
-import jwt_decode from 'jwt-decode';
+import { SuperAdminTokenModel } from './model/token.model';
 import { TOKEN } from 'src/app/core/auth.inteceptor';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'super-admin-login',
@@ -17,7 +17,7 @@ import { TOKEN } from 'src/app/core/auth.inteceptor';
   styleUrls: ['./super-admin-login.component.css'],
 })
 export class SuperAdminLoginComponent{
-  tokenInfo?: TokenModel;
+  tokenInfo?: SuperAdminTokenModel;
   isLogin: boolean = false;
   passwordVisible = false;
 
@@ -63,8 +63,8 @@ export class SuperAdminLoginComponent{
             this.isLogin = false;
             localStorage.setItem(TOKEN, response.token);
             const token = localStorage.getItem(TOKEN)!;
-            this.tokenInfo = this.getDecodedAccessToken(token) as TokenModel;
-            this.router.navigate([`/admin/login`]);
+            this.tokenInfo = this.getDecodedAccessToken(token) as SuperAdminTokenModel;
+            this.router.navigate([`/admin`]);
           }
         },
         error: (response) => {

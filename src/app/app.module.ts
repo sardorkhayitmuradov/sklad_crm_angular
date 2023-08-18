@@ -1,6 +1,5 @@
 import {
   HTTP_INTERCEPTORS,
-  HttpClient,
   HttpClientModule,
 } from '@angular/common/http';
 import { AuthInterceptor } from './core/auth.inteceptor';

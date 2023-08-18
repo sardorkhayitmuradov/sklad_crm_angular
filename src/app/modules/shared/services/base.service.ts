@@ -1,5 +1,6 @@
 import {
   HttpClient,
+  HttpHeaders,
   HttpParams,
   HttpStatusCode,
 } from '@angular/common/http';
@@ -8,13 +9,12 @@ import { shareReplay, of, catchError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 export const ENDPOINT = new InjectionToken<string>('endpoint');
-import { TOKEN } from 'src/app/core/auth.inteceptor';
+import { EMPLOYER_ID, TOKEN } from 'src/app/core/auth.inteceptor';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BaseService {
-
   /**
    *
    * @param url
@@ -54,20 +54,16 @@ export class BaseService {
    * @returns
    */
   get<T>(url: string, params?: HttpParams) {
-    return this.http
-      .get<T>(this.makeUrl(url), {
-        params,
+    return this.http.get<T>(this.makeUrl(url), { params }).pipe(
+      shareReplay(1),
+      catchError((error) => {
+        if (error.status === HttpStatusCode.Unauthorized) {
+          localStorage.removeItem(TOKEN);
+          this.getRoute();
+        }
+        return of(null as T);
       })
-      .pipe(
-        shareReplay(1),
-        catchError((error) => {
-          if (error.error.status === HttpStatusCode.Unauthorized) {
-            localStorage.removeItem(TOKEN);
-            this.getRoute();
-          }
-          return of(null as T);
-        })
-      );
+    );
   }
 
   /**
@@ -80,7 +76,8 @@ export class BaseService {
     return this.http.post<T>(this.makeUrl(url), model).pipe(
       shareReplay(1),
       catchError((error) => {
-        if (error.error.status === HttpStatusCode.Unauthorized) {
+        console.log(error);
+        if (error.status === HttpStatusCode.Unauthorized) {
           localStorage.removeItem(TOKEN);
           this.getRoute();
         }
@@ -96,16 +93,18 @@ export class BaseService {
    * @returns
    */
   put<T>(url: string, model?: any) {
-    return this.http.put<T>(this.makeUrl(url), model).pipe(
-      shareReplay(1),
-      catchError((error) => {
-        if (error.error.status === HttpStatusCode.Unauthorized) {
-          localStorage.removeItem(TOKEN);
-          this.getRoute();
-        }
-        return of(null as T);
-      })
-    );
+    return this.http
+      .put<T>(this.makeUrl(url), model)
+      .pipe(
+        shareReplay(1),
+        catchError((error) => {
+          if (error.status === HttpStatusCode.Unauthorized) {
+            localStorage.removeItem(TOKEN);
+            this.getRoute();
+          }
+          return of(null as T);
+        })
+      );
   }
 
   /**
@@ -115,15 +114,17 @@ export class BaseService {
    * @returns
    */
   delete<T>(url: string, body?: any) {
-    return this.http.delete<T>(this.makeUrl(url)).pipe(
-      shareReplay(1),
-      catchError((error) => {
-        if (error.error.status === HttpStatusCode.Unauthorized) {
-          localStorage.removeItem(TOKEN);
-          this.getRoute();
-        }
-        return of(null as T);
-      })
-    );
+    return this.http
+      .delete<T>(this.makeUrl(url))
+      .pipe(
+        shareReplay(1),
+        catchError((error) => {
+          if (error.status === HttpStatusCode.Unauthorized) {
+            localStorage.removeItem(TOKEN);
+            this.getRoute();
+          }
+          return of(null as T);
+        })
+      );
   }
 }

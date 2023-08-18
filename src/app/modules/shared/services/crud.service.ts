@@ -49,7 +49,6 @@ export abstract class CRUDService<TResponse, TRequest> {
    * @param page pageSize
    */
   getByPaginationMarketId(page: number, pageSize: number, id?: string) {
-    console.log(page, pageSize, id)
     return this._base.get<BaseResponse<TResponse[]>>(`${this.url}/pagination?page=${page}&pageSize=${pageSize}&marketId=${id}`);
   }
 

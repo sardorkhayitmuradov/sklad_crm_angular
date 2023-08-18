@@ -1,0 +1,109 @@
+<main class="h-full">
+  <section class="h-full flex flex-col justify-center">
+    <div class="mx-auto max-w-xl w-full flex items-center justify-center">
+      <div class="w-full flex flex-col mx-auto items-center">
+        <h2 nz-typography class="text-slate-800 text-lg font-black mb-6">
+          Login
+        </h2>
+        <div class="max-w-xs w-full">
+          <nz-select
+            nzSize="large"
+            [(ngModel)]="selectedValue"
+            [ngModelOptions]="{ standalone: true }"
+            [compareWith]="compareFn"
+            (ngModelChange)="log($event)"
+            class="mt-2 mb-6 w-full"
+            nzAllowClear
+            [nzPlaceHolder]="selectedValue.label"
+          >
+            <nz-option
+              *ngFor="let option of optionList"
+              class="h-full"
+              [nzValue]="option"
+              [nzLabel]="option.label"
+            ></nz-option>
+          </nz-select>
+          <form
+            nz-form
+            [formGroup]="form"
+            (ngSubmit)="login(selectedValue.value)"
+          >
+            <nz-form-item>
+              <nz-form-control [nzErrorTip]="phoneNumberError">
+                <nz-input-group nzPrefixIcon="phone" class="px-4">
+                  <input
+                    type="tel"
+                    nz-input
+                    class="h-full my-2"
+                    formControlName="phone_number"
+                    [showMaskTyped]="true"
+                    prefix="+998 "
+                    placeHolderCharacter="*"
+                    mask="(00) 000-00-00"
+                    nzSize="large"
+                  />
+                </nz-input-group>
+              </nz-form-control>
+              <ng-template #phoneNumberError let-control>
+                <ng-container *ngIf="control.getError('required')">
+                  Ushbu maydonni to'ldiring
+                </ng-container>
+                <ng-container *ngIf="control.getError('mask')">
+                  Telefon nomerni to'liq kiriting
+                </ng-container>
+              </ng-template>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Parolingizni kiriting!">
+                <nz-input-group
+                  nzPrefixIcon="lock"
+                  [nzSuffix]="suffixTemplate"
+                  class="px-4"
+                >
+                  <input
+                    [type]="passwordVisible ? 'text' : 'password'"
+                    nz-input
+                    class="h-full my-2"
+                    formControlName="password"
+                    placeholder="Password"
+                    nzSize="large"
+                    autocomplete="on"
+                  />
+                </nz-input-group>
+                <ng-template #suffixTemplate>
+                  <i
+                    nz-icon
+                    [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                    class="cursor-pointer"
+                    (click)="passwordVisible = !passwordVisible"
+                  ></i>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+            <button
+              *ngIf="!isLogin"
+              nz-button
+              class="w-full"
+              nzSize="large"
+              [nzType]="'primary'"
+            >
+              Log in
+            </button>
+            <button
+              nz-button
+              *ngIf="isLogin"
+              disabled="true"
+              nzType="primary"
+              nzLoading
+              class="w-full !bg-[#1890ff] !text-white"
+              nzSize="large"
+            >
+              <span nz-icon nzType="poweroff"></span>
+              Loading
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
