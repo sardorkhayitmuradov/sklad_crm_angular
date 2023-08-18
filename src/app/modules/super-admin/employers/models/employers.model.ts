@@ -9,13 +9,6 @@ export interface Employers extends Id {
     __v: number
 }
 
-// export interface EmployersResponse extends EmployersRequest {
-//     token?: string
-//     message: string,
-//     error?: string; 
-//     employers: Employers[]
-// }
-
 export interface EmployersRequest  {
     fullname: string,
     phone_number: string,

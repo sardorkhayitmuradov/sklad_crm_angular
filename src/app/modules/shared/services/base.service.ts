@@ -1,16 +1,19 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { CookieService } from 'ngx-cookie-service';
+import {
+  HttpClient,
+  HttpParams,
+  HttpStatusCode,
+} from '@angular/common/http';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { shareReplay, of, catchError } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+
+export const ENDPOINT = new InjectionToken<string>('endpoint');
+import { TOKEN } from 'src/app/core/auth.inteceptor';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BaseService {
-  /**
-   *
-   */
-  private url = '/api/v1/';
 
   /**
    *
@@ -18,24 +21,30 @@ export class BaseService {
    * @returns
    */
   private makeUrl(url: string) {
-    return `${environment.baseUrl}${this.url}${url}`;
+    return `${this.endpoint}${url}`;
   }
 
   /**
    *
    * @param http
    */
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute,
+    @Inject(ENDPOINT) private endpoint: string
+  ) {}
 
-  private getHeaders() {
-    const token = this.cookieService.get('token');
-    const employer_id = this.cookieService.get('employer_id') || '';
-
-    let headers = new HttpHeaders()
-      .set('Authorization', token)
-      .set('employer_id', employer_id);
-
-    return headers;
+  /**
+   *
+   * @returns
+   */
+  getRoute(): void {
+    const route = this.route.snapshot.queryParams['admin'];
+    if (route === 'admin') {
+      this.router.navigate(['/admin/login']);
+    }
+    this.router.navigate(['/login']);
   }
 
   /**
@@ -45,10 +54,20 @@ export class BaseService {
    * @returns
    */
   get<T>(url: string, params?: HttpParams) {
-    return this.http.get<T>(this.makeUrl(url), {
-      headers: this.getHeaders(),
-      params,
-    });
+    return this.http
+      .get<T>(this.makeUrl(url), {
+        params,
+      })
+      .pipe(
+        shareReplay(1),
+        catchError((error) => {
+          if (error.error.status === HttpStatusCode.Unauthorized) {
+            localStorage.removeItem(TOKEN);
+            this.getRoute();
+          }
+          return of(null as T);
+        })
+      );
   }
 
   /**
@@ -58,9 +77,16 @@ export class BaseService {
    * @returns
    */
   post<T>(url: string, model?: any) {
-    return this.http.post<T>(this.makeUrl(url), model, {
-      headers: this.getHeaders(),
-    });
+    return this.http.post<T>(this.makeUrl(url), model).pipe(
+      shareReplay(1),
+      catchError((error) => {
+        if (error.error.status === HttpStatusCode.Unauthorized) {
+          localStorage.removeItem(TOKEN);
+          this.getRoute();
+        }
+        return of(null as T);
+      })
+    );
   }
 
   /**
@@ -70,9 +96,16 @@ export class BaseService {
    * @returns
    */
   put<T>(url: string, model?: any) {
-    return this.http.put<T>(this.makeUrl(url), model, {
-      headers: this.getHeaders(),
-    });
+    return this.http.put<T>(this.makeUrl(url), model).pipe(
+      shareReplay(1),
+      catchError((error) => {
+        if (error.error.status === HttpStatusCode.Unauthorized) {
+          localStorage.removeItem(TOKEN);
+          this.getRoute();
+        }
+        return of(null as T);
+      })
+    );
   }
 
   /**
@@ -82,8 +115,15 @@ export class BaseService {
    * @returns
    */
   delete<T>(url: string, body?: any) {
-    return this.http.delete<T>(this.makeUrl(url), {
-      headers: this.getHeaders(),
-    });
+    return this.http.delete<T>(this.makeUrl(url)).pipe(
+      shareReplay(1),
+      catchError((error) => {
+        if (error.error.status === HttpStatusCode.Unauthorized) {
+          localStorage.removeItem(TOKEN);
+          this.getRoute();
+        }
+        return of(null as T);
+      })
+    );
   }
 }

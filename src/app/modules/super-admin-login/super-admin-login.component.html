@@ -1,91 +1,92 @@
 <main class="h-full">
-  <section class="h-full flex flex-col justify-center">
-    <div class="mx-auto max-w-xl w-full flex items-center justify-center">
-      <div class="w-full flex flex-col mx-auto items-center">
-        <h2 nz-typography class="text-slate-800 text-lg font-black mb-6">
-          Super Admin Login
-        </h2>
-        <form
-          nz-form
-          [formGroup]="form"
-          class="max-w-xs w-full"
-          (ngSubmit)="login('admin')"
-        >
-          <nz-form-item>
-            <nz-form-control [nzErrorTip]="emailError">
-              <nz-input-group nzPrefixIcon="mail" class="px-4">
-                <input
-                  type="text"
-                  nz-input
-                  class="h-full my-2"
-                  formControlName="email"
-                  mask="A*@A*.SSS"
-                  [validation]="true"
-                  [dropSpecialCharacters]="false"
-                  nzSize="large"
-                  placeholder="Email"
-                  autocomplete="on"
-                />
-              </nz-input-group>
-            </nz-form-control>
-            <ng-template #emailError let-control>
-              <ng-container *ngIf="control.getError('required')">
-                Ushbu maydonni to'ldiring
-              </ng-container>
-              <ng-container *ngIf="control.getError('mask')">
-                Emailingizni to'liq kiriting
-              </ng-container>
-            </ng-template>
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-control nzErrorTip="Parolingizni kiriting!">
-              <nz-input-group
-                nzPrefixIcon="lock"
-                [nzSuffix]="suffixTemplate"
-                class="px-4"
-              >
-                <input
-                  [type]="passwordVisible ? 'text' : 'password'"
-                  nz-input
-                  class="h-full my-2"
-                  formControlName="password"
-                  placeholder="Password"
-                  nzSize="large"
-                  autocomplete="on"
-                />
-              </nz-input-group>
-              <ng-template #suffixTemplate>
-                <i
-                  nz-icon
-                  [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
-                  class="cursor-pointer"
-                  (click)="passwordVisible = !passwordVisible"
-                ></i>
-              </ng-template>
-            </nz-form-control>
-          </nz-form-item>
-          <button 
-            *ngIf="!isLogin"
-            nz-button 
-            class="w-full" 
-            nzSize="large" 
-            [nzType]="'primary'">
-            Log in
-          </button>
-          <button
-            nz-button
-            *ngIf="isLogin"
-            disabled="true"
-            nzType="primary"
-            nzLoading
-            class="w-full !bg-[#1890ff] !text-white"
-            nzSize="large"
+    <section class="h-full flex flex-col justify-center">
+      <div class="mx-auto max-w-xl w-full flex items-center justify-center">
+        <div class="w-full flex flex-col mx-auto items-center">
+          <h2 nz-typography class="text-slate-800 text-lg font-black mb-6">
+            Super Admin Login
+          </h2>
+          <form
+            nz-form
+            [formGroup]="form"
+            class="max-w-xs w-full"
+            (ngSubmit)="login()"
           >
-            <span nz-icon nzType="poweroff"></span>
-            Loading
-          </button>
-        </form>
+            <nz-form-item>
+              <nz-form-control [nzErrorTip]="emailError">
+                <nz-input-group nzPrefixIcon="mail" class="px-4">
+                  <input
+                    type="text"
+                    nz-input
+                    class="h-full my-2"
+                    formControlName="email"
+                    mask="A*@A*.SSS"
+                    [validation]="true"
+                    [dropSpecialCharacters]="false"
+                    nzSize="large"
+                    placeholder="Email"
+                    autocomplete="on"
+                  />
+                </nz-input-group>
+              </nz-form-control>
+              <ng-template #emailError let-control>
+                <ng-container *ngIf="control.getError('required')">
+                  Ushbu maydonni to'ldiring
+                </ng-container>
+                <ng-container *ngIf="control.getError('mask')">
+                  Emailingizni to'liq kiriting
+                </ng-container>
+              </ng-template>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Parolingizni kiriting!">
+                <nz-input-group
+                  nzPrefixIcon="lock"
+                  [nzSuffix]="suffixTemplate"
+                  class="px-4"
+                >
+                  <input
+                    [type]="passwordVisible ? 'text' : 'password'"
+                    nz-input
+                    class="h-full my-2"
+                    formControlName="password"
+                    placeholder="Password"
+                    nzSize="large"
+                    autocomplete="on"
+                  />
+                </nz-input-group>
+                <ng-template #suffixTemplate>
+                  <i
+                    nz-icon
+                    [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                    class="cursor-pointer"
+                    (click)="passwordVisible = !passwordVisible"
+                  ></i>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+            <button 
+              *ngIf="!isLogin"
+              nz-button 
+              class="w-full" 
+              nzSize="large" 
+              [nzType]="'primary'">
+              Log in
+            </button>
+            <button
+              nz-button
+              *ngIf="isLogin"
+              disabled="true"
+              nzType="primary"
+              nzLoading
+              class="w-full !bg-[#1890ff] !text-white"
+              nzSize="large"
+            >
+              <span nz-icon nzType="poweroff"></span>
+              Loading
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
+  

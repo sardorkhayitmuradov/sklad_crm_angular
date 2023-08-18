@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    baseUrl: 'https://joila.onrender.com'
+    endpoint: 'https://joila.onrender.com/api/v1/'
 };

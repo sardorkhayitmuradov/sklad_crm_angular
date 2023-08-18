@@ -1,25 +1,23 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { SuperAdminRoutingModule } from './super-admin-routing.module';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { SharedModule } from '../shared/shared.module';
 import { SuperAdminComponent } from './super-admin.component';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
 
 @NgModule({
   declarations: [SuperAdminComponent],
   imports: [
-    CommonModule,
     SuperAdminRoutingModule,
-    NzLayoutModule,
-    NzIconModule,
-    NzMenuModule,
-    NzButtonModule,
-    NzBreadCrumbModule
-  ]
+    FormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+    SharedModule
+  ],
+  providers: [
+    provideNgxMask()
+  ],
 })
 export class SuperAdminModule { }

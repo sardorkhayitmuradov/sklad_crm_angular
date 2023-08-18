@@ -1,34 +1,33 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { role } from './model/role.model';
-import  jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
+import { TOKEN } from 'src/app/core/auth.inteceptor';
 
 @Component({
   selector: 'employer',
   templateUrl: './employer.component.html',
-  styleUrls: ['./employer.component.css']
+  styleUrls: ['./employer.component.css'],
 })
-
 export class EmployerComponent {
   isCollapsed = true;
   tokenInfo: role;
 
-  constructor(private router: Router, private cookieService: CookieService){
-    const token = this.cookieService.get('token');
-    this.tokenInfo = this.getDecodedAccessToken(token) as role
+  constructor(private router: Router) {
+    const token = localStorage.getItem(TOKEN)!;
+    this.tokenInfo = this.getDecodedAccessToken(token) as role;
   }
 
   private getDecodedAccessToken(token: string) {
     try {
       return jwt_decode(token);
-    } catch(Error) {
+    } catch (Error) {
       return null;
     }
   }
 
-  logOut(){
-    this.cookieService.deleteAll();
+  logOut() {
+    localStorage.removeItem(TOKEN);
     this.router.navigate(['/login']);
-}
+  }
 }

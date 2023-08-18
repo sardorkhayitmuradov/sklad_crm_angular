@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { EmployeesService } from '../services/employees.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ActivatedRoute, Router } from '@angular/router';
-import { formatter } from 'src/app/modules/shared/crud/auth.class';
+import { formatter } from 'src/app/modules/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({

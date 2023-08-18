@@ -1,5 +1,4 @@
-export interface RoleModel {
-    iat: number;
-    phone_number: string;
-    role: string;
+export interface Role {
+    label: string;
+    value: string;
 }

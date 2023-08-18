@@ -4,7 +4,7 @@ import { EmployersService } from '../services/employers.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddEdit } from 'src/app/modules/shared/crud/add-edit.class';
 import { EmployersRequest, Employers } from '../models/employers.model';
-import { formatter } from 'src/app/modules/shared/crud/auth.class';
+import { formatter } from 'src/app/modules/login/login.component';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({

@@ -17,6 +17,11 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { RouterModule } from '@angular/router';
 import { NzListModule } from 'ng-zorro-antd/list';
 
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +29,9 @@ import { NzListModule } from 'ng-zorro-antd/list';
     RouterModule,
     FormsModule,
 
+    NzLayoutModule,
+    NzMenuModule,
+    NzBreadCrumbModule,
     NzTableModule,
     NzDividerModule,
     NzButtonModule,
@@ -42,6 +50,10 @@ import { NzListModule } from 'ng-zorro-antd/list';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+
+    NzLayoutModule,
+    NzMenuModule,
+    NzBreadCrumbModule,
     NzTableModule,
     NzDividerModule,
     NzButtonModule,

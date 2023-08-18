@@ -10,7 +10,7 @@ export abstract class CRUDService<TResponse, TRequest> {
   /**
    *
    */
-  protected url: string;
+  private url: string;
 
   /**
    *

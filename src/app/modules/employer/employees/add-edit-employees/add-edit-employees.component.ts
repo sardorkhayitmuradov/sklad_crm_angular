@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { EmployeesService } from '../services/employees.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { formatter } from 'src/app/modules/shared/crud/auth.class';
+import { formatter } from 'src/app/modules/login/login.component';
 
 @Component({
   selector: 'add-edit-employees',

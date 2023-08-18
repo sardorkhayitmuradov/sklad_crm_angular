@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { token } from './model/token.model';
 import  jwt_decode from 'jwt-decode';
+import { SuperAdminToken } from './model/token.model';
 
 @Component({
   selector: 'superAdmin',
@@ -12,11 +12,11 @@ import  jwt_decode from 'jwt-decode';
 
 export class SuperAdminComponent {
   isCollapsed = true;
-  tokenInfo: token;
+  tokenInfo: SuperAdminToken;
 
   constructor(private router: Router, private cookieService: CookieService){
     const token = this.cookieService.get('token');
-    this.tokenInfo = this.getDecodedAccessToken(token)as token
+    this.tokenInfo = this.getDecodedAccessToken(token)as SuperAdminToken
   }
 
   private getDecodedAccessToken(token: string) {

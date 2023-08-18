@@ -6,24 +6,18 @@ import { NetworkAwarePreloadStrategy } from './modules/shared/services/network-a
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
   {
-    path: 'admin/login',
-    loadChildren: () =>
-    import('./modules/super-admin-login/super-admin-login.module').then((m) => m.SuperAdminLoginModule),
-  },
-  {
     path: 'admin',
     loadChildren: () =>
       import('./modules/super-admin/super-admin.module').then((m) => m.SuperAdminModule),
-    canActivate: [AuthGuard],
     data: {
       breadcrumb: 'Super Admin'
     },
   },
-  {
-    path: 'login',
-    loadChildren: () =>
-      import('./modules/login/login.module').then((m) => m.LoginModule),
-  },
+  // {
+  //   path: 'login',
+  //   loadChildren: () =>
+  //     import('./modules/login/login.module').then((m) => m.LoginModule),
+  // },
   {
     path: 'employer',
     loadChildren: () =>

@@ -5,10 +5,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MarketsService } from '../services/markets.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ActivatedRoute, Router } from '@angular/router';
-import { formatter } from 'src/app/modules/shared/crud/auth.class';
+import { formatter } from 'src/app/modules/login/login.component';
 
 @Component({
-  selector: 'app-add-edit-markets',
+  selector: 'employee-add-edit-markets',
   templateUrl: './add-edit-markets.component.html',
   styleUrls: ['./add-edit-markets.component.css']
 })
