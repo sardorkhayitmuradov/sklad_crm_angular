@@ -60,7 +60,7 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
         if (this.selectedTab.tab === 'Client') {
           this.form.controls.client_name.setValidators([
             Validators.required,
-            Validators.minLength(2),
+            Validators.minLength(4),
           ]);
           this.form.controls.market_id.clearValidators();
         }
@@ -228,14 +228,6 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     );
   }
 
-  /**
-   *
-   * @param answerIndex
-   */
-  removeProduct(index: number) {
-    this.products.controls.splice(index, 1);
-    console.log(this.products.controls);
-  }
 
   /**
    *
@@ -243,7 +235,7 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
   override submit(): void {
     if (this.form.invalid) {
       this.updateValueAndValidity();
-      console.log(this.form.getRawValue());
+      console.log(this.form.errors);
       return;
     }
 
@@ -256,7 +248,8 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
 
     // Creating a new object with the modified products array
     const modifiedRequest = { ...request, products: modifiedProducts };
-    this.add(modifiedRequest as any);
+    // this.add(modifiedRequest as any);
+    console.log(modifiedRequest);
   }
 
   /**
@@ -266,6 +259,14 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     this.router.navigate([this.isEdit ? '../../' : '../'], {
       relativeTo: this.route,
     });
+  }
+
+  /**
+   *
+   * @param answerIndex
+   */
+  removeProduct(index: number) {
+    this.products.removeAt(index);
   }
 }
 

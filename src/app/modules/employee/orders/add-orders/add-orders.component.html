@@ -74,6 +74,9 @@
               <ng-container *ngIf="control.getError('required')">
                 Please fill the input!
               </ng-container>
+              <ng-container *ngIf="control.errors?.['minlength']">
+               Client name must be at least 4 characters long.
+              </ng-container>
             </ng-template>
           </nz-form-item>
 
