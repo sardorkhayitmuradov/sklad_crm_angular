@@ -1,5 +1,6 @@
 import {
   HTTP_INTERCEPTORS,
+  HttpClient,
   HttpClientModule,
 } from '@angular/common/http';
 import { AuthInterceptor } from './core/auth.inteceptor';
@@ -16,8 +17,14 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ENDPOINT } from './modules/shared/services/base.service';
 import { environment } from './modules/environments/environment';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 registerLocaleData(en);
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -28,7 +35,15 @@ registerLocaleData(en);
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
+
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

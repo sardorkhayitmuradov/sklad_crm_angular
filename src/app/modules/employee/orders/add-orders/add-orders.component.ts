@@ -248,8 +248,7 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
 
     // Creating a new object with the modified products array
     const modifiedRequest = { ...request, products: modifiedProducts };
-    // this.add(modifiedRequest as any);
-    console.log(modifiedRequest);
+    this.add(modifiedRequest as any);
   }
 
   /**
