@@ -145,7 +145,7 @@ export abstract class AddEdit<TResponse, TRequest> {
   /**
    *
    */
-  private updateValueAndValidity() {
+  protected updateValueAndValidity() {
     Object.values(this.form.controls).forEach((control) => {
       if (control instanceof FormArray) {
         control.controls.forEach((formGroup) => {
@@ -176,7 +176,7 @@ export abstract class AddEdit<TResponse, TRequest> {
    *
    * @param control
    */
-   private markAsDirty(control: AbstractControl) {
+   protected markAsDirty(control: AbstractControl) {
     control.markAsDirty();
     control.updateValueAndValidity({ onlySelf: true });
   }

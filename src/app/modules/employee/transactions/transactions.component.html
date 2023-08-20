@@ -11,6 +11,8 @@
           [(ngModel)]="searchText"
           (ngModelChange)="handleSearchTextChange($event)"
           type="text"
+          mask="separator.2"
+          thousandSeparator=" "
           nz-input
           placeholder="Search transaction.."
           (keyup.enter)="handleSearch(searchText)"

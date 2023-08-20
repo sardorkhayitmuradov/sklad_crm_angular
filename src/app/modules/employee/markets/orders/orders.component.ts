@@ -111,20 +111,6 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     return rowspan;
   }
 
-  // showDeleteConfirm(id: string): void {
-  //   this.modal.confirm({
-  //     nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
-  //     nzOkText: 'Yes',
-  //     nzOkType: 'primary',
-  //     nzOkDanger: true,
-  //     nzOnOk: () => {
-  //       this.delete(id);
-  //     },
-  //     nzCancelText: 'No',
-  //     nzOnCancel: () => console.log('Cancel'),
-  //   });
-  // }
-
 
   clear(){
     this.searchText = ''

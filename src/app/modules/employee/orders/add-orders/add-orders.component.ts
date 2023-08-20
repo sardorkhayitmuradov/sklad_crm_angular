@@ -7,11 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Markets } from '../../markets/models/markets.models';
 import { Products } from '../../products/models/products.model';
 import { AddOrdersService } from './services/add-orders.service';
-
-export interface Tab {
-  id: number;
-  tab: string;
-}
+import { Tab } from './model/tab.model';
 
 @Component({
   selector: 'employee-add-orders',
@@ -22,30 +18,31 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
   /**
    *
    */
-  form = this.fb.nonNullable.group({
-    client_type: ['', Validators.required],
-    client_name: ['', Validators.required],
-    market_id: ['', Validators.required],
-    products: this.fb.array([
-      this.fb.group({
-        productId: ['', Validators.required],
-        qty: [0, [Validators.required, Validators.min(1)]],
-        productPrice: [0, Validators.required],
-        price: [{ value: 0, disabled: true }, Validators.required],
-      }),
-    ]),
-    paid: [0, Validators.required],
-  });
-
-  /**
-   *
-   */
   tab: Tab[] = [
     { tab: 'Market', id: 0 },
     { tab: 'Client', id: 1 },
   ];
 
   selectedTab = this.tab[0];
+
+  /**
+   *
+   */
+  form = this.fb.nonNullable.group({
+    client_type: ['', Validators.required],
+    client_name: [''],
+    market_id: [''],
+    products: this.fb.array([
+      this.fb.group({
+        productId: ['', Validators.required],
+        qty: [0, [Validators.required, Validators.min(1)]],
+        productPrice: [0, Validators.required],
+        price: [{ value: 0, disabled: true }],
+      }),
+    ]),
+    paid: [0, Validators.required],
+  });
+
   /**
    *
    * @param index
@@ -55,12 +52,27 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
       if (index === this.tab[i].id) {
         this.selectedTab = this.tab[i];
         this.form.controls.client_type.setValue(this.selectedTab.tab);
+        if (this.selectedTab.tab === 'Market') {
+          this.form.controls.market_id.setValidators([Validators.required]);
+          this.form.controls.client_name.clearValidators();
+        }
+
+        if (this.selectedTab.tab === 'Client') {
+          this.form.controls.client_name.setValidators([
+            Validators.required,
+            Validators.minLength(2),
+          ]);
+          this.form.controls.market_id.clearValidators();
+        }
+
+        // Update the validation status
+        this.form.controls.client_name.updateValueAndValidity();
+        this.form.controls.market_id.updateValueAndValidity();
       }
     }
 
     this.form.controls.client_name.setValue('');
     this.form.controls.market_id.setValue('');
-    // this.form.reset
   }
 
   /**
@@ -102,6 +114,7 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     });
 
     this.form.controls.client_type.setValue(this.selectedTab.tab);
+    this.form.controls.market_id.setValidators([Validators.required]);
   }
 
   /**
@@ -112,6 +125,9 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     return this.form.controls.products as FormArray;
   }
 
+  /**
+   *
+   */
   showOrderTotalPrice() {
     const products = this.products.getRawValue();
     this.orderTotalPrice = 0;
@@ -120,27 +136,28 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     }
   }
 
+  /**
+   *
+   * @param index
+   * @param productId
+   * @param fromProductSelect
+   */
   setProductQty(index: number, productId: string, fromProductSelect = false) {
-    const selectedProduct = this.productsData.find((p) => p._id === productId)!;
-    const productGroup = this.products.at(index);
+    const selectedProduct = this.productsData.find((product) => product._id === productId);
+    const productGroup = this.products.at(index) as FormGroup;
 
-    if (productGroup instanceof FormGroup) {
-      const qtyControl = productGroup.get('qty')!;
-      const priceControl = productGroup.get('price')!;
-      const productPriceControl = productGroup.get('productPrice')!;
+    if (selectedProduct) {
+      const qtyControl = productGroup.get('qty');
+      const priceControl = productGroup.get('price');
+      const productPriceControl = productGroup.get('productPrice');
+
 
       if (qtyControl && priceControl && productPriceControl) {
-        // let qty = qtyControl.value;
-        // const price = priceControl.value;
-        // const productPrice = productPriceControl.value;
-
-        // Handle initial qty value and price calculation
         if (fromProductSelect) {
-          qtyControl.setValue(1); // Update the form control value
-
-          // Multiply the price by the initial qty
+          qtyControl.setValue(1);
           productPriceControl.setValue(selectedProduct.price);
           priceControl.setValue(qtyControl.value * selectedProduct.price);
+
           if (this.products.getRawValue().length === 1) {
             this.orderTotalPrice = selectedProduct.price;
           }
@@ -150,7 +167,7 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
           this.form.controls.paid.setValue(this.orderTotalPrice);
         }
 
-        if (!isNaN(qtyControl.value) && !isNaN(priceControl.value)) {
+        if (!isNaN(qtyControl.value) && !isNaN(selectedProduct.price)) {
           const overallPrice = qtyControl.value * productPriceControl.value;
           priceControl.setValue(overallPrice);
           this.showOrderTotalPrice();
@@ -160,8 +177,12 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     }
   }
 
-  updateOverallPrice(index: number, priceValue: any) {
-    const price = priceValue;
+  /**
+   *
+   * @param index
+   * @param priceValue
+   */
+  updateOverallPrice(index: number, price: any) {
     const productGroup = this.products.at(index);
 
     if (productGroup instanceof FormGroup) {
@@ -169,10 +190,8 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
       const priceControl = productGroup.get('price');
 
       if (qtyControl && priceControl) {
-        let qty = qtyControl.value;
-
-        if (!isNaN(qty)) {
-          const overallPrice = Number(qty) * price;
+        if (!isNaN(qtyControl.value)) {
+          const overallPrice = Number(qtyControl.value) * price;
           priceControl.setValue(overallPrice);
           this.showOrderTotalPrice();
           this.form.controls.paid.setValue(this.orderTotalPrice);
@@ -181,6 +200,11 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     }
   }
 
+  /**
+   *
+   * @param productId
+   * @returns
+   */
   getProductUnit(productId?: string) {
     const selectedProduct = this.productsData.find((p) => p._id === productId)!;
     if (selectedProduct) {
@@ -210,9 +234,19 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
    */
   removeProduct(index: number) {
     this.products.controls.splice(index, 1);
+    console.log(this.products.controls);
   }
 
+  /**
+   *
+   */
   override submit(): void {
+    if (this.form.invalid) {
+      this.updateValueAndValidity();
+      console.log(this.form.getRawValue());
+      return;
+    }
+
     const request: OrdersRequest = this.form.getRawValue() as any;
     // Creating a new array with productPrice removed from each product
     const modifiedProducts = request.products.map((product) => {
@@ -222,7 +256,6 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
 
     // Creating a new object with the modified products array
     const modifiedRequest = { ...request, products: modifiedProducts };
-    
     this.add(modifiedRequest as any);
   }
 
