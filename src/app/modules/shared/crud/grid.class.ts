@@ -28,14 +28,4 @@ export abstract class Grid<TResponse, TRequest> {
   getByPagination(page: number, pageSize: number) {
     this.data$ = this.$data.getByPagination(page, pageSize);
   }
-
-  /**
-   *
-   * @param id
-   */
-  delete(id: string) {
-    this.$data.delete(id).subscribe(() => {
-      this.getAll();
-    });
-  }
 }

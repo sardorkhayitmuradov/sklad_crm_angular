@@ -76,10 +76,9 @@ export abstract class AddEdit<TResponse, TRequest> {
     if (this.form.invalid) {
       this.updateValueAndValidity();
       return;
-    }
+    } 
     
     const request: TRequest = this.getRequest();
-    console.log(request);
     if (this.isEdit) {
       this.edit(request);
       return;

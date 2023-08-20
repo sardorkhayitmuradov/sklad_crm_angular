@@ -35,4 +35,3 @@ export class AddOrdersService extends CRUDService<OrdersResponse, OrdersRequest>
   }
 
 }
-

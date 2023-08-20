@@ -92,6 +92,16 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
   }
 
   /**
+   * 
+   * @param id 
+   */
+  delete(id: string): void {
+    this.$data.delete(id).subscribe(() => {
+      this.getData(this.pages.pageIndex, this.pages.pageSize);
+    });
+  }
+
+  /**
    *
    */
   clear() {

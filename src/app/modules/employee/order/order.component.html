@@ -28,7 +28,6 @@
           <span nz-icon nzType="calendar" nzTheme="twotone"></span>
         </div>
       </th>
-      <th class="w-[40px]" nzAlign="center" rowSpan="2">Operations</th>
     </tr>
     <tr>
       <th nzAlign="center">Name</th>
@@ -39,18 +38,30 @@
         </div>
       </th>
       <th nzAlign="center">Qty</th>
-      <th nzAlign="center">
-        <div class="flex items-center gap-1 justify-center">
-          <p>Price</p>
-          <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
-        </div>
-      </th>
-      <th nzAlign="center">
-        <div class="flex items-center gap-1 justify-center">
-          <p>Sold Price</p>
-          <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
-        </div>
-      </th>
+      <ng-container
+        *ngIf="data.length > 0 && arePricesEqual(); else separatePriceColumns"
+      >
+        <th nzAlign="center" colSpan="2">
+          <div class="flex items-center gap-1 justify-center">
+            <p>Sold Price</p>
+            <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
+          </div>
+        </th>
+      </ng-container>
+      <ng-template #separatePriceColumns>
+        <th nzAlign="center">
+          <div class="flex items-center gap-1 justify-center">
+            <p>Price</p>
+            <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
+          </div>
+        </th>
+        <th nzAlign="center">
+          <div class="flex items-center gap-1 justify-center">
+            <p>Sold Price</p>
+            <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
+          </div>
+        </th>
+      </ng-template>
     </tr>
   </thead>
   <tbody>
@@ -63,24 +74,33 @@
         >
           {{ order.client_name || order.client_type }}
         </td>
-        <td nzAlign="center">{{product.name}}</td>
-        <td nzAlign="center">{{product.code}}</td>
+        <td nzAlign="center">{{ product.name }}</td>
+        <td nzAlign="center">{{ product.code }}</td>
         <td nzAlign="center">{{ product.qty | number }} {{ product.unit }}</td>
-        <td nzAlign="center">{{ product.price | number }} so'm</td>
-        <td nzAlign="center">{{ product.soldPrice | number }} so'm</td>
+        <ng-container
+          *ngIf="product.price === product.soldPrice; else separateColumns"
+        >
+          <td nzAlign="center" colSpan="2">
+            {{ product.soldPrice | number }} so'm
+          </td>
+        </ng-container>
+        <ng-template #separateColumns>
+          <td nzAlign="center">{{ product.price | number }} so'm</td>
+          <td nzAlign="center">{{ product.soldPrice | number }} so'm</td>
+        </ng-template>
         <td
           *ngIf="j === 0"
           [attr.rowspan]="order.products.length"
           nzAlign="center"
         >
-          {{ order.paid | number }}  so'm
+          {{ order.paid | number }} so'm
         </td>
         <td
           *ngIf="j === 0"
           [attr.rowspan]="order.products.length"
           nzAlign="center"
         >
-          {{ order.totalAmount | number }}  so'm
+          {{ order.totalAmount | number }} so'm
         </td>
         <td
           *ngIf="j === 0"
@@ -89,84 +109,7 @@
         >
           {{ order.createdAt | date : "medium" }}
         </td>
-        <td
-          *ngIf="j === 0"
-          [attr.rowspan]="order.products.length"
-          nzAlign="center"
-        >
-          <div class="flex items-center gap-x-3 justify-center">
-            <button
-              nz-button
-              nzType="primary"
-              nzDanger
-              class="flex items-center justify-center"
-            >
-              <span nz-icon nzType="delete" nzTheme="outline"></span>
-            </button>
-          </div>
-        </td>
       </tr>
     </ng-container>
   </tbody>
 </nz-table>
-
-<!-- <nz-table
-  #groupingTable
-  nzSize="middle"
-  [nzData]="data || []"
-  [nzLoading]="isLoading"
-  [nzPageSizeOptions]="pages.pageSizeOptions"
-  (nzPageIndexChange)="handlePageIndexChange($event)"
-  (nzPageSizeChange)="handlePageSizeChange($event)"
-  [nzFrontPagination]="false"
-  [nzPageIndex]="pages.pageIndex"
-  [nzPageSize]="pages.pageSize"
-  [nzTotal]="getQtyOrders()"
-  nzBordered
->
-  <thead>
-    <tr>
-      <th nzWidth="10%" nzAlign="center" rowSpan="2">ID (Name)</th>
-      <th nzWidth="15%" nzAlign="center" colspan="3">Products</th>
-      <th nzWidth="15%" nzAlign="center" rowSpan="2">Paid</th>
-      <th nzWidth="15%" nzAlign="center" rowSpan="2">Total</th>
-      <th class="w-[150px]" nzAlign="center" rowSpan="2">Operations</th>
-    </tr>
-    <tr>
-      <th nzAlign="center">Code</th>
-      <th nzAlign="center">Qty</th>
-      <th nzAlign="center">Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngFor="let order of groupingTable.data; let i = index">
-      <tr *ngFor="let product of order.products; let j = index">
-        <td *ngIf="j === 0" [attr.rowspan]="order.products.length" nzAlign="center">{{ order.client_name || order.client_type }}</td>
-        <td nzAlign="center">{{ product.productId }}</td>
-        <td nzAlign="center">{{ product.qty }}</td>
-        <td nzAlign="center">{{ product.price }}</td>
-        <td *ngIf="j === 0" [attr.rowspan]="order.products.length" nzAlign="center">{{ order.paid }}</td>
-        <td *ngIf="j === 0" [attr.rowspan]="order.products.length" nzAlign="center">{{ order.totalAmount }}</td>
-        <td *ngIf="j === 0" [attr.rowspan]="order.products.length" nzAlign="center" rowspan="2">
-          <div class="flex items-center gap-x-3 justify-center">
-            <button
-              nz-button
-              nzType="default"
-              class="flex items-center justify-center"
-            >
-              <span nz-icon nzType="edit" nzTheme="outline"></span>
-            </button>
-            <button
-              nz-button
-              nzType="primary"
-              nzDanger
-              class="flex items-center justify-center"
-            >
-              <span nz-icon nzType="delete" nzTheme="outline"></span>
-            </button>
-          </div>
-        </td>
-      </tr>
-    </ng-container>
-  </tbody>
-</nz-table> -->

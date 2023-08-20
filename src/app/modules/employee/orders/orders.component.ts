@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { OrdersService } from './services/orders.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Grid } from '../../shared/crud/grid.class';
+import { Grid } from 'src/app/modules/shared/crud/grid.class';
 import { OrdersRequest, OrdersResponse } from './model/orders.model';
-import { pages } from '../../shared/models/pages.model';
-import { BaseResponse } from '../../shared/models/base.interface';
+import { pages } from 'src/app/modules/shared/models/pages.model';
+import { BaseResponse } from 'src/app/modules/shared/models/base.interface';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
@@ -19,6 +19,9 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
   isOkLoading = false;
   isLoading = true;
 
+  /**
+   * 
+   */
   pages: pages = {
     pageIndex: 1,
     pageSize: 10,
@@ -52,10 +55,19 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
+  /**
+   * 
+   * @returns 
+   */
   getQtyOrders(): number {
     return this.pages.qtyOrders ?? 0;
   }
 
+  /**
+   * 
+   * @param pageIndex 
+   * @param pageSize 
+   */
   getData(pageIndex: number, pageSize: number) {
     this.$data
       .getByPagination(pageIndex, pageSize)
@@ -68,6 +80,10 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
       });
   }
 
+  /**
+   * 
+   * @param newPageIndex 
+   */
   handlePageIndexChange(newPageIndex: number) {
     this.pages.pageIndex = newPageIndex;
     this.isLoading = true;
@@ -77,6 +93,10 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
+  /**
+   * 
+   * @param newPageSize 
+   */
   handlePageSizeChange(newPageSize: number) {
     this.pages.pageSize = newPageSize;
     this.isLoading = true;
@@ -86,28 +106,33 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
-  showDeleteConfirm(id: string): void {
-    this.modal.confirm({
-      nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
-      nzOkText: 'Yes',
-      nzOkType: 'primary',
-      nzOkDanger: true,
-      nzOnOk: () => {
-        this.delete(id);
-      },
-      nzCancelText: 'No',
-      nzOnCancel: () => console.log('Cancel'),
-    });
+  /**
+   *
+   * @param searchText
+   */
+  handleSearch(searchText: string) {
+    this.isLoading = true;
+    this.$data
+      .getDatasBySearch(searchText, 'order')
+      .subscribe((response: BaseResponse<OrdersResponse[]>) => {
+        this.data = response.data;
+        this.isLoading = false;
+      });
   }
 
-  override delete(id: string): void {
-    this.$data.delete(id).subscribe(() => {
+  /**
+   *
+   * @param searchText
+   */
+  handleSearchTextChange(searchText: string) {
+    if (searchText.length === 0) {
+      this.isLoading = true;
       this.getData(this.pages.pageIndex, this.pages.pageSize);
-    });
+    }
   }
-
 
   clear(){
-    this.searchText = ''
+    this.searchText = '';
+    this.handleSearchTextChange(this.searchText);
   }
 }

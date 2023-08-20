@@ -18,4 +18,3 @@ export class OrderService extends CRUDService<OrderResponse, OrderRequest> {
     super($base, 'order');
   }
 }
-

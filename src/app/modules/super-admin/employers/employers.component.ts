@@ -20,6 +20,11 @@ export class EmployersComponent extends Grid<Employers, EmployersRequest> {
 
   constructor($data: EmployersService, private modal: NzModalService, private cookieService: CookieService,private router: Router) {
     super($data);
+    this.getData()
+  }
+
+
+  getData(){
     this.data$.subscribe((response: any) => {
       this.data = response.employers;
         this.isLoading = false
@@ -34,12 +39,19 @@ export class EmployersComponent extends Grid<Employers, EmployersRequest> {
       nzOkDanger: true,
       nzOnOk: () => {
         this.delete(id);
-        // this.data$.subscribe((response: any) => {
-        //   this.data = response.employers;
-        // });
       },
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel'),
+    });
+  }
+
+  /**
+   * 
+   * @param id 
+   */
+  delete(id: string): void {
+    this.$data.delete(id).subscribe(() => {
+      this.getData();
     });
   }
 

@@ -7,7 +7,14 @@
         [nzSuffix]="inputClearTpl"
         [nzAddOnAfter]="suffixIconButton"
       >
-        <input type="text" nz-input placeholder="search..." />
+        <input
+          [(ngModel)]="searchText"
+          (ngModelChange)="handleSearchTextChange($event)"
+          type="text"
+          nz-input
+          placeholder="Search market..."
+          (keyup.enter)="handleSearch(searchText)"
+        />
       </nz-input-group>
 
       <ng-template #inputClearTpl>
@@ -20,14 +27,17 @@
           (click)="clear()"
         ></span>
       </ng-template>
+
       <ng-template #suffixIconButton>
-        <button nz-button nzType="primary" nzSearch>
+        <button
+          (click)="handleSearch(searchText)"
+          nz-button
+          nzType="primary"
+          nzSearch
+        >
           <span nz-icon nzType="search"></span>
         </button>
       </ng-template>
-      <!-- <button [routerLink]="['add']" nz-button nzType="primary" class="flex items-center justify-center">
-        <span nz-icon nzType="plus" nzTheme="outline"></span>
-      </button> -->
     </div>
   </div>
 
@@ -58,7 +68,6 @@
         </th>
         <th nzWidth="35%" [nzAlign]="'center'">Address</th>
         <th [nzAlign]="'center'">Orders</th>
-        <!-- <th [nzAlign]="'center'">Operations</th> -->
       </tr>
     </thead>
     <tbody>
@@ -75,38 +84,7 @@
             <span nz-icon nzType="link" nzTheme="outline"></span>
             </button>
         </td>
-        <!-- <td [nzAlign]="'center'">
-          <div class="flex items-center gap-x-3 justify-center">
-            <button
-              nz-button
-              nzType="default"
-              class="flex items-center justify-center"
-              [routerLink]="['edit', data._id]"
-            >
-              <span nz-icon nzType="edit" nzTheme="outline"></span>
-            </button>
-            <button
-              nz-button
-              nzType="primary"
-              nzDanger
-              class="flex items-center justify-center"
-              (click)="showDeleteConfirm(data._id)"
-            >
-              <span nz-icon nzType="delete" nzTheme="outline"></span>
-            </button>
-          </div>
-        </td> -->
       </tr>
     </tbody>
   </nz-table>
 </div>
-
-<!-- <nz-modal
-  [(nzVisible)]="isVisible"
-  nzTitle="Add Product"
-  (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()"
-  [nzOkLoading]="isOkLoading"
->
-  <div *nzModalContent>add modal content</div>
-</nz-modal> -->

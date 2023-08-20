@@ -3,17 +3,23 @@ import { CommonModule } from '@angular/common';
 
 import { OrdersRoutingModule } from './orders-routing.module';
 import { OrdersComponent } from './orders.component';
-import { NzTableModule } from 'ng-zorro-antd/table';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
   declarations: [
-    OrdersComponent
+    OrdersComponent,
   ],
   imports: [
     CommonModule,
     OrdersRoutingModule,
-    NzTableModule
-  ]
+    SharedModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+  ],
+  providers: [
+    provideNgxMask()
+  ],
 })
 export class OrdersModule { }

@@ -92,6 +92,16 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
     });
   }
 
+  /**
+   * 
+   * @param id 
+   */
+  delete(id: string): void {
+    this.$data.delete(id).subscribe(() => {
+      this.getData(this.pages.pageIndex, this.pages.pageSize);
+    });
+  }
+
 
     /**
    *

@@ -22,11 +22,17 @@
                 formControlName="market_id"
                 id="markets"
               >
-                <nz-option
-                  *ngFor="let market of markets"
-                  [nzLabel]="market.market_name"
-                  [nzValue]="market._id"
-                ></nz-option>
+                <ng-container *ngFor="let market of markets">
+                  <nz-option
+                    *ngIf="markets"
+                    [nzLabel]="market.market_name"
+                    [nzValue]="market._id"
+                  ></nz-option>
+                </ng-container>
+                <nz-option *ngIf="!markets" nzDisabled nzCustomContent>
+                  <span nz-icon nzType="loading" class="loading-icon"></span>
+                  Loading markets...
+                </nz-option>
               </nz-select>
             </nz-form-control>
           </nz-form-item>
@@ -80,12 +86,7 @@
     <nz-table nzTemplateMode #editRowTable nzBordered nzFrontPagination="false">
       <thead>
         <tr>
-          <th
-            nzWidth="20%"
-            nzAlign="center"
-          >
-            Choose a product
-          </th>
+          <th nzWidth="20%" nzAlign="center">Choose a product</th>
           <th nzWidth="15%" nzAlign="center">Enter the product quantity</th>
           <th nzWidth="20%" nzAlign="center">Enter the product price</th>
           <th nzWidth="35%" nzAlign="center">Overall price</th>
@@ -110,12 +111,17 @@
               class="w-full"
               (ngModelChange)="setProductQty(i, product.value.productId, true)"
             >
-              <nz-option
-                class="w-full"
-                *ngFor="let p of productsData; let j = index"
-                [nzLabel]="p.name"
-                [nzValue]="p._id"
-              ></nz-option>
+              <ng-container *ngFor="let product of productsData; let j = index">
+                <nz-option
+                  class="w-full"
+                  [nzLabel]="product.name"
+                  [nzValue]="product._id"
+                ></nz-option>
+              </ng-container>
+              <nz-option *ngIf="!product" nzDisabled nzCustomContent>
+                <span nz-icon nzType="loading" class="loading-icon"></span>
+                Loading products...
+              </nz-option>
             </nz-select>
           </td>
           <td nzAlign="center">

@@ -1,5 +1,5 @@
 <nz-layout>
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" nzTheme="dark" [nzTrigger]="null">
     <div class="m-4 bg-white px-1 py-1 rounded-5">
       <img
         [src]="
@@ -80,7 +80,7 @@
         </span>
         <span>My transactions</span>
       </li>
-      <li
+      <!-- <li
         nz-menu-item
         [routerLink]="['settings']"
         routerLinkActive="ant-menu-item-selected"
@@ -94,7 +94,7 @@
           ></span>
         </span>
         <span>Settings</span>
-      </li>
+      </li> -->
     </ul>
   </nz-sider>
   <nz-layout class="flex flex-col">

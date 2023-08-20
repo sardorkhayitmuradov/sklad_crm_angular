@@ -101,6 +101,17 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     });
   }
 
+  /**
+   * 
+   * @param id 
+   */
+  delete(id: string): void {
+    const routeId = this.route.snapshot.params['id'];
+    this.$data.delete(id).subscribe(() => {
+      this.getData(this.pages.pageIndex, this.pages.pageSize, id && `${routeId}`);
+    });
+  }
+
 
   clear(){
     this.searchText = ''

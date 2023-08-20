@@ -26,6 +26,22 @@ const routes: Routes = [
       breadcrumb: 'Edit',
     },
   },
+  {
+    path: 'orders',
+    loadChildren: () =>
+      import('./orders/orders.module').then((m) => m.OrdersModule),
+    data: {
+      breadcrumb: "Employee's Orders",
+    },
+  },
+  {
+    path: 'transactions',
+    loadChildren: () =>
+      import('./transactions/transactions.module').then((m) => m.TransactionsModule),
+    data: {
+      breadcrumb: "Employee's Transactions",
+    },
+  },
 ];
 
 @NgModule({

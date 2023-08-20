@@ -14,7 +14,7 @@ export interface Tab {
 }
 
 @Component({
-  selector: 'app-add-orders',
+  selector: 'employee-add-orders',
   templateUrl: './add-orders.component.html',
   styleUrls: ['./add-orders.component.css'],
 })

@@ -40,14 +40,6 @@ const routes: Routes = [
           breadcrumb: 'Employees',
         },
       },
-      // {
-      //   path: 'orders',
-      //   loadChildren: () =>
-      //     import('./orders/orders.module').then((m) => m.OrdersModule),
-      //   data: {
-      //     breadcrumb: 'Orders',
-      //   },
-      // },
       {
         path: 'settings',
         loadChildren: () =>

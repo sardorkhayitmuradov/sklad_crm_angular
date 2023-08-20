@@ -3,7 +3,7 @@ import { OrderService } from './services/order.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Grid } from '../../shared/crud/grid.class';
-import { OrderRequest, OrderResponse } from './model/order.model';
+import { OrderRequest, OrderResponse, Products } from './model/order.model';
 
 @Component({
   selector: 'employer-order',
@@ -15,6 +15,9 @@ export class OrderComponent extends Grid<OrderResponse, OrderRequest> {
   isOkLoading = false;
   isLoading = true;
 
+  /**
+   * 
+   */
   data: OrderResponse[] = [];
 
   constructor(
@@ -28,6 +31,10 @@ export class OrderComponent extends Grid<OrderResponse, OrderRequest> {
     this.getDataById(Id)
   }
 
+  /**
+   * 
+   * @param id 
+   */
   getDataById(id: string) {
     this.$data
       .getById(id)
@@ -37,17 +44,15 @@ export class OrderComponent extends Grid<OrderResponse, OrderRequest> {
       });
   }
 
-  showDeleteConfirm(id: string): void {
-    this.modal.confirm({
-      nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
-      nzOkText: 'Yes',
-      nzOkType: 'primary',
-      nzOkDanger: true,
-      nzOnOk: () => {
-        this.delete(id);
-      },
-      nzCancelText: 'No',
-      nzOnCancel: () => console.log('Cancel'),
-    });
+  /**
+   * 
+   * @param product 
+   * @returns 
+   */
+  arePricesEqual() {
+    return this.data[0].products[0].price === this.data[0].products[0].soldPrice;
   }
+
+
+
 }

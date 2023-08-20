@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { pages } from '../../shared/models/pages.model';
-import { Grid } from '../../shared/crud/grid.class';
+import { pages } from 'src/app/modules/shared/models/pages.model';
+import { Grid } from 'src/app/modules/shared/crud/grid.class';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -8,6 +8,7 @@ import {
   TransactionsResponse,
 } from './models/transactions.model';
 import { TransactionsService } from './services/transactions.service';
+import { BaseResponse } from '../../shared/models/base.interface';
 
 @Component({
   selector: 'employee-transactions',
@@ -25,6 +26,9 @@ export class TransactionsComponent extends Grid<
   isOkLoading = false;
   isLoading = true;
 
+  /**
+   * 
+   */
   pages: pages = {
     pageIndex: 1,
     pageSize: 10,
@@ -60,7 +64,10 @@ export class TransactionsComponent extends Grid<
     this.getDatas();
   }
 
-  protected getDatas() {
+  /**
+   * 
+   */
+  getDatas() {
     this.data$.subscribe((response: any) => {
       this.data = response.data;
       this.isLoading = false;
@@ -72,14 +79,41 @@ export class TransactionsComponent extends Grid<
    * @param pageIndex
    */
   handelPageIndex(pageIndex: number) {
-    this.router.navigate([], { queryParams: { pageIndex } });
+    this.pages.pageIndex = pageIndex;
+    this.router.navigate([], { queryParams: { pageIndex, pageSize: this.pages.pageSize } });
   }
 
   /**
    *
    */
   handlePageSize(pageSize: number) {
-    this.router.navigate([], { queryParams: { pageSize } });
+    this.pages.pageSize = pageSize;
+    this.router.navigate([], { queryParams: { pageIndex: this.pages.pageIndex , pageSize } });
+  }
+
+  /**
+   *
+   * @param searchText
+   */
+  handleSearch(searchText: string) {
+    this.isLoading = true;
+    this.$data
+      .getDatasBySearch(searchText)
+      .subscribe((response: BaseResponse<TransactionsResponse[]>) => {
+        this.data = response.data;
+        this.isLoading = false;
+      });
+  }
+
+  /**
+   *
+   * @param searchText
+   */
+  handleSearchTextChange(searchText: string) {
+    if (searchText.length === 0) {
+      this.isLoading = true;
+      this.getDatas();
+    }
   }
 
   showDeleteConfirm(id: string): void {
@@ -108,7 +142,7 @@ export class TransactionsComponent extends Grid<
     this.isVisible= true;
   }
 
-  override delete(id: string): void {
+  delete(id: string): void {
     this.$data.delete(id).subscribe(() => {
       this.getDatas();
     });
@@ -119,5 +153,6 @@ export class TransactionsComponent extends Grid<
    */
   clear() {
     this.searchText = '';
+    this.handleSearchTextChange(this.searchText);
   }
 }

@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
-  selector: 'app-add-edit-transactions',
+  selector: 'employee-add-edit-transactions',
   templateUrl: './add-edit-transactions.component.html',
   styleUrls: ['./add-edit-transactions.component.css']
 })

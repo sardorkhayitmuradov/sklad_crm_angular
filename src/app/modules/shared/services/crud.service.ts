@@ -29,6 +29,16 @@ export abstract class CRUDService<TResponse, TRequest> {
   }
 
   /**
+   * 
+   * @param url 
+   * @returns 
+   */
+  getDatasBySearch(text: string, order?: string){
+    return this._base.get<BaseResponse<TResponse[]>>(`${order ?? this.url}?search=${text}`);
+  }
+
+
+  /**
    *
    * @param id
    */

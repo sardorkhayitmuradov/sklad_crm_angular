@@ -87,19 +87,43 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
-  showDeleteConfirm(id: string): void {
-    this.modal.confirm({
-      nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
-      nzOkText: 'Yes',
-      nzOkType: 'primary',
-      nzOkDanger: true,
-      nzOnOk: () => {
-        this.delete(id);
-      },
-      nzCancelText: 'No',
-      nzOnCancel: () => console.log('Cancel'),
-    });
+  getRowspan(clientName: string, currentIndex: number): number {
+    let rowspan = 1;
+  
+    for (let i = currentIndex + 1; i < this.data.length; i++) {
+      const nextOrder = this.data[i];
+      
+      if (nextOrder.client_name === clientName || nextOrder.client_type === clientName) {
+        rowspan++;
+      } else {
+        break;
+      }
+    }
+  
+    return rowspan;
   }
+
+  fixRowSpan(index: number): number{
+    let rowspan = 1;
+    for (let i = index + 1; i < this.data.length; i++) {
+        rowspan++;
+    }
+    return rowspan;
+  }
+
+  // showDeleteConfirm(id: string): void {
+  //   this.modal.confirm({
+  //     nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
+  //     nzOkText: 'Yes',
+  //     nzOkType: 'primary',
+  //     nzOkDanger: true,
+  //     nzOnOk: () => {
+  //       this.delete(id);
+  //     },
+  //     nzCancelText: 'No',
+  //     nzOnCancel: () => console.log('Cancel'),
+  //   });
+  // }
 
 
   clear(){

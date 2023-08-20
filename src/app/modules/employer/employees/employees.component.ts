@@ -47,14 +47,13 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
       nzOkDanger: true,
       nzOnOk: () => {
         this.delete(id);
-        this.getDatas();
       },
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel'),
     });
   }
 
-  override delete(id: string): void {
+  delete(id: string): void {
     this.$data.delete(id).subscribe(() => {
       this.getDatas();
     });

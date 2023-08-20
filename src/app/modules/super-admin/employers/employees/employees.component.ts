@@ -17,6 +17,11 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
 
   constructor($data: EmployeesService, private modal: NzModalService) {
     super($data);
+    this.getData();
+  }
+
+
+  getData(){
     this.data$.subscribe((response: any) => {
       this.data = response.employees;
         this.isLoading = false
@@ -37,4 +42,14 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
     });
   }
 
+  /**
+   * 
+   * @param id 
+   */
+  delete(id: string): void {
+    this.$data.delete(id).subscribe(() => {
+      this.getData();
+    });
+  }
+ 
 }

@@ -39,7 +39,7 @@ export class BaseService {
    *
    * @returns
    */
-  getRoute(): void {
+  private getRoute(): void {
     const route = this.route.snapshot.queryParams['admin'];
     if (route === 'admin') {
       this.router.navigate(['/admin/login']);

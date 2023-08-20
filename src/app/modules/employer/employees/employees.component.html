@@ -2,15 +2,15 @@
   <div class="relative mb-4">
     <nz-divider nzText="Employees" nzOrientation="left"></nz-divider>
     <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
-      <nz-input-group
+      <!-- <nz-input-group
         nzSearch
         [nzSuffix]="inputClearTpl"
         [nzAddOnAfter]="suffixIconButton"
       >
         <input type="text" nz-input placeholder="search..." />
-      </nz-input-group>
+      </nz-input-group> -->
 
-      <ng-template #inputClearTpl>
+      <!-- <ng-template #inputClearTpl>
         <span
           nz-icon
           class="ant-input-clear-icon"
@@ -19,14 +19,15 @@
           [hidden]="!searchText"
           (click)="clear()"
         ></span>
-      </ng-template>
+      </ng-template> -->
       <ng-template #suffixIconButton>
         <button nz-button nzType="primary" nzSearch>
           <span nz-icon nzType="search"></span>
         </button>
       </ng-template>
-
-      <button (click)="add()" nz-button nzType="primary">Add</button>
+      <button (click)="add()" nz-button nzType="primary" class="flex items-center justify-center">
+        <span nz-icon nzType="plus" nzTheme="outline"></span>
+      </button>
     </div>
   </div>
 
@@ -38,21 +39,66 @@
   >
     <thead>
       <tr>
-        <th nzWidth="20%">FullName</th>
-        <th nzWidth="20%">Phone</th>
-        <th nzWidth="25%">Balance</th>
-        <th nzWidth="20%">Debt</th>
-        <th>Operations</th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <p>Full Name</p>
+            <span nz-icon nzType="user" nzTheme="outline"></span>
+          </div>
+        </th>
+        <th nzWidth="15%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <p>Phone</p>
+            <span nz-icon nzType="phone" nzTheme="twotone"></span>
+          </div>
+        </th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <p>Balance</p>
+            <span nz-icon nzType="dollar" nzTheme="twotone"></span>
+          </div>
+        </th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <p>Debt</p>
+            <span nz-icon nzType="dollar" nzTheme="twotone"></span>
+          </div>
+        </th>
+        <th nzWidth="10%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <p>Transactions</p>
+            <span nz-icon nzType="interaction" nzTheme="twotone"></span>
+          </div>
+        </th>
+        <th nzWidth="10%" [nzAlign]="'center'">Orders</th>
+        <th [nzAlign]="'center'">Operations</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td>{{ data.fullname }}</td>
-        <td>{{ data.phone_number }}</td>
-        <td>{{ data.balance }}</td>
-        <td>{{ data.debt }}</td>
-        <td>
-          <div class="flex items-center gap-x-3">
+        <td [nzAlign]="'center'">{{ data.fullname }}</td>
+        <td [nzAlign]="'center'">{{ data.phone_number }}</td>
+        <td [nzAlign]="'center'">{{ data.balance | number }} sum</td>
+        <td [nzAlign]="'center'">{{ data.debt | number }} sum</td>
+        <td [nzAlign]="'center'">
+          <button
+              nz-button
+              nzType="link"
+              [routerLink]="['orders', data._id]"
+            >
+            <span nz-icon nzType="link" nzTheme="outline"></span>
+            </button>
+        </td>
+        <td [nzAlign]="'center'">
+          <button
+              nz-button
+              nzType="link"
+              [routerLink]="['transactions', data._id]"
+            >
+            <span nz-icon nzType="link" nzTheme="outline"></span>
+            </button>
+        </td>
+        <td [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-x-3">
             <button
               nz-button
               nzType="default"

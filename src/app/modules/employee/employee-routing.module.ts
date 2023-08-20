@@ -48,14 +48,14 @@ const routes: Routes = [
           breadcrumb: 'My transactions',
         },
       },
-      {
-        path: 'settings',
-        loadChildren: () =>
-          import('./settings/settings.module').then((m) => m.SettingsModule),
-        data: {
-          breadcrumb: 'Settings',
-        },
-      },
+      // {
+      //   path: 'settings',
+      //   loadChildren: () =>
+      //     import('./settings/settings.module').then((m) => m.SettingsModule),
+      //   data: {
+      //     breadcrumb: 'Settings',
+      //   },
+      // },
     ],
   },
 ];

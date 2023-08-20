@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { OrdersRoutingModule } from './orders-routing.module';
 import { OrdersComponent } from './orders.component';
-import { SharedModule } from '../../shared/shared.module';
-import { AddOrdersComponent } from './add-orders/add-orders.component';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 

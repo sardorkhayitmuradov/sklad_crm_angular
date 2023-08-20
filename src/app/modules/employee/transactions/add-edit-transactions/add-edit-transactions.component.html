@@ -1,6 +1,6 @@
 <nz-modal
   [(nzVisible)]="isVisible"
-  nzTitle="{{ isEdit ? 'Edit Transaction' : 'Add Transaction' }}"
+  nzTitle="Add Transaction"
   (nzOnCancel)="cancel()"
   [nzFooter]="footer"
   nzWidth="400px"
@@ -31,7 +31,7 @@
 
   <ng-template #footer>
     <button nz-button nzType="primary" (click)="submit()">
-      {{ (isEdit ? "Edit" : "Add") }}
+      Add
     </button>
     <button nz-button (click)="reset()">Clear</button>
     <button nz-button (click)="cancel()">

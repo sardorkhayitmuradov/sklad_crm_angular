@@ -7,9 +7,16 @@
         [nzSuffix]="inputClearTpl"
         [nzAddOnAfter]="suffixIconButton"
       >
-        <input type="text" nz-input placeholder="search..." />
+        <input
+          [(ngModel)]="searchText"
+          (ngModelChange)="handleSearchTextChange($event)"
+          type="text"
+          nz-input
+          placeholder="Search market & client name..."
+          (keyup.enter)="handleSearch(searchText)"
+        />
       </nz-input-group>
-  
+
       <ng-template #inputClearTpl>
         <span
           nz-icon
@@ -20,8 +27,14 @@
           (click)="clear()"
         ></span>
       </ng-template>
+
       <ng-template #suffixIconButton>
-        <button nz-button nzType="primary" nzSearch>
+        <button
+          (click)="handleSearch(searchText)"
+          nz-button
+          nzType="primary"
+          nzSearch
+        >
           <span nz-icon nzType="search"></span>
         </button>
       </ng-template>
@@ -47,7 +60,7 @@
   >
     <thead>
       <tr>
-        <th nzWidth="10%" nzAlign="center">ID (Name)</th>
+        <th nzWidth="10%" nzAlign="center">Name</th>
         <th nzWidth="35%" nzAlign="center">
           <div class="flex items-center gap-1 justify-center">
             <p>Paid</p>
@@ -61,7 +74,6 @@
           </div>
         </th>
         <th nzWidth="10%" nzAlign="center">Products</th>
-        <th nzWidth="10%" nzAlign="center">Operations</th>
       </tr>
     </thead>
     <tbody>
@@ -73,18 +85,6 @@
           <button nz-button nzType="link" [routerLink]="['order', order._id]" class="flex items-center justify-center mx-auto">
             <span nz-icon nzType="link" nzTheme="outline"></span>
           </button>
-        </td>
-        <td nzAlign="center">
-          <div class="flex items-center justify-center">
-            <button
-              nz-button
-              nzType="primary"
-              nzDanger
-              class="flex items-center justify-center"
-            >
-              <span nz-icon nzType="delete" nzTheme="outline"></span>
-            </button>
-          </div>
         </td>
       </tr>
     </tbody>

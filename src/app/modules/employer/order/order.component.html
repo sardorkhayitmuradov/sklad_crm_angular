@@ -39,7 +39,29 @@
         </div>
       </th>
       <th nzAlign="center">Qty</th>
-      <th nzAlign="center">
+      <ng-container *ngIf="data.length > 0 && arePricesEqual(); else separatePriceColumns">
+        <th nzAlign="center" colSpan="2">
+          <div class="flex items-center gap-1 justify-center">
+            <p>Sold Price</p>
+            <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
+          </div>
+        </th>
+      </ng-container>
+      <ng-template #separatePriceColumns>
+        <th nzAlign="center">
+          <div class="flex items-center gap-1 justify-center">
+            <p>Price</p>
+            <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
+          </div>
+        </th>
+        <th nzAlign="center">
+          <div class="flex items-center gap-1 justify-center">
+            <p>Sold Price</p>
+            <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
+          </div>
+        </th>
+      </ng-template>
+      <!-- <th nzAlign="center">
         <div class="flex items-center gap-1 justify-center">
           <p>Price</p>
           <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
@@ -50,7 +72,7 @@
           <p>Sold Price</p>
           <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
         </div>
-      </th>
+      </th> -->
     </tr>
   </thead>
   <tbody>
@@ -66,8 +88,15 @@
         <td nzAlign="center">{{product.name}}</td>
         <td nzAlign="center">{{product.code}}</td>
         <td nzAlign="center">{{ product.qty | number }} {{ product.unit }}</td>
-        <td nzAlign="center">{{ product.price | number }} so'm</td>
-        <td nzAlign="center">{{ product.soldPrice | number }} so'm</td>
+        <ng-container *ngIf="product.price === product.soldPrice; else separateColumns">
+          <td nzAlign="center" colSpan="2">{{ product.soldPrice | number }} so'm</td>
+        </ng-container>
+        <ng-template #separateColumns>
+          <td nzAlign="center">{{ product.price | number }} so'm</td>
+          <td nzAlign="center">{{ product.soldPrice | number }} so'm</td>
+        </ng-template>
+        <!-- <td nzAlign="center">{{ product.price | number }} so'm</td> -->
+        <!-- <td nzAlign="center">{{ product.soldPrice | number }} so'm</td> -->
         <td
           *ngIf="j === 0"
           [attr.rowspan]="order.products.length"

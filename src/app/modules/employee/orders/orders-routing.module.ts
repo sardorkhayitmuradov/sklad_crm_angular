@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OrdersComponent } from './orders.component';
-import { AddOrdersComponent } from './add-orders/add-orders.component';
 
 const routes: Routes = [
   {
@@ -19,9 +18,9 @@ const routes: Routes = [
   {
     path: 'order/:id',
     loadChildren: () =>
-      import('../order/order.module').then((m) => m.OrdersModule),
+      import('../order/order.module').then((m) => m.OrderModule),
     data: {
-      breadcrumb: 'Order',
+      breadcrumb: "Order",
     },
   },
 ];
