@@ -20,6 +20,9 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 
 @NgModule({
@@ -66,7 +69,10 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     NzTabsModule,
     NzRadioModule,
     NzPopconfirmModule,
-    NzListModule
+    NzListModule,
+    NzSpinModule,
+    NzPopoverModule,
+    NzBadgeModule
   ],
 })
 export class SharedModule {}

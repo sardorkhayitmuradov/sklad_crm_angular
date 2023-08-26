@@ -7,7 +7,12 @@
           <span nz-icon nzType="search"></span>
         </button>
       </ng-template>
-      <button (click)="add()" nz-button nzType="primary" class="flex items-center justify-center">
+      <button
+        [routerLink]="['add']"
+        nz-button
+        nzType="primary"
+        class="flex items-center justify-center"
+      >
         <span nz-icon nzType="plus" nzTheme="outline"></span>
       </button>
     </div>
@@ -63,21 +68,17 @@
         <td [nzAlign]="'center'">{{ data.debt | number }} sum</td>
         <td [nzAlign]="'center'">
           <button
-              nz-button
-              nzType="link"
-              [routerLink]="['transactions', data._id]"
-            >
+            nz-button
+            nzType="link"
+            [routerLink]="['transactions', data._id]"
+          >
             <span nz-icon nzType="link" nzTheme="outline"></span>
-            </button>
+          </button>
         </td>
         <td [nzAlign]="'center'">
-          <button
-              nz-button
-              nzType="link"
-              [routerLink]="['orders', data._id]"
-            >
+          <button nz-button nzType="link" [routerLink]="['orders', data._id]">
             <span nz-icon nzType="link" nzTheme="outline"></span>
-            </button>
+          </button>
         </td>
         <td [nzAlign]="'center'">
           <div class="flex items-center justify-center gap-x-3">
@@ -85,7 +86,7 @@
               nz-button
               nzType="default"
               class="flex items-center justify-center"
-              (click)="isVisible = true; addEdit.id = data._id"
+              [routerLink]="['edit', data._id]"
             >
               <span nz-icon nzType="edit" nzTheme="outline"></span>
             </button>
@@ -104,10 +105,3 @@
     </tbody>
   </nz-table>
 </div>
-
-<add-edit-employees 
-#addEdit
-[(isVisible)]="isVisible" 
-(submitted)="getDatas()">
-</add-edit-employees>
-

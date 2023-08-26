@@ -133,7 +133,7 @@ export abstract class AddEdit<TResponse, TRequest> {
    *
    * @param request
    */
-  private edit(request: TRequest) {
+  protected edit(request: TRequest) {
     this.$data.edit(this.id, request).subscribe((item) => {
       if (item) {
         this.afterSuccess();

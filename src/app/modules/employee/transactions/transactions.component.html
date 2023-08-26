@@ -98,7 +98,7 @@
               [disabled]="data.employerAccepted"
               nzDanger
               class="flex items-center justify-center"
-              (click)="showDeleteConfirm(data._id)"
+              (click)="data.employerAccepted ? null : showDeleteConfirm(data._id)"
             >
               <span nz-icon nzType="delete" nzTheme="outline"></span>
             </button>

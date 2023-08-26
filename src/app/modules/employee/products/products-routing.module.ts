@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './products.component';
 import { AddEditProductsComponent } from './add-edit-products/add-edit-products.component';
 import { ProductsResolver } from './services/products.resolver';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
     data: {
       breadcrumb: 'Edit',
     },
+  },
+  {
+    path: 'product/:id',
+    component: UpdateProductComponent
   },
 ];
 

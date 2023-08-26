@@ -1,34 +1,6 @@
 <div class="flex flex-col w-full">
   <div class="relative mb-4">
     <nz-divider nzText="Market Orders" nzOrientation="left"></nz-divider>
-    <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
-      <nz-input-group
-        nzSearch
-        [nzSuffix]="inputClearTpl"
-        [nzAddOnAfter]="suffixIconButton"
-      >
-        <input type="text" nz-input placeholder="search..." />
-      </nz-input-group>
-  
-      <ng-template #inputClearTpl>
-        <span
-          nz-icon
-          class="ant-input-clear-icon"
-          nzTheme="fill"
-          nzType="close-circle"
-          [hidden]="!searchText"
-          (click)="clear()"
-        ></span>
-      </ng-template>
-      <ng-template #suffixIconButton>
-        <button nz-button nzType="primary" nzSearch>
-          <span nz-icon nzType="search"></span>
-        </button>
-      </ng-template>
-      <!-- <button [routerLink]="['add']" nz-button nzType="primary" class="flex items-center justify-center">
-        <span nz-icon nzType="plus" nzTheme="outline"></span>
-      </button> -->
-    </div>
   </div>
   
   <nz-table
@@ -66,8 +38,8 @@
     <tbody>
       <tr *ngFor="let order of groupingTable.data; let i = index">
         <td nzAlign="center">{{ order.client_name || order.client_type }}</td>
-        <td nzAlign="center">{{ order.paid | number }} so'm</td>
-        <td nzAlign="center">{{ order.totalAmount | number }} so'm</td>
+        <td nzAlign="center">{{ order.paid | number }} sum</td>
+        <td nzAlign="center">{{ order.totalAmount | number }} sum</td>
         <td nzAlign="center">
           <button nz-button nzType="link" [routerLink]="['order', order._id]" class="flex items-center justify-center mx-auto">
             <span nz-icon nzType="link" nzTheme="outline"></span>

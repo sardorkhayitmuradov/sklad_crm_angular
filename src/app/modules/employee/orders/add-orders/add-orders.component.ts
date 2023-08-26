@@ -235,7 +235,6 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
   override submit(): void {
     if (this.form.invalid) {
       this.updateValueAndValidity();
-      console.log(this.form.errors);
       return;
     }
 

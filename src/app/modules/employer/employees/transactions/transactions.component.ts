@@ -17,6 +17,7 @@ export class TransactionsComponent extends Grid<
   TransactionsResponse,
   TransactionsRequest
 > {
+  id: string = '';
   /**
    *
    */
@@ -47,28 +48,25 @@ export class TransactionsComponent extends Grid<
     private route: ActivatedRoute
   ) {
     super($data);
-    const id = this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.params['id'];
     const pageIndex = +this.route.snapshot.queryParams['pageIndex'];
     const pageSize = +this.route.snapshot.queryParams['pageSize'];
 
     if (isFinite(pageSize)) {
       this.pages.pageSize = pageSize;
     }
-    
+
     if (isFinite(pageIndex)) {
       this.pages.pageIndex = pageIndex;
     }
-    this.getDatas(id);
+    this.getDatas();
   }
 
-  protected getDatas(id: string) {
-    this.$data.getEmployeeTransactions(id).subscribe(
-      (response: any) => {
-        this.data = response.data;
-        console.log(response.data);
-        this.isLoading = false;
-      }
-    )
+  protected getDatas() {
+    this.$data.getEmployeeTransactions(this.id).subscribe((response: any) => {
+      this.data = response.data;
+      this.isLoading = false;
+    });
   }
 
   /**
@@ -76,14 +74,22 @@ export class TransactionsComponent extends Grid<
    * @param pageIndex
    */
   handelPageIndex(pageIndex: number) {
-    this.router.navigate([], { queryParams: { pageIndex } });
+    this.router.navigate([], {
+      queryParams: { pageIndex, pageSize: this.pages.pageSize },
+    });
   }
 
   /**
    *
    */
   handlePageSize(pageSize: number) {
-    this.router.navigate([], { queryParams: { pageSize } });
+    this.router.navigate([], {
+      queryParams: { pageIndex: this.pages.pageIndex, pageSize },
+    });
+  }
+
+  acceptransaction(id: string) {
+    this.$data.acceptTransaction(id).subscribe((response) => this.getDatas());
   }
 
   /**

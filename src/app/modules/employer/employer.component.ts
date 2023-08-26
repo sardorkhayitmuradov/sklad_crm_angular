@@ -12,6 +12,7 @@ import { TOKEN } from 'src/app/core/auth.inteceptor';
 export class EmployerComponent {
   isCollapsed = true;
   tokenInfo: role;
+  overallNotifications: number = 9;
 
   constructor(private router: Router) {
     const token = localStorage.getItem(TOKEN)!;

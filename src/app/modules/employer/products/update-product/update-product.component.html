@@ -1,0 +1,36 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Product quantity"
+  (nzOnCancel)="cancel()"
+  [nzFooter]="footer"
+  nzWidth="400px"
+>
+  <ng-container *nzModalContent>
+    <div class="flex items-center gap-2 w-full">
+      <form [formGroup]="form" nz-form nzLayout="vertical" class="w-full">
+        <!-- Product qty -->
+        <nz-form-item class="w-full">
+          <nz-form-label nzFor="qty">Enter the quantity of the</nz-form-label>
+          <nz-form-control nzErrorTip="Required field!">
+            <input
+              class="w-full"
+              nz-input
+              name="qty"
+              formControlName="qty"
+              type="text"
+              mask="separator.2"
+              thousandSeparator=" "
+              id="qty"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+      <p class="mt-4">{{ this.form.get("unit")?.value }}</p>
+    </div>
+  </ng-container>
+
+  <ng-template #footer>
+    <button nz-button nzType="primary" (click)="submit()">Add</button>
+    <button nz-button (click)="cancel()">Cancel</button>
+  </ng-template>
+</nz-modal>

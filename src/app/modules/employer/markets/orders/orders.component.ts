@@ -12,7 +12,7 @@ import { DecimalPipe } from '@angular/common';
   selector: 'app-employer-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css'],
-  providers: [DecimalPipe]
+  providers: [DecimalPipe],
 })
 export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
   isVisible = false;
@@ -28,7 +28,7 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     pageSizeOptions: [10, 15, 20, 25, 30],
   };
 
-  searchText: string = ''
+  searchText: string = '';
   data: OrdersResponse[] = [];
 
   constructor(
@@ -38,7 +38,7 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     private route: ActivatedRoute
   ) {
     super($data);
-    const id = this.route.snapshot.params['id'];
+    const id = this.route.snapshot.params['id']
     const pageIndex = +this.route.snapshot.queryParams['pageIndex'];
     const pageSize = +this.route.snapshot.queryParams['pageSize'];
 
@@ -53,10 +53,20 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     this.getData(this.pages.pageIndex, this.pages.pageSize, id);
   }
 
+  /**
+   *
+   * @returns
+   */
   getQtyOrders(): number {
     return this.pages.qtyOrders ?? 0;
   }
 
+  /**
+   *
+   * @param pageIndex
+   * @param pageSize
+   * @param id
+   */
   getData(pageIndex: number, pageSize: number, id?: string) {
     this.$data
       .getByPaginationMarketId(pageIndex, pageSize, id && `${id}`)
@@ -69,6 +79,10 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
       });
   }
 
+  /**
+   *
+   * @param newPageIndex
+   */
   handlePageIndexChange(newPageIndex: number) {
     this.pages.pageIndex = newPageIndex;
     this.isLoading = true;
@@ -78,6 +92,10 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
+  /**
+   *
+   * @param newPageSize
+   */
   handlePageSizeChange(newPageSize: number) {
     this.pages.pageSize = newPageSize;
     this.isLoading = true;
@@ -87,6 +105,10 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
+  /**
+   *
+   * @param id
+   */
   showDeleteConfirm(id: string): void {
     this.modal.confirm({
       nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
@@ -102,18 +124,21 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
   }
 
   /**
-   * 
-   * @param id 
+   *
+   * @param id
    */
-  delete(id: string): void {
-    const routeId = this.route.snapshot.params['id'];
+  delete(id: string) {
+    const Id = this.route.snapshot.params['id']
     this.$data.delete(id).subscribe(() => {
-      this.getData(this.pages.pageIndex, this.pages.pageSize, id && `${routeId}`);
+      this.getData(
+        this.pages.pageIndex,
+        this.pages.pageSize,
+        id && `${Id}`
+      );
     });
   }
 
-
-  clear(){
-    this.searchText = ''
+  clear() {
+    this.searchText = '';
   }
 }

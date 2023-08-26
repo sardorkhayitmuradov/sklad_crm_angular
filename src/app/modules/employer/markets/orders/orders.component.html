@@ -25,9 +25,9 @@
           <span nz-icon nzType="search"></span>
         </button>
       </ng-template>
-      <!-- <button [routerLink]="['add']" nz-button nzType="primary" class="flex items-center justify-center">
+      <button [routerLink]="['add']" nz-button nzType="primary" class="flex items-center justify-center">
         <span nz-icon nzType="plus" nzTheme="outline"></span>
-      </button> -->
+      </button>
     </div>
   </div>
   
@@ -67,8 +67,8 @@
     <tbody>
       <tr *ngFor="let order of groupingTable.data; let i = index">
         <td nzAlign="center">{{ order.market_name }}</td>
-        <td nzAlign="center">{{ order.paid | number }} so'm</td>
-        <td nzAlign="center">{{ order.totalAmount | number }} so'm</td>
+        <td nzAlign="center">{{ order.paid | number }} sum</td>
+        <td nzAlign="center">{{ order.totalAmount | number }} sum</td>
         <td nzAlign="center">
           <button nz-button nzType="link" [routerLink]="['order', order._id]" class="flex items-center justify-center mx-auto">
             <span nz-icon nzType="link" nzTheme="outline"></span>
@@ -81,6 +81,7 @@
               nzType="primary"
               nzDanger
               class="flex items-center justify-center"
+              (click)="showDeleteConfirm(order._id)"
             >
               <span nz-icon nzType="delete" nzTheme="outline"></span>
             </button>

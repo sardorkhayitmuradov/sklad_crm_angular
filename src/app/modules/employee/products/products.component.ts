@@ -6,7 +6,6 @@ import { ProductsService } from './services/products.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { BaseResponse } from '../../shared/models/base.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'employee-products',
@@ -66,7 +65,6 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
       .getByPagination(pageIndex, pageSize)
       .subscribe((response: BaseResponse<Products[]>) => {
         this.data = response.data;
-        // console.log(this.data)
         this.pages.pageIndex = response.page;
         this.pages.pageSize = response.page_size;
         this.pages.all = response.all;
@@ -123,6 +121,17 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
       this.isLoading = true;
       this.getData(this.pages.pageIndex, this.pages.pageSize);
     }
+  }
+
+  /**
+   *
+   */
+  add(id: string) {
+    this.router.navigate([], {
+      queryParams: { product: id },
+    });
+
+    this.isVisible = true;
   }
 
   /**
