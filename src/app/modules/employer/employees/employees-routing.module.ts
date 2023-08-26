@@ -27,7 +27,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'orders',
+    path: 'orders/:id',
     loadChildren: () =>
       import('./orders/orders.module').then((m) => m.OrdersModule),
     data: {
@@ -35,7 +35,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'transactions',
+    path: 'transactions/:id',
     loadChildren: () =>
       import('./transactions/transactions.module').then((m) => m.TransactionsModule),
     data: {

@@ -12,12 +12,14 @@ import { DecimalPipe } from '@angular/common';
   selector: 'employer-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css'],
-  providers: [DecimalPipe]
+  providers: [DecimalPipe],
 })
 export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
   isVisible = false;
   isOkLoading = false;
   isLoading = true;
+
+  employeeId: string = '';
 
   pages: pages = {
     pageIndex: 1,
@@ -28,7 +30,7 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     pageSizeOptions: [10, 15, 20, 25, 30],
   };
 
-  searchText: string = ''
+  searchText: string = '';
   data: OrdersResponse[] = [];
 
   constructor(
@@ -38,6 +40,7 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     private route: ActivatedRoute
   ) {
     super($data);
+    this.employeeId = this.route.snapshot.params['id'];
     const pageIndex = +this.route.snapshot.queryParams['pageIndex'];
     const pageSize = +this.route.snapshot.queryParams['pageSize'];
 
@@ -49,16 +52,16 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
       this.pages.pageSize = pageSize;
     }
 
-    this.getData(this.pages.pageIndex, this.pages.pageSize);
+    this.getData(this.pages.pageIndex, this.pages.pageSize, this.employeeId);
   }
 
   getQtyOrders(): number {
     return this.pages.qtyOrders ?? 0;
   }
 
-  getData(pageIndex: number, pageSize: number) {
+  getData(pageIndex: number, pageSize: number, id: string) {
     this.$data
-      .getByPagination(pageIndex, pageSize)
+      .getEmployeeOrders(pageIndex, pageSize, id)
       .subscribe((response: BaseResponse<OrdersResponse[]>) => {
         this.data = response.data;
         this.pages.pageIndex = response.page;
@@ -74,7 +77,7 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     this.router.navigate([], {
       queryParams: { pageIndex: newPageIndex, pageSize: this.pages.pageSize },
     });
-    this.getData(this.pages.pageIndex, this.pages.pageSize);
+    this.getData(this.pages.pageIndex, this.pages.pageSize, this.employeeId);
   }
 
   handlePageSizeChange(newPageSize: number) {
@@ -83,31 +86,36 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     this.router.navigate([], {
       queryParams: { pageIndex: this.pages.pageIndex, pageSize: newPageSize },
     });
-    this.getData(this.pages.pageIndex, this.pages.pageSize);
+    this.getData(this.pages.pageIndex, this.pages.pageSize, this.employeeId);
   }
 
-  showDeleteConfirm(id: string): void {
-    this.modal.confirm({
-      nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
-      nzOkText: 'Yes',
-      nzOkType: 'primary',
-      nzOkDanger: true,
-      nzOnOk: () => {
-        this.delete(id);
-      },
-      nzCancelText: 'No',
-      nzOnCancel: () => console.log('Cancel'),
-    });
+  /**
+   *
+   * @param searchText
+   */
+  handleSearch(searchText: string) {
+    this.isLoading = true;
+    this.$data
+      .getDatasBySearch(searchText, 'order')
+      .subscribe((response: BaseResponse<OrdersResponse[]>) => {
+        this.data = response.data;
+        this.isLoading = false;
+      });
   }
 
-  delete(id: string): void {
-    this.$data.delete(id).subscribe(() => {
-      this.getData(this.pages.pageIndex, this.pages.pageSize);
-    });
+  /**
+   *
+   * @param searchText
+   */
+  handleSearchTextChange(searchText: string) {
+    if (searchText.length === 0) {
+      this.isLoading = true;
+      this.getData(this.pages.pageIndex, this.pages.pageSize, this.employeeId);
+    }
   }
 
-
-  clear(){
-    this.searchText = ''
+  clear() {
+    this.searchText = '';
+    this.handleSearchTextChange(this.searchText);
   }
 }

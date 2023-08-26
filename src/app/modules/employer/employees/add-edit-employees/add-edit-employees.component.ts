@@ -69,7 +69,6 @@ export class AddEditEmployeesComponent extends AddEdit<Employees, EmployeesReque
     super($data,$notification, router, route);
     if (this.isEdit) {
       route.data.subscribe((w) => {
-        console.log(w['data']);
         // this.setFormValues(w['data']['data']);
         // this.form.controls.phone_number.setValue(
         //   this.form.controls.phone_number.value.replace('+998', '')

@@ -16,4 +16,4 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
     SharedModule
   ]
 })
-export class OrdersModule { }
+export class OrderModule { }

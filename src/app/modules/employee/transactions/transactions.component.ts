@@ -147,6 +147,10 @@ export class TransactionsComponent extends Grid<
     this.isVisible = true;
   }
 
+  /**
+   * 
+   * @param id 
+   */
   delete(id: string): void {
     this.$data.delete(id).subscribe(
       (w) => {
