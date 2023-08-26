@@ -78,16 +78,16 @@
             >
               <span nz-icon nzType="edit" nzTheme="outline"></span>
             </button> -->
-            <!-- <button
+            <button
               nz-button
               nzType="primary"
               [disabled]="data.employerAccepted"
               nzDanger
               class="flex items-center justify-center"
-              (click)="showDeleteConfirm(data._id)"
+              (click)="acceptransaction(data._id)"
             >
-              <span nz-icon nzType="delete" nzTheme="outline"></span>
-            </button> -->
+            <span nz-icon nzType="check" nzTheme="outline"></span>
+            </button>
           </div>
         </td>
       </tr>

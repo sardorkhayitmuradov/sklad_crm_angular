@@ -16,7 +16,6 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
   isOkLoading = false;
   isLoading = true;
 
-
   pages: pages = {
     pageIndex: 1,
     pageSize: 10,
@@ -33,48 +32,56 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
 
   data: Products[] = [];
 
-  constructor($data: ProductsService, private modal: NzModalService, private router: Router , private route: ActivatedRoute) {
+  constructor(
+    $data: ProductsService,
+    private modal: NzModalService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     super($data);
     const pageIndex = +this.route.snapshot.queryParams['pageIndex'];
     const pageSize = +this.route.snapshot.queryParams['pageSize'];
-    
+
     if (isFinite(pageIndex)) {
       this.pages.pageIndex = pageIndex;
     }
 
-    if(isFinite(pageSize)){
+    if (isFinite(pageSize)) {
       this.pages.pageSize = pageSize;
     }
-    
-    this.getData(this.pages.pageIndex, this.pages.pageSize)
+
+    this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
-  
-  
+
   getData(pageIndex: number, pageSize: number) {
     this.$data
-    .getByPagination(pageIndex, pageSize)
-    .subscribe((response: BaseResponse<Products[]>) => {
-      this.data = response.data;
-      console.log(this.data)
-      this.pages.pageIndex = response.page;
-      this.pages.pageSize = response.page_size;
-      this.pages.all = response.all
-      this.isLoading = false;
-    });
+      .getByPagination(pageIndex, pageSize)
+      .subscribe((response: BaseResponse<Products[]>) => {
+        this.data = response.data;
+        console.log(this.data);
+        this.pages.pageIndex = response.page;
+        this.pages.pageSize = response.page_size;
+        this.pages.all = response.all;
+        this.isLoading = false;
+      });
   }
 
   handlePageIndexChange(newPageIndex: number) {
     this.pages.pageIndex = newPageIndex;
     this.isLoading = true;
-    this.router.navigate([], { queryParams: { pageIndex: newPageIndex , pageSize: this.pages.pageSize } });
-    this.getData(this.pages.pageIndex , this.pages.pageSize);
+    this.router.navigate([], {
+      queryParams: { pageIndex: newPageIndex, pageSize: this.pages.pageSize },
+    });
+    this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
   handlePageSizeChange(newPageSize: number) {
     this.pages.pageSize = newPageSize;
     this.isLoading = true;
-    this.router.navigate([], { queryParams: { pageIndex: this.pages.pageIndex , pageSize: newPageSize } });
-    this.getData(this.pages.pageIndex, this.pages.pageSize)
+    this.router.navigate([], {
+      queryParams: { pageIndex: this.pages.pageIndex, pageSize: newPageSize },
+    });
+    this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
   showDeleteConfirm(id: string): void {
@@ -92,10 +99,11 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
   }
 
   /**
-   * 
-   * @param id 
+   *
+   * @param id
    */
   delete(id: string): void {
+    this.isLoading = true;
     this.$data.delete(id).subscribe(() => {
       this.getData(this.pages.pageIndex, this.pages.pageSize);
     });

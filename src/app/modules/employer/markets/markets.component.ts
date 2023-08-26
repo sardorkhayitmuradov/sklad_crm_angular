@@ -16,13 +16,12 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
   isOkLoading = false;
   isLoading = true;
 
-
   pages: pages = {
     pageIndex: 1,
     pageSize: 10,
     all: 0,
     count: 0, /// datas per page coming
-    pageSizeOptions: [10,15,20,25,30]
+    pageSizeOptions: [10, 15, 20, 25, 30],
   };
 
   /**
@@ -31,53 +30,76 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
   searchText = '';
 
   data: Markets[] = [];
-  
-  constructor($data: MarketsService, private modal: NzModalService, private router: Router , private route: ActivatedRoute) {
+
+  constructor(
+    $data: MarketsService,
+    private modal: NzModalService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     super($data);
     const pageIndex = +this.route.snapshot.queryParams['pageIndex'];
     const pageSize = +this.route.snapshot.queryParams['pageSize'];
-    
+
     if (isFinite(pageIndex)) {
       this.pages.pageIndex = pageIndex;
     }
 
-    if(isFinite(pageSize)){
+    if (isFinite(pageSize)) {
       this.pages.pageSize = pageSize;
     }
 
-    this.getData(this.pages.pageIndex, this.pages.pageSize)
+    this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
-  
-  
+
+  /**
+   * 
+   * @param pageIndex 
+   * @param pageSize 
+   */
   getData(pageIndex: number, pageSize: number) {
     this.$data
       .getByPagination(pageIndex, pageSize)
       .subscribe((response: BaseResponse<Markets[]>) => {
         this.data = response.data;
-        console.log(this.data)
+        console.log(this.data);
         this.pages.pageIndex = response.page;
         this.pages.pageSize = response.page_size;
-        this.pages.all = response.all
+        this.pages.all = response.all;
         this.isLoading = false;
       });
   }
 
-
-
-  handlePageIndexChange(newPageIndex: number){
+  /**
+   * 
+   * @param newPageIndex 
+   */
+  handlePageIndexChange(newPageIndex: number) {
     this.pages.pageIndex = newPageIndex;
     this.isLoading = true;
-    this.router.navigate([], { queryParams: { pageIndex: newPageIndex , pageSize: this.pages.pageSize } });
-    this.getData(this.pages.pageIndex , this.pages.pageSize)
+    this.router.navigate([], {
+      queryParams: { pageIndex: newPageIndex, pageSize: this.pages.pageSize },
+    });
+    this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
-  handlePageSizeChange(newPageSize: number){
-    this.pages.pageSize = newPageSize
+  /**
+   * 
+   * @param newPageSize 
+   */
+  handlePageSizeChange(newPageSize: number) {
+    this.pages.pageSize = newPageSize;
     this.isLoading = true;
-    this.router.navigate([], { queryParams: { pageIndex: this.pages.pageIndex , pageSize: newPageSize } });
-    this.getData(this.pages.pageIndex, this.pages.pageSize)
+    this.router.navigate([], {
+      queryParams: { pageIndex: this.pages.pageIndex, pageSize: newPageSize },
+    });
+    this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
+  /**
+   * 
+   * @param id 
+   */
   showDeleteConfirm(id: string): void {
     this.modal.confirm({
       nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
@@ -93,20 +115,19 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
   }
 
   /**
-   * 
-   * @param id 
+   *
+   * @param id
    */
-  delete(id: string): void {
+  delete(id: string) {
     this.$data.delete(id).subscribe(() => {
       this.getData(this.pages.pageIndex, this.pages.pageSize);
     });
   }
 
-
-    /**
+  /**
    *
    */
-    clear() {
-      this.searchText = '';
-    }
+  clear() {
+    this.searchText = '';
+  }
 }

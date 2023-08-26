@@ -113,16 +113,45 @@
         ></span>
 
         <div class="flex items-center gap-x-6">
+          <button nz-button class="border-none p-0">
+            <nz-badge
+              [nzCount]="overallNotifications"
+              nz-popover
+              nzPopoverTitle="Notifications"
+              [nzPopoverContent]="contentTemplate"
+              nzPopoverPlacement="bottom"
+            >
+              <span
+                style="font-size: 24px"
+                nz-icon
+                nzType="bell"
+                nzTheme="outline"
+              ></span>
+            </nz-badge>
+          </button>
+
+          <ng-template #contentTemplate>
+            <div>
+              <a>New transactions</a>
+            </div>
+          </ng-template>
+
+          <div>
+            <employer-language></employer-language>
+          </div>
+
           <p class="h-fit font-medium">
             {{ tokenInfo.role == "employer" && "Admin" }}
           </p>
           <button
             nz-button
             nzSize="default"
+            class="flex items-center"
             nzType="primary"
             (click)="logOut()"
           >
-            Log out
+            <span nz-icon nzType="logout" nzTheme="outline"></span>
+            <span>Log out</span>
           </button>
         </div>
       </div>

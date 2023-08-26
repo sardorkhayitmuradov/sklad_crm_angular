@@ -49,15 +49,21 @@
   >
     <thead>
       <tr>
-        <th nzWidth="30%" [nzAlign]="'center'">Name</th>
-        <th nzWidth="20%" [nzAlign]="'center'">
+        <th nzWidth="20%" [nzAlign]="'center'">Name</th>
+        <th nzWidth="15%" [nzAlign]="'center'">
           <div class="flex items-center justify-center gap-1">
             <p>Phone</p>
             <span nz-icon nzType="phone" nzTheme="twotone"></span>
           </div>
         </th>
-        <th nzWidth="35%" [nzAlign]="'center'">Address</th>
-        <th [nzAlign]="'center'">Orders</th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <p>Debt</p>
+            <span nz-icon nzType="dollar" nzTheme="twotone"></span>
+          </div>
+        </th>
+        <th nzWidth="25%" [nzAlign]="'center'">Address</th>
+        <th nzWidth="10%" [nzAlign]="'center'">Orders</th>
         <th [nzAlign]="'center'">Operations</th>
       </tr>
     </thead>
@@ -65,6 +71,7 @@
       <tr *ngFor="let data of basicTable.data">
         <td [nzAlign]="'center'">{{ data.market_name }}</td>
         <td [nzAlign]="'center'">{{ data.phone_number }}</td>
+        <td [nzAlign]="'center'">{{ data.debt | number }} sum</td>
         <td [nzAlign]="'center'">{{ data.location }}</td>
         <td [nzAlign]="'center'">
           <button

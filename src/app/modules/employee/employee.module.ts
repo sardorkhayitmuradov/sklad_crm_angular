@@ -8,10 +8,6 @@ import { LanguageComponent } from './components/language/language.component';
 
 @NgModule({
   declarations: [EmployeeComponent, LanguageComponent],
-  imports: [
-    CommonModule,
-    EmployeeRoutingModule,
-    SharedModule
-  ],
+  imports: [CommonModule, EmployeeRoutingModule, SharedModule],
 })
 export class EmployeeModule {}

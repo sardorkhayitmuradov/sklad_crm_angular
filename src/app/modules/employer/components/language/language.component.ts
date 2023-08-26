@@ -6,7 +6,7 @@ export const DEFAULT_LANGUAGE = 'en';
 const CURRENT_LANGUAGE = 'en';
 
 @Component({
-  selector: 'employee-language',
+  selector: 'employer-language',
   templateUrl: './language.component.html',
   styleUrls: ['./language.component.css']
 })

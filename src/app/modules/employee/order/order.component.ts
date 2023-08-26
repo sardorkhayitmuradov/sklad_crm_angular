@@ -44,13 +44,4 @@ export class OrderComponent extends Grid<OrderResponse, OrderRequest> {
       });
   }
 
-  /**
-   * 
-   * @param product 
-   * @returns 
-   */
-  arePricesEqual() {
-    return this.data[0].products[0].price === this.data[0].products[0].soldPrice;
-  }
-
 }

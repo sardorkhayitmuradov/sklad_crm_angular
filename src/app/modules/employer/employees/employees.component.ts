@@ -74,18 +74,6 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
   /**
    *
    */
-  add() {
-    if (this.isVisible === undefined) {
-      this.router.navigate(['add'], { relativeTo: this.route });
-      return;
-    }
-
-    this.isVisible = true;
-  }
-
-  /**
-   *
-   */
   clear() {
     this.searchText = '';
   }

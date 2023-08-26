@@ -89,6 +89,15 @@ export abstract class CRUDService<TResponse, TRequest> {
     );
   }
 
+   /**
+   * 
+   * @param id 
+   * @returns 
+   */
+   acceptTransaction(id: string){
+    return this._base.put<BaseResponse<TResponse[]>>(`${this.url}/${id}`)
+  }
+
   /**
    *
    * @param model

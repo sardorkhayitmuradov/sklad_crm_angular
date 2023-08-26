@@ -8,15 +8,17 @@ import { OrderRequest, OrderResponse, Products } from './model/order.model';
 @Component({
   selector: 'employer-order',
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css']
+  styleUrls: ['./order.component.css'],
 })
 export class OrderComponent extends Grid<OrderResponse, OrderRequest> {
+  id: string = '';
+
   isVisible = false;
   isOkLoading = false;
   isLoading = true;
 
   /**
-   * 
+   *
    */
   data: OrderResponse[] = [];
 
@@ -27,32 +29,18 @@ export class OrderComponent extends Grid<OrderResponse, OrderRequest> {
     private route: ActivatedRoute
   ) {
     super($data);
-    const Id = route.snapshot.params['id'];
-    this.getDataById(Id)
+    this.id = route.snapshot.params['id'];
+    this.getDataById();
   }
 
   /**
-   * 
-   * @param id 
+   *
+   * @param id
    */
-  getDataById(id: string) {
-    this.$data
-      .getById(id)
-      .subscribe((response: any) => {
-        this.data = [response.data];
-        this.isLoading = false;
-      });
+  getDataById() {
+    this.$data.getById(this.id).subscribe((response: any) => {
+      this.data = [response.data];
+      this.isLoading = false;
+    });
   }
-
-  /**
-   * 
-   * @param product 
-   * @returns 
-   */
-  arePricesEqual() {
-    return this.data[0].products[0].price === this.data[0].products[0].soldPrice;
-  }
-
-
-
 }

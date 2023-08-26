@@ -28,7 +28,6 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     pageSizeOptions: [10, 15, 20, 25, 30],
   };
 
-  searchText: string = ''
   data: OrdersResponse[] = [];
 
   constructor(
@@ -111,8 +110,4 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
     return rowspan;
   }
 
-
-  clear(){
-    this.searchText = ''
-  }
 }
