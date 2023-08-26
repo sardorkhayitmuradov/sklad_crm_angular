@@ -4,21 +4,13 @@ import { CommonModule } from '@angular/common';
 import { TransactionsRoutingModule } from './transactions-routing.module';
 import { TransactionsComponent } from './transactions.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
-import { AddEditTransactionsComponent } from './add-edit-transactions/add-edit-transactions.component';
-
 
 @NgModule({
-  declarations: [TransactionsComponent, AddEditTransactionsComponent],
+  declarations: [TransactionsComponent],
   imports: [
     CommonModule,
     TransactionsRoutingModule,
     SharedModule,
-    NgxMaskDirective,
-    NgxMaskPipe,
-  ],
-  providers: [
-    provideNgxMask()
   ],
 })
 export class TransactionsModule { }

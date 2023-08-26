@@ -73,6 +73,7 @@ export class OrdersComponent extends Grid<OrdersResponse, OrdersRequest> {
       .getByPagination(pageIndex, pageSize)
       .subscribe((response: BaseResponse<OrdersResponse[]>) => {
         this.data = response.data;
+        console.log(response.data);
         this.pages.pageIndex = response.page;
         this.pages.pageSize = response.page_size;
         this.pages.qtyOrders = response.qtyOrders;

@@ -29,14 +29,37 @@ export abstract class CRUDService<TResponse, TRequest> {
   }
 
   /**
-   * 
-   * @param url 
-   * @returns 
+   *
+   * @param url
+   * @returns
    */
-  getDatasBySearch(text: string, order?: string){
-    return this._base.get<BaseResponse<TResponse[]>>(`${order ?? this.url}?search=${text}`);
+  getDatasBySearch(text: string, order?: string) {
+    return this._base.get<BaseResponse<TResponse[]>>(
+      `${order ?? this.url}?search=${text}`
+    );
   }
 
+  /**
+   *
+   * @param id
+   * @returns
+   */
+  getEmployeeTransactions(id: string) {
+    return this._base.get<BaseResponse<TResponse[]>>(
+      `${this.url}?employeeId=${id}`
+    );
+  }
+
+  /**
+   *
+   * @param id
+   * @returns
+   */
+  getEmployeeOrders(page: number, pageSize: number, id: string) {
+    return this._base.get<BaseResponse<TResponse[]>>(
+      `${this.url}/pagination?page=${page}&pageSize=${pageSize}&employeeId=${id}`
+    );
+  }
 
   /**
    *
@@ -51,7 +74,9 @@ export abstract class CRUDService<TResponse, TRequest> {
    * @param page pageSize
    */
   getByPagination(page: number, pageSize: number) {
-    return this._base.get<BaseResponse<TResponse[]>>(`${this.url}/pagination?page=${page}&pageSize=${pageSize}`);
+    return this._base.get<BaseResponse<TResponse[]>>(
+      `${this.url}/pagination?page=${page}&pageSize=${pageSize}`
+    );
   }
 
   /**
@@ -59,7 +84,9 @@ export abstract class CRUDService<TResponse, TRequest> {
    * @param page pageSize
    */
   getByPaginationMarketId(page: number, pageSize: number, id?: string) {
-    return this._base.get<BaseResponse<TResponse[]>>(`${this.url}/pagination?page=${page}&pageSize=${pageSize}&marketId=${id}`);
+    return this._base.get<BaseResponse<TResponse[]>>(
+      `${this.url}/pagination?page=${page}&pageSize=${pageSize}&marketId=${id}`
+    );
   }
 
   /**
@@ -79,7 +106,6 @@ export abstract class CRUDService<TResponse, TRequest> {
   edit(id: string, model: TRequest) {
     return this._base.put<TResponse>(`${this.url}/${id}`, model);
   }
-
 
   /**
    *

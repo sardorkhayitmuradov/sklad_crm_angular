@@ -33,7 +33,7 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
   }
 
   protected getDatas() {
-    this.data$.subscribe((response: any) => {
+    this.$data.getAll().subscribe((response: any) => {
       this.data = response.employees;
       this.isLoading = false;
     });
@@ -46,6 +46,7 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
+        this.isLoading = true;
         this.delete(id);
       },
       nzCancelText: 'No',
@@ -53,10 +54,21 @@ export class EmployeesComponent extends Grid<Employees, EmployeesRequest> {
     });
   }
 
+  /**
+   *
+   * @param id
+   */
   delete(id: string): void {
-    this.$data.delete(id).subscribe(() => {
-      this.getDatas();
-    });
+    this.$data.delete(id).subscribe(
+      (w) => {
+        if (w.message) {
+          this.getDatas();
+        }
+      },
+      (error) => {
+        console.error('Delete error:', error);
+      }
+    );
   }
 
   /**

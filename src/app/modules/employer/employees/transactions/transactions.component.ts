@@ -47,6 +47,7 @@ export class TransactionsComponent extends Grid<
     private route: ActivatedRoute
   ) {
     super($data);
+    const id = this.route.snapshot.params['id'];
     const pageIndex = +this.route.snapshot.queryParams['pageIndex'];
     const pageSize = +this.route.snapshot.queryParams['pageSize'];
 
@@ -57,14 +58,17 @@ export class TransactionsComponent extends Grid<
     if (isFinite(pageIndex)) {
       this.pages.pageIndex = pageIndex;
     }
-    this.getDatas();
+    this.getDatas(id);
   }
 
-  protected getDatas() {
-    this.data$.subscribe((response: any) => {
-      this.data = response.data;
-      this.isLoading = false;
-    });
+  protected getDatas(id: string) {
+    this.$data.getEmployeeTransactions(id).subscribe(
+      (response: any) => {
+        this.data = response.data;
+        console.log(response.data);
+        this.isLoading = false;
+      }
+    )
   }
 
   /**
@@ -80,38 +84,6 @@ export class TransactionsComponent extends Grid<
    */
   handlePageSize(pageSize: number) {
     this.router.navigate([], { queryParams: { pageSize } });
-  }
-
-  showDeleteConfirm(id: string): void {
-    this.modal.confirm({
-      nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
-      nzOkText: 'Yes',
-      nzOkType: 'primary',
-      nzOkDanger: true,
-      nzOnOk: () => {
-        this.delete(id);
-      },
-      nzCancelText: 'No',
-      nzOnCancel: () => console.log('Cancel'),
-    });
-  }
-
-  /**
-   *
-   */
-  add() {
-    if (this.isVisible === undefined) {
-      this.router.navigate(['add'], { relativeTo: this.route });
-      return;
-    }
-
-    this.isVisible= true;
-  }
-
-   delete(id: string): void {
-    this.$data.delete(id).subscribe(() => {
-      this.getDatas();
-    });
   }
 
   /**

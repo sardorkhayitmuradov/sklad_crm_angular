@@ -2,24 +2,6 @@
   <div class="relative mb-4">
     <nz-divider nzText="Employees" nzOrientation="left"></nz-divider>
     <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
-      <!-- <nz-input-group
-        nzSearch
-        [nzSuffix]="inputClearTpl"
-        [nzAddOnAfter]="suffixIconButton"
-      >
-        <input type="text" nz-input placeholder="search..." />
-      </nz-input-group> -->
-
-      <!-- <ng-template #inputClearTpl>
-        <span
-          nz-icon
-          class="ant-input-clear-icon"
-          nzTheme="fill"
-          nzType="close-circle"
-          [hidden]="!searchText"
-          (click)="clear()"
-        ></span>
-      </ng-template> -->
       <ng-template #suffixIconButton>
         <button nz-button nzType="primary" nzSearch>
           <span nz-icon nzType="search"></span>
@@ -83,7 +65,7 @@
           <button
               nz-button
               nzType="link"
-              [routerLink]="['orders', data._id]"
+              [routerLink]="['transactions', data._id]"
             >
             <span nz-icon nzType="link" nzTheme="outline"></span>
             </button>
@@ -92,7 +74,7 @@
           <button
               nz-button
               nzType="link"
-              [routerLink]="['transactions', data._id]"
+              [routerLink]="['orders', data._id]"
             >
             <span nz-icon nzType="link" nzTheme="outline"></span>
             </button>

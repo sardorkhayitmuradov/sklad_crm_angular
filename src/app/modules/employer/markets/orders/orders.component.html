@@ -47,7 +47,7 @@
   >
     <thead>
       <tr>
-        <th nzWidth="10%" nzAlign="center">ID (Name)</th>
+        <th nzWidth="10%" nzAlign="center">Name</th>
         <th nzWidth="35%" nzAlign="center">
           <div class="flex items-center gap-1 justify-center">
             <p>Paid</p>
@@ -66,7 +66,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let order of groupingTable.data; let i = index">
-        <td nzAlign="center">{{ order.client_name || order.client_type }}</td>
+        <td nzAlign="center">{{ order.market_name }}</td>
         <td nzAlign="center">{{ order.paid | number }} so'm</td>
         <td nzAlign="center">{{ order.totalAmount | number }} so'm</td>
         <td nzAlign="center">
