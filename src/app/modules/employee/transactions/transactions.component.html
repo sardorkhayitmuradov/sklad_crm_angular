@@ -53,17 +53,16 @@
 
   <nz-table
     #basicTable
+    [nzSize]="'middle'"
     [nzData]="data || []"
     [nzLoading]="isLoading"
-    nzBordered
-    [nzSize]="'middle'"
     [nzPageSizeOptions]="pages.pageSizeOptions"
+    (nzPageIndexChange)="handelPageIndex($event)"
     (nzPageSizeChange)="handlePageSize($event)"
     [nzPageIndex]="pages.pageIndex"
-    (nzPageIndexChange)="handelPageIndex($event)"
     [nzPageSize]="pages.pageSize"
     [nzTotal]="pages.all"
-    nzShowSizeChanger
+    nzBordered
   >
     <thead>
       <tr>

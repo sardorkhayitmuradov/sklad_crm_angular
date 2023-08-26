@@ -27,7 +27,7 @@ export class TransactionsComponent extends Grid<
   isLoading = true;
 
   /**
-   * 
+   *
    */
   pages: pages = {
     pageIndex: 1,
@@ -57,7 +57,7 @@ export class TransactionsComponent extends Grid<
     if (isFinite(pageSize)) {
       this.pages.pageSize = pageSize;
     }
-    
+
     if (isFinite(pageIndex)) {
       this.pages.pageIndex = pageIndex;
     }
@@ -65,13 +65,13 @@ export class TransactionsComponent extends Grid<
   }
 
   /**
-   * 
+   *
    */
   getDatas() {
-    this.data$.subscribe((response: any) => {
+    this.$data.getAll().subscribe((response: any) => {
       this.data = response.data;
       this.isLoading = false;
-    });
+    })
   }
 
   /**
@@ -80,7 +80,9 @@ export class TransactionsComponent extends Grid<
    */
   handelPageIndex(pageIndex: number) {
     this.pages.pageIndex = pageIndex;
-    this.router.navigate([], { queryParams: { pageIndex, pageSize: this.pages.pageSize } });
+    this.router.navigate([], {
+      queryParams: { pageIndex, pageSize: this.pages.pageSize },
+    });
   }
 
   /**
@@ -88,7 +90,9 @@ export class TransactionsComponent extends Grid<
    */
   handlePageSize(pageSize: number) {
     this.pages.pageSize = pageSize;
-    this.router.navigate([], { queryParams: { pageIndex: this.pages.pageIndex , pageSize } });
+    this.router.navigate([], {
+      queryParams: { pageIndex: this.pages.pageIndex, pageSize },
+    });
   }
 
   /**
@@ -123,6 +127,7 @@ export class TransactionsComponent extends Grid<
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
+        this.isLoading = true;
         this.delete(id);
       },
       nzCancelText: 'No',
@@ -139,13 +144,20 @@ export class TransactionsComponent extends Grid<
       return;
     }
 
-    this.isVisible= true;
+    this.isVisible = true;
   }
 
   delete(id: string): void {
-    this.$data.delete(id).subscribe(() => {
-      this.getDatas();
-    });
+    this.$data.delete(id).subscribe(
+      (w) => {
+        if (w.message) {
+          this.getDatas();
+        }
+      },
+      (error) => {
+        console.error('Delete error:', error);
+      }
+    );
   }
 
   /**
