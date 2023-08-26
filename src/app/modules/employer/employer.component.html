@@ -135,16 +135,23 @@
               <a>New transactions</a>
             </div>
           </ng-template>
+
+          <div>
+            <employer-language></employer-language>
+          </div>
+
           <p class="h-fit font-medium">
             {{ tokenInfo.role == "employer" && "Admin" }}
           </p>
           <button
             nz-button
             nzSize="default"
+            class="flex items-center"
             nzType="primary"
             (click)="logOut()"
           >
-            Log out
+            <span nz-icon nzType="logout" nzTheme="outline"></span>
+            <span>Log out</span>
           </button>
         </div>
       </div>
