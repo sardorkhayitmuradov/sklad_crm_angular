@@ -36,8 +36,8 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
       this.fb.group({
         productId: ['', Validators.required],
         qty: [0, [Validators.required, Validators.min(1)]],
-        productPrice: [0, Validators.required],
-        price: [{ value: 0, disabled: true }],
+        price: [0, Validators.required],
+        overallPrice: [{ value: 0, disabled: true }],
       }),
     ]),
     paid: [0, Validators.required],
@@ -132,7 +132,7 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     const products = this.products.getRawValue();
     this.orderTotalPrice = 0;
     for (let i = 0; i < products.length; i++) {
-      this.orderTotalPrice += products[i].price;
+      this.orderTotalPrice += products[i].overallPrice;
     }
   }
 
@@ -148,15 +148,15 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
 
     if (selectedProduct) {
       const qtyControl = productGroup.get('qty');
+      const overrallPriceControl = productGroup.get('overallPrice');
       const priceControl = productGroup.get('price');
-      const productPriceControl = productGroup.get('productPrice');
 
 
-      if (qtyControl && priceControl && productPriceControl) {
+      if (qtyControl && overrallPriceControl && priceControl) {
         if (fromProductSelect) {
           qtyControl.setValue(1);
-          productPriceControl.setValue(selectedProduct.price);
-          priceControl.setValue(qtyControl.value * selectedProduct.price);
+          priceControl.setValue(selectedProduct.price);
+          overrallPriceControl.setValue(qtyControl.value * selectedProduct.price);
 
           if (this.products.getRawValue().length === 1) {
             this.orderTotalPrice = selectedProduct.price;
@@ -168,8 +168,8 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
         }
 
         if (!isNaN(qtyControl.value) && !isNaN(selectedProduct.price)) {
-          const overallPrice = qtyControl.value * productPriceControl.value;
-          priceControl.setValue(overallPrice);
+          const overallPrice = qtyControl.value * priceControl.value;
+          overrallPriceControl.setValue(overallPrice);
           this.showOrderTotalPrice();
           this.form.controls.paid.setValue(this.orderTotalPrice);
         }
@@ -187,12 +187,12 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
 
     if (productGroup instanceof FormGroup) {
       const qtyControl = productGroup.get('qty');
-      const priceControl = productGroup.get('price');
+      const overallPriceControl = productGroup.get('overallPrice');
 
-      if (qtyControl && priceControl) {
+      if (qtyControl && overallPriceControl) {
         if (!isNaN(qtyControl.value)) {
           const overallPrice = Number(qtyControl.value) * price;
-          priceControl.setValue(overallPrice);
+          overallPriceControl.setValue(overallPrice);
           this.showOrderTotalPrice();
           this.form.controls.paid.setValue(this.orderTotalPrice);
         }
@@ -222,8 +222,8 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
       this.fb.group({
         productId: ['', Validators.required],
         qty: [0, Validators.required],
-        productPrice: [0, Validators.required],
-        price: [{ value: 0, disabled: true }, Validators.required],
+        price: [0, Validators.required],
+        overallPrice: [{ value: 0, disabled: true }, Validators.required],
       })
     );
   }
@@ -242,7 +242,7 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     const request: OrdersRequest = this.form.getRawValue() as any;
     // Creating a new array with productPrice removed from each product
     const modifiedProducts = request.products.map((product) => {
-      const { productPrice, ...rest } = product;
+      const { overallPrice, ...rest } = product;
       return rest;
     });
 

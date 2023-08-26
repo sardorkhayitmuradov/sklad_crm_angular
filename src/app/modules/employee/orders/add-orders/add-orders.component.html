@@ -178,10 +178,10 @@
                   <input
                     required
                     nz-input
-                    name="productPrice"
+                    name="price"
                     type="text"
-                    id="productPrice"
-                    formControlName="productPrice"
+                    id="price"
+                    formControlName="price"
                     (ngModelChange)="updateOverallPrice(i, $event)"
                     mask="separator.2"
                     thousandSeparator=" "
@@ -197,10 +197,10 @@
                 <nz-form-control nzErrorTip="Required field!">
                   <input
                     nz-input
-                    name="price"
-                    formControlName="price"
+                    name="overallPrice"
+                    formControlName="overallPrice"
                     type="text"
-                    id="price"
+                    id="overallPrice"
                     mask="separator.2"
                     thousandSeparator=" "
                   />
