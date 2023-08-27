@@ -62,7 +62,6 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
       .getByPagination(pageIndex, pageSize)
       .subscribe((response: BaseResponse<Markets[]>) => {
         this.data = response.data;
-        console.log(this.data);
         this.pages.pageIndex = response.page;
         this.pages.pageSize = response.page_size;
         this.pages.all = response.all;

@@ -44,7 +44,6 @@ export class AddEditProductsComponent extends AddEdit<
     if (this.isEdit) {
       route.data.subscribe((w) => {
         this.setFormValues(w['data']['data']);
-        console.log(this.form.controls);
       });
     }
   }
