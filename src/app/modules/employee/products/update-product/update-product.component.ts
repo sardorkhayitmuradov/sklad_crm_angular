@@ -61,6 +61,31 @@ export class UpdateProductComponent extends AddEdit<Products, ProductsRequest> {
     }
   }
 
+  protected override setFormValues(model: any) {
+    type FormControlsKeys = keyof typeof this.form.controls;
+    type TResponseKeys = keyof Products[];
+    Object.keys(this.form.controls).forEach((key) => {
+      this.form.controls[key as FormControlsKeys].setValue(
+        model[key as TResponseKeys]
+        );
+        this.form.controls.qty.setValue('');
+    });
+  }
+
+  /**
+   *
+   * @returns
+   */
+  override submit() {
+    if (this.form.invalid) {
+      this.updateValueAndValidity();
+      return;
+    } 
+    
+    const request: ProductsRequest = this.getRequest();
+    this.add(request);
+  }
+
   /**
    *
    */
