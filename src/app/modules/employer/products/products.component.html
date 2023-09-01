@@ -7,7 +7,14 @@
         [nzSuffix]="inputClearTpl"
         [nzAddOnAfter]="suffixIconButton"
       >
-        <input type="text" nz-input placeholder="search..." />
+        <input
+          [(ngModel)]="searchText"
+          (ngModelChange)="handleSearchTextChange($event)"
+          type="text"
+          nz-input
+          placeholder="Search product..."
+          (keyup.enter)="handleSearch(searchText)"
+        />
       </nz-input-group>
 
       <ng-template #inputClearTpl>
@@ -21,7 +28,12 @@
         ></span>
       </ng-template>
       <ng-template #suffixIconButton>
-        <button nz-button nzType="primary" nzSearch>
+        <button
+          (click)="handleSearch(searchText)"
+          nz-button
+          nzType="primary"
+          nzSearch
+        >
           <span nz-icon nzType="search"></span>
         </button>
       </ng-template>

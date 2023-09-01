@@ -12,7 +12,6 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./update-product.component.css'],
 })
 export class UpdateProductComponent extends AddEdit<Products, ProductsRequest> {
-
   /**
    *
    */
@@ -50,10 +49,10 @@ export class UpdateProductComponent extends AddEdit<Products, ProductsRequest> {
     route: ActivatedRoute
   ) {
     super($data, $notification, router, route);
-    this.getProduct()
+    this.getProduct();
   }
 
-  getProduct(){
+  getProduct() {
     if (this.id) {
       this.$data.getById(this.id).subscribe((item) => {
         this.setFormValues(item.data);
@@ -61,14 +60,18 @@ export class UpdateProductComponent extends AddEdit<Products, ProductsRequest> {
     }
   }
 
+  /**
+   *
+   * @param model
+   */
   protected override setFormValues(model: any) {
     type FormControlsKeys = keyof typeof this.form.controls;
     type TResponseKeys = keyof Products[];
     Object.keys(this.form.controls).forEach((key) => {
       this.form.controls[key as FormControlsKeys].setValue(
         model[key as TResponseKeys]
-        );
-        this.form.controls.qty.setValue('');
+      );
+      this.form.controls.qty.setValue('');
     });
   }
 
@@ -80,8 +83,8 @@ export class UpdateProductComponent extends AddEdit<Products, ProductsRequest> {
     if (this.form.invalid) {
       this.updateValueAndValidity();
       return;
-    } 
-    
+    }
+
     const request: ProductsRequest = this.getRequest();
     this.add(request);
   }

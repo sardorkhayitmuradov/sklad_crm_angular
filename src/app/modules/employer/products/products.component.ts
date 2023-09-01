@@ -53,6 +53,11 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
     this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
+  /**
+   * 
+   * @param pageIndex 
+   * @param pageSize 
+   */
   getData(pageIndex: number, pageSize: number) {
     this.$data
       .getByPagination(pageIndex, pageSize)
@@ -65,6 +70,10 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
       });
   }
 
+  /**
+   * 
+   * @param newPageIndex 
+   */
   handlePageIndexChange(newPageIndex: number) {
     this.pages.pageIndex = newPageIndex;
     this.isLoading = true;
@@ -74,6 +83,10 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
     this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
+  /**
+   * 
+   * @param newPageSize 
+   */
   handlePageSizeChange(newPageSize: number) {
     this.pages.pageSize = newPageSize;
     this.isLoading = true;
@@ -83,6 +96,35 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
     this.getData(this.pages.pageIndex, this.pages.pageSize);
   }
 
+  /**
+   *
+   * @param searchText
+   */
+  handleSearch(searchText: string) {
+    this.isLoading = true;
+    this.$data
+      .getDatasBySearch(searchText)
+      .subscribe((response: BaseResponse<Products[]>) => {
+        this.data = response.data;
+        this.isLoading = false;
+      });
+  }
+
+  /**
+   *
+   * @param searchText
+   */
+  handleSearchTextChange(searchText: string) {
+    if (searchText.length === 0) {
+      this.isLoading = true;
+      this.getData(this.pages.pageIndex, this.pages.pageSize);
+    }
+  }
+
+  /**
+   * 
+   * @param id 
+   */
   showDeleteConfirm(id: string): void {
     this.modal.confirm({
       nzTitle: `Haqiqatdan o'chirmoqchimisiz ?`,
@@ -113,5 +155,6 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
    */
   clear() {
     this.searchText = '';
+    this.handleSearchTextChange(this.searchText);
   }
 }
