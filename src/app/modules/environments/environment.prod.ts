@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  endpoint: 'https://joila.onrender.com/api/v1/'
+  endpoint: 'https://joila.up.railway.app/api/v1/'
 };

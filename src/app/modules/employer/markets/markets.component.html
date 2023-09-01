@@ -7,7 +7,14 @@
         [nzSuffix]="inputClearTpl"
         [nzAddOnAfter]="suffixIconButton"
       >
-        <input type="text" nz-input placeholder="search..." />
+        <input
+          [(ngModel)]="searchText"
+          (ngModelChange)="handleSearchTextChange($event)"
+          type="text"
+          nz-input
+          placeholder="Search market..."
+          (keyup.enter)="handleSearch(searchText)"
+        />
       </nz-input-group>
 
       <ng-template #inputClearTpl>
@@ -21,11 +28,21 @@
         ></span>
       </ng-template>
       <ng-template #suffixIconButton>
-        <button nz-button nzType="primary" nzSearch>
+        <button
+          (click)="handleSearch(searchText)"
+          nz-button
+          nzType="primary"
+          nzSearch
+        >
           <span nz-icon nzType="search"></span>
         </button>
       </ng-template>
-      <button [routerLink]="['add']" nz-button nzType="primary" class="flex items-center justify-center">
+      <button
+        [routerLink]="['add']"
+        nz-button
+        nzType="primary"
+        class="flex items-center justify-center"
+      >
         <span nz-icon nzType="plus" nzTheme="outline"></span>
       </button>
     </div>
@@ -33,7 +50,7 @@
 
   <nz-table
     #basicTable
-    [nzData]="(data) || []"
+    [nzData]="data || []"
     [nzLoading]="isLoading"
     nzBordered
     [nzSize]="'middle'"
@@ -45,7 +62,6 @@
     [nzPageSize]="pages.pageSize"
     [nzTotal]="pages.all"
     nzShowSizeChanger
-    
   >
     <thead>
       <tr>
@@ -74,13 +90,9 @@
         <td [nzAlign]="'center'">{{ data.debt | number }} sum</td>
         <td [nzAlign]="'center'">{{ data.location }}</td>
         <td [nzAlign]="'center'">
-          <button
-              nz-button
-              nzType="link"
-              [routerLink]="['orders', data._id]"
-            >
+          <button nz-button nzType="link" [routerLink]="['orders', data._id]">
             <span nz-icon nzType="link" nzTheme="outline"></span>
-            </button>
+          </button>
         </td>
         <td [nzAlign]="'center'">
           <div class="flex items-center gap-x-3 justify-center">

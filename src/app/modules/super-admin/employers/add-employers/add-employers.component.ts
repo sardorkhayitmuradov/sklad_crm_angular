@@ -49,7 +49,6 @@ export class AddEmployersComponent extends AddEdit<
     const request = super.getRequest();
     const countryCode = '+998';
     request.phone_number = formatter(countryCode + request.phone_number);
-    console.log(request);
     return request;
   }
 }

@@ -62,7 +62,6 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
       .getByPagination(pageIndex, pageSize)
       .subscribe((response: BaseResponse<Markets[]>) => {
         this.data = response.data;
-        console.log(this.data);
         this.pages.pageIndex = response.page;
         this.pages.pageSize = response.page_size;
         this.pages.all = response.all;
@@ -94,6 +93,31 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
       queryParams: { pageIndex: this.pages.pageIndex, pageSize: newPageSize },
     });
     this.getData(this.pages.pageIndex, this.pages.pageSize);
+  }
+
+  /**
+   *
+   * @param searchText
+   */
+  handleSearch(searchText: string) {
+    this.isLoading = true;
+    this.$data
+      .getDatasBySearch(searchText)
+      .subscribe((response: BaseResponse<Markets[]>) => {
+        this.data = response.data;
+        this.isLoading = false;
+      });
+  }
+
+  /**
+   *
+   * @param searchText
+   */
+  handleSearchTextChange(searchText: string) {
+    if (searchText.length === 0) {
+      this.isLoading = true;
+      this.getData(this.pages.pageIndex, this.pages.pageSize);
+    }
   }
 
   /**
@@ -129,5 +153,6 @@ export class MarketsComponent extends Grid<Markets, MarketsRequest> {
    */
   clear() {
     this.searchText = '';
+    this.handleSearchTextChange(this.searchText);
   }
 }

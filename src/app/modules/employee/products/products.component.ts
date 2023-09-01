@@ -123,16 +123,6 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
     }
   }
 
-  /**
-   *
-   */
-  add(id: string) {
-    this.router.navigate([], {
-      queryParams: { product: id },
-    });
-
-    this.isVisible = true;
-  }
 
   /**
    *
