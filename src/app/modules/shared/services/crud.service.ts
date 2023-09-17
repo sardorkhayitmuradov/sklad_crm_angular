@@ -63,6 +63,28 @@ export abstract class CRUDService<TResponse, TRequest> {
 
   /**
    *
+   * @param year
+   * @param month
+   * @returns
+   */
+  getBalances(year: number, month: string) {
+    return this._base.get<BaseResponse<TResponse[]>>(
+      `${this.url}?year=${year}&month=${month}`
+    );
+  }
+
+  /**
+   *
+   * @param year
+   * @param month
+   * @returns
+   */
+  getStatistics(year: number, month: string) {
+    return this._base.get<TResponse>(`${this.url}/${year}/${month}`);
+  }
+
+  /**
+   *
    * @param id
    */
   getById(id: string) {
@@ -89,13 +111,13 @@ export abstract class CRUDService<TResponse, TRequest> {
     );
   }
 
-   /**
-   * 
-   * @param id 
-   * @returns 
+  /**
+   *
+   * @param id
+   * @returns
    */
-   acceptTransaction(id: string){
-    return this._base.put<BaseResponse<TResponse[]>>(`${this.url}/${id}`)
+  acceptTransaction(id: string) {
+    return this._base.put<BaseResponse<TResponse[]>>(`${this.url}/${id}`);
   }
 
   /**

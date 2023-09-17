@@ -28,7 +28,7 @@
 
   },
   "employee": {
-    "title": "Employee",
+    "title": "Employees",
     "fullName": "Full name",
     "balance": "Balance",
     "phone": "Phone number",
@@ -36,6 +36,7 @@
     "employeeOrders": "Employee's Orders",
     "employeeOrder": "Employee's Order"
   },
+  "balances": "Balances",
   "employer": "Employer",
   "dashboard": "Dashboard",
   "sections": {

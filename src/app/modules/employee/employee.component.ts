@@ -7,7 +7,7 @@ import { TOKEN } from 'src/app/core/auth.inteceptor';
 import {
   DEFAULT_LANGUAGE,
   getCurrentLangauge,
-} from './components/language/language.component';
+} from '../components/language/language.component';
 
 @Component({
   selector: 'employee',
@@ -19,23 +19,18 @@ export class EmployeeComponent {
   tokenInfo: role;
   showBreadCrumb = true;
 
-  constructor(
-    private router: Router,
-    translate: TranslateService,
-    private $translate: TranslateService
-  ) {
+  constructor(private router: Router, private $translate: TranslateService) {
     $translate.onLangChange.subscribe((w) => {
       this.showBreadCrumb = false;
       setTimeout(() => {
-        console.log(w);
         this.translateFn = (key) => this.$translate.instant(key);
         this.showBreadCrumb = true;
       });
     });
     const token = localStorage.getItem(TOKEN)!;
     this.tokenInfo = this.getDecodedAccessToken(token) as role;
-    translate.setDefaultLang(DEFAULT_LANGUAGE);
-    translate.use(getCurrentLangauge());
+    $translate.setDefaultLang(DEFAULT_LANGUAGE);
+    $translate.use(getCurrentLangauge());
   }
 
   private getDecodedAccessToken(token: string) {

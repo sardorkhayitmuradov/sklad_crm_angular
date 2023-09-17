@@ -25,7 +25,7 @@
     }
   },
   "employee": {
-    "title": "Сотрудник",
+    "title": "Сотрудники",
     "fullName": "Полное имя",
     "balance": "Баланс",
     "phone": "Номер телефона",
@@ -33,6 +33,7 @@
     "employeeOrders": "Заказы сотрудника",
     "employeeOrder": "Заказ сотрудника"
   },
+  "balances": "Балансы",
   "employer": "Работодатель",
   "dashboard": "Панель",
   "sections": {

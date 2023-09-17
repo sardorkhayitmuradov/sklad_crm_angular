@@ -9,14 +9,6 @@ const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'products' },
       {
-        path: 'dashboard',
-        loadChildren: () =>
-          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-        data: {
-          breadcrumbWithTranslate: 'dashboard',
-        },
-      },
-      {
         path: 'markets',
         loadChildren: () =>
           import('./markets/markets.module').then((m) => m.MarketsModule),

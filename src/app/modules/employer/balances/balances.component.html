@@ -1,0 +1,56 @@
+<div class="flex flex-col w-full">
+  <div class="relative mb-4">
+    <nz-divider nzText="Balances" nzOrientation="left"></nz-divider>
+    <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
+      <nz-date-picker
+        [nzPlaceHolder]="'Select year & month'"
+        nzMode="month"
+        [nzDisabledDate]="disabledDate"
+        (keyup.enter)="handleSearchTextChange($event)"
+        [(ngModel)]="searchText"
+        (ngModelChange)="handleSearchTextChange($event)"
+      ></nz-date-picker>
+    </div>
+  </div>
+
+  <nz-table
+    #basicTable
+    [nzData]="data || []"
+    [nzLoading]="isLoading"
+    nzBordered
+    [nzSize]="'middle'"
+    [nzPageSizeOptions]="pages.pageSizeOptions"
+    (nzPageIndexChange)="handlePageIndexChange($event)"
+    (nzPageSizeChange)="handlePageSizeChange($event)"
+    [nzFrontPagination]="false"
+    [nzPageIndex]="pages.pageIndex"
+    [nzPageSize]="pages.pageSize"
+    [nzTotal]="pages.all"
+    nzShowSizeChanger
+  >
+    <thead>
+      <tr>
+        <th nzWidth="20%" [nzAlign]="'center'">Balances</th>
+        <th nzWidth="15%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <p>Month</p>
+            <span nz-icon nzType="phone" nzTheme="twotone"></span>
+          </div>
+        </th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          <div class="flex items-center justify-center gap-1">
+            <p>Year</p>
+            <span nz-icon nzType="dollar" nzTheme="twotone"></span>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td [nzAlign]="'center'">{{ data.balance }}</td>
+        <td [nzAlign]="'center'">{{ data.month }}</td>
+        <td [nzAlign]="'center'">{{ data.year }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

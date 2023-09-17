@@ -23,7 +23,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
-
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -50,7 +50,8 @@ import { TranslateModule } from '@ngx-translate/core';
     NzTabsModule,
     NzRadioModule,
     NzPopconfirmModule,
-    NzListModule
+    NzListModule,
+    NzDatePickerModule 
   ],
   exports: [
     CommonModule,
@@ -76,7 +77,8 @@ import { TranslateModule } from '@ngx-translate/core';
     NzListModule,
     NzSpinModule,
     NzPopoverModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzDatePickerModule
   ],
 })
 export class SharedModule {}

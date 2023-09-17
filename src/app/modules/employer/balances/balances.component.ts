@@ -1,26 +1,20 @@
 import { Component } from '@angular/core';
-import { Color, LegendPosition, ScaleType } from '@swimlane/ngx-charts';
-import { differenceInCalendarDays } from 'date-fns';
-import {
-  SoldProductsModel,
-  dashboardModel,
-  dashboardPages,
-  remainedProductsModel,
-} from './models/dashboard.model';
-import { DashboardService } from './services/dashboard.service';
-import { months } from '../balances/constants/date';
+import { BalancesModel, balancePages } from './models/balances.model';
+import { Grid } from '../../shared/crud/grid.class';
+import { BalancesService } from './services/balances.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { differenceInCalendarDays } from 'date-fns';
+import { months } from './constants/date';
 
 @Component({
-  selector: 'employee-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard-component.css'],
+  selector: 'employer-balances',
+  templateUrl: './balances.component.html',
 })
-export class DashboardComponent {
+export class BalancesComponent extends Grid<BalancesModel, BalancesModel> {
   isLoading = true;
   today = new Date();
 
-  pages: dashboardPages = {
+  pages: balancePages = {
     pageIndex: 1,
     pageSize: 10,
     all: 0,
@@ -34,27 +28,26 @@ export class DashboardComponent {
    * @Input
    */
   searchText = '';
-  SoldProducts: SoldProductsModel[] = [];
-  RemainedProducts: remainedProductsModel[] = [];
-  view: [number, number] = [700, 480];
 
-  soldProductsLegendPosition: LegendPosition = LegendPosition.Below;
-
-  soldProductsColorScheme: Color = {
-    domain: ['#1890ff'],
-    name: 'Color Scheme',
-    selectable: false,
-    group: ScaleType.Linear,
-  };
+  data: BalancesModel[] = [];
 
   constructor(
-    private $data: DashboardService,
+    $data: BalancesService,
     private router: Router,
     private route: ActivatedRoute
   ) {
+    super($data);
+    const pageIndex = +this.route.snapshot.queryParams['pageIndex'];
+    const pageSize = +this.route.snapshot.queryParams['pageSize'];
     const pageYear = +this.route.snapshot.queryParams['year'];
     const pageMonth = this.route.snapshot.queryParams['month'];
 
+    if (isFinite(pageIndex)) {
+      this.pages.pageIndex = pageIndex;
+    }
+    if (isFinite(pageSize)) {
+      this.pages.pageSize = pageSize;
+    }
     if (isFinite(pageYear)) {
       this.pages.year = pageYear;
     }
@@ -71,21 +64,9 @@ export class DashboardComponent {
   getDatas(year: number, month: string) {
     console.log(year, month);
     this.$data
-      .getStatistics(year, month ? month : 'September')
-      .subscribe((response: dashboardModel) => {
-        this.SoldProducts = response.products.map((p) => {
-          return {
-            name: p.code,
-            value: p.soldQty,
-          };
-        });
-
-        this.RemainedProducts = response.products.map((p) => {
-          return {
-            name: p.code,
-            value: p.inStoreQty,
-          };
-        });
+      .getBalances(year, month ? month : '')
+      .subscribe((response: any) => {
+        this.data = response;
         this.isLoading = false;
       });
   }
