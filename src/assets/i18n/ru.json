@@ -1,0 +1,121 @@
+{
+  "superAdmin": "Супер админ",
+  "admin": "Администратор",
+  "login": {
+    "title": "Вход",
+    "logIn": "Войти",
+    "loading": "Загрузка"
+  },
+  "inputs": {
+    "fill": "Заполните это поле!",
+    "phoneNumberInput": {
+      "enter": "Введите свой полный номер телефона!"
+    },
+    "passwordInput": {
+      "min": "Пароль должен содержать не менее 8 символов!"
+    },
+    "market": {
+      "select": "Пожалуйста, выберите рынок!"
+    },
+    "client": {
+      "min": "Имя клиента должно содержать не менее 4 символов!"
+    },
+    "product": {
+      "select": "Пожалуйста, выберите товар!"
+    }
+  },
+  "employee": {
+    "title": "Сотрудник",
+    "fullName": "Полное имя",
+    "balance": "Баланс",
+    "phone": "Номер телефона",
+    "employeeTransactions": "Транзакции сотрудника",
+    "employeeOrders": "Заказы сотрудника",
+    "employeeOrder": "Заказ сотрудника"
+  },
+  "employer": "Работодатель",
+  "dashboard": "Панель",
+  "sections": {
+    "name": "Название",
+    "phone": "Телефон",
+    "price": "Цена",
+    "quantity": "Количество",
+    "paid": "Оплачено",
+    "total": "Всего",
+    "market": "Рынок",
+    "client": "Клиент",
+    "operations": "Операции"
+  },
+  "products": {
+    "title": "Товары",
+    "code": "Код",
+    "qty": "Кол-во",
+    "soldPrice": "Цена продажи",
+    "unit": "Ед. измерения",
+    "selectUnit": "Выберите единицу измерения",
+    "search": "Поиск товара...",
+    "productQuantity": "Количество товара",
+    "enterQuantity": "Введите количество",
+    "newproduct": "Новый товар"
+  },
+  "markets": {
+    "title": "Рынки",
+    "debt": "Долг",
+    "address": "Адрес",
+    "orders": "Заказы",
+    "search": "Поиск рынка...",
+    "market_orders": "Заказы рынка",
+    "market_order": "Заказ рынка"
+  },
+  "orders": {
+    "title": "Заказы",
+    "market&ClientName": "Рынок или имя клиента",
+    "search": "Поиск рынка и имени клиента..."
+  },
+  "order": {
+    "createdDay": "Дата создания",
+    "chooseMarket": "Выберите рынок",
+    "clientName": "Введите имя клиента",
+    "selectMarket": "Выберите рынок",
+    "loadingMarkets": "Загрузка рынков...",
+    "addProduct": "Добавить товар",
+    "chooseProduct": "Выберите товар",
+    "enterProductQuantity": "Введите количество товара",
+    "enterProductPrice": "Введите цену товара",
+    "selectProdocts": "Выберите товар",
+    "overallPrice": "Итоговая цена",
+    "totalPrice": "Общая стоимость",
+    "enterPsidPrice": "Введите оплаченную сумму",
+    "addOrder": "Добавить заказ",
+    "tooltipPaidPrice": "Введите оплаченную сумму за заказ!"
+  },
+  "transactions": {
+    "title": "Транзакции",
+    "amountPaid": "Сумма перевода",
+    "time": "Время перевода",
+    "acception": "Подтверждение перевода",
+    "operations": "Операции",
+    "search": "Поиск транзакции...",
+    "add": "Добавить транзакцию",
+    "enterTransactions": "Введите сумму транзакции",
+    "accepted": "Принято",
+    "notAccepted": "Не принято"
+  },
+  "actions": {
+    "add": "Добавить",
+    "cancel": "Отменить",
+    "edit": "Редактировать",
+    "clear": "Очистить",
+    "deleteConsfirm": "Уверены, что хотите удалить?",
+    "ok": "Ок",
+    "page": "Страница"
+  },
+  "quantity": {
+    "kg": "кг",
+    "dona": "шт.",
+    "m2": "м2",
+    "qadoq": "упаковок"
+},
+  "sum": "сумов",
+  "logOut": "Выйти"
+}

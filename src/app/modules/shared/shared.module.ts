@@ -24,6 +24,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
@@ -32,6 +34,7 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
     RouterModule,
     FormsModule,
 
+    TranslateModule,
     NzLayoutModule,
     NzMenuModule,
     NzBreadCrumbModule,
@@ -54,6 +57,7 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
     ReactiveFormsModule,
     FormsModule,
 
+    TranslateModule,
     NzLayoutModule,
     NzMenuModule,
     NzBreadCrumbModule,

@@ -1,0 +1,124 @@
+{
+  "superAdmin": "Super admin",
+  "admin": "Admin",
+  "login": {
+    "title": "Login",
+    "logIn": "Log in",
+    "loading": "Loading"
+  },
+  "inputs": {
+    "fill": "Fill out this field!",
+    "phoneNumberInput": {
+      "enter": "Enter your full phone number!"
+    },
+    "passwordInput": {
+      "min": "Password must be at least 8 characters!"
+    },
+    "market": {
+      "select": "Please select market!"
+    },
+    "client": {
+      "min": "Client name must be at least 4 characters!"
+    },
+    "product": {
+      "select": "Please select product!"
+    }
+  },
+  "product": {
+
+  },
+  "employee": {
+    "title": "Employee",
+    "fullName": "Full name",
+    "balance": "Balance",
+    "phone": "Phone number",
+    "employeeTransactions": "Employee's Transactions",
+    "employeeOrders": "Employee's Orders",
+    "employeeOrder": "Employee's Order"
+  },
+  "employer": "Employer",
+  "dashboard": "Dashboard",
+  "sections": {
+    "name": "Name",
+    "phone": "Phone",
+    "price": "Price",
+    "quantity": "Quantity",
+    "paid": "Paid",
+    "total": "Total",
+    "market": "Market",
+    "client": "Client",
+    "operations": "Operations"
+  },
+  "products": {
+    "title": "Products",
+    "code": "Code",
+    "qty": "Qty",
+    "soldPrice": "Sold price",
+    "unit": "Unit",
+    "selectUnit": "Select unit",
+    "search": "Search product...",
+    "productQuantity": "Product quantity",
+    "enterQuantity": "Enter the quantity",
+    "newproduct": "New product"
+  },
+  "markets": {
+    "title": "Markets",
+    "debt": "Debt",
+    "address": "Address",
+    "orders": "Orders",
+    "search": "Search market...",
+    "market_orders": "Market orders",
+    "market_order": "Market order"
+  },
+  "orders": {
+    "title": "Orders",
+    "market&ClientName": "Market or Client name",
+    "search": "Search market & client name..."
+  },
+  "order": {
+    "createdDay": "Created day",
+    "chooseMarket": "Choose market",
+    "clientName": "Enter client name",
+    "selectMarket": "Select market",
+    "loadingMarkets": "Loading markets...",
+    "addProduct": "Add product",
+    "chooseProduct": "Choose product",
+    "enterProductQuantity": "Enter product quantity",
+    "enterProductPrice": "Enter product price",
+    "selectProdocts": "Select product",
+    "overallPrice": "Overall price",
+    "totalPrice": "Total price",
+    "enterPsidPrice": "Enter paid price",
+    "addOrder": "Add order",
+    "tooltipPaidPrice": "Enter the paid price for an order !"
+  },
+  "transactions": {
+    "title": "Transactions",
+    "amountPaid": "Transfer amount paid",
+    "time": "Transfer time",
+    "acception": "Transfer acception",
+    "operations": "Operations",
+    "search": "Search transaction...",
+    "add": "Add Transaction",
+    "enterTransactions": "Enter the transaction amount",
+    "accepted": "Accepted",
+    "notAccepted": "Not accepted"
+  },
+  "actions": {
+    "add": "Add",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "clear": "Clear",
+    "deleteConsfirm": "Sure to delete?",
+    "ok": "Ok",
+    "page": "Page"
+  },
+  "quantity": {
+    "kg": "kg",
+    "dona": "pcs.",
+    "m2": "m2",
+    "qadoq": "packs"
+  },
+  "sum": "sum",
+  "logOut": "Log out"
+}

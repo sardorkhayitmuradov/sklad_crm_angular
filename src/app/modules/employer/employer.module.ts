@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 import { EmployerRoutingModule } from './employer-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { EmployerComponent } from './employer.component';
-import { LanguageComponent } from './components/language/language.component';
-
+import { EmployerLanguageComponent } from './components/language/language.component';
 
 @NgModule({
-  declarations: [EmployerComponent, LanguageComponent],
+  declarations: [EmployerComponent, EmployerLanguageComponent],
   imports: [
     CommonModule,
     EmployerRoutingModule,

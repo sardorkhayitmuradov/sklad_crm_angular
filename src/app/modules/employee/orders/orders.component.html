@@ -1,6 +1,9 @@
 <div class="flex flex-col w-full">
   <div class="relative mb-4">
-    <nz-divider nzText="Orders" nzOrientation="left"></nz-divider>
+    <nz-divider
+      [nzText]="'orders.title' | translate"
+      nzOrientation="left"
+    ></nz-divider>
     <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
       <nz-input-group
         nzSearch
@@ -12,7 +15,7 @@
           (ngModelChange)="handleSearchTextChange($event)"
           type="text"
           nz-input
-          placeholder="Search market & client name..."
+          [placeholder]="'orders.search' | translate"
           (keyup.enter)="handleSearch(searchText)"
         />
       </nz-input-group>
@@ -38,12 +41,17 @@
           <span nz-icon nzType="search"></span>
         </button>
       </ng-template>
-      <button [routerLink]="['add']" nz-button nzType="primary" class="flex items-center justify-center">
+      <button
+        [routerLink]="['add']"
+        nz-button
+        nzType="primary"
+        class="flex items-center justify-center"
+      >
         <span nz-icon nzType="plus" nzTheme="outline"></span>
       </button>
     </div>
   </div>
-  
+
   <nz-table
     #groupingTable
     nzSize="middle"
@@ -60,29 +68,42 @@
   >
     <thead>
       <tr>
-        <th nzWidth="10%" nzAlign="center">Name</th>
+        <th nzWidth="20%" nzAlign="center">
+          {{ "orders.market&ClientName" | translate }}
+        </th>
         <th nzWidth="35%" nzAlign="center">
           <div class="flex items-center gap-1 justify-center">
-            <p>Paid</p>
+            <p>{{ "sections.paid" | translate }}</p>
             <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
           </div>
         </th>
         <th nzWidth="35%" nzAlign="center">
           <div class="flex items-center gap-1 justify-center">
-            <p>Total</p>
+            <p>{{ "sections.total" | translate }}</p>
             <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
           </div>
         </th>
-        <th nzWidth="10%" nzAlign="center">Products</th>
+        <th nzWidth="10%" nzAlign="center">
+          {{ "products.title" | translate }}
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let order of groupingTable.data; let i = index">
         <td nzAlign="center">{{ order.client_name || order.market_name }}</td>
-        <td nzAlign="center">{{ order.paid | number }} sum</td>
-        <td nzAlign="center">{{ order.totalAmount | number }} sum</td>
         <td nzAlign="center">
-          <button nz-button nzType="link" [routerLink]="['order', order._id]" class="flex items-center justify-center mx-auto">
+          {{ order.paid | number }} {{ "sum" | translate }}
+        </td>
+        <td nzAlign="center">
+          {{ order.totalAmount | number }} {{ "sum" | translate }}
+        </td>
+        <td nzAlign="center">
+          <button
+            nz-button
+            nzType="link"
+            [routerLink]="['order', order._id]"
+            class="flex items-center justify-center mx-auto"
+          >
             <span nz-icon nzType="link" nzTheme="outline"></span>
           </button>
         </td>

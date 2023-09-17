@@ -19,7 +19,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('../../order/order.module').then((m) => m.OrderModule),
     data: {
-      breadcrumb: 'Market Order',
+      breadcrumbWithTranslate: 'markets.market_order',
     },
   },
 ];

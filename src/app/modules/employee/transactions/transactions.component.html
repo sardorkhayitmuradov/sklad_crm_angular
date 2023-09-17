@@ -1,6 +1,9 @@
 <div class="flex flex-col w-full">
   <div class="relative mb-4">
-    <nz-divider nzText=" My transactions" nzOrientation="left"></nz-divider>
+    <nz-divider
+      [nzText]="'transactions.title' | translate"
+      nzOrientation="left"
+    ></nz-divider>
     <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
       <nz-input-group
         nzSearch
@@ -14,7 +17,7 @@
           mask="separator.2"
           thousandSeparator=" "
           nz-input
-          placeholder="Search transaction.."
+          [placeholder]="'transactions.search' | translate"
           (keyup.enter)="handleSearch(searchText)"
         />
       </nz-input-group>
@@ -66,26 +69,32 @@
   >
     <thead>
       <tr>
-        <th nzWidth="35%" [nzAlign]="'center'">Transfer amount paid</th>
-        <th nzWidth="20%" [nzAlign]="'center'">Transfer time</th>
-        <th nzWidth="20%" [nzAlign]="'center'">Transfer acception</th>
-        <th [nzAlign]="'center'">Operations</th>
+        <th nzWidth="35%" [nzAlign]="'center'">
+          {{ "transactions.amountPaid" | translate }}
+        </th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          {{ "transactions.time" | translate }}
+        </th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          {{ "transactions.acception" | translate }}
+        </th>
+        <th [nzAlign]="'center'">{{ "sections.operations" | translate }}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td [nzAlign]="'center'">{{ data.amountPaid | number }} sum</td>
+        <td [nzAlign]="'center'">{{ data.amountPaid | number }} {{ "sum" | translate }}</td>
         <td [nzAlign]="'center'">{{ data.createdAt | date : "medium" }}</td>
         <td [nzAlign]="'center'">
           <ng-container *ngIf="data.employerAccepted; else notAccepted">
             <div class="flex items-center gap-1 justify-center">
-              <p>Accepted</p>
+              <p>{{ "transactions.accepted" | translate }}</p>
               <span nz-icon nzType="check-circle" nzTheme="twotone"></span>
             </div>
           </ng-container>
           <ng-template #notAccepted>
             <div class="flex items-center gap-1 justify-center">
-              <p>Not Accepted</p>
+              <p>{{ "transactions.notAccepted" | translate }}</p>
               <span nz-icon nzType="close-circle" nzTheme="twotone"></span>
             </div>
           </ng-template>
@@ -98,7 +107,9 @@
               [disabled]="data.employerAccepted"
               nzDanger
               class="flex items-center justify-center"
-              (click)="data.employerAccepted ? null : showDeleteConfirm(data._id)"
+              (click)="
+                data.employerAccepted ? null : showDeleteConfirm(data._id)
+              "
             >
               <span nz-icon nzType="delete" nzTheme="outline"></span>
             </button>

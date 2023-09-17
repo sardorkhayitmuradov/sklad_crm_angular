@@ -14,7 +14,7 @@ const routes: Routes = [
     path: 'add',
     component: AddEditProductsComponent,
     data: {
-      breadcrumb: 'Add',
+      breadcrumbWithTranslate: 'actions.add',
     },
   },
   {
@@ -24,12 +24,12 @@ const routes: Routes = [
       data: ProductsResolver,
     },
     data: {
-      breadcrumb: 'Edit',
+      breadcrumbWithTranslate: 'actions.edit',
     },
   },
   {
     path: 'product/:id',
-    component: UpdateProductComponent
+    component: UpdateProductComponent,
   },
 ];
 

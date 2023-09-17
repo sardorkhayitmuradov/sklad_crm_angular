@@ -10,7 +10,7 @@ const CURRENT_LANGUAGE = 'en';
   templateUrl: './language.component.html',
   styleUrls: ['./language.component.css']
 })
-export class LanguageComponent {
+export class EmployerLanguageComponent {
 
   /**
    * 

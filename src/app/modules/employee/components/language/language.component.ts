@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 export const LOCAL_STORAGE_CURRENT_LANGUAGE = 'currentLanguage';
-export const DEFAULT_LANGUAGE = 'en';
-const CURRENT_LANGUAGE = 'en';
+export const DEFAULT_LANGUAGE = 'ru';
+const CURRENT_LANGUAGE = 'ru';
 
 @Component({
   selector: 'employee-language',
   templateUrl: './language.component.html',
   styleUrls: ['./language.component.css']
 })
-export class LanguageComponent {
+export class EmployeeLanguageComponent {
 
   /**
    * 

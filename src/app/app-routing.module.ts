@@ -20,7 +20,7 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
     data: {
-      breadcrumb: 'Super Admin',
+      breadcrumbWithTranslate: 'superAdmin',
     },
   },
   {
@@ -36,7 +36,7 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
     data: {
-      breadcrumb: 'Employer',
+      breadcrumbWithTranslate: 'employer',
       preload: true,
     },
   },
@@ -48,7 +48,7 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
     data: {
-      breadcrumb: 'Employee',
+      breadcrumbWithTranslate: 'employee.title',
       preload: true,
     },
   },

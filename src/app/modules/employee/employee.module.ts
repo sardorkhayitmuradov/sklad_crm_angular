@@ -4,10 +4,16 @@ import { CommonModule } from '@angular/common';
 import { EmployeeComponent } from './employee.component';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { LanguageComponent } from './components/language/language.component';
+import { EmployeeLanguageComponent } from './components/language/language.component';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
 @NgModule({
-  declarations: [EmployeeComponent, LanguageComponent],
-  imports: [CommonModule, EmployeeRoutingModule, SharedModule],
+  declarations: [EmployeeComponent, EmployeeLanguageComponent],
+  imports: [
+    CommonModule,
+    EmployeeRoutingModule,
+    SharedModule,
+    NzBreadCrumbModule,
+  ],
 })
 export class EmployeeModule {}

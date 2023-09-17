@@ -8,20 +8,20 @@ const routes: Routes = [
     component: EmployeeComponent,
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'products' },
-      // {
-      //   path: 'dashboard',
-      //   loadChildren: () =>
-      //     import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-      //   data: {
-      //     breadcrumb: 'Dashboard',
-      //   },
-      // },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+        data: {
+          breadcrumbWithTranslate: 'dashboard',
+        },
+      },
       {
         path: 'markets',
         loadChildren: () =>
           import('./markets/markets.module').then((m) => m.MarketsModule),
         data: {
-          breadcrumb: 'Markets',
+          breadcrumbWithTranslate: 'markets.title',
         },
       },
       {
@@ -29,7 +29,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./products/products.module').then((m) => m.ProductsModule),
         data: {
-          breadcrumb: 'Products',
+          breadcrumbWithTranslate: 'products.title',
         },
       },
       {
@@ -37,15 +37,17 @@ const routes: Routes = [
         loadChildren: () =>
           import('./orders/orders.module').then((m) => m.OrdersModule),
         data: {
-          breadcrumb: 'Orders',
+          breadcrumbWithTranslate: 'orders.title',
         },
       },
       {
         path: 'transactions',
         loadChildren: () =>
-          import('./transactions/transactions.module').then((m) => m.TransactionsModule),
+          import('./transactions/transactions.module').then(
+            (m) => m.TransactionsModule
+          ),
         data: {
-          breadcrumb: 'My transactions',
+          breadcrumbWithTranslate: 'transactions.title',
         },
       },
       // {
