@@ -37,7 +37,26 @@
     "employeeOrders": "Заказы сотрудника",
     "employeeOrder": "Заказ сотрудника"
   },
-  "balances": "Балансы",
+  "balances": {
+    "title": "Балансы",
+    "month": "Месяц",
+    "year": "Год",
+    "select": "Выберите год и месяц"
+  },
+  "month": {
+    "January": "Январь",
+    "February": "Февраль",
+    "March": "Март",
+    "April": "Апрель",
+    "May": "Май",
+    "June": "Июнь",
+    "July": "Июль",
+    "August": "Август",
+    "September": "Сентябрь",
+    "October": "Октябрь",
+    "November": "Ноябрь",
+    "December": "Декабрь"
+  },
   "employer": "Работодатель",
   "role": {
     "employee": "Сотрудник",
@@ -124,6 +143,26 @@
     "dona": "шт.",
     "m2": "м2",
     "qadoq": "упаковок"
+  },
+  "statistics": {
+    "title": "Статистика",
+    "notFound": "Статистика не найдена",
+    "mostSoldProducts": "Самые продаваемые товары в",
+    "remainedProducts": "Осталось товаров в",
+    "months": {
+      "January": "Январе",
+      "February": "Феврале",
+      "March": "Марте",
+      "April": "Апреле",
+      "May": "Мае",
+      "June": "Июне",
+      "July": "Июле",
+      "August": "Августе",
+      "September": "Сентябре",
+      "October": "Октябре",
+      "November": "Ноябре",
+      "December": "Декабре"
+    }
   },
   "notExist": "Извините, страница, которую вы посетили, не существует.",
   "backHome": "На главную",

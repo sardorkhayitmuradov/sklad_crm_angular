@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('../../order/order.module').then((m) => m.OrderModule),
     data: {
-      breadcrumb: "employee.employeeOrder",
+      breadcrumbWithTranslate: "employee.employeeOrder",
     },
   },
 ];

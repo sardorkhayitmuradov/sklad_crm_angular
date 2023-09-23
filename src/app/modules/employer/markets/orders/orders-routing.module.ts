@@ -7,19 +7,12 @@ const routes: Routes = [
     path: '',
     component: OrdersComponent,
   },
-  // {
-  //   path: 'add',
-  //   component: AddEditProductsComponent,
-  //   data: {
-  //     breadcrumb: 'Add',
-  //   },
-  // },
   {
     path: 'order/:id',
     loadChildren: () =>
       import('../../order/order.module').then((m) => m.OrderModule),
     data: {
-      breadcrumb: 'Market Order',
+      breadcrumbWithTranslate: 'markets.market_order',
     },
   },
 ];

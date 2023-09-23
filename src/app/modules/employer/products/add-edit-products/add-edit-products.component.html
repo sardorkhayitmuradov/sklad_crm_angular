@@ -1,15 +1,17 @@
 <a (click)="goBack()" class="flex items-center gap-2 font-bold text-xs mb-5">
   <!-- NAVIGATE TO BACK -->
   <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
-  {{ isEdit ? "Edit" : "Add" }}</a
+  {{ (isEdit ? "actions.edit" : "actions.add") | translate }}</a
 >
 <form [formGroup]="form" nzLayout="vertical" nz-form>
   <div nz-row [nzGutter]="40" class="w-4/5 !mx-auto">
     <div nz-col nzSpan="12">
       <!-- CODE -->
       <nz-form-item>
-        <nz-form-label [nzSpan]="6" nzFor="code">Code</nz-form-label>
-        <nz-form-control nzErrorTip="Required field!">
+        <nz-form-label [nzSpan]="6" nzFor="code">{{
+          "products.code" | translate
+        }}</nz-form-label>
+        <nz-form-control [nzErrorTip]="'inputs.fill' | translate">
           <input
             nz-input
             name="code"
@@ -22,7 +24,9 @@
 
       <!-- NAME -->
       <nz-form-item>
-        <nz-form-label [nzSpan]="6" nzFor="name">Name</nz-form-label>
+        <nz-form-label [nzSpan]="6" nzFor="name">{{
+          "sections.name" | translate
+        }}</nz-form-label>
         <nz-form-control nzErrorTip="Required field!">
           <input
             nz-input
@@ -38,8 +42,13 @@
       <div class="flex items-center gap-2">
         <!-- PRICE -->
         <nz-form-item class="w-full">
-          <nz-form-label [nzSpan]="6" nzFor="price">Price</nz-form-label>
-          <nz-form-control nzErrorTip="Required field!" class="w-full">
+          <nz-form-label [nzSpan]="6" nzFor="price">{{
+            "sections.price" | translate
+          }}</nz-form-label>
+          <nz-form-control
+            [nzErrorTip]="'inputs.fill' | translate"
+            class="w-full"
+          >
             <input
               nz-input
               name="price"
@@ -57,8 +66,13 @@
       <div class="flex items-center gap-5">
         <!-- QTY -->
         <nz-form-item class="w-full">
-          <nz-form-label nzFor="qty">Quantity</nz-form-label>
-          <nz-form-control nzErrorTip="Required field!" class="w-full">
+          <nz-form-label nzFor="qty">{{
+            "sections.quantity" | translate
+          }}</nz-form-label>
+          <nz-form-control
+            [nzErrorTip]="'inputs.fill' | translate"
+            class="w-full"
+          >
             <input
               nz-input
               name="qty"
@@ -73,18 +87,23 @@
 
         <!-- UNIT -->
         <nz-form-item class="w-full">
-          <nz-form-label nzFor="unit">Unit</nz-form-label>
-          <nz-form-control nzErrorTip="Required field!" class="w-full">
+          <nz-form-label nzFor="unit">{{
+            "products.unit" | translate
+          }}</nz-form-label>
+          <nz-form-control
+            [nzErrorTip]="'inputs.fill' | translate"
+            class="w-full"
+          >
             <nz-select
               nzShowSearch
               nzAllowClear
-              nzPlaceHolder="Select a unit"
+              [nzPlaceHolder]="'products.selectUnit' | translate"
               formControlName="unit"
               id="unit"
             >
               <nz-option
                 *ngFor="let unit of UNITS"
-                [nzLabel]="unit.label"
+                [nzLabel]="'quantity.' + unit.label | translate"
                 [nzValue]="unit.value"
               ></nz-option>
             </nz-select>
@@ -96,9 +115,13 @@
 
   <div class="flex gap-1 justify-end">
     <button nz-button nzType="primary" (click)="submit()">
-      {{ isEdit ? "Edit" : "Add" }}
+      {{ (isEdit ? "actions.edit" : "actions.add") | translate }}
     </button>
-    <button nz-button (click)="reset()">Clear</button>
-    <button nz-button (click)="goBack()">Cancel</button>
+    <button nz-button (click)="reset()">
+      {{ "actions.clear" | translate }}
+    </button>
+    <button nz-button (click)="goBack()">
+      {{ "actions.cancel" | translate }}
+    </button>
   </div>
 </form>

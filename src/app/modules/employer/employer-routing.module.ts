@@ -45,7 +45,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./balances/balances.module').then((m) => m.BalancesModule),
         data: {
-          breadcrumbWithTranslate: 'balances',
+          breadcrumbWithTranslate: 'balances.title',
         },
       },
       // {

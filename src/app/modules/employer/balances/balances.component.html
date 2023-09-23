@@ -1,9 +1,12 @@
 <div class="flex flex-col w-full">
   <div class="relative mb-4">
-    <nz-divider nzText="Balances" nzOrientation="left"></nz-divider>
+    <nz-divider
+      [nzText]="'balances.title' | translate"
+      nzOrientation="left"
+    ></nz-divider>
     <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
       <nz-date-picker
-        [nzPlaceHolder]="'Select year & month'"
+        [nzPlaceHolder]="'balances.select' | translate"
         nzMode="month"
         [nzDisabledDate]="disabledDate"
         (keyup.enter)="handleSearchTextChange($event)"
@@ -30,16 +33,18 @@
   >
     <thead>
       <tr>
-        <th nzWidth="20%" [nzAlign]="'center'">Balances</th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          {{ "balances.title" | translate }}
+        </th>
         <th nzWidth="15%" [nzAlign]="'center'">
           <div class="flex items-center justify-center gap-1">
-            <p>Month</p>
+            <p>{{ "balances.month" | translate }}</p>
             <span nz-icon nzType="phone" nzTheme="twotone"></span>
           </div>
         </th>
         <th nzWidth="20%" [nzAlign]="'center'">
           <div class="flex items-center justify-center gap-1">
-            <p>Year</p>
+            <p>{{ "balances.year" | translate }}</p>
             <span nz-icon nzType="dollar" nzTheme="twotone"></span>
           </div>
         </th>

@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'add',
     component: AddEditMarketsComponent,
     data: {
-      breadcrumb: 'Add',
+      breadcrumbWithTranslate: 'actions.add',
     },
   },
   {
@@ -23,7 +23,7 @@ const routes: Routes = [
       data: MarketsResolver,
     },
     data: {
-      breadcrumb: 'Edit',
+      breadcrumbWithTranslate: 'actions.edit',
     },
   },
   {
@@ -31,7 +31,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./orders/orders.module').then((m) => m.OrdersModule),
     data: {
-      breadcrumb: 'Market Orders',
+      breadcrumbWithTranslate: 'markets.market_orders',
     },
   },
 ];

@@ -2,12 +2,15 @@
   <div *ngIf="!notFound; else template" class="flex flex-col w-full">
     <!-- Your data display section here -->
     <div class="relative mb-4">
-      <nz-divider nzText="Balances" nzOrientation="left"></nz-divider>
+      <nz-divider
+        [nzText]="'statistics.title' | translate"
+        nzOrientation="left"
+      ></nz-divider>
       <div
         class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2"
       >
         <nz-date-picker
-          [nzPlaceHolder]="'Select year & month'"
+          [nzPlaceHolder]="'balances.select' | translate"
           nzMode="month"
           [nzDisabledDate]="disabledDate"
           (keyup.enter)="handleSearchTextChange($event)"
@@ -18,7 +21,10 @@
     </div>
     <div class="mx-auto flex items-center justify-center">
       <div>
-        <h4 class="text-center text-md font-bold">Most sold products in {{pages.month}}</h4>
+        <h4 class="text-center text-md font-bold">
+          {{ "statistics.mostSoldProducts" | translate }}
+          {{ "statistics.months." + pages.month | translate }}
+        </h4>
         <ngx-charts-bar-horizontal
           [view]="view"
           [scheme]="soldProductsColorScheme"
@@ -27,12 +33,15 @@
           [yAxis]="true"
           [legend]="true"
           [legendPosition]="soldProductsLegendPosition"
-          [legendTitle]="'Products'"
+          [legendTitle]="'products.title' | translate"
         >
         </ngx-charts-bar-horizontal>
       </div>
       <div>
-        <h4 class="text-center text-md font-bold">Remained products in {{pages.month}}</h4>
+        <h4 class="text-center text-md font-bold">
+          {{ "statistics.remainedProducts" | translate }}
+          {{ "statistics.months." + pages.month | translate }}
+        </h4>
         <ngx-charts-bar-horizontal
           [view]="view"
           [scheme]="soldProductsColorScheme"
@@ -41,7 +50,7 @@
           [yAxis]="true"
           [legend]="true"
           [legendPosition]="soldProductsLegendPosition"
-          [legendTitle]="'Products'"
+          [legendTitle]="'products.title' | translate"
         >
         </ngx-charts-bar-horizontal>
       </div>
@@ -51,10 +60,10 @@
   <ng-template #template>
     <div class="max-w-xl mx-auto w-full px-6">
       <div class="flex flex-col items-center justify-center h-full">
-        <nz-result nzStatus="404" nzTitle="404" [nzSubTitle]="notFound">
+        <nz-result nzStatus="404" nzTitle="404" [nzSubTitle]="'statistics.notFound' | translate">
           <div nz-result-extra>
             <button nz-button nzType="primary" (click)="changeRoute()">
-              Back dashboard
+              {{ "backHome" | translate }}
             </button>
           </div>
         </nz-result>

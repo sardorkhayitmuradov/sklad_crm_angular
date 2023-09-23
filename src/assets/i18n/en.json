@@ -28,9 +28,7 @@
       "select": "Please select product!"
     }
   },
-  "product": {
-
-  },
+  "product": {},
   "employee": {
     "title": "Employees",
     "fullName": "Full name",
@@ -40,11 +38,30 @@
     "employeeOrders": "Employee's Orders",
     "employeeOrder": "Employee's Order"
   },
-  "balances": "Balances",
+  "balances": {
+    "title": "Balances",
+    "month": "Month",
+    "year": "Year",
+    "select": "Select year & month"
+  },
+  "month": {
+    "January": "January",
+    "February": "February",
+    "March": "March",
+    "April": "April",
+    "May": "May",
+    "June": "June",
+    "July": "July",
+    "August": "August",
+    "September": "September",
+    "October": "October",
+    "November": "November",
+    "December": "December"
+  },
   "employer": "Employer",
   "role": {
-    "employee" : "Employee",
-    "employer" : "Employer"
+    "employee": "Employee",
+    "employer": "Employer"
   },
   "dashboard": "Dashboard",
   "sections": {
@@ -127,6 +144,26 @@
     "dona": "pcs.",
     "m2": "m2",
     "qadoq": "packs"
+  },
+  "statistics": {
+    "title": "Statistics",
+    "notFound": "Statistics not found",
+    "mostSoldProducts": "Most sold products in ",
+    "remainedProducts": "Remained products in ",
+    "months": {
+      "January": "January",
+      "February": "February",
+      "March": "March",
+      "April": "April",
+      "May": "May",
+      "June": "June",
+      "July": "July",
+      "August": "August",
+      "September": "September",
+      "October": "October",
+      "November": "November",
+      "December": "December"
+    }
   },
   "notExist": "Sorry, the page you visited does not exist.",
   "backHome": "Back home",
