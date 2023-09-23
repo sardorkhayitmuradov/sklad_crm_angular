@@ -43,7 +43,6 @@ export class EmployeeComponent {
       .getInfos()
       .subscribe((response: BaseResponse<EmployeeBalanceModel>) => {
         this.role = response.data;
-        console.log(this.role);
       });
   }
 

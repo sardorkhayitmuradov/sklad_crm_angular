@@ -1,3 +1,4 @@
+import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexPlotOptions, ApexTitleSubtitle, ApexXAxis } from 'ng-apexcharts';
 import { Id } from 'src/app/modules/shared/models/id.interface';
 export interface productsModel extends Id {
   productId: string;
@@ -38,3 +39,13 @@ export interface remainedProductsModel {
   value: number;
 }
 [];
+
+
+export interface mostSoldProductsOptions  {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  xaxis: ApexXAxis;
+  title: ApexTitleSubtitle
+};

@@ -6,7 +6,6 @@ import { EmployeesService } from '../services/employees.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatter } from 'src/app/modules/login/login.component';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-add-employees',
@@ -16,7 +15,7 @@ export class AddEmployeesComponent extends AddEdit<
   Employees,
   EmployeesRequest
 > {
-  private employer_id = this.cookieService.get('employer_id') || "";
+  private employer_id = "";
   /**
    *
    */
@@ -39,7 +38,6 @@ export class AddEmployeesComponent extends AddEdit<
     private fb: FormBuilder,
     $data: EmployeesService,
     $notification: NzNotificationService,
-    private cookieService: CookieService,
     router: Router,
     route: ActivatedRoute,
   ) {

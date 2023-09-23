@@ -118,7 +118,6 @@ export class BalancesComponent extends Grid<BalancesModel, BalancesModel> {
       this.router.navigate([], {
         queryParams: { year: this.pages.year, month: this.pages.month },
       });
-      console.log(month, year);
       this.isLoading = true;
       this.getDatas(year, month);
     }
