@@ -27,7 +27,7 @@
         <nz-form-label [nzSpan]="6" nzFor="name">{{
           "sections.name" | translate
         }}</nz-form-label>
-        <nz-form-control nzErrorTip="Required field!">
+        <nz-form-control [nzErrorTip]="'inputs.fill' | translate">
           <input
             nz-input
             name="name"

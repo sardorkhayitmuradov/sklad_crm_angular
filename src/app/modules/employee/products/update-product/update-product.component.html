@@ -13,7 +13,7 @@
           <nz-form-label nzFor="qty">{{
             "products.enterQuantity" | translate
           }}</nz-form-label>
-          <nz-form-control nzErrorTip="Required field!">
+          <nz-form-control [nzErrorTip]="'inputs.fill' | translate">
             <input
               class="w-full"
               nz-input
