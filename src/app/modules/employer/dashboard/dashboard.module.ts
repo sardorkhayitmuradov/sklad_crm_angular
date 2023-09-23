@@ -5,6 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SharedModule } from '../../shared/shared.module';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -13,6 +14,7 @@ import { SharedModule } from '../../shared/shared.module';
     DashboardRoutingModule,
     NgxChartsModule,
     SharedModule,
+    NzResultModule
   ],
 })
 export class DashboardModule {}

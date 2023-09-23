@@ -7,6 +7,11 @@ import { Role } from '../shared/models/role.model';
 import { Token } from '../shared/models/token.model';
 import { TOKEN } from 'src/app/core/auth.inteceptor';
 import jwt_decode from 'jwt-decode';
+import { TranslateService } from '@ngx-translate/core';
+import {
+  DEFAULT_LANGUAGE,
+  getCurrentLangauge,
+} from '../components/language/language.component';
 
 @Component({
   selector: 'login',
@@ -22,8 +27,8 @@ export class LoginComponent {
    *
    */
   optionList = [
-    { label: 'Admin', value: 'employer' },
-    { label: 'Xodim', value: 'employee' },
+    { label: 'employer', value: 'employer' },
+    { label: 'employee', value: 'employee' },
   ];
 
   /**
@@ -36,15 +41,31 @@ export class LoginComponent {
    */
   form = this.fb.nonNullable.group({
     phone_number: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.min(8)]],
   });
 
   constructor(
     private fb: FormBuilder,
     private $auth: LoginService,
     private $notification: NzNotificationService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private $translate: TranslateService
+  ) {
+    $translate.onLangChange.subscribe((w) => {
+      setTimeout(() => {
+        this.translateFn = (key) => this.$translate.instant(key);
+      });
+    });
+    $translate.setDefaultLang(DEFAULT_LANGUAGE);
+    $translate.use(getCurrentLangauge());
+  }
+
+  /**
+   *
+   * @param key
+   * @returns
+   */
+  translateFn = (key: string) => this.$translate.instant(key);
 
   /**
    *
@@ -76,40 +97,40 @@ export class LoginComponent {
     }
   }
 
- /**
- *
- * @param request
- */
-login(route: string) {
-  this.isLogin = true;
-  
-  if (this.form.valid) {
-    const request = this.form.getRawValue();
-    if (request?.phone_number) {
-      const countryCode = '+998';
-      request.phone_number = formatter(countryCode + request.phone_number);
-    }
+  /**
+   *
+   * @param request
+   */
+  login(route: string) {
+    this.isLogin = true;
 
-    this.$auth.login(route, request).subscribe({
-      next: (response) => {
-        if (response.token) {
+    if (this.form.valid) {
+      const request = this.form.getRawValue();
+      if (request?.phone_number) {
+        const countryCode = '+998';
+        request.phone_number = formatter(countryCode + request.phone_number);
+      }
+
+      this.$auth.login(route, request).subscribe({
+        next: (response) => {
+          if (response.token) {
+            this.isLogin = false;
+            localStorage.setItem(TOKEN, response.token);
+            const token = localStorage.getItem(TOKEN)!;
+            this.tokenInfo = this.getDecodedAccessToken(token) as Token;
+            this.router.navigate([`/${route}`]);
+          }
+        },
+        error: (response) => {
           this.isLogin = false;
-          localStorage.setItem(TOKEN, response.token);
-          const token = localStorage.getItem(TOKEN)!;
-          this.tokenInfo = this.getDecodedAccessToken(token) as Token;
-          this.router.navigate([`/${route}`]);
-        }
-      },
-      error: (response) => {
-        this.isLogin = false;
-        this.createNotification('error', response.error.error);
-      },
-    });
-  } else {
-    this.isLogin = false;
-    return this.updateValueAndValidity();
+          this.createNotification('error', response.error.error);
+        },
+      });
+    } else {
+      this.isLogin = false;
+      return this.updateValueAndValidity();
+    }
   }
-}
 
   /**
    *
@@ -144,9 +165,9 @@ login(route: string) {
 }
 
 /**
- * 
- * @param phoneNumber 
- * @returns 
+ *
+ * @param phoneNumber
+ * @returns
  */
 export function formatter(phoneNumber: string) {
   let phone_number: string = phoneNumber.replace(

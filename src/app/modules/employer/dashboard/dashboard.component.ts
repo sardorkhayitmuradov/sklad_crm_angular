@@ -19,6 +19,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DashboardComponent {
   isLoading = true;
   today = new Date();
+  notFound: string = '';
+
+  month: string[] = [];
 
   pages: dashboardPages = {
     pageIndex: 1,
@@ -36,7 +39,7 @@ export class DashboardComponent {
   searchText = '';
   SoldProducts: SoldProductsModel[] = [];
   RemainedProducts: remainedProductsModel[] = [];
-  view: [number, number] = [700, 480];
+  view: [number, number] = [700, 460];
 
   soldProductsLegendPosition: LegendPosition = LegendPosition.Below;
 
@@ -69,10 +72,15 @@ export class DashboardComponent {
    * @param month
    */
   getDatas(year: number, month: string) {
-    console.log(year, month);
+    const getMonth = month ? month : months[this.today.getMonth()];
+    this.pages.month = getMonth;
     this.$data
-      .getStatistics(year, month ? month : 'September')
+      .getStatistics(year, getMonth)
       .subscribe((response: dashboardModel) => {
+        if (response === null) {
+          this.notFound = 'Statistics not found';
+          this.isLoading = false;
+        }
         this.SoldProducts = response.products.map((p) => {
           return {
             name: p.code,
@@ -131,9 +139,13 @@ export class DashboardComponent {
 
     const year = date.getFullYear();
     const month = months[date.getMonth()];
+    this.pages.month = month;
+    this.pages.year = year;
 
     if (searchDate) {
-      console.log(month, year);
+      this.router.navigate([], {
+        queryParams: { year: this.pages.year, month: this.pages.month },
+      });
       this.isLoading = true;
       this.getDatas(year, month);
     }
@@ -142,6 +154,18 @@ export class DashboardComponent {
       this.getDatas(this.pages.year, this.pages.month);
       this.isLoading = false;
     }
+  }
+
+  changeRoute() {
+    this.router.navigate([], {
+      queryParams: {
+        year: this.pages.year,
+        month: months[this.today.getMonth()],
+      },
+    });
+
+    this.pages.month = months[this.today.getMonth()];
+    this.notFound = '';
   }
 
   clear() {

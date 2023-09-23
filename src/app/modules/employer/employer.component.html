@@ -113,6 +113,10 @@
         ></span>
 
         <div class="flex items-center gap-x-6">
+          <p class="font-medium">
+            {{ "balance" | translate }}: {{ getFormattedBalance() | number }}
+            {{ "sum" | translate }}
+          </p>
           <!-- <button nz-button class="border-none p-0">
             <nz-badge
               [nzCount]="overallNotifications"
@@ -141,7 +145,7 @@
           </div>
 
           <p class="h-fit font-medium">
-            {{ tokenInfo.role == "employer" && "Admin" }}
+            <!-- {{ tokenInfo.role == "employer" && "Admin" }} -->
           </p>
           <button
             nz-button
@@ -151,7 +155,7 @@
             (click)="logOut()"
           >
             <span nz-icon nzType="logout" nzTheme="outline"></span>
-            <span>Log out</span>
+            <span>{{ "logOut" | translate }}</span>
           </button>
         </div>
       </div>

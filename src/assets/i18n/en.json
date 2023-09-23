@@ -12,7 +12,11 @@
       "enter": "Enter your full phone number!"
     },
     "passwordInput": {
+      "title": "Password",
       "min": "Password must be at least 8 characters!"
+    },
+    "employees": {
+      "min": "Full name must be at least 3 characters!"
     },
     "market": {
       "select": "Please select market!"
@@ -38,6 +42,10 @@
   },
   "balances": "Balances",
   "employer": "Employer",
+  "role": {
+    "employee" : "Employee",
+    "employer" : "Employer"
+  },
   "dashboard": "Dashboard",
   "sections": {
     "name": "Name",
@@ -120,6 +128,9 @@
     "m2": "m2",
     "qadoq": "packs"
   },
+  "notExist": "Sorry, the page you visited does not exist.",
+  "backHome": "Back home",
+  "balance": "Balance",
   "sum": "sum",
   "logOut": "Log out"
 }

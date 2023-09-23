@@ -64,7 +64,10 @@
         </td>
         <td nzAlign="center">{{ product.name }}</td>
         <td nzAlign="center">{{ product.code }}</td>
-        <td nzAlign="center">{{ product.qty | number }} {{ product.unit }}</td>
+        <td nzAlign="center">
+          {{ product.qty | number }}
+          {{ "quantity." + product.unit | translate }}
+        </td>
         <td nzAlign="center">
           <ng-container
             *ngIf="product.price === product.soldPrice; else regularPrice"

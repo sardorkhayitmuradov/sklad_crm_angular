@@ -27,7 +27,12 @@
           </nz-form-control>
         </nz-form-item>
       </form>
-      <p class="mt-4">{{ this.form.get("unit")?.value }}</p>
+      {{
+        (this.form.get("unit")?.value
+          ? "quantity." + this.form.get("unit")?.value
+          : ""
+        ) | translate
+      }}
     </div>
   </ng-container>
 

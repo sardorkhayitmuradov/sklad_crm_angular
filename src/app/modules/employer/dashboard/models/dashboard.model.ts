@@ -14,6 +14,7 @@ export interface dashboardModel extends Id {
   employerId: string;
   createdAt: string;
   updatedAt: string;
+  error: string;
 }
 
 export interface dashboardPages {

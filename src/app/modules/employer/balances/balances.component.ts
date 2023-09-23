@@ -62,9 +62,8 @@ export class BalancesComponent extends Grid<BalancesModel, BalancesModel> {
    * @param month
    */
   getDatas(year: number, month: string) {
-    console.log(year, month);
     this.$data
-      .getBalances(year, month ? month : '')
+      .getBalances(year, month ? month : months[this.today.getMonth()])
       .subscribe((response: any) => {
         this.data = response;
         this.isLoading = false;
@@ -112,8 +111,13 @@ export class BalancesComponent extends Grid<BalancesModel, BalancesModel> {
 
     const year = date.getFullYear();
     const month = months[date.getMonth()];
+    this.pages.month = month;
+    this.pages.year = year;
 
     if (searchDate) {
+      this.router.navigate([], {
+        queryParams: { year: this.pages.year, month: this.pages.month },
+      });
       console.log(month, year);
       this.isLoading = true;
       this.getDatas(year, month);

@@ -111,6 +111,12 @@ export abstract class CRUDService<TResponse, TRequest> {
     );
   }
 
+  getInfos(){
+    return this._base.get<BaseResponse<TResponse>>(
+      `${this.url}/me`
+    );
+  }
+
   /**
    *
    * @param id

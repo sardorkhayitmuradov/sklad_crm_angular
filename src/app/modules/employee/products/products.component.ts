@@ -6,6 +6,7 @@ import { ProductsService } from './services/products.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { BaseResponse } from '../../shared/models/base.interface';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'employee-products',
@@ -38,7 +39,8 @@ export class ProductsComponent extends Grid<Products, ProductsRequest> {
     $data: ProductsService,
     private modal: NzModalService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    translate: TranslateService
   ) {
     super($data);
     const pageIndex = +this.route.snapshot.queryParams['pageIndex'];

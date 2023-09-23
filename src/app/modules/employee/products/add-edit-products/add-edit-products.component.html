@@ -91,10 +91,10 @@
               [nzPlaceHolder]="'products.selectUnit' | translate"
               formControlName="unit"
               id="unit"
-            >
+              >
               <nz-option
                 *ngFor="let unit of UNITS"
-                [nzLabel]="unit.label"
+                [nzLabel]="'quantity.' + unit.label | translate"
                 [nzValue]="unit.value"
               ></nz-option>
             </nz-select>

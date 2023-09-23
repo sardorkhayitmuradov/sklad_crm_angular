@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-xl w-full flex items-center justify-center">
       <div class="w-full flex flex-col mx-auto items-center">
         <h2 nz-typography class="text-slate-800 text-lg font-black mb-6">
-          Login
+          {{ "login.title" | translate }}
         </h2>
         <div class="max-w-xs w-full">
           <nz-select
@@ -16,11 +16,12 @@
             nzAllowClear
             [nzPlaceHolder]="selectedValue.label"
           >
+          [nzLabel]="'quantity.' + unit.label | translate"
             <nz-option
               *ngFor="let option of optionList"
               class="h-full"
               [nzValue]="option"
-              [nzLabel]="option.label"
+              [nzLabel]="'role.' + option.label | translate"
             ></nz-option>
           </nz-select>
           <form
@@ -46,15 +47,15 @@
               </nz-form-control>
               <ng-template #phoneNumberError let-control>
                 <ng-container *ngIf="control.getError('required')">
-                  Ushbu maydonni to'ldiring
+                  {{ "inputs.fill" | translate }}
                 </ng-container>
                 <ng-container *ngIf="control.getError('mask')">
-                  Telefon nomerni to'liq kiriting
+                  {{ "inputs.phoneNumberInput.enter" | translate }}
                 </ng-container>
               </ng-template>
             </nz-form-item>
             <nz-form-item>
-              <nz-form-control nzErrorTip="Parolingizni kiriting!">
+              <nz-form-control [nzErrorTip]="passwordError">
                 <nz-input-group
                   nzPrefixIcon="lock"
                   [nzSuffix]="suffixTemplate"
@@ -65,7 +66,7 @@
                     nz-input
                     class="h-full my-2"
                     formControlName="password"
-                    placeholder="Password"
+                    [placeholder]="'inputs.passwordInput.title' | translate"
                     nzSize="large"
                     autocomplete="on"
                   />
@@ -79,6 +80,14 @@
                   ></i>
                 </ng-template>
               </nz-form-control>
+              <ng-template #passwordError let-control>
+                <ng-container *ngIf="control.getError('required')">
+                  {{ "inputs.fill" | translate }}
+                </ng-container>
+                <ng-container *ngIf="control.errors?.['minlength']">
+                  {{ "inputs.passwordInput.min" | translate }}
+                </ng-container>
+              </ng-template>
             </nz-form-item>
             <button
               *ngIf="!isLogin"
@@ -87,7 +96,7 @@
               nzSize="large"
               [nzType]="'primary'"
             >
-              Log in
+              {{ "login.logIn" | translate }}
             </button>
             <button
               nz-button
@@ -99,7 +108,7 @@
               nzSize="large"
             >
               <span nz-icon nzType="poweroff"></span>
-              Loading
+              {{ "login.loading" | translate }}
             </button>
           </form>
         </div>

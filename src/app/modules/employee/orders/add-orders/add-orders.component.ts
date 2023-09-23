@@ -8,6 +8,7 @@ import { Markets } from '../../markets/models/markets.models';
 import { Products } from '../../products/models/products.model';
 import { AddOrdersService } from './services/add-orders.service';
 import { Tab } from './model/tab.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'employee-add-orders',
@@ -101,6 +102,7 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
     private fb: FormBuilder,
     $data: AddOrdersService,
     $notification: NzNotificationService,
+    private translate: TranslateService,
     router: Router,
     route: ActivatedRoute
   ) {
@@ -208,7 +210,8 @@ export class AddOrdersComponent extends AddEdit<OrdersResponse, OrdersRequest> {
   getProductUnit(productId?: string) {
     const selectedProduct = this.productsData.find((p) => p._id === productId)!;
     if (selectedProduct) {
-      return selectedProduct.unit;
+      const translatedUnit = this.translate.instant('quantity.' + selectedProduct.unit);
+      return translatedUnit || selectedProduct.unit;
     }
 
     return '';

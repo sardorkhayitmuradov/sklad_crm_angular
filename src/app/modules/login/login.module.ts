@@ -7,6 +7,8 @@ import { LoginComponent } from './login.component';
 //Mask
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { SharedModule } from '../shared/shared.module';
+import { LanguageModule } from '../components/language/language.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     NgxMaskDirective,
     NgxMaskPipe,
-    SharedModule
+    SharedModule,
+    LanguageModule,
+    TranslateModule
   ],
   providers: [
     provideNgxMask()

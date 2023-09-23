@@ -1,5 +1,6 @@
 <nz-spin nzTip="Loading..." [nzSpinning]="isLoading">
-  <div class="flex flex-col w-full">
+  <div *ngIf="!notFound; else template" class="flex flex-col w-full">
+    <!-- Your data display section here -->
     <div class="relative mb-4">
       <nz-divider nzText="Balances" nzOrientation="left"></nz-divider>
       <div
@@ -8,32 +9,56 @@
         <nz-date-picker
           [nzPlaceHolder]="'Select year & month'"
           nzMode="month"
+          [nzDisabledDate]="disabledDate"
+          (keyup.enter)="handleSearchTextChange($event)"
+          [(ngModel)]="searchText"
+          (ngModelChange)="handleSearchTextChange($event)"
         ></nz-date-picker>
       </div>
     </div>
     <div class="mx-auto flex items-center justify-center">
-      <ngx-charts-bar-horizontal
-        [view]="view"
-        [scheme]="soldProductsColorScheme"
-        [results]="SoldProducts"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [legendPosition]="soldProductsLegendPosition"
-        [legendTitle]="'Products'"
-      >
-      </ngx-charts-bar-horizontal>
-      <ngx-charts-bar-horizontal
-        [view]="view"
-        [scheme]="soldProductsColorScheme"
-        [results]="RemainedProducts"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [legendPosition]="soldProductsLegendPosition"
-        [legendTitle]="'Products'"
-      >
-      </ngx-charts-bar-horizontal>
+      <div>
+        <h4 class="text-center text-md font-bold">Most sold products in {{pages.month}}</h4>
+        <ngx-charts-bar-horizontal
+          [view]="view"
+          [scheme]="soldProductsColorScheme"
+          [results]="SoldProducts"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [legendPosition]="soldProductsLegendPosition"
+          [legendTitle]="'Products'"
+        >
+        </ngx-charts-bar-horizontal>
+      </div>
+      <div>
+        <h4 class="text-center text-md font-bold">Remained products in {{pages.month}}</h4>
+        <ngx-charts-bar-horizontal
+          [view]="view"
+          [scheme]="soldProductsColorScheme"
+          [results]="RemainedProducts"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [legendPosition]="soldProductsLegendPosition"
+          [legendTitle]="'Products'"
+        >
+        </ngx-charts-bar-horizontal>
+      </div>
     </div>
   </div>
+
+  <ng-template #template>
+    <div class="max-w-xl mx-auto w-full px-6">
+      <div class="flex flex-col items-center justify-center h-full">
+        <nz-result nzStatus="404" nzTitle="404" [nzSubTitle]="notFound">
+          <div nz-result-extra>
+            <button nz-button nzType="primary" (click)="changeRoute()">
+              Back dashboard
+            </button>
+          </div>
+        </nz-result>
+      </div>
+    </div>
+  </ng-template>
 </nz-spin>

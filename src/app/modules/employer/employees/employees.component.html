@@ -1,6 +1,6 @@
 <div class="flex flex-col w-full">
   <div class="relative mb-4">
-    <nz-divider nzText="Employees" nzOrientation="left"></nz-divider>
+    <nz-divider [nzText]="'employee.title' | translate" nzOrientation="left"></nz-divider>
     <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
       <ng-template #suffixIconButton>
         <button nz-button nzType="primary" nzSearch>
@@ -28,44 +28,44 @@
       <tr>
         <th nzWidth="20%" [nzAlign]="'center'">
           <div class="flex items-center justify-center gap-1">
-            <p>Full Name</p>
+            <p>{{"employee.fullName" | translate}}</p>
             <span nz-icon nzType="user" nzTheme="outline"></span>
           </div>
         </th>
         <th nzWidth="15%" [nzAlign]="'center'">
           <div class="flex items-center justify-center gap-1">
-            <p>Phone</p>
+            <p>{{"employee.fullName" | translate}}</p>
             <span nz-icon nzType="phone" nzTheme="twotone"></span>
           </div>
         </th>
         <th nzWidth="20%" [nzAlign]="'center'">
           <div class="flex items-center justify-center gap-1">
-            <p>Balance</p>
+            <p>{{"balance" | translate}}</p>
             <span nz-icon nzType="dollar" nzTheme="twotone"></span>
           </div>
         </th>
         <th nzWidth="20%" [nzAlign]="'center'">
           <div class="flex items-center justify-center gap-1">
-            <p>Debt</p>
+            <p>{{"markets.debt" | translate}}</p>
             <span nz-icon nzType="dollar" nzTheme="twotone"></span>
           </div>
         </th>
         <th nzWidth="10%" [nzAlign]="'center'">
           <div class="flex items-center justify-center gap-1">
-            <p>Transactions</p>
+            <p>{{"transactions.title" | translate}}</p>
             <span nz-icon nzType="interaction" nzTheme="twotone"></span>
           </div>
         </th>
-        <th nzWidth="10%" [nzAlign]="'center'">Orders</th>
-        <th [nzAlign]="'center'">Operations</th>
+        <th nzWidth="10%" [nzAlign]="'center'">{{"markets.orders" | translate}}</th>
+        <th [nzAlign]="'center'">{{"sections.operations" | translate}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td [nzAlign]="'center'">{{ data.fullname }}</td>
         <td [nzAlign]="'center'">{{ data.phone_number }}</td>
-        <td [nzAlign]="'center'">{{ data.balance | number }} sum</td>
-        <td [nzAlign]="'center'">{{ data.debt | number }} sum</td>
+        <td [nzAlign]="'center'">{{ data.balance | number }} {{"sum" | translate}}</td>
+        <td [nzAlign]="'center'">{{ data.debt | number }} {{"sum" | translate}}</td>
         <td [nzAlign]="'center'">
           <button
             nz-button

@@ -1,7 +1,7 @@
 <a (click)="goBack()" class="flex items-center gap-2 font-bold text-xs mb-5">
   <!-- NAVIGATE TO BACK -->
   <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
-  {{ isEdit ? "Edit" : "Add" }}</a
+  {{ isEdit ? ("actions.edit" | translate) : ("actions.add" | translate) }}</a
 >
 
 <form [formGroup]="form" nzLayout="vertical" nz-form class="py-4">
@@ -9,7 +9,9 @@
     <div nzSpan="12">
       <!--FULL NAME -->
       <nz-form-item class="gap-2">
-        <nz-form-label nzFor="fullname">Full Name</nz-form-label>
+        <nz-form-label nzFor="fullname">{{
+          "employee.fullName" | translate
+        }}</nz-form-label>
         <nz-form-control [nzErrorTip]="fullNameError">
           <input
             nz-input
@@ -21,17 +23,19 @@
         </nz-form-control>
         <ng-template #fullNameError let-control>
           <ng-container *ngIf="control.getError('required')">
-            Required field!
+            {{ "inputs.fill" | translate }}
           </ng-container>
           <ng-container *ngIf="control.getError('minLength')">
-            Required at least 3 characters!
+            {{ "inputs.employees.min" | translate }}
           </ng-container>
         </ng-template>
       </nz-form-item>
 
       <!-- PHONE NUMBER -->
       <nz-form-item class="gap-2">
-        <nz-form-label nzFor="phone_number">Phone number</nz-form-label>
+        <nz-form-label nzFor="phone_number">{{
+          "employee.phone" | translate
+        }}</nz-form-label>
         <nz-form-control [nzErrorTip]="phoneNumberError">
           <input
             nz-input
@@ -47,17 +51,19 @@
         </nz-form-control>
         <ng-template #phoneNumberError let-control>
           <ng-container *ngIf="control.getError('required')">
-            Ushbu maydonni to'ldiring
+            {{ "inputs.fill" | translate }}
           </ng-container>
           <ng-container *ngIf="control.getError('mask')">
-            Telefon nomerni to'liq kiriting
+            {{ "inputs.phoneNumberInput.enter" | translate }}
           </ng-container>
         </ng-template>
       </nz-form-item>
 
       <!--PASSWORD -->
       <nz-form-item class="gap-2">
-        <nz-form-label nzFor="fullname">Password</nz-form-label>
+        <nz-form-label nzFor="fullname">{{
+          "inputs.passwordInput.title" | translate
+        }}</nz-form-label>
         <nz-form-control [nzErrorTip]="passwordError">
           <input
             nz-input
@@ -69,10 +75,10 @@
         </nz-form-control>
         <ng-template #passwordError let-control>
           <ng-container *ngIf="control.getError('required')">
-            Required field!
+            {{ "inputs.fill" | translate }}
           </ng-container>
           <ng-container *ngIf="control.getError('minLength')">
-            Required at least 8 characters!
+            {{ "inputs.passwordInput.min" | translate }}
           </ng-container>
         </ng-template>
       </nz-form-item>
@@ -81,9 +87,13 @@
 
   <div class="flex gap-1 justify-end">
     <button nz-button nzType="primary" (click)="submit()">
-      {{ isEdit ? "Edit" : "Add" }}
+      {{ isEdit ? ("actions.edit" | translate) : ("actions.add" | translate) }}
     </button>
-    <button nz-button (click)="reset()">Reset</button>
-    <button nz-button (click)="goBack()">Cancel</button>
+    <button nz-button (click)="reset()">
+      {{ "actions.clear" | translate }}
+    </button>
+    <button nz-button (click)="goBack()">
+      {{ "actions.cancel" | translate }}
+    </button>
   </div>
 </form>
