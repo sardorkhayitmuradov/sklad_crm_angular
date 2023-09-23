@@ -3,8 +3,6 @@ import { Grid } from '../../shared/crud/grid.class';
 import { EmployersRequest, Employers } from './models/employers.model';
 import { EmployersService } from './services/employers.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
-
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +16,7 @@ export class EmployersComponent extends Grid<Employers, EmployersRequest> {
 
   data: Employers[] = [];
 
-  constructor($data: EmployersService, private modal: NzModalService, private cookieService: CookieService,private router: Router) {
+  constructor($data: EmployersService, private modal: NzModalService,private router: Router) {
     super($data);
     this.getData()
   }
@@ -57,7 +55,7 @@ export class EmployersComponent extends Grid<Employers, EmployersRequest> {
 
 
   linkToEmployees(id: string) {
-    this.cookieService.set('employer_id', id);
+    // this.cookieService.set('employer_id', id);
     this.router.navigate([`admin/employers/employees/${id}`]);
   }
 }

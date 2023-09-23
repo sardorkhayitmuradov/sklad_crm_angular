@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Color, LegendPosition, ScaleType } from '@swimlane/ngx-charts';
+import { Component, ViewChild } from '@angular/core';
 import { differenceInCalendarDays } from 'date-fns';
 import {
   SoldProductsModel,
@@ -10,6 +9,18 @@ import {
 import { DashboardService } from './services/dashboard.service';
 import { months } from '../balances/constants/date';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ChartComponent,
+  ApexDataLabels,
+  ApexXAxis,
+  ApexPlotOptions,
+} from 'ng-apexcharts';
+
+import { mostSoldProductsOptions } from './models/dashboard.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'employee-dashboard',
@@ -39,18 +50,9 @@ export class DashboardComponent {
   searchText = '';
   SoldProducts: SoldProductsModel[] = [];
   RemainedProducts: remainedProductsModel[] = [];
-  view: [number, number] = [700, 460];
-
-  soldProductsLegendPosition: LegendPosition = LegendPosition.Below;
-
-  soldProductsColorScheme: Color = {
-    domain: ['#1890ff'],
-    name: 'Color Scheme',
-    selectable: false,
-    group: ScaleType.Linear,
-  };
 
   constructor(
+    private translate: TranslateService,
     private $data: DashboardService,
     private router: Router,
     private route: ActivatedRoute
@@ -64,6 +66,62 @@ export class DashboardComponent {
     this.pages.month = pageMonth;
 
     this.getDatas(this.pages.year, this.pages.month);
+  }
+
+  @ViewChild('chart') chart!: ChartComponent;
+  public mostSoldProducts: mostSoldProductsOptions = {
+    series: [
+      {
+        name: 'basic',
+        data: [400, 430, 448, 470, 540, 580],
+      },
+    ],
+    chart: {
+      type: 'bar',
+      height: 450,
+      width: 700,
+    },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          position: 'center', // top, center, bottom
+          orientation: 'horizontal',
+        },
+        columnWidth: '100%',
+        borderRadiusApplication: 'end',
+        borderRadiusWhenStacked: 'last',
+        horizontal: true,
+      },
+    },
+    dataLabels: {
+      enabled: true,
+    },
+    title: {
+      text: this.getTitle(),
+      align: 'center',
+    },
+    xaxis: {
+      categories: [
+        'Product 1',
+        'Product 2',
+        'Product 3',
+        'Product 4',
+        'Product 5',
+        'Product 6',
+      ],
+    },
+  };
+
+  getTitle() {
+    const translatedMostSoldProducts = this.translate.instant(
+      'statistics.mostSoldProducts'
+    );
+    const translatedMonth = this.translate.instant(
+      'statistics.months.' + this.pages.month
+    );
+
+    const title = `${translatedMostSoldProducts} ${translatedMonth}`;
+    return title;
   }
 
   /**
@@ -105,30 +163,6 @@ export class DashboardComponent {
    */
   disabledDate = (current: Date): boolean =>
     differenceInCalendarDays(current, this.today) > 0;
-
-  /**
-   *
-   * @param newPageIndex
-   */
-  handlePageIndexChange(newPageIndex: number) {
-    this.pages.pageIndex = newPageIndex;
-    this.isLoading = true;
-    this.router.navigate([], {
-      queryParams: { pageIndex: newPageIndex, pageSize: this.pages.pageSize },
-    });
-  }
-
-  /**
-   *
-   * @param newPageSize
-   */
-  handlePageSizeChange(newPageSize: number) {
-    this.pages.pageSize = newPageSize;
-    this.isLoading = true;
-    this.router.navigate([], {
-      queryParams: { pageIndex: this.pages.pageIndex, pageSize: newPageSize },
-    });
-  }
 
   /**
    *

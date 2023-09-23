@@ -76,7 +76,6 @@ export class BaseService {
     return this.http.post<T>(this.makeUrl(url), model).pipe(
       shareReplay(1),
       catchError((error) => {
-        console.log(error);
         if (error.status === HttpStatusCode.Unauthorized) {
           localStorage.removeItem(TOKEN);
           this.getRoute();

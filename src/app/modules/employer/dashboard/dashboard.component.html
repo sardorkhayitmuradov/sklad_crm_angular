@@ -21,11 +21,19 @@
     </div>
     <div class="mx-auto flex items-center justify-center">
       <div>
-        <h4 class="text-center text-md font-bold">
+        <apx-chart
+          [title]="mostSoldProducts.title"
+          [series]="mostSoldProducts.series"
+          [chart]="mostSoldProducts.chart"
+          [dataLabels]="mostSoldProducts.dataLabels"
+          [plotOptions]="mostSoldProducts.plotOptions"
+          [xaxis]="mostSoldProducts.xaxis"
+        ></apx-chart>
+        <!-- <h4 class="text-center text-md font-bold">
           {{ "statistics.mostSoldProducts" | translate }}
           {{ "statistics.months." + pages.month | translate }}
-        </h4>
-        <ngx-charts-bar-horizontal
+        </h4> -->
+        <!-- <ngx-charts-bar-horizontal
           [view]="view"
           [scheme]="soldProductsColorScheme"
           [results]="SoldProducts"
@@ -35,14 +43,14 @@
           [legendPosition]="soldProductsLegendPosition"
           [legendTitle]="'products.title' | translate"
         >
-        </ngx-charts-bar-horizontal>
+        </ngx-charts-bar-horizontal> -->
       </div>
       <div>
-        <h4 class="text-center text-md font-bold">
+        <!-- <h4 class="text-center text-md font-bold">
           {{ "statistics.remainedProducts" | translate }}
           {{ "statistics.months." + pages.month | translate }}
-        </h4>
-        <ngx-charts-bar-horizontal
+        </h4> -->
+        <!-- <ngx-charts-bar-horizontal
           [view]="view"
           [scheme]="soldProductsColorScheme"
           [results]="RemainedProducts"
@@ -52,7 +60,7 @@
           [legendPosition]="soldProductsLegendPosition"
           [legendTitle]="'products.title' | translate"
         >
-        </ngx-charts-bar-horizontal>
+        </ngx-charts-bar-horizontal> -->
       </div>
     </div>
   </div>
@@ -60,7 +68,11 @@
   <ng-template #template>
     <div class="max-w-xl mx-auto w-full px-6">
       <div class="flex flex-col items-center justify-center h-full">
-        <nz-result nzStatus="404" nzTitle="404" [nzSubTitle]="'statistics.notFound' | translate">
+        <nz-result
+          nzStatus="404"
+          nzTitle="404"
+          [nzSubTitle]="'statistics.notFound' | translate"
+        >
           <div nz-result-extra>
             <button nz-button nzType="primary" (click)="changeRoute()">
               {{ "backHome" | translate }}

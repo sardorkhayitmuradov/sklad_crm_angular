@@ -19,6 +19,7 @@ export interface OrderResponse extends OrderRequest, Id {
 export interface OrderRequest {
   client_type?: string;
   market_id?: string;
+  market_name: string;
   client_name?: string;
   products: Products[];
   paid: number;

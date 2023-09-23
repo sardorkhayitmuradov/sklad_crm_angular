@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from 'jwt-decode';
 import { SuperAdminToken } from './model/token.model';
 
@@ -11,24 +10,14 @@ import { SuperAdminToken } from './model/token.model';
 })
 export class SuperAdminComponent {
   isCollapsed = true;
-  tokenInfo: SuperAdminToken;
+  // tokenInfo: SuperAdminToken;
 
-  constructor(private router: Router, private cookieService: CookieService) {
-    const token = this.cookieService.get('token');
-    this.tokenInfo = this.getDecodedAccessToken(token) as SuperAdminToken;
-  }
-
-  private getDecodedAccessToken(token: string) {
-    try {
-      return jwt_decode(token);
-    } catch (Error) {
-      return null;
-    }
+  constructor(private router: Router) {
   }
 
   logOut() {
-    this.cookieService.delete('token');
-    this.cookieService.delete('employer_id');
+    // this.cookieService.delete('token');
+    // this.cookieService.delete('employer_id');
     this.router.navigate(['/admin/login']);
   }
 }
