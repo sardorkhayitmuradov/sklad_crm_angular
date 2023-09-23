@@ -1,6 +1,6 @@
 <nz-modal
   [(nzVisible)]="isVisible"
-  nzTitle="Add Transaction"
+  [nzTitle]="'transactions.add' | translate"
   (nzOnCancel)="cancel()"
   [nzFooter]="footer"
   nzWidth="400px"
@@ -10,32 +10,36 @@
       <form [formGroup]="form" nz-form nzLayout="vertical" class="w-full">
         <!-- TRANSFER AMOUNT PAID -->
         <nz-form-item class="w-full">
-          <nz-form-label nzFor="amountPaid">Transfer your amount paid</nz-form-label>
-          <nz-form-control nzErrorTip="Required field!">
+          <nz-form-label nzFor="amountPaid">{{
+            "transactions.enterTransactions" | translate
+          }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'inputs.fill' | translate">
             <input
-            class="w-full"
+              class="w-full"
               nz-input
               name="amountPaid"
               formControlName="amountPaid"
               type="text"
-              mask="separator.2" 
+              mask="separator.2"
               thousandSeparator=" "
               id="amountPaid"
             />
           </nz-form-control>
         </nz-form-item>
       </form>
-      <p class="mt-4">sum</p>
+      <p class="mt-4">{{ "sum" | translate }}</p>
     </div>
   </ng-container>
 
   <ng-template #footer>
     <button nz-button nzType="primary" (click)="submit()">
-      Add
+      {{ "actions.add" | translate }}
     </button>
-    <button nz-button (click)="reset()">Clear</button>
+    <button nz-button (click)="reset()">
+      {{ "actions.clear" | translate }}
+    </button>
     <button nz-button (click)="cancel()">
-      Cancel
+      {{ "actions.cancel" | translate }}
     </button>
   </ng-template>
 </nz-modal>

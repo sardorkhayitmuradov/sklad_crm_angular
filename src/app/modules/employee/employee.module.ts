@@ -4,10 +4,15 @@ import { CommonModule } from '@angular/common';
 import { EmployeeComponent } from './employee.component';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { LanguageComponent } from './components/language/language.component';
+import { LanguageModule } from '../components/language/language.module';
 
 @NgModule({
-  declarations: [EmployeeComponent, LanguageComponent],
-  imports: [CommonModule, EmployeeRoutingModule, SharedModule],
+  declarations: [EmployeeComponent],
+  imports: [
+    CommonModule,
+    EmployeeRoutingModule,
+    SharedModule,
+    LanguageModule,
+  ],
 })
 export class EmployeeModule {}

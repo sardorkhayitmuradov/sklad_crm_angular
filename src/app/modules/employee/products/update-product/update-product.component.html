@@ -1,6 +1,6 @@
 <nz-modal
   [(nzVisible)]="isVisible"
-  nzTitle="Product quantity"
+  [nzTitle]="'products.productQuantity' | translate"
   (nzOnCancel)="cancel()"
   [nzFooter]="footer"
   nzWidth="400px"
@@ -10,8 +10,10 @@
       <form [formGroup]="form" nz-form nzLayout="vertical" class="w-full">
         <!-- Product qty -->
         <nz-form-item class="w-full">
-          <nz-form-label nzFor="qty">Enter the quantity</nz-form-label>
-          <nz-form-control nzErrorTip="Required field!">
+          <nz-form-label nzFor="qty">{{
+            "products.enterQuantity" | translate
+          }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'inputs.fill' | translate">
             <input
               class="w-full"
               nz-input
@@ -25,12 +27,21 @@
           </nz-form-control>
         </nz-form-item>
       </form>
-      <p class="mt-4">{{ this.form.get("unit")?.value }}</p>
+      {{
+        (this.form.get("unit")?.value
+          ? "quantity." + this.form.get("unit")?.value
+          : ""
+        ) | translate
+      }}
     </div>
   </ng-container>
 
   <ng-template #footer>
-    <button nz-button nzType="primary" (click)="submit()">Add</button>
-    <button nz-button (click)="cancel()">Cancel</button>
+    <button nz-button nzType="primary" (click)="submit()">
+      {{ "actions.add" | translate }}
+    </button>
+    <button nz-button (click)="cancel()">
+      {{ "actions.cancel" | translate }}
+    </button>
   </ng-template>
 </nz-modal>

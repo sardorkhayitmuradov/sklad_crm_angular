@@ -43,7 +43,6 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     })
-
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

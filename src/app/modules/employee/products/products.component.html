@@ -1,6 +1,9 @@
 <div class="flex flex-col w-full">
   <div class="relative mb-4">
-    <nz-divider nzText="Products" nzOrientation="left"></nz-divider>
+    <nz-divider
+      [nzText]="'products.title' | translate"
+      nzOrientation="left"
+    ></nz-divider>
     <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
       <nz-input-group
         nzSearch
@@ -12,7 +15,7 @@
           (ngModelChange)="handleSearchTextChange($event)"
           type="text"
           nz-input
-          placeholder="Search product..."
+          placeholder="{{ 'products.search' | translate }}"
           (keyup.enter)="handleSearch(searchText)"
         />
       </nz-input-group>
@@ -47,7 +50,7 @@
       >
         <div class="flex items-center gap-2">
           <span nz-icon nzType="plus" nzTheme="outline"></span>
-          <p>New product</p>
+          <p>{{ "products.newproduct" | translate }}</p>
         </div>
       </button>
     </div>
@@ -73,26 +76,35 @@
         <th nzWidth="10%" [nzAlign]="'center'">
           <div class="flex items-center justify-center gap-1">
             <span nz-icon nzType="number" nzTheme="outline"></span>
-            <p>Code</p>
+            <p>{{ "products.code" | translate }}</p>
           </div>
         </th>
-        <th nzWidth="35%" [nzAlign]="'center'">Name</th>
+        <th nzWidth="35%" [nzAlign]="'center'">
+          {{ "products.title" | translate }}
+        </th>
         <th nzWidth="20%" [nzAlign]="'center'">
           <div class="flex items-center justify-center gap-1">
-            <p>Price</p>
+            <p>{{ "sections.price" | translate }}</p>
             <span nz-icon nzType="dollar" nzTheme="twotone"></span>
           </div>
         </th>
-        <th nzWidth="20%" [nzAlign]="'center'">Quantity</th>
-        <th [nzAlign]="'center'">Operations</th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          {{ "sections.quantity" | translate }}
+        </th>
+        <th [nzAlign]="'center'">{{ "sections.operations" | translate }}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td [nzAlign]="'center'">{{ data.code }}</td>
         <td [nzAlign]="'center'">{{ data.name }}</td>
-        <td [nzAlign]="'center'">{{ data.price | number }} sum</td>
-        <td [nzAlign]="'center'">{{ data.qty | number }} {{ data.unit }}</td>
+        <td [nzAlign]="'center'">
+          {{ data.price | number }} {{ "sum" | translate }}
+        </td>
+        <td [nzAlign]="'center'">
+          {{ data.qty | number }}
+          {{ "quantity." + data.unit | translate }}
+        </td>
 
         <td [nzAlign]="'center'">
           <div class="flex items-center gap-x-3 justify-center">

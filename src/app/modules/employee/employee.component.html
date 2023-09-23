@@ -1,5 +1,10 @@
 <nz-layout>
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" nzTheme="dark" [nzTrigger]="null">
+  <nz-sider
+    nzCollapsible
+    [(nzCollapsed)]="isCollapsed"
+    nzTheme="dark"
+    [nzTrigger]="null"
+  >
     <div class="m-4 bg-white px-1 py-1 rounded-5">
       <img
         [src]="
@@ -23,7 +28,7 @@
           nzTheme="outline"
           class="text-white"
         ></span>
-        <span>Dashboard</span>
+        <span>{{ "dashboard" | translate }}</span>
       </li> -->
       <li
         nz-menu-item
@@ -38,7 +43,7 @@
             height="15px"
           />
         </span>
-        <span>Products</span>
+        <span>{{ "products.title" | translate }}</span>
       </li>
       <li
         nz-menu-item
@@ -53,7 +58,7 @@
             height="15px"
           />
         </span>
-        <span>Markets</span>
+        <span>{{ "markets.title" | translate }}</span>
       </li>
       <li
         nz-menu-item
@@ -68,17 +73,22 @@
             nzTheme="outline"
           ></span>
         </span>
-        <span>Orders</span>
+        <span>{{ "orders.title" | translate }}</span>
       </li>
       <li
         nz-menu-item
         [routerLink]="['transactions']"
         routerLinkActive="ant-menu-item-selected"
       >
-        <span nz-icon nzTheme="outline" >
-          <span nz-icon nzType="transaction" class="text-white" nzTheme="outline"></span>
+        <span nz-icon nzTheme="outline">
+          <span
+            nz-icon
+            nzType="transaction"
+            class="text-white"
+            nzTheme="outline"
+          ></span>
         </span>
-        <span>My transactions</span>
+        <span>{{ "transactions.title" | translate }}</span>
       </li>
       <!-- <li
         nz-menu-item
@@ -107,14 +117,15 @@
           (click)="isCollapsed = !isCollapsed"
         ></span>
 
-        <div class="flex items-center gap-x-6">
-          <p class="h-fit font-medium">
-            {{ tokenInfo.phone_number || tokenInfo.role }}
+        <div class="flex items-center gap-x-6 h-fit">
+          <p class="font-medium">
+            {{ "balance" | translate }}: {{ getFormattedBalance() | number }}
+            {{ "sum" | translate }}
           </p>
 
           <div>
-            <employee-language></employee-language>
-          </div>  
+            <app-language></app-language>
+          </div>
 
           <button
             nz-button
@@ -124,18 +135,21 @@
             (click)="logOut()"
           >
             <span nz-icon nzType="logout" nzTheme="outline"></span>
-            <span>Log out</span>
+            <span>{{ "logOut" | translate }}</span>
           </button>
         </div>
       </div>
     </nz-header>
     <nz-content class="h-full">
-      <nz-breadcrumb
-        class="!my-3"
-        [nzAutoGenerate]="true"
-        [nzRouteLabel]="'breadcrumb'"
-      >
-      </nz-breadcrumb>
+      <div class="!h-[22px] !my-3">
+        <nz-breadcrumb
+          *ngIf="showBreadCrumb"
+          [nzAutoGenerate]="true"
+          [nzRouteLabel]="'breadcrumbWithTranslate'"
+          [nzRouteLabelFn]="translateFn"
+        >
+        </nz-breadcrumb>
+      </div>
       <div class="inner-content">
         <router-outlet></router-outlet>
       </div>

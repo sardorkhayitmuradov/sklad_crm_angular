@@ -23,6 +23,8 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
     RouterModule,
     FormsModule,
 
+    TranslateModule,
     NzLayoutModule,
     NzMenuModule,
     NzBreadCrumbModule,
@@ -47,13 +50,15 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
     NzTabsModule,
     NzRadioModule,
     NzPopconfirmModule,
-    NzListModule
+    NzListModule,
+    NzDatePickerModule 
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
 
+    TranslateModule,
     NzLayoutModule,
     NzMenuModule,
     NzBreadCrumbModule,
@@ -72,7 +77,8 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
     NzListModule,
     NzSpinModule,
     NzPopoverModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzDatePickerModule
   ],
 })
 export class SharedModule {}

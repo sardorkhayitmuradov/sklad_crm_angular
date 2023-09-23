@@ -12,13 +12,13 @@ const routes: Routes = [
     path: 'add',
     component: AddEditTransactionsComponent,
     data: {
-      breadcrumbWithTranslate: 'Add',
+      breadcrumbWithTranslate: 'actions.add',
     },
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class TransactionsRoutingModule { }
+export class TransactionsRoutingModule {}

@@ -17,7 +17,7 @@
   <!--FULL NAME -->
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzFor="fullname">Full Name</nz-form-label>
-    <nz-form-control nzErrorTip="Required field!" [nzSpan]="14">
+    <nz-form-control [nzErrorTip]="'inputs.fill' | translate" [nzSpan]="14">
       <input
         nz-input
         name="fullname"

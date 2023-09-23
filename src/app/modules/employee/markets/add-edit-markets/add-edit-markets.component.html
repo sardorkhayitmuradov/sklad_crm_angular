@@ -1,7 +1,7 @@
 <a (click)="goBack()" class="flex items-center gap-2 font-bold text-xs mb-5">
   <!-- NAVIGATE TO BACK -->
   <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
-  {{ isEdit ? "Edit" : "Add" }}</a
+  {{ (isEdit ? "actions.edit" : "actions.add") | translate }}</a
 >
 
 <form [formGroup]="form" nzLayout="vertical" nz-form>
@@ -9,10 +9,10 @@
     <div nzSpan="12">
       <!-- MARKET NAME -->
       <nz-form-item>
-        <nz-form-label nzFor="market_name"
-          >Market name</nz-form-label
-        >
-        <nz-form-control nzErrorTip="Required field!">
+        <nz-form-label nzFor="market_name">{{
+          "orders.title" | translate
+        }}</nz-form-label>
+        <nz-form-control [nzErrorTip]="'inputs.fill' | translate">
           <input
             nz-input
             name="market_name"
@@ -25,9 +25,9 @@
 
       <!-- PHONE -->
       <nz-form-item>
-        <nz-form-label nzFor="phone_number"
-          >Phone number</nz-form-label
-        >
+        <nz-form-label nzFor="phone_number">{{
+          "employee.phone" | translate
+        }}</nz-form-label>
         <nz-form-control [nzErrorTip]="phoneNumberError">
           <input
             nz-input
@@ -43,18 +43,20 @@
         </nz-form-control>
         <ng-template #phoneNumberError let-control>
           <ng-container *ngIf="control.getError('required')">
-            Ushbu maydonni to'ldiring
+            {{ "inputs.fill" | translate }}
           </ng-container>
           <ng-container *ngIf="control.getError('mask')">
-            Telefon nomerni to'liq kiriting
+            {{ "inputs.phoneNumberInput" | translate }}
           </ng-container>
         </ng-template>
       </nz-form-item>
 
       <!-- LOCATION -->
       <nz-form-item>
-        <nz-form-label [nzSpan]="6" nzFor="location">Location</nz-form-label>
-        <nz-form-control nzErrorTip="Required field!">
+        <nz-form-label [nzSpan]="6" nzFor="location">{{
+          "markets.address" | translate
+        }}</nz-form-label>
+        <nz-form-control [nzErrorTip]="'inputs.fill' | translate">
           <input
             nz-input
             name="location"
@@ -69,9 +71,13 @@
 
   <div class="flex gap-1 justify-end">
     <button nz-button nzType="primary" (click)="submit()">
-      {{ isEdit ? "Edit" : "Add" }}
+      {{ (isEdit ? "actions.edit" : "actions.add") | translate }}
     </button>
-    <button nz-button (click)="reset()">Clear</button>
-    <button nz-button (click)="goBack()">Cancel</button>
+    <button nz-button (click)="reset()">
+      {{ "actions.clear" | translate }}
+    </button>
+    <button nz-button (click)="goBack()">
+      {{ "actions.cancel" | translate }}
+    </button>
   </div>
 </form>

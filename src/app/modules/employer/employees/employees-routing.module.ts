@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'add',
     component: AddEditEmployeesComponent,
     data: {
-      breadcrumb: 'Add',
+      breadcrumbWithTranslate: 'actions.add',
     },
   },
   {
@@ -23,7 +23,7 @@ const routes: Routes = [
       data: EmployeesResolver,
     },
     data: {
-      breadcrumb: 'Edit',
+      breadcrumbWithTranslate: 'actions.edit',
     },
   },
   {
@@ -31,15 +31,17 @@ const routes: Routes = [
     loadChildren: () =>
       import('./orders/orders.module').then((m) => m.OrdersModule),
     data: {
-      breadcrumb: "Employee's Orders",
+      breadcrumbWithTranslate: 'employee.employeeOrders',
     },
   },
   {
     path: 'transactions/:id',
     loadChildren: () =>
-      import('./transactions/transactions.module').then((m) => m.TransactionsModule),
+      import('./transactions/transactions.module').then(
+        (m) => m.TransactionsModule
+      ),
     data: {
-      breadcrumb: "Employee's Transactions",
+      breadcrumbWithTranslate: 'employee.employeeTransactions',
     },
   },
 ];

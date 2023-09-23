@@ -1,13 +1,20 @@
 <div class="flex flex-col w-full">
   <div class="relative mb-4">
-    <nz-divider nzText="Employee's transactions" nzOrientation="left"></nz-divider>
+    <nz-divider
+      [nzText]="'employee.employeeTransactions' | translate"
+      nzOrientation="left"
+    ></nz-divider>
     <div class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2">
       <nz-input-group
         nzSearch
         [nzSuffix]="inputClearTpl"
         [nzAddOnAfter]="suffixIconButton"
       >
-        <input type="text" nz-input placeholder="search..." />
+        <input
+          type="text"
+          nz-input
+          [placeholder]="'transactions.search' | translate"
+        />
       </nz-input-group>
 
       <ng-template #inputClearTpl>
@@ -44,30 +51,38 @@
   >
     <thead>
       <tr>
-        <th nzWidth="35%" [nzAlign]="'center'">Transfer amount paid</th>
-        <th nzWidth="20%" [nzAlign]="'center'">Transfer time</th>
-        <th nzWidth="20%" [nzAlign]="'center'">Transfer acception</th>
-        <th [nzAlign]="'center'">Operations</th>
+        <th nzWidth="35%" [nzAlign]="'center'">
+          {{ "transactions.amountPaid" | translate }}
+        </th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          {{ "transactions.time" | translate }}
+        </th>
+        <th nzWidth="20%" [nzAlign]="'center'">
+          {{ "transactions.acception" | translate }}
+        </th>
+        <th [nzAlign]="'center'">{{ "sections.operations" | translate }}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td [nzAlign]="'center'">{{ data.amountPaid | number }} sum</td>
+        <td [nzAlign]="'center'">
+          {{ data.amountPaid | number }} {{ "sum" | translate }}
+        </td>
         <td [nzAlign]="'center'">{{ data.createdAt | date : "medium" }}</td>
         <td [nzAlign]="'center'">
-            <ng-container *ngIf="data.employerAccepted; else notAccepted">
-              <div class="flex items-center gap-1 justify-center">
-                <p>Accepted</p>
-                <span nz-icon nzType="check-circle" nzTheme="twotone"></span>
-              </div>
-            </ng-container>
-            <ng-template #notAccepted>
-              <div class="flex items-center gap-1 justify-center">
-                <p>Not Accepted</p>
-                <span nz-icon nzType="close-circle" nzTheme="twotone"></span>
-              </div>
-            </ng-template>
-          </td>
+          <ng-container *ngIf="data.employerAccepted; else notAccepted">
+            <div class="flex items-center gap-1 justify-center">
+              <p>{{ "transactions.accepted" | translate }}</p>
+              <span nz-icon nzType="check-circle" nzTheme="twotone"></span>
+            </div>
+          </ng-container>
+          <ng-template #notAccepted>
+            <div class="flex items-center gap-1 justify-center">
+              <p>{{ "transactions.notAccepted" | translate }}</p>
+              <span nz-icon nzType="close-circle" nzTheme="twotone"></span>
+            </div>
+          </ng-template>
+        </td>
         <td [nzAlign]="'center'">
           <div class="flex items-center gap-x-3 justify-center">
             <button
@@ -77,7 +92,7 @@
               class="flex items-center justify-center"
               (click)="acceptransaction(data._id)"
             >
-            <span nz-icon nzType="check" nzTheme="outline"></span>
+              <span nz-icon nzType="check" nzTheme="outline"></span>
             </button>
           </div>
         </td>
@@ -85,5 +100,3 @@
     </tbody>
   </nz-table>
 </div>
-
-

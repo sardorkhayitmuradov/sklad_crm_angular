@@ -2,33 +2,29 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 export const LOCAL_STORAGE_CURRENT_LANGUAGE = 'currentLanguage';
-export const DEFAULT_LANGUAGE = 'en';
-const CURRENT_LANGUAGE = 'en';
+export const DEFAULT_LANGUAGE = 'ru';
+const CURRENT_LANGUAGE = 'ru';
 
 @Component({
-  selector: 'employer-language',
+  selector: 'app-language',
   templateUrl: './language.component.html',
-  styleUrls: ['./language.component.css']
+  styleUrls: ['./language.component.css'],
 })
 export class LanguageComponent {
-
   /**
-   * 
+   *
    */
   currentLanguage = getCurrentLangauge();
 
   /**
-   * 
-   * @param translate 
+   *
+   * @param translate
    */
-  constructor(
-    private translate: TranslateService
-  ) {
-  }
+  constructor(private translate: TranslateService) {}
 
   /**
-   * 
-   * @param newLanguage 
+   *
+   * @param newLanguage
    */
   chooseCurrentLanguage(newLanguage: string) {
     this.translate.use(newLanguage);
@@ -37,8 +33,8 @@ export class LanguageComponent {
 }
 
 /**
- * 
- * @returns 
+ *
+ * @returns
  */
 export function getCurrentLangauge() {
   let currentLanguage = localStorage.getItem(LOCAL_STORAGE_CURRENT_LANGUAGE);

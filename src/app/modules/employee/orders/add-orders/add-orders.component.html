@@ -1,24 +1,27 @@
 <a (click)="goBack()" class="flex items-center gap-2 font-bold text-xs mb-5">
   <!-- NAVIGATE TO BACK -->
   <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
-  {{ isEdit ? "Edit" : "Add" }}</a
+  {{ "actions.add" | translate }}</a
 >
 
 <form [formGroup]="form" nz-form>
   <div class="flex flex-col w-full">
     <nz-tabset nzType="card" (nzSelectedIndexChange)="handleTabChange($event)">
-      <nz-tab [nzTitle]="'Market'" [tabindex]="selectedTab.id">
+      <nz-tab
+        [nzTitle]="'sections.market' | translate"
+        [tabindex]="selectedTab.id"
+      >
         <div class="w-full flex items-center my-6 justify-between">
           <!-- MARKETS -->
           <nz-form-item class="mb-0" nzSpan="16">
-            <nz-form-label nzRequired nzFor="markets"
-              >Choose the market</nz-form-label
-            >
+            <nz-form-label nzRequired nzFor="markets">{{
+              "order.chooseMarket" | translate
+            }}</nz-form-label>
             <nz-form-control class="w-full" [nzErrorTip]="marketError">
               <nz-select
                 nzShowSearch
                 nzAllowClear
-                nzPlaceHolder="Select a market"
+                [nzPlaceHolder]="'order.selectMarket' | translate"
                 formControlName="market_id"
                 id="markets"
               >
@@ -31,13 +34,13 @@
                 </ng-container>
                 <nz-option *ngIf="!markets" nzDisabled nzCustomContent>
                   <span nz-icon nzType="loading" class="loading-icon"></span>
-                  Loading markets...
+                  {{ "order.loadingMarkets" | translate }}
                 </nz-option>
               </nz-select>
             </nz-form-control>
             <ng-template #marketError let-control>
               <ng-container *ngIf="control.getError('required')">
-                Please select the market!
+                {{ "inputs.market.select" | translate }}
               </ng-container>
             </ng-template>
           </nz-form-item>
@@ -50,17 +53,17 @@
             nzSpan="8"
           >
             <span nz-icon nzType="plus" nzTheme="outline"></span>
-            Add product
+            {{ "order.addProduct" | translate }}
           </button>
         </div>
       </nz-tab>
-      <nz-tab [nzTitle]="'Client'" [tabindex]="selectedTab.id">
+      <nz-tab [nzTitle]="'sections.client' | translate" [tabindex]="selectedTab.id">
         <div class="w-full flex items-center justify-between my-6">
           <!-- CLIENT NAME -->
           <nz-form-item class="mb-0" nzSpan="16">
-            <nz-form-label nzRequired nzFor="client_name"
-              >Client name</nz-form-label
-            >
+            <nz-form-label nzRequired nzFor="client_name">{{
+              "order.clientName" | translate
+            }}</nz-form-label>
             <nz-form-control [nzErrorTip]="clientError">
               <input
                 nz-input
@@ -72,10 +75,10 @@
             </nz-form-control>
             <ng-template #clientError let-control>
               <ng-container *ngIf="control.getError('required')">
-                Please fill the input!
+                {{ "inputs.fill" | translate }}
               </ng-container>
               <ng-container *ngIf="control.errors?.['minlength']">
-               Client name must be at least 4 characters long.
+                {{ "client.min" | translate }}
               </ng-container>
             </ng-template>
           </nz-form-item>
@@ -88,7 +91,7 @@
             nzSpan="8"
           >
             <span nz-icon nzType="plus" nzTheme="outline"></span>
-            Add product
+            {{ "order.addProduct" | translate }}
           </button>
         </div>
       </nz-tab>
@@ -99,11 +102,21 @@
     <nz-table nzTemplateMode #editRowTable nzBordered nzFrontPagination="false">
       <thead>
         <tr>
-          <th nzWidth="20%" nzAlign="center">Choose a product</th>
-          <th nzWidth="15%" nzAlign="center">Enter the product quantity</th>
-          <th nzWidth="20%" nzAlign="center">Enter the product price</th>
-          <th nzWidth="35%" nzAlign="center">Overall price</th>
-          <th nzWidth="10%" nzAlign="center">Operation</th>
+          <th nzWidth="20%" nzAlign="center">
+            {{ "order.chooseProduct" | translate }}
+          </th>
+          <th nzWidth="15%" nzAlign="center">
+            {{ "order.enterProductQuantity" | translate }}
+          </th>
+          <th nzWidth="20%" nzAlign="center">
+            {{ "order.enterProductPrice" | translate }}
+          </th>
+          <th nzWidth="35%" nzAlign="center">
+            {{ "order.totalPrice" | translate }}
+          </th>
+          <th nzWidth="10%" nzAlign="center">
+            {{ "sections.operations" | translate }}
+          </th>
         </tr>
       </thead>
       <tbody formArrayName="products">
@@ -121,13 +134,17 @@
                   nzShowSearch
                   nzAllowClear
                   class="w-full"
-                  nzPlaceHolder="Select products"
+                  [nzPlaceHolder]="'order.selectProdocts' | translate"
                   formControlName="productId"
                   id="products"
                   class="w-full"
-                  (ngModelChange)="setProductQty(i, product.value.productId, true)"
+                  (ngModelChange)="
+                    setProductQty(i, product.value.productId, true)
+                  "
                 >
-                  <ng-container *ngFor="let product of productsData; let j = index">
+                  <ng-container
+                    *ngFor="let product of productsData; let j = index"
+                  >
                     <nz-option
                       class="w-full"
                       [nzLabel]="product.name"
@@ -139,10 +156,11 @@
                     Loading products...
                   </nz-option>
                 </nz-select>
-              </nz-form-control></nz-form-item>
+              </nz-form-control></nz-form-item
+            >
             <ng-template #selectedProduct let-control>
               <ng-container *ngIf="control.getError('required')">
-                Please select the product!
+                {{ "inputs.product.select" | translate }}
               </ng-container>
               <!-- <ng-container *ngIf="control.getError('mask')">
                 Telefon nomerni to'liq kiriting
@@ -152,7 +170,10 @@
           <td nzAlign="center">
             <div class="flex items-center gap-2">
               <nz-form-item class="mb-0 w-full">
-                <nz-form-control nzErrorTip="Required field!" class="w-full">
+                <nz-form-control
+                  [nzErrorTip]="'inputs.fill' | translate"
+                  class="w-full"
+                >
                   <input
                     required
                     nz-input
@@ -174,7 +195,7 @@
           <td nzAlign="center">
             <div class="flex items-center gap-2">
               <nz-form-item class="mb-0 w-full">
-                <nz-form-control nzErrorTip="Required field!">
+                <nz-form-control [nzErrorTip]="'inputs.fill' | translate">
                   <input
                     required
                     nz-input
@@ -188,13 +209,13 @@
                   />
                 </nz-form-control>
               </nz-form-item>
-              <p class="mt-auto w-fit">sum</p>
+              <p class="mt-auto w-fit">{{ "sum" | translate }}</p>
             </div>
           </td>
           <td nzAlign="center">
             <div class="flex items-center gap-2">
               <nz-form-item class="mb-0 w-full">
-                <nz-form-control nzErrorTip="Required field!">
+                <nz-form-control [nzErrorTip]="'inputs.fill' | translate">
                   <input
                     nz-input
                     name="overallPrice"
@@ -206,13 +227,15 @@
                   />
                 </nz-form-control>
               </nz-form-item>
-              <p class="mt-auto w-fit">sum</p>
+              <p class="mt-auto w-fit">{{ "sum" | translate }}</p>
             </div>
           </td>
           <td nzAlign="center">
             <button
               nz-popconfirm
-              nzPopconfirmTitle="Sure to delete?"
+              [nzOkText]="'actions.ok' | translate"
+              [nzCancelText]="'actions.cancel' | translate"
+              [nzPopconfirmTitle]="'actions.deleteConsfirm' | translate"
               [disabled]="products.controls.length === 1"
               (nzOnConfirm)="removeProduct(i)"
               nz-button
@@ -230,17 +253,18 @@
 
   <div class="mt-6 flex">
     <p class="font-bold text-xs w-1/2">
-      Total Price: {{ orderTotalPrice | number }} sum
+      {{ "order.overallPrice" | translate }}: {{ orderTotalPrice | number }}
+      {{ "sum" | translate }}
     </p>
     <nz-form-item class="w-1/2">
       <nz-form-label
         nzFor="paid"
         nzRequired
-        nzTooltipTitle="Enter the paid price for an order !"
+        [nzTooltipTitle]="'order.tooltipPaidPrice' | translate"
       >
-        <span>Enter paid price</span>
+        <span>{{ "order.enterPsidPrice" | translate }}</span>
       </nz-form-label>
-      <nz-form-control nzErrorTip="Please input your paid price !">
+      <nz-form-control [nzErrorTip]="'inputs.fill' | translate">
         <input
           nz-input
           class="w-full"
@@ -252,13 +276,24 @@
           thousandSeparator=" "
         />
       </nz-form-control>
-      <p class="mb-0 self-end ml-2">sum</p>
+      <p class="mb-0 self-end ml-2">{{ "sum" | translate }}</p>
     </nz-form-item>
   </div>
 
   <div class="flex gap-1 justify-end my-6">
-    <button nz-button nzType="primary" [disabled]="form.invalid" (click)="submit()">Add Order</button>
-    <button nz-button (click)="reset()">Clear</button>
-    <button nz-button (click)="goBack()">Cancel</button>
+    <button
+      nz-button
+      nzType="primary"
+      [disabled]="form.invalid"
+      (click)="submit()"
+    >
+      {{ "order.addOrder" | translate }}
+    </button>
+    <button nz-button (click)="reset()">
+      {{ "actions.clear" | translate }}
+    </button>
+    <button nz-button (click)="goBack()">
+      {{ "actions.cancel" | translate }}
+    </button>
   </div>
 </form>

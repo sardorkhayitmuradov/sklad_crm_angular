@@ -7,13 +7,13 @@ const routes: Routes = [
     path: '',
     component: EmployerComponent,
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'employees' },
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       {
         path: 'dashboard',
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
         data: {
-          breadcrumb: 'Dashboard',
+          breadcrumbWithTranslate: 'dashboard',
         },
       },
       {
@@ -21,7 +21,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./markets/markets.module').then((m) => m.MarketsModule),
         data: {
-          breadcrumb: 'Markets',
+          breadcrumbWithTranslate: 'markets.title',
         },
       },
       {
@@ -29,7 +29,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./products/products.module').then((m) => m.ProductsModule),
         data: {
-          breadcrumb: 'Products',
+          breadcrumbWithTranslate: 'products.title',
         },
       },
       {
@@ -37,17 +37,25 @@ const routes: Routes = [
         loadChildren: () =>
           import('./employees/employees.module').then((m) => m.EmployeesModule),
         data: {
-          breadcrumb: 'Employees',
+          breadcrumbWithTranslate: 'employee.title',
         },
       },
       {
-        path: 'settings',
+        path: 'balances',
         loadChildren: () =>
-          import('./settings/settings.module').then((m) => m.SettingsModule),
+          import('./balances/balances.module').then((m) => m.BalancesModule),
         data: {
-          breadcrumb: 'Settings',
+          breadcrumbWithTranslate: 'balances.title',
         },
       },
+      // {
+      //   path: 'settings',
+      //   loadChildren: () =>
+      //     import('./settings/settings.module').then((m) => m.SettingsModule),
+      //   data: {
+      //     breadcrumb: 'Settings',
+      //   },
+      // },
     ],
   },
 ];

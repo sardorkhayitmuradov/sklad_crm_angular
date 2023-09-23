@@ -8,45 +8,45 @@
 >
   <thead>
     <tr>
-      <th nzAlign="center" rowSpan="2">Name</th>
-      <th nzAlign="center" colspan="5">Products</th>
+      <th nzAlign="center" rowSpan="2">{{ "markets.title" | translate }}</th>
+      <th nzAlign="center" colspan="5">{{ "products.title" | translate }}</th>
       <th nzAlign="center" rowSpan="2">
         <div class="flex items-center gap-1 justify-center">
-          <p>Paid</p>
+          <p>{{ "sections.paid" | translate }}</p>
           <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
         </div>
       </th>
       <th nzAlign="center" rowSpan="2">
         <div class="flex items-center gap-1 justify-center">
-          <p>Total</p>
+          <p>{{ "sections.total" | translate }}</p>
           <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
         </div>
       </th>
       <th nzAlign="center" rowSpan="2">
         <div class="flex items-center gap-1 justify-center">
-          <p>Created day</p>
+          <p>{{ "order.createdDay" | translate }}</p>
           <span nz-icon nzType="calendar" nzTheme="twotone"></span>
         </div>
       </th>
     </tr>
     <tr>
-      <th nzAlign="center">Name</th>
+      <th nzAlign="center">{{ "sections.name" | translate }}</th>
       <th nzAlign="center">
         <div class="flex items-center justify-center gap-1">
           <span nz-icon nzType="number" nzTheme="outline"></span>
-          <p>Code</p>
+          <p>{{ "products.code" | translate }}</p>
         </div>
       </th>
-      <th nzAlign="center">Qty</th>
+      <th nzAlign="center">{{ "products.qty" | translate }}</th>
       <th nzAlign="center">
         <div class="flex items-center gap-1 justify-center">
-          <p>Price</p>
+          <p>{{ "sections.price" | translate }}</p>
           <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
         </div>
       </th>
       <th nzAlign="center">
         <div class="flex items-center gap-1 justify-center">
-          <p>Sold Price</p>
+          <p>{{ "products.soldPrice" | translate }}</p>
           <span nz-icon nzType="dollar-circle" nzTheme="twotone"></span>
         </div>
       </th>
@@ -64,31 +64,36 @@
         </td>
         <td nzAlign="center">{{ product.name }}</td>
         <td nzAlign="center">{{ product.code }}</td>
-        <td nzAlign="center">{{ product.qty | number }} {{ product.unit }}</td>
+        <td nzAlign="center">
+          {{ product.qty | number }}
+          {{ "quantity." + product.unit | translate }}
+        </td>
         <td nzAlign="center">
           <ng-container
             *ngIf="product.price === product.soldPrice; else regularPrice"
           >
-            <del>{{ product.price | number }} sum</del>
+            <del>{{ product.price | number }} {{ "sum" | translate }}</del>
           </ng-container>
           <ng-template #regularPrice>
-            {{ product.price | number }} sum
+            {{ product.price | number }} {{ "sum" | translate }}
           </ng-template>
         </td>
-        <td nzAlign="center">{{ product.soldPrice | number }} sum</td>
-        <td
-          *ngIf="j === 0"
-          [attr.rowspan]="order.products.length"
-          nzAlign="center"
-        >
-          {{ order.paid | number }} sum
+        <td nzAlign="center">
+          {{ product.soldPrice | number }} {{ "sum" | translate }}
         </td>
         <td
           *ngIf="j === 0"
           [attr.rowspan]="order.products.length"
           nzAlign="center"
         >
-          {{ order.totalAmount | number }} sum
+          {{ order.paid | number }} {{ "sum" | translate }}
+        </td>
+        <td
+          *ngIf="j === 0"
+          [attr.rowspan]="order.products.length"
+          nzAlign="center"
+        >
+          {{ order.totalAmount | number }} {{ "sum" | translate }}
         </td>
         <td
           *ngIf="j === 0"

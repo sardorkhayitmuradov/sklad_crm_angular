@@ -1,1 +1,73 @@
-<p>Dashboard</p>
+<nz-spin nzTip="Loading..." [nzSpinning]="isLoading">
+  <div *ngIf="!notFound; else template" class="flex flex-col w-full">
+    <!-- Your data display section here -->
+    <div class="relative mb-4">
+      <nz-divider
+        [nzText]="'statistics.title' | translate"
+        nzOrientation="left"
+      ></nz-divider>
+      <div
+        class="absolute right-0 top-4 py-0 px-[15px] flex items-center gap-2"
+      >
+        <nz-date-picker
+          [nzPlaceHolder]="'balances.select' | translate"
+          nzMode="month"
+          [nzDisabledDate]="disabledDate"
+          (keyup.enter)="handleSearchTextChange($event)"
+          [(ngModel)]="searchText"
+          (ngModelChange)="handleSearchTextChange($event)"
+        ></nz-date-picker>
+      </div>
+    </div>
+    <div class="mx-auto flex items-center justify-center">
+      <div>
+        <h4 class="text-center text-md font-bold">
+          {{ "statistics.mostSoldProducts" | translate }}
+          {{ "statistics.months." + pages.month | translate }}
+        </h4>
+        <ngx-charts-bar-horizontal
+          [view]="view"
+          [scheme]="soldProductsColorScheme"
+          [results]="SoldProducts"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [legendPosition]="soldProductsLegendPosition"
+          [legendTitle]="'products.title' | translate"
+        >
+        </ngx-charts-bar-horizontal>
+      </div>
+      <div>
+        <h4 class="text-center text-md font-bold">
+          {{ "statistics.remainedProducts" | translate }}
+          {{ "statistics.months." + pages.month | translate }}
+        </h4>
+        <ngx-charts-bar-horizontal
+          [view]="view"
+          [scheme]="soldProductsColorScheme"
+          [results]="RemainedProducts"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [legendPosition]="soldProductsLegendPosition"
+          [legendTitle]="'products.title' | translate"
+        >
+        </ngx-charts-bar-horizontal>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #template>
+    <div class="max-w-xl mx-auto w-full px-6">
+      <div class="flex flex-col items-center justify-center h-full">
+        <nz-result nzStatus="404" nzTitle="404" [nzSubTitle]="'statistics.notFound' | translate">
+          <div nz-result-extra>
+            <button nz-button nzType="primary" (click)="changeRoute()">
+              {{ "backHome" | translate }}
+            </button>
+          </div>
+        </nz-result>
+      </div>
+    </div>
+  </ng-template>
+</nz-spin>
