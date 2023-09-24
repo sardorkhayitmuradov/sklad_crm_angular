@@ -5,3 +5,16 @@
 .phone-select {
   width: 70px;
 }
+
+.login {
+  background-image: url("../../../assets/images/login-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.login-wrapper {
+  padding: 30px 0px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 4px 4px 30px 0px #1890ff;
+}
