@@ -64,8 +64,8 @@
       <tr *ngFor="let data of basicTable.data">
         <td [nzAlign]="'center'">{{ data.fullname }}</td>
         <td [nzAlign]="'center'">{{ data.phone_number }}</td>
-        <td [nzAlign]="'center'">{{ data.balance | number }} {{"sum" | translate}}</td>
-        <td [nzAlign]="'center'">{{ data.debt | number }} {{"sum" | translate}}</td>
+        <td [nzAlign]="'center'">{{ data.balance | number }} $</td>
+        <td [nzAlign]="'center'">{{ data.debt | number }} $</td>
         <td [nzAlign]="'center'">
           <button
             nz-button

@@ -83,7 +83,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td [nzAlign]="'center'">{{ data.amountPaid | number }} {{ "sum" | translate }}</td>
+        <td [nzAlign]="'center'">{{ data.amountPaid | number }} $</td>
         <td [nzAlign]="'center'">{{ data.createdAt | date : "medium" }}</td>
         <td [nzAlign]="'center'">
           <ng-container *ngIf="data.employerAccepted; else notAccepted">

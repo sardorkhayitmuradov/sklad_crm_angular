@@ -72,26 +72,26 @@
           <ng-container
             *ngIf="product.price === product.soldPrice; else regularPrice"
           >
-            <del>{{ product.price | number }} {{"sum" | translate}}</del>
+            <del>{{ product.price | number }} $</del>
           </ng-container>
           <ng-template #regularPrice>
-            {{ product.price | number }} {{"sum" | translate}}
+            {{ product.price | number }} $
           </ng-template>
         </td>
-        <td nzAlign="center">{{ product.soldPrice | number }} {{"sum" | translate}}</td>
+        <td nzAlign="center">{{ product.soldPrice | number }} $</td>
         <td
           *ngIf="j === 0"
           [attr.rowspan]="order.products.length"
           nzAlign="center"
         >
-          {{ order.paid | number }} {{"sum" | translate}}
+          {{ order.paid | number }} $
         </td>
         <td
           *ngIf="j === 0"
           [attr.rowspan]="order.products.length"
           nzAlign="center"
         >
-          {{ order.totalAmount | number }} {{"sum" | translate}}
+          {{ order.totalAmount | number }} $
         </td>
         <td
           *ngIf="j === 0"

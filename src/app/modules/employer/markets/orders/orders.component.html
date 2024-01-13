@@ -78,10 +78,10 @@
       <tr *ngFor="let order of groupingTable.data; let i = index">
         <td nzAlign="center">{{ order.market_name }}</td>
         <td nzAlign="center">
-          {{ order.paid | number }} {{ "sum" | translate }}
+          {{ order.paid | number }} $
         </td>
         <td nzAlign="center">
-          {{ order.totalAmount | number }} {{ "sum" | translate }}
+          {{ order.totalAmount | number }} $
         </td>
         <td nzAlign="center">
           <button
